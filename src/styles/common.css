@@ -1,0 +1,27 @@
+/* PC端 */
+html, 
+body,
+main {
+	height: 100%;
+}
+
+
+/* 笔记本电脑屏幕 */
+@media (max-width: 1366px) {
+
+}
+
+/* Pad屏幕 && 投影仪屏幕 */
+@media (max-width: 1024px) {
+
+}
+
+/* 手机屏幕 */
+@media (max-width: 768px) {
+
+}
+
+/* 动画 */
+@keyframes  {
+	
+}
