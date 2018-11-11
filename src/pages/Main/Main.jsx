@@ -26,7 +26,8 @@ class Main extends Component {
 
   componentWillMount () {
     dispatch.user.update_user({ id: 1, username: 'admin' });
-    console.log(getState(), 23);
+    getState();
+    // console.log(getState(), 23);
   };
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -34,7 +35,6 @@ class Main extends Component {
   };
 
   goto = item => {
-    console.log(item, this.props);
     this.props.history.push(item.key);
   };
 

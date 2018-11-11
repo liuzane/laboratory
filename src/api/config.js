@@ -1,64 +1,37 @@
 import axios from 'axios';
+import mock from '@/mock';
 
 //暴露初始实例
 export default axios;
 
-const isProd = process.env.NODE_ENV === 'production';
+//开启开发模式模拟数据（与正常联调模式互斥）
+if (process.env.NODE_ENV === 'development') mock();
 
+// const isProd = process.env.NODE_ENV === 'production';
 
-//判断生产环境的Url
-export const handleUrl = (devUrl, prodUrl, baseUrl = '') => {
-  devUrl = devUrl + baseUrl;
-  prodUrl = prodUrl + baseUrl;
-
-  return isProd ? prodUrl : devUrl;
+//响应拦截器
+const handleInterceptors = instances => {
+  instances.forEach(instance => {
+    instance.interceptors.response.use(function (response) {
+      // 对响应数据做点什么
+      return response.data;
+    }, function (error) {
+      // 对响应错误做点什么
+      return Promise.reject(error);
+    });
+  });
 };
-
-
-
-//处理 get 请求参数转换为字符串
-export const handleData = function (object) {
-  let dataString = [];
-
-  for (let key in object) dataString.push(key + '=' + object[key]);
-
-  return dataString.join('&');
-};
-
 
 
 //基本配置实例
 export const http = axios.create({
-  baseURL: handleUrl('/serve', '/'),
+  baseURL: '/',
   headers: { 'Content-Type': 'application/json' },
 });
 
-
-
-//配置输出格式和百度密钥
-export const baidu_config = { output: 'json', ak: 'hEsDFepHLai1OqKD3ngsrULY' };
-
-//中转百度api实例
-export const baidu = axios.create({
-  baseURL: handleUrl('/serve', '', '/api/Customer/GetBaiduApiResult'),
-
+export const main = axios.create({
+  baseURL: 'http://192.168.0.1',
   headers: { 'Content-Type': 'application/json' },
-
-  //发送请求前对参数进行转换
-  paramsSerializer: function (params) {
-    params.url = encodeURIComponent(params.url);
-    params.content = encodeURIComponent(handleData(Object.assign({}, baidu_config, params.content)));
-
-    return handleData(params);
-  },
 });
 
-
-
-export const excel = params => {
-  const url = params.url + '?';
-  let data = handleData(params.params);
-
-  // return (isProd ? '' : 'http://117.74.132.91:8777') + url + data;
-  return (isProd ? '' : 'http://120.55.94.65:8777') + url + data;
-};
+handleInterceptors([ http, main ]);

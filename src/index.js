@@ -7,7 +7,6 @@ import ReactDOM from 'react-dom';
 
 //Redux状态库
 import { Provider } from 'react-redux';
-
 import store from './store';
 
 //入口组件

@@ -10,22 +10,22 @@ import main from './main';
 //所有路由配置
 const routes = [
   {
-    path: '/home',
+    path: '/',
     title: '首页',
     strict: true,
     component: AsyncLoad(() => import('@/pages/Main')),
     children: main,
   },
 
-  {
-    path: '/',
-    exact: true,
-    redirect: '/home',
-  },
+  // {
+  //   path: '/',
+  //   exact: true,
+  //   redirect: '/home',
+  // },
 
   // 404 未找到页面
   {
-    component: AsyncLoad(() => import('@/components/NotFound')),
+    component: AsyncLoad(() => import('@/layouts/NotFound')),
   },
 ];
 
