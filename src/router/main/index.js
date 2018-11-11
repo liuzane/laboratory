@@ -22,4 +22,11 @@ export default [
     component: AsyncLoad(() => import('@/pages/Main/CountTable')),
     exact: true,
   },
+
+  {
+    path: '/less',
+    title: 'less',
+    component: AsyncLoad(() => import('@/pages/Main/Less')),
+    exact: true,
+  },
 ];
