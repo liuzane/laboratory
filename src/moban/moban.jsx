@@ -46,7 +46,7 @@ class moban extends Component {
     this.state = {};
   };
 
-  componentWillMount () {
+  componentDidMount () {
 
   };
 

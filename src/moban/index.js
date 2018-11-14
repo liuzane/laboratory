@@ -1,3 +1,3 @@
-import  from './.jsx';
+import  from '';
 
 export default ;
