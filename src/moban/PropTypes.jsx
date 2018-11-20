@@ -40,7 +40,7 @@ class moban extends PureComponent {
   render () {
     return (
       <div 
-        className={ ('moban ' + this.props.className).trim() } 
+        className={ ('typeof ' + this.props.className).trim() }
         style={ this.props.style }
       >
         

@@ -7,6 +7,8 @@ import { fromJS, is } from 'immutable';
 //api
 import { getUserList } from '@/api';
 
+import { InputNumber, Button } from 'antd';
+
 //组件
 import CountTable from './CountTable';
 import EditableTable from './EditableTable';
@@ -15,7 +17,7 @@ import EditableTable from './EditableTable';
 import './style/Desktop.css';
 
 
-class Desktop extends Component {
+export default class Desktop extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -32,6 +34,13 @@ class Desktop extends Component {
           title: 'Age',
           align: 'center',
           dataIndex: 'age',
+          validate: (getFieldDecorator, dataIndex, record) => {
+            return getFieldDecorator(dataIndex, {
+              rules: [
+                { required: true, message: '请输入年龄', },
+              ],
+            })(<InputNumber />);
+          },
         },
 
         {
@@ -46,7 +55,7 @@ class Desktop extends Component {
           render: (text, record, index) => {
             return (
               <div className="btns">
-                <button>Check</button>
+                <button onClick={ this.test }>Check</button>
                 <button>Edit</button>
                 <button>Delete</button>
               </div>
@@ -75,9 +84,11 @@ class Desktop extends Component {
         },
       ],
     };
+    
+    this.CountTable = React.createRef();
   };
 
-  componentWillMount () {
+  componentDidMount () {
     this.setState({ loading: true });
     getUserList({ page: 1, size: 2 }).then(response => {
       // console.log(response, 62);
@@ -90,6 +101,16 @@ class Desktop extends Component {
 
   shouldComponentUpdate (nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
+  };
+  
+  validate = () => {
+    console.log(this.CountTable.current.forms, 107);
+    let forms = this.CountTable.current.forms;
+    for (let key in forms) {
+      forms[key].validateFields((error, values) => {
+        console.log(error, values, 111);
+      });
+    };
   };
 
   render () {
@@ -105,23 +126,22 @@ class Desktop extends Component {
 
     return (
       <div>
-        {/*<CountTable 
-          data={ dataSource } 
-          loading={ loading } 
-          columns={ columns } 
-          footer={ footer } 
-          rowKey="id" 
-        />*/}
-
-        <EditableTable 
-          data={ data } 
-          loading={ loading } 
-          columns={ columns } 
-          rowKey="id" 
+        <CountTable
+          ref={ this.CountTable }
+          data={ dataSource }
+          loading={ loading }
+          columns={ columns }
+          footer={ footer }
+          rowKey="id"
         />
+        <Button type="primary" onClick={ this.validate }>验证</Button>
+        {/*<EditableTable */}
+          {/*data={ data } */}
+          {/*loading={ loading } */}
+          {/*columns={ columns } */}
+          {/*rowKey="id" */}
+        {/*/>*/}
       </div>
     );
   };
 };
-
-export default Desktop;

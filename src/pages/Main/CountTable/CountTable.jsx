@@ -6,7 +6,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 //UI组件库
-import { Table, Spin } from 'antd';
+import { Form, Table, Spin, Input } from 'antd';
+
+const FormItem = Form.Item;
+const CountTableContext = React.createContext();
 
 const Style = styled.div`
   padding: 10px;
@@ -43,8 +46,50 @@ const Style = styled.div`
   }
 `;
 
+let forms = {};
 
-class CountTable extends PureComponent {
+const CountTableRow = ({ form, index, ...props }) => {
+  const key = props['data-row-key'];
+  if (key) forms[key] = form;
+  return (
+    <CountTableContext.Provider value={ form }>
+      <tr { ...props } />
+    </CountTableContext.Provider>
+  );
+};
+
+const CountTableFormRow = Form.create()(CountTableRow);
+
+class CountTableCell extends PureComponent {
+  render () {
+    const { validate, dataIndex, record, children, ...props } = this.props;
+    if (typeof validate !== 'function' && validate !== undefined) {
+      console.error('[ Validate Error ]: validate must is function!');
+    };
+
+    return (
+      <td { ...props }>
+        {
+          validate ? (
+            <CountTableContext.Consumer>
+              {
+                form => {
+                  return (
+                    <FormItem>
+                      { validate(form.getFieldDecorator, dataIndex, record) }
+                    </FormItem>
+                  );
+                }
+              }
+            </CountTableContext.Consumer>
+          ) : children
+        }
+      </td>
+    );
+  };
+};
+
+export default class CountTable extends PureComponent {
   static propTypes = {
     data: PropTypes.array,
     columns: PropTypes.array,
@@ -59,9 +104,22 @@ class CountTable extends PureComponent {
   static defaultProps = {
     className: '',
   };
+  
+  constructor (props) {
+    super(props);
+    this.forms = forms;
+  };
 
   render () {
-    const { data, columns, loading, rowKey, scroll, footer } = this.props;
+    const { data, loading, rowKey, scroll, footer } = this.props;
+    const columns = this.props.columns.map(col => ({
+      ...col,
+      onCell: record => ({
+        record,
+        dataIndex: col.dataIndex,
+        validate: col.validate,
+      })
+    }));
     let [ loadingComponent, footerComponent ] = [ null, null ];
 
     if (loading) {
@@ -101,6 +159,13 @@ class CountTable extends PureComponent {
         </div>
       );
     };
+  
+    const components = {
+      body: {
+        row: CountTableFormRow,
+        cell: CountTableCell,
+      },
+    };
 
     return (
       <Style className="count-table">
@@ -122,7 +187,8 @@ class CountTable extends PureComponent {
             return (
               <Table 
                 className="count-table__body" 
-                key={ index } 
+                key={ index }
+                components={ components }
                 bordered 
                 dataSource={ table.dataSource } 
                 columns={ columns } 
@@ -141,5 +207,3 @@ class CountTable extends PureComponent {
     );
   };
 };
-
-export default CountTable;
