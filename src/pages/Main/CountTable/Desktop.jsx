@@ -9,6 +9,7 @@ import { getUserList } from '@/api';
 
 //组件
 import CountTable from './CountTable';
+import EditableTable from './EditableTable';
 
 //样式
 import './style/Desktop.css';
@@ -104,11 +105,18 @@ class Desktop extends Component {
 
     return (
       <div>
-        <CountTable 
+        {/*<CountTable 
           data={ dataSource } 
           loading={ loading } 
           columns={ columns } 
           footer={ footer } 
+          rowKey="id" 
+        />*/}
+
+        <EditableTable 
+          data={ data } 
+          loading={ loading } 
+          columns={ columns } 
           rowKey="id" 
         />
       </div>

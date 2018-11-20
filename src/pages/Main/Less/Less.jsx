@@ -20,7 +20,11 @@ class Less extends Component {
   };
 
   componentWillMount () {
-
+    let array = [];
+    let object = {};
+    let string = '';
+    let number = 0;
+    console.log( object instanceof Array )
   };
 
   shouldComponentUpdate (nextProps, nextState) {
