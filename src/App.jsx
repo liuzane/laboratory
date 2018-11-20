@@ -7,14 +7,23 @@ import { HashRouter as Router } from 'react-router-dom';
 //路由配置
 import routes, { RouterView } from '@/router';
 
+//第三方模块
+import NProgress from 'nprogress';
+
 //全局样式
 import '@/styles';
+import 'nprogress/nprogress.css';
 
 
 class App extends PureComponent {
 	onBeforeEach = (to, from, history) => {
-		//全局路由监听
+    NProgress.start();
 	};
+  
+  onAfterEach = (to, from, history) => {
+    setTimeout(NProgress.done, 300);
+    // NProgress.done();
+  };
 
   render() {
     return (
@@ -22,6 +31,7 @@ class App extends PureComponent {
         <RouterView 
         	routes={ routes } 
         	onBeforeEach={ this.onBeforeEach }
+          onAfterEach={ this.onAfterEach }
         />
       </Router>
     );

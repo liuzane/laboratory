@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 
-class moban extends PureComponent {
+export default class moban extends PureComponent {
   static propTypes = {
     string: PropTypes.string,
     number: PropTypes.number,

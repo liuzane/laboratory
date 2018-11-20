@@ -24,7 +24,7 @@ import  from '';
 import './style/';
 
 
-class moban extends Component {
+export default class Desktop extends Component {
   static propTypes = {
     string: PropTypes.string,
     number: PropTypes.number,
@@ -65,5 +65,3 @@ class moban extends Component {
     );
   };
 };
-
-export default moban;

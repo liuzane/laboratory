@@ -11,10 +11,11 @@ import { InputNumber, Button } from 'antd';
 
 //组件
 import CountTable from './CountTable';
-import EditableTable from './EditableTable';
+// import EditableTable from './EditableTable';
 
 //样式
 import './style/Desktop.css';
+import Mock, {Random} from "mockjs";
 
 
 export default class Desktop extends Component {
@@ -39,6 +40,7 @@ export default class Desktop extends Component {
               rules: [
                 { required: true, message: '请输入年龄', },
               ],
+              initialValue: record[ dataIndex ],
             })(<InputNumber />);
           },
         },
@@ -65,21 +67,21 @@ export default class Desktop extends Component {
       ],
       footer: [
         {
-          // align: 'center',
-          dataIndex: 'age',
-          render: (rowData) => {
-            return '年龄：' + rowData.reduce((pervious, current) => pervious + current);
-            // return '年龄'
-          },
-        },
-
-        {
           width: '100px',
           // align: 'center',
           dataIndex: 'address',
           render: (rowData) => {
             console.log(rowData, 72);
             return '合计';
+          },
+        },
+        
+        {
+          // align: 'center',
+          dataIndex: 'age',
+          render: (rowData) => {
+            return '年龄：' + rowData.reduce((pervious, current) => pervious + current);
+            // return '年龄'
           },
         },
       ],
@@ -97,6 +99,17 @@ export default class Desktop extends Component {
       console.error(error);
       this.setState({ loading: false });
     });
+    
+    // setTimeout(() => {
+    //   this.setState({
+    //     data: Array.apply(null, { length: 2 }).map((item, index) => ({
+    //       name: 'xxxx',
+    //       age: 20,
+    //       address: '中华人民共和国',
+    //     })),
+    //     loading: false,
+    //   });
+    // }, 2000);
   };
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -108,24 +121,25 @@ export default class Desktop extends Component {
     let forms = this.CountTable.current.forms;
     for (let key in forms) {
       forms[key].validateFields((error, values) => {
-        console.log(error, values, 111);
+      
       });
     };
   };
 
   render () {
     const { data, loading, columns, footer } = this.state;
-    const dataSource = data.map(item => ({
+    const dataSource = data.map((table, index) => ({
       title: [ 
-        { label: '采购单号', value: 'XXXXXX' }, 
-        { label: '客户', value: '西西' }, 
-        { label: '最后入库时间', value: '2018-11-11 00:41:00' }, 
+        { label: '所在组', value: 'XXXXXX' },
+        { label: '管理员', value: 'Admin' },
+        { label: '创建时间', value: new Date().format('yyyy-MM-dd hh:mm:ss') },
       ],
-      dataSource: data,
+      dataSource: data.map((item, j) => ({ ...item, id: (Math.random()).toString() })),
     }));
 
     return (
       <div>
+        <Button type="primary" onClick={ this.validate }>验证</Button>
         <CountTable
           ref={ this.CountTable }
           data={ dataSource }
@@ -134,7 +148,7 @@ export default class Desktop extends Component {
           footer={ footer }
           rowKey="id"
         />
-        <Button type="primary" onClick={ this.validate }>验证</Button>
+        
         {/*<EditableTable */}
           {/*data={ data } */}
           {/*loading={ loading } */}
