@@ -28,6 +28,9 @@ module.exports = function override(config, env) {
 
 
   const webpackConfig = merge(config, {
+    //关闭生产环境sourceMap
+    devtool: false,
+    
     //配置别名
     resolve: {
       alias: {

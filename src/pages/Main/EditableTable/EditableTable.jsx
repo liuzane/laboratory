@@ -13,7 +13,6 @@ const EditableRow = ({ ...props }) => {
 };
 
 const EditableCell = ({ one, ...props }) => {
-  console.log(one, props, 17)
   return (<td { ...props }>{ props.children }</td>);
 };
 
@@ -49,7 +48,6 @@ class EditableTable extends PureComponent {
     } = this.props;
 
     const columns = this.props.columns.map((col) => {
-      console.log(col, 52)
       return {
         ...col,
         onCell: record => ({

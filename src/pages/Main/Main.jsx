@@ -1,12 +1,13 @@
 //基础模块
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 //路由配置
 import { RouterView, main } from '@/router';
 
 //第三方模块
 import { fromJS, is } from 'immutable';
-import { dispatch, getState } from '@/store';
 
 //布局组件
 import Layout from '@/layouts/Layout';
@@ -19,15 +20,21 @@ const { SubMenu, Item } = Menu;
 
 
 class Main extends Component {
+  static propTypes = {
+    id: PropTypes.string,
+    username: PropTypes.string,
+    update_user: PropTypes.func,
+  };
+  
   constructor (props) {
     super(props);
     this.state = {};
   };
 
   componentWillMount () {
-    dispatch.user.update_user({ id: 1, username: 'admin' });
-    getState();
-    // console.log(getState(), 23);
+    const { id, username, update_user } = this.props;
+    update_user({ id: '1', username: 'admin' });
+    // console.log('Main', id, username);
   };
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -89,4 +96,22 @@ class Main extends Component {
   };
 };
 
-export default Main;
+const mapStateToProps = state => {
+  const { id, username } = state.user;
+  return {
+    id,
+    username,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  const { update_user } = dispatch.user;
+  return {
+    update_user,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Main);

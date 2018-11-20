@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 
-class moban extends PureComponent {
+export default class moban extends PureComponent {
   static propTypes = {
     string: PropTypes.string,
     number: PropTypes.number,
@@ -40,7 +40,7 @@ class moban extends PureComponent {
   render () {
     return (
       <div 
-        className={ ('moban ' + this.props.className).trim() } 
+        className={ ('typeof ' + this.props.className).trim() }
         style={ this.props.style }
       >
         

@@ -36,4 +36,11 @@ export default [
     component: AsyncLoad(() => import('@/pages/Main/EditableTable')),
     exact: true,
   },
+  
+  {
+    path: '/typeof',
+    title: 'typeof',
+    component: AsyncLoad(() => import('@/pages/Main/Typeof')),
+    exact: true,
+  },
 ];

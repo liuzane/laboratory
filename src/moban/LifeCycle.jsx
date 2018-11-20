@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react';
 import { fromJS, is } from 'immutable';
 
 
-class moban extends PurComponent {
+export default class moban extends PurComponent {
   constructor (props) {
     super(props);
     this.state = {};
@@ -43,5 +43,3 @@ class moban extends PurComponent {
     return ();
   };
 };
-
-export default moban;

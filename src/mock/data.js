@@ -23,7 +23,6 @@ for (let i = 0; i < 10; i++) {
     trade: Mock.Random.cword(2),
     nature: Mock.Random.cword(2),
     'total|10-80': 10,
-    'running|10-80': 10,
     person: Mock.Random.cname(),
   }));
 };

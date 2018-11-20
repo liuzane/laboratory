@@ -12,6 +12,9 @@ import store from './store';
 //入口组件
 import App from './App';
 
+//原型链方法
+import './utils/prototype';
+
 
 ReactDOM.render(
   <Provider store={ store }>

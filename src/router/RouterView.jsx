@@ -13,16 +13,25 @@ class RouterView extends PureComponent {
   static propTypes = {
     routes: PropTypes.array,
     onBeforeEach: PropTypes.func,
+    onAfterEach: PropTypes.func,
   };
 
   static defaultProps = {
     onBeforeEach: () => {},
+    onAfterEach: () => {},
   };
 
   componentWillReceiveProps (nextProps) {
     const [ to, from ] = [ nextProps.location, this.props.location ];
-    if (!is(fromJS(this.props), fromJS(nextProps))) {
+    if (!is(fromJS(to), fromJS(from))) {
       this.props.onBeforeEach(to, from, this.props.history);
+    };
+  };
+  
+  componentWillUpdate (nextProps, nextState) {
+    const [ to, from ] = [ nextProps.location, this.props.location ];
+    if (!is(fromJS(to), fromJS(from))) {
+      this.props.onAfterEach(to, from, this.props.history);
     };
   };
 

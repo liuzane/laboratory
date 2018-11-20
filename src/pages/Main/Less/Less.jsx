@@ -10,17 +10,11 @@ import { Button } from 'antd';
 import styled from './style/Css.module.css';
 // import styled from './style/Scss.scss';
 
-console.log(styled, 12)
-
 
 class Less extends Component {
   constructor (props) {
     super(props);
     this.state = {};
-  };
-
-  componentWillMount () {
-
   };
 
   shouldComponentUpdate (nextProps, nextState) {
