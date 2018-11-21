@@ -10,6 +10,12 @@ import main from './main';
 //所有路由配置
 const routes = [
   {
+    path: '/login',
+    strict: true,
+    component: AsyncLoad(() => import('@/pages/Login')),
+  },
+  
+  {
     path: '/',
     title: '首页',
     strict: true,

@@ -1,9 +1,18 @@
 //用户
 import { mock } from '@/api/config';
 
-
 //登录
 export const login = (params, cancelToken) => {
+  return mock({
+    method: 'get',
+    url: '/user/login',
+    params,
+    cancelToken,
+  });
+};
+
+//登录
+export const userLogin = (params, cancelToken) => {
   return mock({
     method: 'get',
     url: '/user/login',
