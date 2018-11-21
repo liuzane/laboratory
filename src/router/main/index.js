@@ -29,13 +29,6 @@ export default [
     component: AsyncLoad(() => import('@/pages/Main/Less')),
     exact: true,
   },
-
-  {
-    path: '/editable-table',
-    title: 'lesseditable-table',
-    component: AsyncLoad(() => import('@/pages/Main/EditableTable')),
-    exact: true,
-  },
   
   {
     path: '/typeof',

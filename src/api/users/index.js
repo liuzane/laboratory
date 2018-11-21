@@ -1,9 +1,20 @@
 //用户
-import { main } from '@/api/config';
+import { mock } from '@/api/config';
+
+
+//登录
+export const login = (params, cancelToken) => {
+  return mock({
+    method: 'get',
+    url: '/user/login',
+    params,
+    cancelToken,
+  });
+};
 
 //获取用户信息
 export const getUserList = (params, cancelToken) => {
-  return main({
+  return mock({
     method: 'get',
     url: '/user/list',
     params,

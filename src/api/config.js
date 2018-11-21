@@ -1,11 +1,11 @@
 import axios from 'axios';
-import mock from '@/mock';
+// import mock from '@/mock';
 
 //暴露初始实例
 export default axios;
 
 //开启开发模式模拟数据（与正常联调模式互斥）
-if (process.env.NODE_ENV === 'development') mock();
+// if (process.env.NODE_ENV === 'development') mock();
 
 // const isProd = process.env.NODE_ENV === 'production';
 
@@ -24,14 +24,14 @@ const handleInterceptors = instances => {
 
 
 //基本配置实例
-export const http = axios.create({
-  baseURL: '/',
+export const mock = axios.create({
+  baseURL: 'https://www.easy-mock.com/mock/5bf3ee63f0beab552d8b6fef',
   headers: { 'Content-Type': 'application/json' },
 });
 
-export const main = axios.create({
+export const http = axios.create({
   baseURL: 'http://192.168.0.1',
   headers: { 'Content-Type': 'application/json' },
 });
 
-handleInterceptors([ http, main ]);
+handleInterceptors([ mock, http ]);

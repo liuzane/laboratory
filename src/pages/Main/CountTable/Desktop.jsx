@@ -1,8 +1,8 @@
 //基础模块
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 //第三方模块
-import { fromJS, is } from 'immutable';
+// import { fromJS, is } from 'immutable';
 
 //api
 import { getUserList } from '@/api';
@@ -15,10 +15,9 @@ import CountTable from './CountTable';
 
 //样式
 import './style/Desktop.css';
-import Mock, {Random} from "mockjs";
 
 
-export default class Desktop extends Component {
+export default class Desktop extends PureComponent {
   constructor (props) {
     super(props);
     this.state = {
@@ -41,7 +40,7 @@ export default class Desktop extends Component {
                 { required: true, message: '请输入年龄', },
               ],
               initialValue: record[ dataIndex ],
-            })(<InputNumber />);
+            })(<InputNumber onChange={ this.varInputChange.bind(this, dataIndex, record) } />);
           },
         },
 
@@ -71,7 +70,6 @@ export default class Desktop extends Component {
           // align: 'center',
           dataIndex: 'address',
           render: (rowData) => {
-            console.log(rowData, 72);
             return '合计';
           },
         },
@@ -91,58 +89,67 @@ export default class Desktop extends Component {
   };
 
   componentDidMount () {
-    this.setState({ loading: true });
-    getUserList({ page: 1, size: 2 }).then(response => {
-      // console.log(response, 62);
-      this.setState({ data: response, loading: false });
-    }, error => {
-      console.error(error);
-      this.setState({ loading: false });
-    });
-    
-    // setTimeout(() => {
-    //   this.setState({
-    //     data: Array.apply(null, { length: 2 }).map((item, index) => ({
-    //       name: 'xxxx',
-    //       age: 20,
-    //       address: '中华人民共和国',
-    //     })),
-    //     loading: false,
-    //   });
-    // }, 2000);
+    this.getUserList();
   };
-
-  shouldComponentUpdate (nextProps, nextState) {
-    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
+  
+  updateTableData = (key, value, record) => {
+    let data = JSON.parse(JSON.stringify(this.state.data));
+    
+    data.map(table => {
+      const index = table.dataSource.findIndex(item => item[key] === value);
+      if (index > -1) table.dataSource.splice(index, 1, record);
+      return table;
+    });
+    return data;
+  };
+  
+  varInputChange = (key, record, value) => {
+    record[ key ] = value;
+    this.setState({ data: this.updateTableData('id', record.id, record) });
+  };
+  
+  getUserList = async function () {
+    this.setState({ loading: true });
+    await getUserList({ page: 1, size: 2 }).then(response => {
+      console.log('user list', response);
+      if (response.success && response.code === '200') {
+        this.setState({
+          data: response.data.map((table, index) => ({
+            title: [
+              { label: '所在组', value: 'XXXXXX' },
+              { label: '管理员', value: 'Admin' },
+              { label: '创建时间', value: new Date().format('yyyy-MM-dd hh:mm:ss') },
+            ],
+            dataSource: response.data.map((item, j) => ({ ...item, id: (Math.random()).toString() })),
+          }))
+        });
+      };
+    }, console.error);
+    this.setState({ loading: false });
   };
   
   validate = () => {
-    console.log(this.CountTable.current.forms, 107);
+    let isPass = true;
     let forms = this.CountTable.current.forms;
     for (let key in forms) {
       forms[key].validateFields((error, values) => {
-      
+        if (error) isPass = false;
       });
+    };
+    if (isPass) {
+      console.log('saved');
     };
   };
 
   render () {
     const { data, loading, columns, footer } = this.state;
-    const dataSource = data.map((table, index) => ({
-      title: [ 
-        { label: '所在组', value: 'XXXXXX' },
-        { label: '管理员', value: 'Admin' },
-        { label: '创建时间', value: new Date().format('yyyy-MM-dd hh:mm:ss') },
-      ],
-      dataSource: data.map((item, j) => ({ ...item, id: (Math.random()).toString() })),
-    }));
 
     return (
       <div>
         <Button type="primary" onClick={ this.validate }>验证</Button>
         <CountTable
           ref={ this.CountTable }
-          data={ dataSource }
+          data={ data }
           loading={ loading }
           columns={ columns }
           footer={ footer }
