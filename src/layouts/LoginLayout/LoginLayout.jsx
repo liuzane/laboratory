@@ -30,11 +30,7 @@ export default class LoginLayout extends PureComponent {
     canvas.height = height;
     this.canvas = canvas;
     
-    const context = this.canvas.getContext('2d');
-    context.strokeStyle = 'rgba(0, 0, 0, 0.2)';
-    context.strokeWidth = 1;
-    context.fillStyle = 'rgba(0, 0, 0, 0.1)';
-    this.context = context;
+    this.getContext();
   
     this.init();
     this.drawTime = setInterval(() => {
@@ -53,6 +49,14 @@ export default class LoginLayout extends PureComponent {
   
   componentWillUnmount () {
     clearInterval(this.drawTime);
+  };
+  
+  getContext = () => {
+    const context = this.canvas.getContext('2d');
+    context.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+    context.strokeWidth = 1;
+    context.fillStyle = 'rgba(0, 0, 0, 0.1)';
+    return this.context = context;
   };
   
   //线条：开始xy坐标，结束xy坐标，线条透明度
@@ -85,13 +89,11 @@ export default class LoginLayout extends PureComponent {
   
   // 绘制原点
   drawCricle = (cxt, x, y, radius, moveX, moveY) => {
-    // console.log(x, y, 84);
     let circle = this.circle(x, y, radius, moveX, moveY);
     cxt.beginPath();
     cxt.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
     cxt.closePath();
     cxt.fill();
-    // console.log(circle, 89);
     return circle;
   };
   
@@ -108,12 +110,18 @@ export default class LoginLayout extends PureComponent {
   
   //每帧绘制
   draw = () => {
-    const context = this.context;
+    let context = this.context;
     const canvas = this.canvas;
     const point = this.point;
     const circles = this.circles;
+
+    try {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    } catch (e) {
+      context = this.getContext();
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    };
     
-    context.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let i = 0; i < point; i ++) {
       this.drawCricle(context, circles[i].x, circles[i].y, circles[i].radius);
@@ -157,7 +165,6 @@ export default class LoginLayout extends PureComponent {
       ));
     };
     this.circles = circles;
-    console.log(circles);
     this.draw();
   };
   
