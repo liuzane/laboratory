@@ -1,24 +1,9 @@
 /* PC端 */
-. {
-  
+.login__title {
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
-/* 笔记本电脑屏幕 */
-@media (max-width: 1366px) {
-
-}
-
-/* Pad屏幕 && 投影仪屏幕 */
-@media (max-width: 1024px) {
-
-}
-
-/* 手机屏幕 */
-@media (max-width: 768px) {
-
-}
-
-/* 动画 */
-@keyframes  {
-  
+.login__error {
+  min-height: 32px;
 }

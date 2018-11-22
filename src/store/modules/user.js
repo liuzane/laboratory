@@ -3,6 +3,7 @@ import { login } from '@/api';
 
 const user = {
   state: {
+    language: '',
     id: '',
     username: '',
     permission: [],
@@ -10,7 +11,9 @@ const user = {
 
   reducers: {
     update_user (state, data) {
-      for (let key in state) state[key] = data[key];
+      for (let key in state) {
+        if (data[key]) state[key] = data[key];
+      };
       return state;
     },
   },

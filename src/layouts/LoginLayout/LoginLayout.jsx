@@ -44,7 +44,7 @@ export default class LoginLayout extends PureComponent {
         else if (cir.y < 0) cir.y = height;
       };
       this.draw();
-    }, 16);
+    }, 50);
   };
   
   componentWillUnmount () {
@@ -71,13 +71,14 @@ export default class LoginLayout extends PureComponent {
   };
   
   //点：圆心xy坐标，半径，每帧移动xy的距离
-  circle = (x, y, radius, moveX, moveY) => {
+  circle = (x, y, radius, moveX, moveY, color) => {
     return {
       x,
       y,
       radius,
       moveX,
       moveY,
+      color,
     };
   };
   
@@ -88,12 +89,13 @@ export default class LoginLayout extends PureComponent {
   };
   
   // 绘制原点
-  drawCricle = (cxt, x, y, radius, moveX, moveY) => {
-    let circle = this.circle(x, y, radius, moveX, moveY);
+  drawCricle = (cxt, x, y, radius, moveX, moveY, color) => {
+    let circle = this.circle(x, y, radius, moveX, moveY, color);
     cxt.beginPath();
+    cxt.fillStyle = circle.color;
     cxt.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
-    cxt.closePath();
     cxt.fill();
+    cxt.closePath();
     return circle;
   };
   
@@ -124,7 +126,16 @@ export default class LoginLayout extends PureComponent {
     
 
     for (let i = 0; i < point; i ++) {
-      this.drawCricle(context, circles[i].x, circles[i].y, circles[i].radius);
+      let circle = circles[i];
+      this.drawCricle(
+        context,
+        circle.x,
+        circle.y,
+        circle.radius,
+        null,
+        null,
+        circle.color,
+      );
     };
     
     for (let i = 0; i < point; i ++) {
@@ -160,8 +171,9 @@ export default class LoginLayout extends PureComponent {
         this.num(this.width),
         this.num(this.height),
         this.num(15, 2),
-        this.num(10, -10) / 40,
-        this.num(10, -10) / 40,
+        this.num(20, -20) / 40,
+        this.num(20, -20) / 40,
+        `rgba(${ this.num(0, 255) }, ${ this.num(0, 255) }, ${ this.num(0, 255) }, .1)`
       ));
     };
     this.circles = circles;

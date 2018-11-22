@@ -3,8 +3,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-//第三方模块
-import { fromJS, is } from 'immutable';
+//UI库组件
+import { Form, Input, Icon, Button } from 'antd';
+
+//多语言组件
+import { injectIntl, FormattedMessage } from 'react-intl';
 
 //公共组件
 import LoginLayout from '@/layouts/LoginLayout';
@@ -12,9 +15,13 @@ import LoginLayout from '@/layouts/LoginLayout';
 //样式
 import './style/Login.css';
 
+const FormItem = Form.Item;
+
 
 class Login extends Component {
   static propTypes = {
+    intl: PropTypes.object,
+    form: PropTypes.object,
     getUserLogin: PropTypes.func,
   };
   
@@ -30,10 +37,6 @@ class Login extends Component {
   componentDidMount () {
 
   };
-
-  shouldComponentUpdate (nextProps, nextState) {
-    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
-  };
   
   login = async () => {
     this.setState({ loading: true });
@@ -45,13 +48,59 @@ class Login extends Component {
   };
 
   render () {
+    const { formatMessage } = this.props.intl;
+    const { getFieldDecorator } = this.props.form;
+    
     return (
       <LoginLayout>
-        <button onClick={ this.login }>Login</button>
+        <Form>
+          <h3 className="login__title">
+            <FormattedMessage id="login.title" />
+          </h3>
+          
+          <FormItem>
+            {
+              getFieldDecorator('username')(
+                <Input
+                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  placeholder={ formatMessage({ id: 'login.username' }) }
+                />
+              )
+            }
+          </FormItem>
+  
+          <FormItem>
+            {
+              getFieldDecorator('password')(
+                <Input
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  placeholder={ formatMessage({ id: 'login.password' }) }
+                  type="password"
+                />
+              )
+            }
+          </FormItem>
+        </Form>
+        
+        <div className="login__error">
+        
+        </div>
+        
+        <Button
+          type="primary"
+          block
+          onClick={ this.login }
+        >
+          <FormattedMessage id="login.loginText"/>
+        </Button>
       </LoginLayout>
     );
   };
 };
+
+const IntlLogin = injectIntl(Login);
+
+const FormIntlLogin = Form.create()(IntlLogin);
 
 const mapDispatchToProps = dispatch => {
   const { getUserLogin } = dispatch.user;
@@ -61,6 +110,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  () => {},
+  () => ({}),
   mapDispatchToProps
-)(Login);
+)(FormIntlLogin);

@@ -12,14 +12,19 @@ import store from './store';
 //入口组件
 import App from './App';
 
+//多语言
+import Language from './language'
+
 //原型链方法
 import './utils/prototype';
 
 
 ReactDOM.render(
   <Provider store={ store }>
-    <App />
-  </Provider>, 
+    <Language>
+      <App />
+    </Language>
+  </Provider>,
   document.getElementById('root')
 );
 
