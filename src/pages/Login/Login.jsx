@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 //UI库组件
-import { Form, Input, Icon, Button } from 'antd';
+import { Form, Input, Icon, Button, message } from 'antd';
 
 //多语言组件
 import { injectIntl, FormattedMessage } from 'react-intl';
@@ -38,13 +38,20 @@ class Login extends Component {
 
   };
   
-  login = async () => {
-    this.setState({ loading: true });
-    await this.props.getUserLogin({ username: 'admin', password: '123456' }, response => {
-      console.log(response);
-      alert('success');
+  login = () => {
+    this.props.form.validateFields(async (err, params) => {
+      if (!err) {
+        this.setState({ loading: true });
+        await this.props.getUserLogin(params, response => {
+          if (response.success && response.code === '200') {
+            message.success(response.message);
+          } else {
+            message.error(response.message);
+          };
+        });
+        this.setState({ loading: false });
+      };
     });
-    this.setState({ loading: false });
   };
 
   render () {
@@ -89,6 +96,7 @@ class Login extends Component {
         <Button
           type="primary"
           block
+          loading={ this.state.loading }
           onClick={ this.login }
         >
           <FormattedMessage id="login.loginText"/>
