@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 //第三方模块
 import { fromJS, is } from 'immutable';
 
+//公共组件
+import LoginLayout from '@/layouts/LoginLayout';
+
 //样式
 import './style/Login.css';
 
@@ -43,9 +46,9 @@ class Login extends Component {
 
   render () {
     return (
-      <div>
+      <LoginLayout>
         <button onClick={ this.login }>Login</button>
-      </div>
+      </LoginLayout>
     );
   };
 };

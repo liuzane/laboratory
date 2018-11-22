@@ -3,35 +3,35 @@ import AsyncLoad from '@/router/config';
 
 export default [
   {
-    path: '/',
+    path: '',
     title: 'home',
     component: AsyncLoad(() => import('@/pages/Main/Home')),
     exact: true,
   },
 
   {
-    path: '/todo',
+    path: 'todo',
     title: 'todo',
     component: AsyncLoad(() => import('@/pages/Main/Todo')),
     exact: true,
   },
 
   {
-    path: '/count-table',
+    path: 'count-table',
     title: 'count-table',
     component: AsyncLoad(() => import('@/pages/Main/CountTable')),
     exact: true,
   },
 
   {
-    path: '/less',
+    path: 'less',
     title: 'less',
     component: AsyncLoad(() => import('@/pages/Main/Less')),
     exact: true,
   },
   
   {
-    path: '/typeof',
+    path: 'typeof',
     title: 'typeof',
     component: AsyncLoad(() => import('@/pages/Main/Typeof')),
     exact: true,

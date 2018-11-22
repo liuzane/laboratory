@@ -4,7 +4,6 @@ const path = require('path');
 const merge = require('webpack-merge');
 const { injectBabelPlugin } = require('react-app-rewired');
 const rewireLess = require('react-app-rewire-less');
-const rewireCssModules = require('react-app-rewire-css-modules');
 
 
 module.exports = function override(config, env) {
@@ -16,19 +15,16 @@ module.exports = function override(config, env) {
 
   //配置主题色
   config = rewireLess.withLoaderOptions({
-    modifyVars: { 
-      // "@primary-color": "#f00", 
+    modifyVars: {
+      // "@primary-color": "#f00",
     },
 
     javascriptEnabled: true,
   })(config, env);
 
-  //css modules
-  config = rewireCssModules(config, env);
-
 
   const webpackConfig = merge(config, {
-    //关闭生产环境sourceMap
+    //关闭sourceMap
     devtool: false,
     
     //配置别名
