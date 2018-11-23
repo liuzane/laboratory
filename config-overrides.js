@@ -27,6 +27,11 @@ module.exports = function override(config, env) {
     //关闭sourceMap
     devtool: false,
     
+    //相对路径
+    output: {
+      publicPath: './',
+    },
+    
     //配置别名
     resolve: {
       alias: {
