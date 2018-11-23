@@ -2,7 +2,8 @@
 import React, { PureComponent } from 'react';
 
 //路由模块
-import { HashRouter as Router } from 'react-router-dom';
+// import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 //路由配置
 import routes, { RouterView } from '@/router';
