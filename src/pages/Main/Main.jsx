@@ -9,6 +9,9 @@ import { RouterView, main } from '@/router';
 //第三方模块
 import { fromJS, is } from 'immutable';
 
+//多语言列表
+// import * as languages from '@/language';
+
 //布局组件
 import Layout from '@/layouts/Layout';
 
@@ -17,7 +20,7 @@ import { Menu, Icon } from 'antd';
 
 const { Sider, Header, Content } = Layout;
 const { SubMenu, Item } = Menu;
-
+// console.log(languages, 23);
 
 class Main extends Component {
   static propTypes = {
