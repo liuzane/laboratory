@@ -29,6 +29,7 @@ module.exports = function override(config, env) {
     
     //相对路径
     output: {
+      // path: path.resolve('docs'),
       publicPath: './',
     },
     
@@ -40,7 +41,7 @@ module.exports = function override(config, env) {
     },
   });
   
-  // console.log(webpackConfig.output);
+  console.log(webpackConfig);
 
   return webpackConfig;
 };
