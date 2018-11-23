@@ -38,13 +38,15 @@ class Login extends Component {
 
   };
   
-  login = async () => {
+  login = () => {
     this.setState({ loading: true });
-    await this.props.getUserLogin({ username: 'admin', password: '123456' }, response => {
+    this.props.getUserLogin({ username: 'admin', password: '123456' }, response => {
       console.log(response);
-      alert('success');
+      this.setState({ loading: false });
+    }, error => {
+      console.error('login', error);
+      this.setState({ loading: false });
     });
-    this.setState({ loading: false });
   };
 
   render () {
@@ -89,6 +91,7 @@ class Login extends Component {
         <Button
           type="primary"
           block
+          loading={ this.state.loading }
           onClick={ this.login }
         >
           <FormattedMessage id="login.loginText"/>
