@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 //UI库组件
-import { Form, Input, Icon, Button } from 'antd';
+import { Form, Input, Icon, Button, message } from 'antd';
 
 //多语言组件
 import { injectIntl, FormattedMessage } from 'react-intl';
@@ -20,6 +20,7 @@ const FormItem = Form.Item;
 
 class Login extends Component {
   static propTypes = {
+    history: PropTypes.object,
     intl: PropTypes.object,
     form: PropTypes.object,
     getUserLogin: PropTypes.func,
@@ -39,13 +40,23 @@ class Login extends Component {
   };
   
   login = () => {
-    this.setState({ loading: true });
-    this.props.getUserLogin({ username: 'admin', password: '123456' }, response => {
-      console.log(response);
-      this.setState({ loading: false });
-    }, error => {
-      console.error('login', error);
-      this.setState({ loading: false });
+    const { history, form, getUserLogin } = this.props;
+    form.validateFields((err, params) => {
+      if (!err) {
+        this.setState({ loading: true });
+        getUserLogin(params, response => {
+          if (response.success && response.code === '200') {
+            message.success(response.message);
+            history.push('/main');
+          } else {
+            message.error(response.message);
+          };
+          this.setState({ loading: false });
+        }, error => {
+          console.error('login', error);
+          this.setState({ loading: false });
+        });
+      };
     });
   };
 
@@ -66,6 +77,7 @@ class Login extends Component {
                 <Input
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder={ formatMessage({ id: 'login.username' }) }
+                  onPressEnter={ this.login }
                 />
               )
             }
@@ -78,6 +90,7 @@ class Login extends Component {
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder={ formatMessage({ id: 'login.password' }) }
                   type="password"
+                  onPressEnter={ this.login }
                 />
               )
             }

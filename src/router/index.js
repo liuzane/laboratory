@@ -23,11 +23,11 @@ const routes = [
     children: main,
   },
 
-  // {
-  //   path: '/',
-  //   exact: true,
-  //   redirect: '/home',
-  // },
+  {
+    path: '/',
+    exact: true,
+    redirect: '/main',
+  },
 
   // 404 未找到页面
   {
