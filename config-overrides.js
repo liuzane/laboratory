@@ -40,7 +40,7 @@ module.exports = function override(config, env) {
     },
   });
   
-  console.log(webpackConfig);
+  // console.log(webpackConfig);
 
   return webpackConfig;
 };
