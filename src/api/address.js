@@ -23,7 +23,7 @@ switch (address_env) {
   //开发环境地址
   case 'development':
     address.DEBUG_DEV_ADDRESS = '/';
-    address.LOCALE_MOCK_ADDRESS = '/';
+    address.LOCALE_MOCK_ADDRESS = './';
     address.EASY_MOCK_ADDRESS = 'https://www.easy-mock.com/mock/5bf3ee63f0beab552d8b6fef';
     address.MAIN_PROD_ADDRESS = 'http://192.168.0.1';
     break;
@@ -31,7 +31,7 @@ switch (address_env) {
   //生产环境地址
   case 'production':
     address.DEBUG_DEV_ADDRESS = '/';
-    address.LOCALE_MOCK_ADDRESS = '/';
+    address.LOCALE_MOCK_ADDRESS = './';
     address.EASY_MOCK_ADDRESS = 'https://www.easy-mock.com/mock/5bf3ee63f0beab552d8b6fef';
     address.MAIN_PROD_ADDRESS = 'http://192.168.0.1';
     break;
@@ -39,7 +39,7 @@ switch (address_env) {
   //测试环境地址
   case 'test':
     address.DEBUG_DEV_ADDRESS = '/';
-    address.LOCALE_MOCK_ADDRESS = '/';
+    address.LOCALE_MOCK_ADDRESS = './';
     address.EASY_MOCK_ADDRESS = 'https://www.easy-mock.com/mock/5bf3ee63f0beab552d8b6fef';
     address.MAIN_PROD_ADDRESS = 'http://192.168.0.1';
     break;
@@ -47,7 +47,7 @@ switch (address_env) {
   //默认地址
   default:
     address.DEBUG_DEV_ADDRESS = '/';
-    address.LOCALE_MOCK_ADDRESS = '/';
+    address.LOCALE_MOCK_ADDRESS = './';
     address.EASY_MOCK_ADDRESS = 'https://www.easy-mock.com/mock/5bf3ee63f0beab552d8b6fef';
     address.MAIN_PROD_ADDRESS = 'http://192.168.0.1';
     break;
