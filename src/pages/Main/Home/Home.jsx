@@ -12,7 +12,7 @@ class Home extends Component {
   };
 
   componentDidMount () {
-
+  
   };
 
   shouldComponentUpdate (nextProps, nextState) {

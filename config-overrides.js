@@ -21,12 +21,8 @@ module.exports = function override(config, env) {
 
     javascriptEnabled: true,
   })(config, env);
-
-
+  
   const webpackConfig = merge(config, {
-    //关闭sourceMap
-    devtool: false,
-    
     //相对路径
     output: {
       publicPath: './',

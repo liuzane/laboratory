@@ -1,9 +1,9 @@
 //用户
-import axios, { localeMock, easyMock } from '@/api/config';
+import { localeMock, easyMock } from '@/api/config';
 
 //登录
 export const login = (data, cancelToken) => {
-  return axios({
+  return localeMock({
     method: 'post',
     url: '/login',
     data,
@@ -22,7 +22,7 @@ export const login = (data, cancelToken) => {
 
 //获取用户信息
 export const getUserList = (params, cancelToken) => {
-  return axios({
+  return localeMock({
     method: 'get',
     url: '/user/list',
     params,
