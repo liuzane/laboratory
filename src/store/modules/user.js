@@ -13,7 +13,7 @@ const user = {
     update_user (state, data) {
       for (let key in state) {
         if (data[key]) state[key] = data[key];
-      };
+      }
       return state;
     },
   },
@@ -23,7 +23,7 @@ const user = {
       if (!params.username || !params.password) {
         console.error('[ Login Error ]: Please confirm params is complete?', params);
         return;
-      };
+      }
   
       login(params).then(response => {
         if (response.success && response.code === '200') {
@@ -31,7 +31,7 @@ const user = {
           this.update_user(response.data);
         } else {
           if (errCallback) errCallback(response);
-        };
+        }
       }, error => {
         console.error(error);
       });

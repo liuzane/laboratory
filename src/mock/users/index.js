@@ -11,18 +11,15 @@ let Data = Array.apply(null, { length: 100 }).map((item, i) => {
 });
 
 
-const request = () => {
-  mock.onGet('/user/list').reply(config => {
-    let { page, size } = config.params;
+console.log(mock);
+mock.onGet('/user/list').reply(config => {
+  let { page, size } = config.params;
 
-    let data = [];
+  let data = [];
 
-    for (let i = page - 1, iLength = Data.length; i < page * size && i < iLength; i ++) {
-      data.push(Data[i]);
-    };
+  for (let i = page - 1, iLength = Data.length; i < page * size && i < iLength; i ++) {
+    data.push(Data[i]);
+  };
 
-    return [ 200, data ];
-  });
-};
-
-export default request;
+  return [ 200, data ];
+});

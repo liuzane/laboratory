@@ -1,29 +1,28 @@
 //用户
-import { mock } from '@/api/config';
+import axios, { localeMock, easyMock } from '@/api/config';
 
 //登录
-export const login = (params, cancelToken) => {
-  return mock({
-    method: 'get',
-    url: '/user/login',
-    params,
+export const login = (data, cancelToken) => {
+  return axios({
+    method: 'post',
+    url: '/login',
+    data,
     cancelToken,
   });
 };
 
-//登录
-export const userLogin = (params, cancelToken) => {
-  return mock({
-    method: 'get',
-    url: '/user/login',
-    params,
-    cancelToken,
-  });
-};
+// export const login = (params, cancelToken) => {
+//   return easyMock({
+//     method: 'get',
+//     url: '/user/login',
+//     params,
+//     cancelToken,
+//   });
+// };
 
 //获取用户信息
 export const getUserList = (params, cancelToken) => {
-  return mock({
+  return axios({
     method: 'get',
     url: '/user/list',
     params,

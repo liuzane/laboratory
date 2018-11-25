@@ -1,18 +1,12 @@
 //基础模块
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
-//第三方模块
-import { fromJS, is } from 'immutable';
 
 //API
 import {  } from '@/api';
 
 //方法
 import {  } from '@/utils/';
-
-//高阶组件
-import  from '@/HOC';
 
 //公共组件
 import  from '@/components';
@@ -24,15 +18,9 @@ import  from '';
 import './style/';
 
 
-export default class Desktop extends Component {
+export default class Desktop extends PureComponent {
   static propTypes = {
     string: PropTypes.string,
-    number: PropTypes.number,
-    bool: PropTypes.bool,
-    array: PropTypes.array,
-    object: PropTypes.object,
-    func:  PropTypes.func,
-    isRequired: PropTypes.isRequired,
     className: PropTypes.string,
     style: PropTypes.object,
   };
@@ -50,15 +38,13 @@ export default class Desktop extends Component {
 
   };
 
-  shouldComponentUpdate (nextProps, nextState) {
-    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
-  };
-
   render () {
+    const { className, style } = this.props;
+    
     return (
       <div 
-        className={ ('moban ' + this.props.className).trim() } 
-        style={ this.props.style }
+        className={ ('moban ' + className).trim() }
+        style={ style }
       >
         
       </div>

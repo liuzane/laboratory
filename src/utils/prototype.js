@@ -1,17 +1,17 @@
 // 插值搜索（ 该方法在已排序的数组性能好，非已排序的请用 findIndex ）
 Array.prototype.insertionSearch = function (item) {
-  var _this = this, low = 0, high = this.length - 1, mid, element, attribute;
-  var arrayItem = function (index) {
+  let _this = this, low = 0, high = this.length - 1, mid, element, attribute;
+  const arrayItem = function (index) {
     return attribute ? _this[index][attribute] : _this[index];
   };
 
   if (typeof item === 'object') {
-    for (var key in item) {
+    for (let key in item) {
       attribute = key;
       item = item[key];
       break;
-    };
-  };
+    }
+  }
 
   while (low <= high) {
     mid = Math.floor(low + (item - arrayItem(low)) / (arrayItem(high) - arrayItem(low)) * (high - low));
@@ -24,14 +24,14 @@ Array.prototype.insertionSearch = function (item) {
       high = mid - 1;
     } else {
       return mid;
-    };
-  };
+    }
+  }
   return -1;
 };
 
 // 日期格式化
 Date.prototype.format = function (fmt) {
-  var date = {
+  const date = {
     'M+': this.getMonth() + 1, //月
     'd+': this.getDate(), //日
     'h+': this.getHours(), //时
@@ -43,11 +43,11 @@ Date.prototype.format = function (fmt) {
 
   if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
 
-  for (var key in date) {
+  for (let key in date) {
     if (new RegExp('(' + key + ')').test(fmt)) {
       fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (date[key]) : (('00' + date[key]).substr(('' + date[key]).length)));
-    };
-  };
+    }
+  }
   return fmt;
 };
 

@@ -1,10 +1,7 @@
-// const mock = () => {
-//   import('./users').then(data => data.default());
-// };
-import users from './users';
+//登录
+import './login';
 
-const request = () => {
-  users();
-};
+//用户数据
+import './users';
 
-export default request;
+

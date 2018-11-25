@@ -12,8 +12,6 @@ import styled from './style/Css.module.css';
 // import './style/Less.less';
 // import styled from './style/Css.css';
 
-console.log(styled, 15);
-
 class Less extends Component {
   constructor (props) {
     super(props);
@@ -26,7 +24,7 @@ class Less extends Component {
 
   render () {
     return (
-      <div className="box">
+      <div className={ styled.box }>
         Less
         <Button type="primary">Button</Button>
       </div>

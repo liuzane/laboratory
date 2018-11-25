@@ -35,7 +35,7 @@ class Main extends Component {
   };
 
   componentWillMount () {
-    const { id, username, update_user } = this.props;
+    const { update_user } = this.props;
     update_user({ id: '1', username: 'admin' });
     // console.log('Main', id, username);
   };
@@ -49,12 +49,14 @@ class Main extends Component {
   };
 
   render () {
+    const currentPathName = this.props.location.pathname;
+
     return (
       <Layout>
         <Sider>
           <Menu
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
+            defaultSelectedKeys={[ currentPathName ]}
+            defaultOpenKeys={[ currentPathName ]}
             mode="inline"
             theme="dark" 
             onSelect={ this.goto }

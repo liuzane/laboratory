@@ -1,6 +1,5 @@
 //基础模块
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
 //多语言
 import { IntlProvider, addLocaleData } from 'react-intl';

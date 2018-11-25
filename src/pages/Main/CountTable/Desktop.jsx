@@ -131,10 +131,12 @@ export default class Desktop extends PureComponent {
   validate = () => {
     let isPass = true;
     let forms = this.CountTable.current.forms;
+    const validate = (error, values) => {
+      if (error) isPass = false;
+    };
+    
     for (let key in forms) {
-      forms[key].validateFields((error, values) => {
-        if (error) isPass = false;
-      });
+      forms[key].validateFields(validate);
     };
     if (isPass) {
       console.log('saved');

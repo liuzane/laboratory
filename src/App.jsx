@@ -18,9 +18,6 @@ import 'nprogress/nprogress.css';
 import { languages } from '@/language';
 
 console.log(languages, 20);
-for (let key in languages) {
-  console.log(key);
-};
 
 
 class App extends PureComponent {
@@ -29,8 +26,8 @@ class App extends PureComponent {
 	};
   
   onAfterEach = (to, from, history) => {
-    setTimeout(NProgress.done, 300);
-    // NProgress.done();
+    // setTimeout(NProgress.done, 300);
+    NProgress.done();
   };
 
   render() {

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 //UI组件库
-import { Form, Table, Spin, Input } from 'antd';
+import { Form, Table, Spin } from 'antd';
 
 const FormItem = Form.Item;
 const CountTableContext = React.createContext();
