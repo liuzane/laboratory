@@ -34,6 +34,10 @@ module.exports = function override(config, env) {
         '@': path.resolve(__dirname, './src'),
       },
     },
+  
+    externals: {
+      one: 'one',
+    },
   });
   
   // console.log(webpackConfig);

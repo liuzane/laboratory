@@ -11,7 +11,7 @@ if (address_env !== 'test') {
   address_env = process.env.NODE_ENV;
 }
 
-//命名方式  XXX_YYY_ADDRESS， XXX 接口名称，YYY 接口所属服务。
+//命名方式  XXX_YYY_ADDRESS， XXX 地址名称，YYY 地址所属服务。
 const address = Object.seal({
   DEBUG_DEV_ADDRESS: null,  //联调地址
   LOCALE_MOCK_ADDRESS: null,  //本地Mock地址

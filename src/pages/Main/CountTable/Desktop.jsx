@@ -113,11 +113,11 @@ export default class Desktop extends PureComponent {
     await getUserList({ page: 1, size: 2 }).then(response => {
       console.log('user list', response);
       if (response.success && response.code === '200') {
-        const array01 = JSON.parse(JSON.stringify(response));
-        const array02 = JSON.parse(JSON.stringify(response));
-        const array03 = JSON.parse(JSON.stringify(response));
-        const array04 = JSON.parse(JSON.stringify(response));
-        const array05 = JSON.parse(JSON.stringify(response));
+        // const array01 = JSON.parse(JSON.stringify(response));
+        // const array02 = JSON.parse(JSON.stringify(response));
+        // const array03 = JSON.parse(JSON.stringify(response));
+        // const array04 = JSON.parse(JSON.stringify(response));
+        // const array05 = JSON.parse(JSON.stringify(response));
         this.setState({
           data: response.data.map((table, index) => ({
             title: [
@@ -125,7 +125,7 @@ export default class Desktop extends PureComponent {
               { label: '管理员', value: 'Admin' },
               { label: '创建时间', value: new Date().format('yyyy-MM-dd hh:mm:ss') },
             ],
-            dataSource: response.data.map((item, j) => ({ ...item, id: (Math.random()).toString() })),
+            dataSource: response.data.map((item, j) => ({ ...item })),
           }))
         });
       };
@@ -160,7 +160,7 @@ export default class Desktop extends PureComponent {
           loading={ loading }
           columns={ columns }
           footer={ footer }
-          rowKey="id"
+          rowKey="roId"
         />
         
         {/*<EditableTable */}

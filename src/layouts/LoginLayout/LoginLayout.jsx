@@ -173,7 +173,7 @@ export default class LoginLayout extends PureComponent {
         this.num(15, 2),
         this.num(20, -20) / 40,
         this.num(20, -20) / 40,
-        `rgba(${ this.num(0, 255) }, ${ this.num(0, 255) }, ${ this.num(0, 255) }, .15)`
+        `rgba(${ this.num(255) }, ${ this.num(255) }, ${ this.num(255) }, .15)`
       ));
     };
     this.circles = circles;

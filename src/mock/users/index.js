@@ -4,6 +4,7 @@ import mock from '@/mock/config';
 let Data = Array.apply(null, { length: 100 }).map((item, i) => {
   return {
     id: Random.guid(),
+    roId: Random.guid(),
     name: Random.name(),
     age: Random.integer(20, 50),
     address: Random.county(true),
@@ -21,5 +22,5 @@ mock.onGet('/user/list').reply(config => {
     data.push(Data[i]);
   };
 
-  return [ 200, data ];
+  return [ 200, { code: '200', success: true, data, message: '' } ];
 });

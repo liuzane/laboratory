@@ -50,6 +50,7 @@ let forms = {};
 
 const CountTableRow = ({ form, index, ...props }) => {
   const key = props['data-row-key'];
+  console.log(key, props, 53);
   if (key) forms[key] = form;
   return (
     <CountTableContext.Provider value={ form }>
@@ -189,6 +190,7 @@ export default class CountTable extends PureComponent {
                 className="count-table__body" 
                 key={ index }
                 components={ components }
+                onRow={ (record, index) => ({ index: record[rowKey], rowId: record[rowKey] }) }
                 bordered 
                 dataSource={ table.dataSource } 
                 columns={ columns } 

@@ -17,11 +17,15 @@ import 'nprogress/nprogress.css';
 
 import { languages } from '@/language';
 
-console.log(languages, 20);
+import one from 'one';
+
+console.log(languages, one, 20);
+
 
 
 class App extends PureComponent {
 	onBeforeEach = (to, from, history) => {
+	  console.log('app', to, from);
     NProgress.start();
 	};
   
