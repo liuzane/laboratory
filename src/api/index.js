@@ -7,6 +7,8 @@ export * from './config';
   require('@/mock');
 // }
 
+//Login
+export * from './login';
 
 //Users
 export * from './users';

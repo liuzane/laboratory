@@ -31,13 +31,22 @@ class Main extends Component {
   
   constructor (props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: false,
+    };
   };
 
   componentWillMount () {
     const { update_user } = this.props;
     update_user({ id: '1', username: 'admin' });
     // console.log('Main', id, username);
+    setTimeout(() => {
+      // const screenLoading = document.getElementById('screen-loading');
+      // if (screenLoading) {
+      //   document.body.removeChild(screenLoading);
+      // }
+      // this.setState({ loading: false });
+    }, 3000);
   };
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -51,7 +60,7 @@ class Main extends Component {
   render () {
     const currentPathName = this.props.location.pathname;
 
-    return (
+    return this.state.loading ? null : (
       <Layout>
         <Sider>
           <Menu

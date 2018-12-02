@@ -21,10 +21,10 @@
     "webpack-merge": "^4.1.4"
   },
   "scripts": {
-    "start": "set PORT=2000&&react-app-rewired start",
-    "build": "set GENERATE_SOURCEMAP=false&&react-app-rewired build",
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
     "test": "react-app-rewired test",
-    "build-test": "set ADDRESS_ENV=test&&npm run build",
+    "build-test": "node scripts/build.js true",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

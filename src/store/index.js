@@ -1,11 +1,15 @@
 import { init } from '@rematch/core';
 
+//枚举
+import emums from './modules/emums'
+
 //用户信息
 import user from './modules/user';
 
 
 const store = init({
   models: {
+    emums,
     user,
   },
 });

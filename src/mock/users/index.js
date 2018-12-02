@@ -12,7 +12,7 @@ let Data = Array.apply(null, { length: 100 }).map((item, i) => {
 });
 
 
-console.log(mock);
+//获取人员列表
 mock.onGet('/user/list').reply(config => {
   let { page, size } = config.params;
 
@@ -20,7 +20,7 @@ mock.onGet('/user/list').reply(config => {
 
   for (let i = page - 1, iLength = Data.length; i < page * size && i < iLength; i ++) {
     data.push(Data[i]);
-  };
+  }
 
   return [ 200, { code: '200', success: true, data, message: '' } ];
 });

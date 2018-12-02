@@ -6,3 +6,6 @@ import './common.css';
 
 //UI库样式
 import 'antd/dist/antd.css';
+
+//顶部loading样式
+import 'nprogress/nprogress.css';

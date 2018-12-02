@@ -1,6 +1,7 @@
 //API
 import { login } from '@/api';
 
+
 const user = {
   state: {
     language: '',
@@ -34,6 +35,7 @@ const user = {
         }
       }, error => {
         console.error(error);
+        if (errCallback) errCallback(error);
       });
     },
   },
