@@ -58,13 +58,12 @@ class App extends PureComponent {
   };
   
 	onBeforeEach = (to, from, history) => {
-	  console.log('app', to, from);
-    NProgress.start();
+    // NProgress.start();
 	};
   
   onAfterEach = (to, from, history) => {
     // setTimeout(NProgress.done, 300);
-    NProgress.done();
+    // NProgress.done();
   };
 
   render() {

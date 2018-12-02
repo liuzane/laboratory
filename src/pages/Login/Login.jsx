@@ -34,10 +34,6 @@ class Login extends Component {
       loading: false,
     };
   };
-
-  componentDidMount () {
-
-  };
   
   login = () => {
     const { history, form, getUserLogin } = this.props;
@@ -48,15 +44,17 @@ class Login extends Component {
           if (response.success && response.code === '200') {
             message.success(response.message);
             history.push('/main');
+            return;
           } else {
             message.error(response.message);
-          };
+          }
+  
           this.setState({ loading: false });
         }, error => {
           console.error('login', error);
           this.setState({ loading: false });
         });
-      };
+      }
     });
   };
 

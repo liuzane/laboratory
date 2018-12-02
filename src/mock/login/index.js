@@ -19,12 +19,15 @@ const Users = {
 //登录
 mock.onPost('/login').reply(config => {
   return new Promise((resolve, reject) => {
+    let params = null;
     try {
-      let params = JSON.parse(config.data);
+      params = JSON.parse(config.data);
     } catch (e) {
       reject([ 200, { code: '500', success: false, data: [], message: '参数解析失败' } ]);
       return;
     }
+    
+    const { username, password } = params;
   
     if (Users[username] && Users[username].password === password) {
       resolve([ 200, {

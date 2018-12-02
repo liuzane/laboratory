@@ -12,7 +12,7 @@ class Home extends Component {
   };
 
   componentDidMount () {
-    console.log(new Date('2018-11-30 00:00:00.0').format('yyyy-MM-dd'), 15)
+    // console.log(new Date('2018-11-30 00:00:00.0').format('yyyy-MM-dd'), 15)
   };
 
   shouldComponentUpdate (nextProps, nextState) {
