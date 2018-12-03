@@ -37,7 +37,7 @@ class App extends PureComponent {
   };
   
   componentDidMount () {
-    console.log(this.props);
+    // console.log(this.props);
     // const { update_user } = this.props;
     // const closeLoading = () => {
       const screenLoading = document.getElementById('screen-loading');

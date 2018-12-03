@@ -111,13 +111,8 @@ export default class Desktop extends PureComponent {
   getUserList = async function () {
     this.setState({ loading: true });
     await getUserList({ page: 1, size: 2 }).then(response => {
-      console.log('user list', response);
+      // console.log('user list', response);
       if (response.success && response.code === '200') {
-        // const array01 = JSON.parse(JSON.stringify(response));
-        // const array02 = JSON.parse(JSON.stringify(response));
-        // const array03 = JSON.parse(JSON.stringify(response));
-        // const array04 = JSON.parse(JSON.stringify(response));
-        // const array05 = JSON.parse(JSON.stringify(response));
         this.setState({
           data: response.data.map((table, index) => ({
             title: [
@@ -160,7 +155,7 @@ export default class Desktop extends PureComponent {
           loading={ loading }
           columns={ columns }
           footer={ footer }
-          rowKey="roId"
+          rowKey="id"
         />
         
         {/*<EditableTable */}

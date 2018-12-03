@@ -31,7 +31,7 @@ switch (address_env) {
   //生产环境地址
   case 'production':
     address.DEBUG_DEV_ADDRESS = '/';
-    address.LOCALE_MOCK_ADDRESS = './';
+    address.LOCALE_MOCK_ADDRESS = 'https://liuzane.github.io/react-laboratory';
     address.EASY_MOCK_ADDRESS = 'https://www.easy-mock.com/mock/5bf3ee63f0beab552d8b6fef';
     address.MAIN_PROD_ADDRESS = 'http://192.168.0.1';
     break;

@@ -7,6 +7,7 @@ import NProgress from 'nprogress';
 
 //Loading
 const loading = props => {
+  console.log('loading', props);
   if (props.error) {
     NProgress.done();
     return <div>Error! <button onClick={ props.retry }>Retry</button></div>;

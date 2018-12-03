@@ -32,7 +32,6 @@ class Todo extends Component {
   };
 
   render () {
-    console.log(this.state.floor, 35);
     return (
       <ul className="todo">
         {

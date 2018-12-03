@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { Form, Table, Spin } from 'antd';
 
 const FormItem = Form.Item;
-const CountTableContext = React.createContext();
+const CountTableRowContext = React.createContext();
 
 const Style = styled.div`
   padding: 10px;
@@ -48,14 +48,13 @@ const Style = styled.div`
 
 let forms = {};
 
-const CountTableRow = ({ form, index, ...props }) => {
-  const key = props['data-row-key'];
-  console.log(key, props, 53);
+const CountTableRow = ({ form, index, id, ...props }) => {
+  const key = id;
   if (key) forms[key] = form;
   return (
-    <CountTableContext.Provider value={ form }>
+    <CountTableRowContext.Provider value={ form }>
       <tr { ...props } />
-    </CountTableContext.Provider>
+    </CountTableRowContext.Provider>
   );
 };
 
@@ -72,7 +71,7 @@ class CountTableCell extends PureComponent {
       <td { ...props }>
         {
           validate ? (
-            <CountTableContext.Consumer>
+            <CountTableRowContext.Consumer>
               {
                 form => {
                   return (
@@ -82,7 +81,7 @@ class CountTableCell extends PureComponent {
                   );
                 }
               }
-            </CountTableContext.Consumer>
+            </CountTableRowContext.Consumer>
           ) : children
         }
       </td>
@@ -190,7 +189,7 @@ export default class CountTable extends PureComponent {
                 className="count-table__body" 
                 key={ index }
                 components={ components }
-                onRow={ (record, index) => ({ index: record[rowKey], rowId: record[rowKey] }) }
+                onRow={ (record, index) => ({ index, id: record[rowKey] }) }
                 bordered 
                 dataSource={ table.dataSource } 
                 columns={ columns } 
