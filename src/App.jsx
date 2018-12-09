@@ -18,7 +18,7 @@ import '@/styles';
 
 // import { languages } from '@/language';
 
-// import one from 'one';
+import one from 'one';
 
 // console.log(languages, 20);
 
@@ -40,10 +40,8 @@ class App extends PureComponent {
     // console.log(this.props);
     // const { update_user } = this.props;
     // const closeLoading = () => {
-      const screenLoading = document.getElementById('screen-loading');
-      if (screenLoading) {
-        document.body.removeChild(screenLoading);
-      }
+    this.closeLoading();
+    console.log(one)
       // this.setState({ loading: false });
     // };
     //
@@ -55,6 +53,16 @@ class App extends PureComponent {
     //
     //   }
     // );
+  };
+  
+  closeLoading = () => {
+    const screenLoading = document.getElementById('screen-loading');
+    const showLoading = document.getElementById('show-loading');
+  
+    if (screenLoading) {
+      document.body.removeChild(screenLoading);
+      document.body.removeChild(showLoading);
+    }
   };
   
 	onBeforeEach = (to, from, history) => {
