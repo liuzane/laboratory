@@ -34,7 +34,7 @@ export default class Desktop extends PureComponent {
           title: 'Age',
           align: 'center',
           dataIndex: 'age',
-          validate: (getFieldDecorator, dataIndex, record) => {
+          validate: ({ getFieldDecorator }, dataIndex, record) => {
             return getFieldDecorator(dataIndex, {
               rules: [
                 { required: true, message: '请输入年龄', },
@@ -118,7 +118,7 @@ export default class Desktop extends PureComponent {
             title: [
               { label: '所在组', value: 'XXXXXX' },
               { label: '管理员', value: 'Admin' },
-              { label: '创建时间', value: new Date().format('yyyy-MM-dd hh:mm:ss') },
+              { label: '创建时间', value: new Date().toDateString() },
             ],
             dataSource: response.data.map((item, j) => ({ ...item })),
           }))

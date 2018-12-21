@@ -13,10 +13,7 @@ import store from './store';
 import App from './App';
 
 //多语言
-import Language from './language'
-
-//原型链方法
-import './utils/prototype';
+import Language from './language';
 
 
 ReactDOM.render(

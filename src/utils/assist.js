@@ -15,7 +15,7 @@ export function typeOf (obj) {
   };
 
   return map[ toString.call(obj) ];
-};
+}
 
 // 深拷贝
 function deepCopy (data) {
@@ -28,18 +28,18 @@ function deepCopy (data) {
     object = {};
   } else {
     return data;
-  };
+  }
 
   if (type === 'array') {
     for (let i = 0; i < data.length; i ++) {
       object.push(deepCopy(data[i]));
-    };
+    }
   } else if (type === 'object') {
     for (let key in data) {
       object[key] = deepCopy(data[key]);
-    };
-  };
+    }
+  }
   return object;
-};
+}
 
 export { deepCopy };

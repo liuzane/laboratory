@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+//方法
+import { setCookie } from '@/utils/cookie';
+
 //UI库组件
 import { Form, Input, Icon, Button, message } from 'antd';
 
@@ -37,11 +40,14 @@ class Login extends Component {
   
   login = () => {
     const { history, form, getUserLogin } = this.props;
-    form.validateFields((err, params) => {
-      if (!err) {
+    
+    form.validateFields((error, params) => {
+      if (!error) {
         this.setState({ loading: true });
         getUserLogin(params, response => {
           if (response.success && response.code === '200') {
+            console.log(response, 49);
+            setCookie({ key: 'token', value: response.data.id, expires: 0.5 });
             message.success(response.message);
             history.push('/main');
             return;

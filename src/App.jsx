@@ -11,14 +11,15 @@ import { HashRouter as Router } from 'react-router-dom';
 import routes, { RouterView } from '@/router';
 
 //第三方模块
-import NProgress from 'nprogress';
+// import NProgress from 'nprogress';
+
+//方法
+import { getCookie } from '@/utils/cookie';
 
 //全局样式
 import '@/styles';
 
 // import { languages } from '@/language';
-
-import one from 'one';
 
 // console.log(languages, 20);
 
@@ -37,22 +38,7 @@ class App extends PureComponent {
   };
   
   componentDidMount () {
-    // console.log(this.props);
-    // const { update_user } = this.props;
-    // const closeLoading = () => {
     this.closeLoading();
-    console.log(one)
-      // this.setState({ loading: false });
-    // };
-    //
-    // update_user(
-    //   { id: '1', username: 'admin' },
-    //   closeLoading,
-    //   error => {
-    //     closeLoading();
-    //
-    //   }
-    // );
   };
   
   closeLoading = () => {
@@ -66,6 +52,9 @@ class App extends PureComponent {
   };
   
 	onBeforeEach = (to, from, history) => {
+    const token = getCookie('token');
+    
+    if (!token) history.push('/login');
     // NProgress.start();
 	};
   

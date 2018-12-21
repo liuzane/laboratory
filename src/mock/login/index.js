@@ -56,7 +56,7 @@ mock.onGet('/user/info').reply(config => {
   let params = config.data;
   console.log('mock login ', config);
   return new Promise((resolve, reject) => {
-    let data = [];
+    let data = [ params ];
     
     resolve([ 200, { code: '200', success: true, data, message: '登录成功' } ]);
   });
