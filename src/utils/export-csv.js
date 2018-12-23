@@ -1,51 +1,29 @@
-'use strict'
-
-// var arr = [
-//   {
-//     name: '张三',
-//     age: 1,
-//     address: 'abc',
-//   },
-//   {
-//     name: '李四',
-//     age: 2,
-//     address: 'abc',
-//   },
-//   {
-//     name: '王五',
-//     age: 3,
-//     address: 'abc',
-//   },
-//   {
-//     name: '赵六',
-//     age: 4,
-//     address: 'abc',
-//   },
-// ];
-// exportCsv({
-//   fileName: 'abc',
-//   titleForKey: [ 'name', 'age', 'address' ],
-//   title: [ '名字', '年龄', '地址' ],
-//   data: arr,
-// });
-
-export function exportCsv (object) {
-  var titleForKey = object.titleForKey,
-    data = object.data,
+/*
+* @method exportCsv
+* @param { params: Object, required }
+*   [ fileName: String ] 文件名称
+*   [ titleForKey: Array[String] ] 表头所对应的字段
+*   [ title: Array[String] ] 表头所对应的字段名称
+*   [ data: Array[Object] ] 表格数据
+* @return null
+*/
+export function exportCsv (params) {
+  let titleForKey = params.titleForKey,
+    data = params.data,
     str = [];
 
-  str.push(object.title.join(',') + '\n');
+  str.push(params.title.join(',') + '\n');
 
-  for(var i = 0; i < data.length; i ++){
+  for (let i = 0; i < data.length; i++) {
     str.push(titleForKey.map(item => data[i][item]).join(',') + '\n');
-  };
+  }
 
-  var url = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str.join('')),
+  let url = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str.join('')),
     downloadLink =  document.createElement('a');
 
   downloadLink.href = url;
-  downloadLink.download = object.fileName + '.csv';
+  downloadLink.download = params.fileName + '.csv';
   document.body.appendChild(downloadLink);
   downloadLink.click();
   document.body.removeChild(downloadLink);
-};
+}

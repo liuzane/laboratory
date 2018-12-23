@@ -4,12 +4,14 @@ import mock from '@/mock/config';
 const Users = {
   admin: {
     id: 'b920FfDB-63f7-dFf5-f8bb-36338ccff84B',
+    name: '管理员',
     password: '123456',
     permission: []
   },
   
   manager: {
     id: 'a3Ac3dAD-f6Ba-B04C-ae81-16D6e4A85fB8',
+    name: '经理',
     password: '123456',
     permission: []
   },
@@ -34,14 +36,13 @@ mock.onPost('/login').reply(config => {
         code: '200',
         success: true,
         data: {
-          id: Users[username].id,
           username,
-          permission: Users[username].permission
+          ...Users[username],
         },
         message: '登录成功'
       } ]);
     } else {
-      resolve([ 200, {
+      reject([ 500, {
         code: '500',
         success: false,
         data: null,
@@ -53,11 +54,33 @@ mock.onPost('/login').reply(config => {
 
 //获取用户信息
 mock.onGet('/user/info').reply(config => {
-  let params = config.data;
-  console.log('mock login ', config);
+  const { id } = config.params;
+
   return new Promise((resolve, reject) => {
-    let data = [ params ];
+    let data = null;
     
-    resolve([ 200, { code: '200', success: true, data, message: '登录成功' } ]);
+    for (let key in Users) {
+      if (Users[key].id === id && id !== undefined) {
+        data = JSON.parse(JSON.stringify(Users[key]));
+        data.username = key;
+        delete data.password;
+      }
+    }
+    
+    if (data) {
+      resolve([ 200, {
+        code: '200',
+        success: true,
+        data,
+        message: '获取成功',
+      } ]);
+    } else {
+      reject([ 500, {
+        code: '500',
+        success: false,
+        data: null,
+        message: '未找到该用户信息',
+      } ]);
+    }
   });
 });

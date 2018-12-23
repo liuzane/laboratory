@@ -25,14 +25,14 @@ class RouterView extends PureComponent {
     const [ to, from ] = [ nextProps.location, this.props.location ];
     if (!is(fromJS(to), fromJS(from))) {
       this.props.onBeforeEach(to, from, this.props.history);
-    };
+    }
   };
   
   componentDidUpdate (nextProps, nextState) {
     const [ to, from ] = [ nextProps.location, this.props.location ];
     if (!is(fromJS(to), fromJS(from))) {
       this.props.onAfterEach(to, from, this.props.history);
-    };
+    }
   };
 
   render () {

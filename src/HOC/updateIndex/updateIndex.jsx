@@ -24,7 +24,7 @@ function updateIndex (WrappedComponent) {
 		render () {
 			return <WrappedComponent { ...this.props } />;
 		};
-	};
+	}
 
 	//约定高阶组件名字
 	UpdateIndex.displayName = `UpdateIndex(${ getDisplayName(WrappedComponent) })`;
@@ -33,10 +33,10 @@ function updateIndex (WrappedComponent) {
 	UpdateIndex.staticMethod = WrappedComponent.staticMethod;
 
 	return UpdateIndex;
-};
+}
 
 function getDisplayName (WrappedComponent) {
 	return WrappedComponent.displayName || WrappedComponent.name || 'Component';
-};
+}
 
 export default updateIndex;

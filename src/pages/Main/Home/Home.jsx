@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 //第三方模块
 import { fromJS, is } from 'immutable';
-
+console.log('loading');
 
 class Home extends Component {
   constructor (props) {

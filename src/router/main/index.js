@@ -36,4 +36,11 @@ export default [
     component: AsyncLoad(() => import('@/pages/Main/Typeof')),
     exact: true,
   },
+  
+  {
+    path: 'module',
+    title: 'module',
+    component: AsyncLoad(() => import('@/pages/Main/Module')),
+    exact: true,
+  },
 ];

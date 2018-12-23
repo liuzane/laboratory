@@ -1,0 +1,25 @@
+#screen-loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 10000;
+}
+
+.screen-loading__viewbox {
+  width: 20vw;
+  height: 20vh;
+  position: absolute;
+  top: calc(40% - 10vh);
+  left: calc(50% - 10vw);
+}
+
+.screen-loading__text {
+  color: #454545;
+  font-family: 'Microsoft YaHei UI','Microsoft YaHei',DengXian,SimSun,'Segoe UI',Tahoma,Helvetica,sans-serif;
+  font-size: 18px;
+  font-weight: 200;
+  text-align: center;
+}

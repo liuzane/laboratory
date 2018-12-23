@@ -8,14 +8,19 @@ import {  } from '@/api';
 //方法
 import {  } from '@/utils/';
 
+//样式
+import './style/';
+
 //公共组件
 import  from '@/components';
 
 //组件
 import  from '';
 
-//样式
-import './style/';
+//UI组件
+import {  } from 'antd';
+
+
 
 
 export default class Desktop extends PureComponent {

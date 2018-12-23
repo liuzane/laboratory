@@ -1,12 +1,12 @@
 //基础模块
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 
 //样式
-import './style/LoginLayout.css';
+import './style/LayLogin.css';
 
 
-export default class LoginLayout extends PureComponent {
-  constructor (props) {
+export default class LayLogin extends PureComponent {
+  constructor(props) {
     super(props);
     this.width = 0;
     this.height = 0;
@@ -18,7 +18,7 @@ export default class LoginLayout extends PureComponent {
     this.drawTime = null;
   };
   
-  componentDidMount () {
+  componentDidMount() {
     const width = window.innerWidth;
     const height = window.innerHeight;
     
@@ -31,7 +31,7 @@ export default class LoginLayout extends PureComponent {
     this.canvas = canvas;
     
     this.getContext();
-  
+    
     this.init();
     this.drawTime = setInterval(() => {
       for (let i = 0; i < this.point; i++) {
@@ -42,12 +42,12 @@ export default class LoginLayout extends PureComponent {
         else if (cir.x < 0) cir.x = width;
         if (cir.y > height) cir.y = 0;
         else if (cir.y < 0) cir.y = height;
-      };
+      }
       this.draw();
     }, 50);
   };
   
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.drawTime);
   };
   
@@ -103,7 +103,7 @@ export default class LoginLayout extends PureComponent {
   drawLine = (cxt, beginX, beginY, closeX, closeY, opacity) => {
     let line = this.line(beginX, beginY, closeX, closeY, opacity);
     cxt.beginPath();
-    cxt.strokeStyle = 'rgba(0, 0, 0, '+ opacity +')';
+    cxt.strokeStyle = 'rgba(0, 0, 0, ' + opacity + ')';
     cxt.moveTo(line.beginX, line.beginY);
     cxt.lineTo(line.closeX, line.closeY);
     cxt.closePath();
@@ -116,16 +116,15 @@ export default class LoginLayout extends PureComponent {
     const canvas = this.canvas;
     const point = this.point;
     const circles = this.circles;
-
+    
     try {
       context.clearRect(0, 0, canvas.width, canvas.height);
     } catch (e) {
       context = this.getContext();
       context.clearRect(0, 0, canvas.width, canvas.height);
-    };
+    }
     
-
-    for (let i = 0; i < point; i ++) {
+    for (let i = 0; i < point; i++) {
       let circle = circles[i];
       this.drawCricle(
         context,
@@ -136,10 +135,10 @@ export default class LoginLayout extends PureComponent {
         null,
         circle.color,
       );
-    };
+    }
     
-    for (let i = 0; i < point; i ++) {
-      for (let j = 0; j < point; j ++) {
+    for (let i = 0; i < point; i++) {
+      for (let j = 0; j < point; j++) {
         if (i + j < point) {
           let A = Math.abs(circles[i + j].x - circles[i].x);
           let B = Math.abs(circles[i + j].y - circles[i].y);
@@ -156,16 +155,16 @@ export default class LoginLayout extends PureComponent {
               circles[i + j].y,
               lineOpacity
             );
-          };
-        };
-      };
-    };
+          }
+        }
+      }
+    }
   };
   
   //初始化生成原点
   init = () => {
     const circles = [];
-    for (let i = 0; i < this.point; i ++) {
+    for (let i = 0; i < this.point; i++) {
       circles.push(this.drawCricle(
         this.context,
         this.num(this.width),
@@ -175,15 +174,15 @@ export default class LoginLayout extends PureComponent {
         this.num(20, -20) / 40,
         `rgba(${ this.num(255) }, ${ this.num(255) }, ${ this.num(255) }, .15)`
       ));
-    };
+    }
     this.circles = circles;
     this.draw();
   };
   
-  render () {
+  render() {
     return (
       <div className="login-layout">
-        <canvas id="MyCanvas" />
+        <canvas id="MyCanvas"/>
         <div className="login-layout__content">
           { this.props.children }
         </div>

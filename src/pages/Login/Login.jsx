@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 //方法
 import { setCookie } from '@/utils/cookie';
+import { setStorage } from '@/utils/local-storage';
 
 //UI库组件
 import { Form, Input, Icon, Button, message } from 'antd';
@@ -13,7 +14,7 @@ import { Form, Input, Icon, Button, message } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
 //公共组件
-import LoginLayout from '@/layouts/LoginLayout';
+import LayLogin from '@/layouts/LayLogin';
 
 //样式
 import './style/Login.css';
@@ -26,10 +27,10 @@ class Login extends Component {
     history: PropTypes.object,
     intl: PropTypes.object,
     form: PropTypes.object,
-    getUserLogin: PropTypes.func,
+    userLogin: PropTypes.func,
   };
   
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       username: '',
@@ -39,25 +40,18 @@ class Login extends Component {
   };
   
   login = () => {
-    const { history, form, getUserLogin } = this.props;
+    const { history, form, userLogin } = this.props;
     
     form.validateFields((error, params) => {
       if (!error) {
         this.setState({ loading: true });
-        getUserLogin(params, response => {
-          if (response.success && response.code === '200') {
-            console.log(response, 49);
-            setCookie({ key: 'token', value: response.data.id, expires: 0.5 });
-            message.success(response.message);
-            history.push('/main');
-            return;
-          } else {
-            message.error(response.message);
-          }
-  
+        userLogin(params, response => {
+          setCookie({ key: 'token', value: response.data.id, hours: 0.5 });
+          setStorage('userInfo', response.data, 24);
+          message.success(response.message);
+          history.push('/main');
           this.setState({ loading: false });
         }, error => {
-          console.error('login', error);
           this.setState({ loading: false });
         });
       }
@@ -69,7 +63,7 @@ class Login extends Component {
     const { getFieldDecorator } = this.props.form;
     
     return (
-      <LoginLayout>
+      <LayLogin>
         <Form>
           <h3 className="login__title">
             <FormattedMessage id="login.title" />
@@ -91,7 +85,7 @@ class Login extends Component {
             {
               getFieldDecorator('password')(
                 <Input
-                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={ <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} /> }
                   placeholder={ formatMessage({ id: 'login.password' }) }
                   type="password"
                   onPressEnter={ this.login }
@@ -113,7 +107,7 @@ class Login extends Component {
         >
           <FormattedMessage id="login.loginText"/>
         </Button>
-      </LoginLayout>
+      </LayLogin>
     );
   };
 };
@@ -123,9 +117,9 @@ const IntlLogin = injectIntl(Login);
 const FormIntlLogin = Form.create()(IntlLogin);
 
 const mapDispatchToProps = dispatch => {
-  const { getUserLogin } = dispatch.user;
+  const { userLogin } = dispatch.user;
   return {
-    getUserLogin,
+    userLogin,
   };
 };
 

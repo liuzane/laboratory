@@ -1,10 +1,10 @@
 import { init } from '@rematch/core';
 
 //枚举
-import emums from './modules/emums'
+import emums from './models/emums'
 
 //用户信息
-import user from './modules/user';
+import user from './models/user';
 
 
 const store = init({

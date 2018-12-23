@@ -2,12 +2,12 @@
 import React from 'react';
 
 //样式
-import './style/Layout.css';
+import './style/LayMain.css';
 
-const Layout = props => (
+const LayMain = props => (
   <article className="layout">
     { props.children }
   </article>
 );
 
-export default Layout;
+export default LayMain;

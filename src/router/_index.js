@@ -4,8 +4,15 @@ import RouterView from './RouterView';
 //异步路由
 import AsyncLoad from '@/router/config';
 
-//主路由配置
-import main from './main';
+//引入所有路由配置
+const files = require.context('.', true, /\.js$/);
+
+//不包括以下文件
+const exclude = {
+  './index.js': true,
+  './config.js': true,
+  './RouterView.jsx': true,
+};
 
 //所有路由配置
 const routes = [

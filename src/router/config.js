@@ -28,6 +28,7 @@ const AsyncLoad = loader => Loadable({
   loader,
   loading,
   render,
+  delay: 0,
 });
 
 export default AsyncLoad;
