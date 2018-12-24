@@ -1,11 +1,16 @@
-.main__text {
-  color: #40a9ff;
-}
-
 .main__dropdown {
   float: right;
-  margin-right: 200px;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.main__dropdown-title {
+  width: 100px;
+  color: #40a9ff;
+  text-align: center;
+}
+
+.main__dropdown-title-text {
+  margin-right: 5px;
 }

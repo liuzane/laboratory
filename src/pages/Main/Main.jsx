@@ -48,13 +48,16 @@ class Main extends Component {
   };
   
   updateUserInfo = async () => {
-    const { getUserInfo } = this.props;
+    const { history, getUserInfo } = this.props;
     const { id } = getStorage('userInfo');
-
+    console.log(id, 55);
+    
     if (id) {
       this.setState({ loading: true });
       await getUserInfo({ id });
       this.setState({ loading: false });
+    } else {
+      history.push('/login');
     }
   };
 
@@ -80,9 +83,7 @@ class Main extends Component {
   };
 }
 
-const mapStateToProps = () => {
-  return {};
-};
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => {
   const { getUserInfo } = dispatch.user;

@@ -4,10 +4,16 @@ import React from 'react';
 //样式
 import './style/LayMain.css';
 
-const LayMain = props => (
-  <article className="layout">
-    { props.children }
-  </article>
-);
+const mainClassName = 'layout';
+
+const LayMain = props => {
+  const wrapperClassName = `${ mainClassName } ${ props.className }`;
+  
+  return (
+    <article className={ wrapperClassName }>
+      { props.children }
+    </article>
+  )
+};
 
 export default LayMain;

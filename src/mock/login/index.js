@@ -42,8 +42,8 @@ mock.onPost('/login').reply(config => {
         message: '登录成功'
       } ]);
     } else {
-      reject([ 500, {
-        code: '500',
+      resolve([ 403, {
+        code: '403',
         success: false,
         data: null,
         message: '请检查账号或密码是否正确'

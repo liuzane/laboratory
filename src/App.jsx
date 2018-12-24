@@ -14,10 +14,6 @@ import { getCookie } from '@/utils/cookie';
 //全局样式
 import '@/styles';
 
-// import { languages } from '@/language';
-
-// console.log(languages, 20);
-
 
 class App extends PureComponent {
 	onBeforeEach = (to, from, history) => {

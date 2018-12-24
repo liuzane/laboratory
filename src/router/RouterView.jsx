@@ -21,21 +21,21 @@ class RouterView extends PureComponent {
     onAfterEach: () => {},
   };
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     const [ to, from ] = [ nextProps.location, this.props.location ];
     if (!is(fromJS(to), fromJS(from))) {
       this.props.onBeforeEach(to, from, this.props.history);
     }
   };
   
-  componentDidUpdate (nextProps, nextState) {
+  componentDidUpdate(nextProps, nextState) {
     const [ to, from ] = [ nextProps.location, this.props.location ];
     if (!is(fromJS(to), fromJS(from))) {
       this.props.onAfterEach(to, from, this.props.history);
     }
   };
 
-  render () {
+  render() {
     return (
       <Switch>
         {
@@ -56,6 +56,6 @@ class RouterView extends PureComponent {
       </Switch>
     );
   };
-};
+}
 
 export default withRouter(RouterView);

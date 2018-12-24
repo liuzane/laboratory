@@ -18,23 +18,40 @@ import { Menu, Dropdown, Icon } from 'antd';
 const { Header } = LayMain;
 console.log('languages', languages);
 
-const menu = (
+
+const LanguageMenu = language => (
+  <Menu defaultSelectedKeys={[ language ]}>
+    {
+      Object.keys(languages).map(key => {
+        const item = languages[key];
+
+        return (
+          <Menu.Item key={ key }>
+            <span>{ item.name }</span>
+          </Menu.Item>
+        );
+      })
+    }
+  </Menu>
+);
+
+const UserMenu = (
   <Menu>
     <Menu.Item key="0">
       <Icon type="user" />
-      <span className="main__text">个人信息</span>
+      <span>个人信息</span>
     </Menu.Item>
     
     <Menu.Item key="1">
       <Icon type="unlock" />
-      <span className="main__text">修改密码</span>
+      <span>修改密码</span>
     </Menu.Item>
     
     <Menu.Divider />
     
     <Menu.Item key="3">
       <Icon type="poweroff" />
-      <span className="main__text">注销</span>
+      <span>注销</span>
       </Menu.Item>
   </Menu>
 );
@@ -42,16 +59,8 @@ const menu = (
 class MainHeader extends Component {
   static propTypes = {
     //Store
-    id: PropTypes.string,
+    language: PropTypes.string,
     username: PropTypes.string,
-    getUserInfo: PropTypes.func,
-  };
-  
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-    };
   };
   
   shouldComponentUpdate(nextProps, nextState) {
@@ -59,35 +68,44 @@ class MainHeader extends Component {
   };
   
   render() {
-    // const { history, location } = this.props;
+    const { language, username } = this.props;
     
     return (
       <Header>
-        <Dropdown overlay={ menu } className="main__dropdown">
-          <span className="main__text">
-            Mr.Liu
+        <Dropdown
+          overlay={ LanguageMenu(language) }
+          placement="bottomCenter"
+          className="main__dropdown"
+        >
+          <div className="main__dropdown-title">
+            <span className="main__dropdown-title-text">语言</span>
             <Icon type="down" />
-          </span>
+          </div>
+        </Dropdown>
+        
+        <Dropdown
+          overlay={ UserMenu }
+          placement="bottomCenter"
+          className="main__dropdown"
+        >
+          <div className="main__dropdown-title">
+            <span className="main__dropdown-title-text">{ username }</span>
+            <Icon type="down" />
+          </div>
         </Dropdown>
       </Header>
     );
   };
 }
 
-const mapStateToProps = state => {
-  const { id, username } = state.user;
-  return {
-    id,
-    username,
-  };
-};
+const mapStateToProps = state => ({
+  language: state.user.language,
+  username: state.user.username,
+});
 
-const mapDispatchToProps = dispatch => {
-  const { getUserInfo } = dispatch.user;
-  return {
-    getUserInfo,
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  update_user: dispatch.user.dispatch,
+});
 
 export default connect(
   mapStateToProps,

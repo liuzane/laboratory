@@ -21,9 +21,7 @@ import  from '';
 import {  } from 'antd';
 
 
-
-
-export default class Desktop extends PureComponent {
+class Desktop extends PureComponent {
   static propTypes = {
     string: PropTypes.string,
     className: PropTypes.string,
@@ -55,4 +53,19 @@ export default class Desktop extends PureComponent {
       </div>
     );
   };
-};
+}
+
+const mapStateToProps = state => ({
+  one: state.user.one,
+});
+
+const mapDispatchToProps = dispatch => ({
+  emit: dispatch.user.emit,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Desktop);
+
+export default Desktop;
