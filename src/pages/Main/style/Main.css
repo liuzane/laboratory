@@ -1,3 +1,12 @@
+.main__title {
+  display: inline-block;
+  line-height: 64px;
+  color: rgba(0, 0, 0, .65);
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
 .main__dropdown {
   float: right;
   position: relative;
@@ -6,11 +15,12 @@
 }
 
 .main__dropdown-title {
-  width: 100px;
-  color: #40a9ff;
+  min-width: 100px;
+  font-size: 15px;
   text-align: center;
 }
 
 .main__dropdown-title-text {
+  color: #1890ff;
   margin-right: 5px;
 }

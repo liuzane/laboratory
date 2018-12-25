@@ -32,13 +32,14 @@ mock.onPost('/login').reply(config => {
     const { username, password } = params;
   
     if (Users[username] && Users[username].password === password) {
+      const data = { username, ...Users[username] };
+      
+      delete data.password;
+      
       resolve([ 200, {
         code: '200',
         success: true,
-        data: {
-          username,
-          ...Users[username],
-        },
+        data,
         message: '登录成功'
       } ]);
     } else {
@@ -66,7 +67,7 @@ mock.onGet('/user/info').reply(config => {
         delete data.password;
       }
     }
-    
+
     if (data) {
       resolve([ 200, {
         code: '200',

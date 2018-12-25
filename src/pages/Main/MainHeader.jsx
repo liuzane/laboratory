@@ -12,15 +12,21 @@ import { languages } from '@/language';
 //布局组件
 import LayMain from '@/layouts/LayMain';
 
+//多语言组件
+import { FormattedMessage } from 'react-intl';
+
 //UI组件库
-import { Menu, Dropdown, Icon } from 'antd';
+import { Input, Dropdown, Menu, Button, Icon } from 'antd';
 
 const { Header } = LayMain;
-console.log('languages', languages);
 
 
-const LanguageMenu = language => (
-  <Menu defaultSelectedKeys={[ language ]}>
+const LanguageMenu = (language, handleLanguage) => (
+  <Menu
+    defaultSelectedKeys={[ language ]}
+    selectedKeys={[ language ]}
+    onClick={ handleLanguage }
+  >
     {
       Object.keys(languages).map(key => {
         const item = languages[key];
@@ -35,62 +41,74 @@ const LanguageMenu = language => (
   </Menu>
 );
 
-const UserMenu = (
-  <Menu>
-    <Menu.Item key="0">
-      <Icon type="user" />
-      <span>个人信息</span>
-    </Menu.Item>
-    
-    <Menu.Item key="1">
-      <Icon type="unlock" />
-      <span>修改密码</span>
-    </Menu.Item>
-    
-    <Menu.Divider />
-    
-    <Menu.Item key="3">
-      <Icon type="poweroff" />
-      <span>注销</span>
+const UserMenu = () => {
+  return (
+    <Menu>
+      <Menu.Item key="0">
+        <Icon type="user" />
+        <span>个人信息</span>
       </Menu.Item>
-  </Menu>
-);
+      
+      <Menu.Item key="1">
+        <Icon type="unlock" />
+        <span>修改密码</span>
+      </Menu.Item>
+      
+      <Menu.Divider />
+      
+      <Menu.Item key="3">
+        <Icon type="poweroff" />
+        <span>注销</span>
+      </Menu.Item>
+    </Menu>
+  );
+};
 
 class MainHeader extends Component {
   static propTypes = {
     //Store
     language: PropTypes.string,
-    username: PropTypes.string,
+    name: PropTypes.string,
+    update_user: PropTypes.func,
   };
   
   shouldComponentUpdate(nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
   };
   
+  handleLanguage = ({ item, key, keyPath }) => {
+    this.props.update_user({ language: key });
+    window.location.reload();
+  };
+  
   render() {
-    const { language, username } = this.props;
-    
+    const { language, name } = this.props;
+
     return (
-      <Header>
+      <Header className="main__header">
+
+        <h2 className="main__title">
+          <FormattedMessage id="main.title" />
+        </h2>
+        
         <Dropdown
-          overlay={ LanguageMenu(language) }
+          overlay={ LanguageMenu(language, this.handleLanguage) }
           placement="bottomCenter"
           className="main__dropdown"
         >
           <div className="main__dropdown-title">
-            <span className="main__dropdown-title-text">语言</span>
-            <Icon type="down" />
+            <Button size="small">{ languages[ language ].name }</Button>
           </div>
         </Dropdown>
         
         <Dropdown
-          overlay={ UserMenu }
+          overlay={ UserMenu() }
           placement="bottomCenter"
           className="main__dropdown"
         >
           <div className="main__dropdown-title">
-            <span className="main__dropdown-title-text">{ username }</span>
-            <Icon type="down" />
+            <span className="main__dropdown-title-text">{ name }</span>
+            <Icon type="caret-down" style={{ color: 'rgba(0, 0, 0, .5)' }} />
           </div>
         </Dropdown>
       </Header>
@@ -100,11 +118,11 @@ class MainHeader extends Component {
 
 const mapStateToProps = state => ({
   language: state.user.language,
-  username: state.user.username,
+  name: state.user.name,
 });
 
 const mapDispatchToProps = dispatch => ({
-  update_user: dispatch.user.dispatch,
+  update_user: dispatch.user.update_user,
 });
 
 export default connect(

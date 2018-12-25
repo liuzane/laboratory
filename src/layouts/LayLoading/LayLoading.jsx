@@ -4,6 +4,7 @@ import React from 'react';
 //样式
 import './style/LayLoading.css';
 
+
 const LayLoading = () => {
   return (
     <div id="screen-loading">

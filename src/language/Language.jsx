@@ -17,7 +17,7 @@ import * as languages from './locale';
 
 addLocaleData([ ...en, ...zh ]);
 
-//获取本地存储语言，没有默认浏览器语言
+//获取本地存储语言，没有默认浏览器语言,格式xx-XX
 let localeLanguage = '';
 
 try {
@@ -28,6 +28,9 @@ try {
 
 if (!localeLanguage) localeLanguage = navigator.language;
 
+//设置格式为xx_XX
+if (typeof localeLanguage === 'string') localeLanguage = localeLanguage.replace('-', '_');
+
 //更新 redux 语言数据源
 if (localeLanguage) {
   dispatch.user.update_user({ language: localeLanguage });
@@ -36,22 +39,20 @@ if (localeLanguage) {
 //根据语言类型选择本地语言包
 const chooseLocale = language => {
   let languagePackage = {};
-
+  
   try {
     languagePackage = languages[ language ].locale;
   } catch (e) {
     console.error('[ Language Error ]: not found locale language package');
-    console.log(languages.en_US.locale, 44);
     languagePackage = languages.en_US.locale;
   }
   
   return languagePackage;
 };
 
-console.log(navigator.language, chooseLocale(localeLanguage), 51);
 const Language = ({ children }) => (
   <IntlProvider
-    locale={ navigator.language }
+    locale={ localeLanguage.replace('_', '-') }
     messages={ chooseLocale(localeLanguage) }
   >
     { children }

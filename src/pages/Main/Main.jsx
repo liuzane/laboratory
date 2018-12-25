@@ -50,7 +50,6 @@ class Main extends Component {
   updateUserInfo = async () => {
     const { history, getUserInfo } = this.props;
     const { id } = getStorage('userInfo');
-    console.log(id, 55);
     
     if (id) {
       this.setState({ loading: true });

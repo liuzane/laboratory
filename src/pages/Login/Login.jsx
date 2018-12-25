@@ -61,10 +61,11 @@ class Login extends Component {
         userLogin({
           params,
           callback: response => {
+            
             setCookie({ key: 'token', value: response.data.id, hours: 0.5 });
             message.success(response.message);
-            history.push('/main');
             this.setState({ loading: false });
+            history.push('/main');
           },
           errCallback: error => {
             message.error(error.message);

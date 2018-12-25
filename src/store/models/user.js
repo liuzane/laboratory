@@ -1,3 +1,5 @@
+import { createModel } from '@rematch/core';
+
 //API
 import { login, getUserInfo } from '@/api';
 
@@ -26,10 +28,11 @@ const errorCallback = function (errCallback, error) {
 };
 
 
-const user = {
+const user = createModel({
   state: {
     language: '',
     id: '',
+    name: '',
     username: '',
     permission: [],
   },
@@ -42,10 +45,10 @@ const user = {
       setStorage('userInfo', data, 24);
       
       for (let key in state) {
-        if (state[key]) state[key] = data[key];
+        if (data[key]) state[key] = data[key];
       }
-      
-      return state;
+
+      return JSON.parse(JSON.stringify(state));
     },
   },
   
@@ -74,6 +77,6 @@ const user = {
       );
     },
   },
-};
+});
 
 export default user;

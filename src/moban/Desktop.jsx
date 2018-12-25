@@ -1,6 +1,7 @@
 //基础模块
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 //API
 import {  } from '@/api';
