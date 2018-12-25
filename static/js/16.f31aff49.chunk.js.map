@@ -1,0 +1,1 @@
+{"version":3,"sources":["../node_modules/antd/es/icon/style/index.js"],"names":["__webpack_require__"],"mappings":"2FAAAA,EAAA,KAAAA,EAAA","file":"static/js/16.f31aff49.chunk.js","sourcesContent":["import '../../style/index.less';\nimport './index.less';"],"sourceRoot":""}
