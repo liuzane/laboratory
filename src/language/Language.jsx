@@ -3,7 +3,7 @@ import React from 'react';
 import { dispatch } from "@/store";
 
 //方法
-import { getStorage } from '@/utils/local-storage';
+import { getStorage, setStorage } from '@/utils/local-storage';
 
 //多语言
 import { IntlProvider, addLocaleData } from 'react-intl';
@@ -21,7 +21,7 @@ addLocaleData([ ...en, ...zh ]);
 let localeLanguage = '';
 
 try {
-  localeLanguage = getStorage('userInfo').language;
+  localeLanguage = getStorage('language');
 } catch (e) {
   localeLanguage = navigator.language;
 }
@@ -33,6 +33,7 @@ if (typeof localeLanguage === 'string') localeLanguage = localeLanguage.replace(
 
 //更新 redux 语言数据源
 if (localeLanguage) {
+  setStorage('language', localeLanguage);
   dispatch.user.update_user({ language: localeLanguage });
 }
 

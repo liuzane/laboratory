@@ -41,12 +41,16 @@ const user = createModel({
 
   reducers: {
     update_user(state, data) {
-      const local = getStorage('userInfo');
+      const userInfo = getStorage('userInfo');
+      const language = getStorage('language');
       
-      data = Object.assign({}, local, data);
-      
+      data = Object.assign({}, userInfo, data);
+  
+      console.log(data.language, 49);
+      console.log(language || navigator.language.replace('-', '_'));
       if (!data.language) {
-        data.language = navigator.language.replace('-', '_');
+        
+        data.language = language || navigator.language.replace('-', '_');
       }
       
       setStorage('userInfo', data, 24);
