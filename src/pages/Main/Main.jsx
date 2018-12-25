@@ -10,7 +10,7 @@ import { RouterView, main } from '@/router';
 import { fromJS, is } from 'immutable';
 
 //方法
-import { getStorage } from '@/utils/local-storage';
+import { getCookie } from '@/utils/cookie';
 
 //样式
 import './style/Main.css';
@@ -49,8 +49,8 @@ class Main extends Component {
   
   updateUserInfo = async () => {
     const { history, getUserInfo } = this.props;
-    const { id } = getStorage('userInfo');
-    
+    const id = getCookie('token');
+
     if (id) {
       this.setState({ loading: true });
       await getUserInfo({ id });
@@ -71,7 +71,7 @@ class Main extends Component {
         />
 
         <LayMain>
-          <MainHeader />
+          <MainHeader history={ history } />
 
           <Content>
             <RouterView routes={ main } />

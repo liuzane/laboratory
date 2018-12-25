@@ -21,14 +21,6 @@ import './style/Login.css';
 const FormItem = Form.Item;
 
 //验证必填项函数
-// const required = (message, rules = []) => {
-//   return {
-//     rules: [
-//       { required: true, message },
-//       ...rules
-//     ],
-//   };
-// };
 const validate = (rules, params) => {
   return {
     rules,
@@ -61,7 +53,6 @@ class Login extends Component {
         userLogin({
           params,
           callback: response => {
-            
             setCookie({ key: 'token', value: response.data.id, hours: 0.5 });
             message.success(response.message);
             this.setState({ loading: false });

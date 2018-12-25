@@ -27,28 +27,39 @@ const errorCallback = function (errCallback, error) {
   }
 };
 
+const initialState = Object.freeze({
+  language: '',
+  id: '',
+  name: '',
+  username: '',
+  permission: [],
+});
+
 
 const user = createModel({
-  state: {
-    language: '',
-    id: '',
-    name: '',
-    username: '',
-    permission: [],
-  },
+  state: { ...initialState },
 
   reducers: {
     update_user(state, data) {
       const local = getStorage('userInfo');
       
       data = Object.assign({}, local, data);
-      setStorage('userInfo', data, 24);
       
+      if (!data.language) {
+        data.language = navigator.language.replace('-', '_');
+      }
+      
+      setStorage('userInfo', data, 24);
+
       for (let key in state) {
         if (data[key]) state[key] = data[key];
       }
 
       return JSON.parse(JSON.stringify(state));
+    },
+    
+    reset_user() {
+      return { ...initialState };
     },
   },
   
