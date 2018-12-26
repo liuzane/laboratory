@@ -8,7 +8,7 @@ import { fromJS, is } from 'immutable';
 
 //方法
 import { clearCookie } from '@/utils/cookie';
-import { clearStorage } from '@/utils/local-storage';
+import { setStorage, clearStorage } from '@/utils/local-storage';
 
 //多语言列表
 import { languages } from '@/language';
@@ -84,6 +84,7 @@ class MainHeader extends Component {
   
   handleLanguage = ({ item, key, keyPath }) => {
     this.props.update_user({ language: key });
+    setStorage('language', key);
     window.location.reload();
   };
   

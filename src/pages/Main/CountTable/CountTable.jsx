@@ -2,55 +2,16 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-//第三方模块
-import styled from 'styled-components';
-
 //UI组件库
 import { Form, Table, Spin } from 'antd';
+
+//样式
+import style from './style/CountTable.module.css';
 
 const FormItem = Form.Item;
 const CountTableContext = React.createContext();
 
-const Style = styled.div`
-  padding: 10px;
-
-  .count-table__loading {
-    text-align: center;
-    padding: 30px 0;
-  }
-
-  .ant-table-title,
-  .count-table__title {
-    background-color: #e8e8e8;
-  }
-
-  .count-table__title > span {
-    display: inline-block;
-    padding: 0 10px;
-    border-right: 3px solid #e8e8e8;
-  }
-
-  .count-table__title > span:last-child {
-    border-right: none;
-  }
-
-  .count-table__body {
-    margin-bottom: 25px;
-  }
-
-  .count-table__footer {
-    display: table;
-    width: 100%;
-    border-radius: 4px;
-    background-color: #e8e8e8;
-  }
-
-  .count-table__footer-cell {
-    display: table-cell;
-    padding: 8px 8px;
-  }
-`;
-
+const countTableClassName = (postfix = '') => style['count-table' + postfix];
 let forms = {};
 
 
@@ -105,7 +66,7 @@ const CountTableBody = ({ rowKey, ...restProps }) => {
   };
   
   return (
-    <div className="count-table__body">
+    <div className={ countTableClassName('__body') }>
       <Table
         components={ components }
         onRow={ (record, index) => ({ index: record[rowKey] }) }
@@ -119,7 +80,6 @@ const CountTableBody = ({ rowKey, ...restProps }) => {
   );
 };
 
-
 const CountTableBodyTitle = ({ title }) => {
   if (!title || !(title instanceof Array)) {
     console.warn('[ CountTable Warn ]: title must is array!');
@@ -127,7 +87,7 @@ const CountTableBodyTitle = ({ title }) => {
   }
   
   return (
-    <div className="count-table__title">
+    <div className={ countTableClassName('__title') }>
       {
         title.map((item, i) => (<span key={ i }>{ item.label }：{ item.value }</span>))
       }
@@ -135,19 +95,20 @@ const CountTableBodyTitle = ({ title }) => {
   );
 };
 
-
-const CountTableBodyFooter = ({ footer, dataSource }) => {
-  if (!footer || !(footer instanceof Array)) {
-    console.warn('[ CountTable Warn ]: footer must is array!');
-    return null;
-  }
+class CountTableBodyFooter extends PureComponent {
+  static propTypes = {
+    footer: PropTypes.array,
+    dataSource: PropTypes.array,
+    dataKey: PropTypes.string,
+  };
   
-  const handleRowData = (data, item) => {
+  handleRowData = (data, item) => {
+    const dataKey = this.props.dataKey;
     let rowData = [];
     
     data.forEach(row => {
-      if (row.dataSource && row.dataSource.length > 0) {
-        rowData = rowData.concat(handleRowData(row.dataSource, item));
+      if (row[dataKey] && row[dataKey].length > 0) {
+        rowData = rowData.concat(this.handleRowData(row[dataKey], item));
       } else {
         rowData.push(item.dataIndex ? row[ item.dataIndex ] : row);
       }
@@ -156,45 +117,64 @@ const CountTableBodyFooter = ({ footer, dataSource }) => {
     return rowData;
   };
   
-  return (
-    <div className="count-table__footer">
-      {
-        footer.map((item, index) => {
-          return (
-            <div
-              key={ index }
-              className="count-table__footer-cell"
-              style={{
-                width: typeof item.width === 'number' ? item.width + 'px' : item.width,
-                textAlign: item.align,
-              }}
-            >
-              { item.render(handleRowData(dataSource, item)) }
-            </div>
-          )
-        })
-      }
-    </div>
-  );
-};
+  render() {
+    const { footer, dataSource } = this.props;
+    
+    return (
+      <div className={ countTableClassName('__footer') }>
+        {
+          footer.map((item, index) => {
+            return (
+              <div
+                key={ item.dataIndex || index }
+                className={ countTableClassName('__footer-cell') }
+                style={{
+                  width: typeof item.width === 'number' ? item.width + 'px' : item.width,
+                  textAlign: item.align,
+                }}
+              >
+                { item.render(this.handleRowData(dataSource, item)) }
+              </div>
+            )
+          })
+        }
+      </div>
+    );
+  };
+}
 
 
 export default class CountTable extends PureComponent {
   static propTypes = {
+    //是否开启多个table模式，默认单个table
     multiple: PropTypes.bool,
+    //数据源
     data: PropTypes.array,
+    //多个table时，数据源的key，默认dataSource
+    dataKey: PropTypes.string,
+    //Antd Table表头属性，多加一个属性validate: (form, dataIndex, record) => React.Node可以验证
     columns: PropTypes.array,
-    title: PropTypes.array,
+    //CountTable表头，参考columns，
+    titles: PropTypes.array,
+    //底部计算，参考columns，渲染函数参数不一样render: (rowData) => Any
     footer: PropTypes.array,
+    //Antd Table Loading属性，单个表格用在Antd Table，多个表格则使用内置Loading
     loading: PropTypes.bool,
+    //Antd Table 行Key属性
     rowKey: PropTypes.string,
+    //当有多个表格时，多个表格的key值，如果每个table数据中没有key属性，则使用index作为key
+    tableKey: PropTypes.string,
+    //Antd Table scroll属性
     scroll: PropTypes.object,
+    
+    //样式
     className: PropTypes.string,
     style: PropTypes.object,
   };
   
   static defaultProps = {
-    multiple: true,
+    multiple: false,
+    dataKey: 'dataSource',
     className: '',
   };
   
@@ -204,7 +184,18 @@ export default class CountTable extends PureComponent {
   };
   
   render () {
-    const { multiple, data, loading, footer, ...restProps } = this.props;
+    const {
+      multiple,
+      data,
+      dataKey,
+      titles,
+      loading,
+      footer,
+      tableKey,
+      className,
+      style,
+      ...restProps
+    } = this.props;
     const columns = restProps.columns.map(col => ({
       ...col,
       onCell: record => ({
@@ -214,52 +205,77 @@ export default class CountTable extends PureComponent {
       })
     }));
     delete restProps.columns;
-    let loadingComponent, footerComponent;
+    const TitleComponent = (title = titles) => () => title ? (<CountTableBodyTitle title={ title } />) : null;
+    let LoadingComponent, TableComponent, FooterComponent;
     
-    if (loading) {
-      loadingComponent = (
-        <div className="count-table__loading">
-          <Spin spinning tip="请稍后..." size="large" />
+    if (loading && multiple) {
+      LoadingComponent = (
+        <div className={ countTableClassName('__loading') }>
+          <Spin spinning size="large" />
         </div>
       );
-    };
-    
-    if (footer && data.length > 0) {
-      footerComponent = (
-        <CountTableBodyFooter footer={ footer } dataSource={ data } />
+    }
+  
+    if (multiple) {
+      TableComponent = data.map((table, index) => {
+        const dataSource = table[ dataKey ];
+        let key = '';
+  
+        if (!dataSource) {
+          console.error('[ CountTable Error ]: ' + dataKey + ' is ' + dataSource);
+        }
+  
+        if (tableKey && table[tableKey]) {
+          key = table[tableKey];
+        } else if (table.key) {
+          key = table.key;
+        } else {
+          key = index;
+        }
+  
+        return (
+          <CountTableBody
+            key={ key }
+            dataSource={ dataSource }
+            columns={ columns }
+            title={ TitleComponent(table.title) }
+            { ...restProps }
+          />
+        );
+      });
+    } else {
+      TableComponent = (
+        <CountTableBody
+          dataSource={ data }
+          columns={ columns }
+          title={ TitleComponent() }
+          loading={ loading }
+          { ...restProps }
+        />
       );
-    };
+    }
+    
+    if (footer && footer.length > 0 && data.length > 0) {
+      FooterComponent = (
+        <CountTableBodyFooter
+          footer={ footer }
+          dataSource={ data }
+          dataKey={ dataKey }
+        />
+      );
+    }
     
     return (
-      <Style className="count-table">
-        { loadingComponent }
+      <div
+        className={ `${ countTableClassName() } ${ className }`.trim() }
+        style={ style }
+      >
+        { LoadingComponent }
         
-        {
-          multiple
-            ? data.map((table, index) => {
-              const title = table.title ? () => (<CountTableBodyTitle title={ table.title } />) : null;
-              
-              return (
-                <CountTableBody
-                  key={ index }
-                  dataSource={ table.dataSource }
-                  columns={ columns }
-                  title={ title }
-                  { ...restProps }
-                />
-              );
-            })
-            : (
-              <CountTableBody
-                dataSource={ data }
-                columns={ columns }
-                { ...restProps }
-              />
-            )
-        }
+        { TableComponent }
         
-        { footerComponent }
-      </Style>
+        { FooterComponent }
+      </div>
     );
   };
 };

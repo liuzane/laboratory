@@ -10,7 +10,7 @@ import {  } from '@/api';
 import {  } from '@/utils/';
 
 //样式
-import './style/';
+import './style/Desktop.css';
 
 //公共组件
 import  from '@/components';

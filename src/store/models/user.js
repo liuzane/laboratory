@@ -45,11 +45,8 @@ const user = createModel({
       const language = getStorage('language');
       
       data = Object.assign({}, userInfo, data);
-  
-      console.log(data.language, 49);
-      console.log(language || navigator.language.replace('-', '_'));
+      
       if (!data.language) {
-        
         data.language = language || navigator.language.replace('-', '_');
       }
       

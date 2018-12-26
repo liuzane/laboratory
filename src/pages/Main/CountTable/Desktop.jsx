@@ -23,67 +23,68 @@ export default class Desktop extends PureComponent {
     this.state = {
       data: [],
       loading: false,
-      columns: [
-        {
-          title: 'Name',
-          align: 'center',
-          dataIndex: 'name',
-        },
-
-        {
-          title: 'Age',
-          align: 'center',
-          dataIndex: 'age',
-          validate: ({ getFieldDecorator }, dataIndex, record) => {
-            return getFieldDecorator(dataIndex, {
-              rules: [
-                { required: true, message: '请输入年龄', },
-              ],
-              initialValue: record[ dataIndex ],
-            })(<InputNumber onChange={ this.varInputChange.bind(this, dataIndex, record) } />);
-          },
-        },
-
-        {
-          title: 'Address',
-          align: 'center',
-          dataIndex: 'address',
-        },
-
-        {
-          title: 'Action',
-          align: 'center',
-          render: (text, record, index) => {
-            return (
-              <div className="btns">
-                <button onClick={ this.test }>Check</button>
-                <button>Edit</button>
-                <button>Delete</button>
-              </div>
-            );
-          },
-        },
-      ],
-      footer: [
-        {
-          width: '100px',
-          // align: 'center',
-          dataIndex: 'address',
-          render: (rowData) => {
-            return '合计';
-          },
-        },
-        
-        {
-          // align: 'center',
-          dataIndex: 'age',
-          render: (rowData) => {
-            return '年龄：' + rowData.reduce((pervious, current) => pervious + current);
-            // return '年龄'
-          },
-        },
-      ],
     };
+  
+    this.columns = [
+      {
+        title: 'Name',
+        align: 'center',
+        dataIndex: 'name',
+      },
+    
+      {
+        title: 'Age',
+        align: 'center',
+        dataIndex: 'age',
+        validate: ({ getFieldDecorator }, dataIndex, record) => {
+          return getFieldDecorator(dataIndex, {
+            rules: [
+              { required: true, message: '请输入年龄', },
+            ],
+            initialValue: record[ dataIndex ],
+          })(<InputNumber onChange={ this.varInputChange.bind(this, dataIndex, record) } />);
+        },
+      },
+    
+      {
+        title: 'Address',
+        align: 'center',
+        dataIndex: 'address',
+      },
+    
+      {
+        title: 'Action',
+        align: 'center',
+        render: (text, record, index) => {
+          return (
+            <div className="btns">
+              <button onClick={ this.test }>Check</button>
+              <button>Edit</button>
+              <button>Delete</button>
+            </div>
+          );
+        },
+      },
+    ];
+    this.footer = [
+      {
+        width: '100px',
+        // align: 'center',
+        dataIndex: 'address',
+        render: (rowData) => {
+          return '合计';
+        },
+      },
+    
+      {
+        // align: 'center',
+        dataIndex: 'age',
+        render: (rowData) => {
+          return '年龄：' + rowData.reduce((pervious, current) => pervious + current);
+          // return '年龄'
+        },
+      },
+    ];
     
     this.CountTable = React.createRef();
   };
@@ -95,11 +96,14 @@ export default class Desktop extends PureComponent {
   updateTableData = (key, value, record) => {
     let data = JSON.parse(JSON.stringify(this.state.data));
     
-    data.map(table => {
-      const index = table.dataSource.findIndex(item => item[key] === value);
-      if (index > -1) table.dataSource.splice(index, 1, record);
-      return table;
-    });
+    // data.map(table => {
+    //   const index = table.dataSource.findIndex(item => item[key] === value);
+    //   if (index > -1) table.dataSource.splice(index, 1, record);
+    //   return table;
+    // });
+    const index = data.findIndex(item => item[key] === value);
+    if (index > -1) data.splice(index, 1, record);
+    
     return data;
   };
   
@@ -113,17 +117,19 @@ export default class Desktop extends PureComponent {
     await getUserList({ page: 1, size: 2 }).then(response => {
       // console.log('user list', response);
       if (response.success && response.code === '200') {
-        this.setState({
-          data: response.data.map((table, index) => ({
-            title: [
-              { label: '所在组', value: 'XXXXXX' },
-              { label: '管理员', value: 'Admin' },
-              { label: '创建时间', value: new Date().toDateString() },
-            ],
-            dataSource: response.data.map((item, j) => ({ ...item })),
-          }))
-        });
-      };
+        // this.setState({
+        //   data: response.data.map((table, index) => ({
+        //     title: [
+        //       { label: '所在组', value: 'XXXXXX' },
+        //       { label: '管理员', value: 'Admin' },
+        //       { label: '创建时间', value: new Date().toDateString() },
+        //     ],
+        //     dataSource: response.data.map((item, j) => ({ ...item })),
+        //     key: index,
+        //   }))
+        // });
+        this.setState({ data: response.data });
+      }
     }, console.error);
     this.setState({ loading: false });
   };
@@ -137,14 +143,14 @@ export default class Desktop extends PureComponent {
     
     for (let key in forms) {
       forms[key].validateFields(validate);
-    };
+    }
     if (isPass) {
       console.log('saved');
-    };
+    }
   };
 
   render () {
-    const { data, loading, columns, footer } = this.state;
+    const { data, loading } = this.state;
 
     return (
       <div>
@@ -153,8 +159,8 @@ export default class Desktop extends PureComponent {
           ref={ this.CountTable }
           data={ data }
           loading={ loading }
-          columns={ columns }
-          footer={ footer }
+          columns={ this.columns }
+          footer={ this.footer }
           rowKey="id"
         />
         
