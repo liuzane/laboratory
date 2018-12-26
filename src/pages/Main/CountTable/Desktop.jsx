@@ -68,9 +68,8 @@ export default class Desktop extends PureComponent {
     ];
     this.footer = [
       {
-        width: '100px',
         // align: 'center',
-        dataIndex: 'address',
+        dataIndex: 'name',
         render: (rowData) => {
           return '合计';
         },
@@ -162,6 +161,7 @@ export default class Desktop extends PureComponent {
           columns={ this.columns }
           footer={ this.footer }
           rowKey="id"
+          className="desktop-table"
         />
         
         {/*<EditableTable */}

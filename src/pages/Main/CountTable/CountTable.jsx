@@ -9,18 +9,29 @@ import { Form, Table, Spin } from 'antd';
 import style from './style/CountTable.module.css';
 
 const FormItem = Form.Item;
-const CountTableContext = React.createContext();
+
+//Context
+const CountTableRowContext = React.createContext();
+const CountTableFormsContext = React.createContext();
 
 const countTableClassName = (postfix = '') => style['count-table' + postfix];
-let forms = {};
 
 
 const CountTableRow = ({ form, index, ...props }) => {
-  if (index) forms[index] = form;
   return (
-    <CountTableContext.Provider value={ form }>
-      <tr { ...props } />
-    </CountTableContext.Provider>
+    <CountTableFormsContext.Consumer>
+      {
+        forms => {
+          if (index) forms[index] = form;
+          return (
+            <CountTableRowContext.Provider value={ form }>
+              <tr { ...props } />
+            </CountTableRowContext.Provider>
+          );
+        }
+      }
+    </CountTableFormsContext.Consumer>
+    
   );
 };
 
@@ -37,7 +48,7 @@ const CountTableCell = ({ validate, dataIndex, record, children, ...props }) => 
     <td { ...props }>
       {
         validate ? (
-          <CountTableContext.Consumer>
+          <CountTableRowContext.Consumer>
             {
               form => {
                 return (
@@ -47,7 +58,7 @@ const CountTableCell = ({ validate, dataIndex, record, children, ...props }) => 
                 );
               }
             }
-          </CountTableContext.Consumer>
+          </CountTableRowContext.Consumer>
         ) : children
       }
     </td>
@@ -80,6 +91,7 @@ const CountTableBody = ({ rowKey, ...restProps }) => {
   );
 };
 
+
 const CountTableBodyTitle = ({ title }) => {
   if (!title || !(title instanceof Array)) {
     console.warn('[ CountTable Warn ]: title must is array!');
@@ -95,9 +107,11 @@ const CountTableBodyTitle = ({ title }) => {
   );
 };
 
+
 class CountTableBodyFooter extends PureComponent {
   static propTypes = {
-    footer: PropTypes.array,
+    footerDictionary: PropTypes.object,
+    columns: PropTypes.array,
     dataSource: PropTypes.array,
     dataKey: PropTypes.string,
   };
@@ -110,30 +124,37 @@ class CountTableBodyFooter extends PureComponent {
       if (row[dataKey] && row[dataKey].length > 0) {
         rowData = rowData.concat(this.handleRowData(row[dataKey], item));
       } else {
-        rowData.push(item.dataIndex ? row[ item.dataIndex ] : row);
+        rowData.push(item.dataIndex && !item.allData ? row[ item.dataIndex ] : row);
       }
     });
-    
+
     return rowData;
   };
   
   render() {
-    const { footer, dataSource } = this.props;
+    const { footerDictionary, columns, dataSource } = this.props;
     
     return (
       <div className={ countTableClassName('__footer') }>
         {
-          footer.map((item, index) => {
+          columns.map((column, index) => {
+            const footerItem = footerDictionary[column.dataIndex];
+            let render = <span>123</span>;
+            
+            if (footerItem) {
+              render = footerItem.render(this.handleRowData(dataSource, footerItem));
+            }
+            
             return (
               <div
-                key={ item.dataIndex || index }
+                key={ column.dataIndex || index }
                 className={ countTableClassName('__footer-cell') }
                 style={{
-                  width: typeof item.width === 'number' ? item.width + 'px' : item.width,
-                  textAlign: item.align,
+                  width: typeof column.width === 'number' ? column.width + 'px' : column.width,
+                  textAlign: column.align,
                 }}
               >
-                { item.render(this.handleRowData(dataSource, item)) }
+                { render }
               </div>
             )
           })
@@ -180,7 +201,11 @@ export default class CountTable extends PureComponent {
   
   constructor (props) {
     super(props);
-    this.forms = forms;
+    this.forms = {};
+  };
+  
+  resetForms = () => {
+    this.forms = {};
   };
   
   render () {
@@ -256,10 +281,14 @@ export default class CountTable extends PureComponent {
     }
     
     if (footer && footer.length > 0 && data.length > 0) {
+      const footerDictionary = {};
+      footer.forEach(item => footerDictionary[item.dataIndex] = item);
+      
       FooterComponent = (
         <CountTableBodyFooter
-          footer={ footer }
+          footerDictionary={ footerDictionary }
           dataSource={ data }
+          columns={ columns }
           dataKey={ dataKey }
         />
       );
@@ -272,7 +301,9 @@ export default class CountTable extends PureComponent {
       >
         { LoadingComponent }
         
-        { TableComponent }
+        <CountTableFormsContext.Provider value={ this.forms }>
+          { TableComponent }
+        </CountTableFormsContext.Provider>
         
         { FooterComponent }
       </div>

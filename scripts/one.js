@@ -1,0 +1,1 @@
+console.log(process.env.GENERATE_SOURCEMAP, process.env.ADDRESS_ENV);
