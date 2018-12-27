@@ -4,10 +4,22 @@ import React from 'react';
 //样式
 import './style/LayLoading.css';
 
+const remove = () => {
+  const root = document.getElementById('root');
+  const screenLoading = document.getElementById('screen-loading');
+  if (root && screenLoading) {
+    root.removeChild(screenLoading);
+  }
+};
 
-const LayLoading = () => {
+
+const LayLoading = ({ loading }) => {
   return (
-    <div id="screen-loading">
+    <div
+      id="screen-loading"
+      style={{ opacity: loading ? 1 : 0 }}
+      onTransitionEnd={ remove }
+    >
       <div className="screen-loading__viewbox">
         <svg width="100%" height="100%" viewBox="0 0 25 30" fill="#2d8cf0">
           <rect x="0" y="9.80392" rx="1.5" ry="1.5" width="4" height="11.3922">

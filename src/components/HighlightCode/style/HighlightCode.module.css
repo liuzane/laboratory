@@ -1,0 +1,17 @@
+.highlight-code {
+  margin: 10px;
+  background-color: #282c34;
+  color: #ffffff;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.highlight-code__pre,
+.highlight-code__code {
+  height: auto !important;
+  margin: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

@@ -4,16 +4,29 @@ import React from 'react';
 //logo
 import logo from './style/logo.svg';
 
-const siderClassName = 'layout-sider';
+const siderClassName = function (postfix = '', ...className) {
+  if (className.length > 0) {
+    className = className.filter(item => item);
+    if (className.length > 0) {
+      className = ' ' + className.join(' ');
+    }
+  } else {
+    className = '';
+  }
+  
+  return 'layout-sider' + postfix + className;
+};
+
 
 const Sider = props => {
-  const wrapperClassName = `${ siderClassName } ${ props.className }`;
-  
   return (
-    <div className={ wrapperClassName.trim() }>
-      <div className={ `${ siderClassName }__top` }>
-        <img src={ logo } alt="" className={ `${ siderClassName }__logo` } />
-        <span className={ `${ siderClassName }__name` }>Laboratory</span>
+    <div
+      className={ siderClassName('', props.className) }
+      style={ props.style }
+    >
+      <div className={ siderClassName('__top') }>
+        <img src={ logo } alt="" className={ siderClassName('__logo') } />
+        <span className={ siderClassName('__name') }>Laboratory</span>
       </div>
       { props.children }
     </div>

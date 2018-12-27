@@ -43,4 +43,11 @@ export default [
     component: AsyncLoad(() => import('@/pages/Main/Module')),
     exact: true,
   },
+  
+  {
+    path: 'grammar',
+    title: 'grammar',
+    component: AsyncLoad(() => import('@/pages/Main/Grammar')),
+    exact: true,
+  },
 ];

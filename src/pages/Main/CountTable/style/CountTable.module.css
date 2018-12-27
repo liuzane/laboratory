@@ -36,5 +36,4 @@
 .count-table__footer-cell {
   display: table-cell;
   padding: 8px 8px;
-  border-right: 1px solid red;
 }

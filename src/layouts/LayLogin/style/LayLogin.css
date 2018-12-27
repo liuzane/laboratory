@@ -7,6 +7,17 @@
   overflow: hidden;
 }
 
+.login-layout__switch {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #2f54eb;
+  cursor: pointer;
+}
+
 .login-layout__content {
   width: 300px;
   min-height: 300px;

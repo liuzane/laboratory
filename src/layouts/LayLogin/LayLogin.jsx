@@ -1,6 +1,9 @@
 //基础模块
 import React, {PureComponent} from 'react';
 
+//多语言组件
+import { FormattedMessage } from 'react-intl';
+
 //样式
 import './style/LayLogin.css';
 
@@ -8,6 +11,10 @@ import './style/LayLogin.css';
 export default class LayLogin extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      special: true,//默认开启特效
+    };
+    
     this.width = 0;
     this.height = 0;
     this.point = 35;
@@ -179,10 +186,38 @@ export default class LayLogin extends PureComponent {
     this.draw();
   };
   
+  handleSpecial = () => {
+    const special = !this.state.special;
+    if (special) {
+      this.drawTime = setInterval(() => {
+        for (let i = 0; i < this.point; i++) {
+          let cir = this.circles[i];
+          cir.x += cir.moveX;
+          cir.y += cir.moveY;
+          if (cir.x > this.width) cir.x = 0;
+          else if (cir.x < 0) cir.x = this.width;
+          if (cir.y > this.height) cir.y = 0;
+          else if (cir.y < 0) cir.y = this.height;
+        }
+        this.draw();
+      }, 50);
+    } else {
+      clearInterval(this.drawTime);
+    }
+    
+    this.setState({ special });
+  };
+  
   render() {
     return (
       <div className="login-layout">
         <canvas id="MyCanvas"/>
+        <button
+          className="login-layout__switch"
+          onClick={ this.handleSpecial }
+        >
+          <FormattedMessage id={ this.state.special ? 'login.offSpecial' : 'login.onSpecial' } />
+        </button>
         <div className="login-layout__content">
           { this.props.children }
         </div>

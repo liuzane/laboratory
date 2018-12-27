@@ -1,5 +1,5 @@
 //基础模块
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -63,21 +63,24 @@ class Main extends Component {
   render() {
     const { history, location } = this.props;
     
-    return this.state.loading ? (<LayLoading />) : (
-      <LayMain>
-        <MainMenu
-          history={ history }
-          location={ location }
-        />
-
+    return (
+      <Fragment>
+        <LayLoading loading={ this.state.loading } />
         <LayMain>
-          <MainHeader history={ history } />
-
-          <Content>
-            <RouterView routes={ main } />
-          </Content>
+          <MainMenu
+            history={ history }
+            location={ location }
+          />
+    
+          <LayMain>
+            <MainHeader history={ history } />
+      
+            <Content>
+              <RouterView routes={ main } />
+            </Content>
+          </LayMain>
         </LayMain>
-      </LayMain>
+      </Fragment>
     );
   };
 }

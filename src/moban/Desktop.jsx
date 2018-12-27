@@ -33,16 +33,16 @@ class Desktop extends PureComponent {
     className: '',
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {};
   };
 
-  componentDidMount () {
+  componentDidMount() {
 
   };
 
-  render () {
+  render() {
     const { className, style } = this.props;
     
     return (
@@ -55,18 +55,5 @@ class Desktop extends PureComponent {
     );
   };
 }
-
-const mapStateToProps = state => ({
-  one: state.user.one,
-});
-
-const mapDispatchToProps = dispatch => ({
-  emit: dispatch.user.emit,
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Desktop);
 
 export default Desktop;

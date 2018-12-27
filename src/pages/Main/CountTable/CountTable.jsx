@@ -110,8 +110,7 @@ const CountTableBodyTitle = ({ title }) => {
 
 class CountTableBodyFooter extends PureComponent {
   static propTypes = {
-    footerDictionary: PropTypes.object,
-    columns: PropTypes.array,
+    footer: PropTypes.array,
     dataSource: PropTypes.array,
     dataKey: PropTypes.string,
   };
@@ -132,29 +131,22 @@ class CountTableBodyFooter extends PureComponent {
   };
   
   render() {
-    const { footerDictionary, columns, dataSource } = this.props;
+    const { footer, dataSource } = this.props;
     
     return (
       <div className={ countTableClassName('__footer') }>
         {
-          columns.map((column, index) => {
-            const footerItem = footerDictionary[column.dataIndex];
-            let render = <span>123</span>;
-            
-            if (footerItem) {
-              render = footerItem.render(this.handleRowData(dataSource, footerItem));
-            }
-            
+          footer.map((item, index) => {
             return (
               <div
-                key={ column.dataIndex || index }
+                key={ index }
                 className={ countTableClassName('__footer-cell') }
                 style={{
-                  width: typeof column.width === 'number' ? column.width + 'px' : column.width,
-                  textAlign: column.align,
+                  width: typeof item.width === 'number' ? item.width + 'px' : item.width,
+                  textAlign: item.align,
                 }}
               >
-                { render }
+                { item.render(this.handleRowData(dataSource, item)) }
               </div>
             )
           })
@@ -230,7 +222,7 @@ export default class CountTable extends PureComponent {
       })
     }));
     delete restProps.columns;
-    const TitleComponent = (title = titles) => () => title ? (<CountTableBodyTitle title={ title } />) : null;
+    const TitleComponent = (title = titles) => title ? () => (<CountTableBodyTitle title={ title } />) : null;
     let LoadingComponent, TableComponent, FooterComponent;
     
     if (loading && multiple) {
@@ -281,14 +273,10 @@ export default class CountTable extends PureComponent {
     }
     
     if (footer && footer.length > 0 && data.length > 0) {
-      const footerDictionary = {};
-      footer.forEach(item => footerDictionary[item.dataIndex] = item);
-      
       FooterComponent = (
         <CountTableBodyFooter
-          footerDictionary={ footerDictionary }
+          footer={ footer }
           dataSource={ data }
-          columns={ columns }
           dataKey={ dataKey }
         />
       );

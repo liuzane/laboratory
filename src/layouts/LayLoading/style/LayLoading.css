@@ -6,6 +6,8 @@
   left: 0;
   background-color: #fff;
   z-index: 10000;
+  opacity: 1;
+  transition: opacity .5s ease-in-out;
 }
 
 .screen-loading__viewbox {

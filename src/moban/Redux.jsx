@@ -9,24 +9,18 @@ class Redux extends Component {
     func: PropTypes.func,
   };
   
-  render () {
+  render() {
     return ();
   };
-};
+}
 
-const mapStateToProps = state => {
-  const {  } = state.;
-  return {
-  
-  };
-};
+const mapStateToProps = state => ({
+  one: state.user.one,
+});
 
-const mapDispatchToProps = dispatch => {
-  const {  } = dispatch.;
-  return {
-  
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  emit: dispatch.user.emit,
+});
 
 export default connect(
   mapStateToProps,
