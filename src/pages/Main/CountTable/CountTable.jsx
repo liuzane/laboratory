@@ -1,5 +1,6 @@
+/* eslint-disable no-trailing-spaces */
 //基础模块
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 //UI组件库
@@ -22,7 +23,7 @@ const CountTableRow = ({ form, index, ...props }) => {
     <CountTableFormsContext.Consumer>
       {
         forms => {
-          if (index) forms[index] = form;
+          if (index && !forms[index]) forms[index] = form;
           return (
             <CountTableRowContext.Provider value={ form }>
               <tr { ...props } />
@@ -31,7 +32,6 @@ const CountTableRow = ({ form, index, ...props }) => {
         }
       }
     </CountTableFormsContext.Consumer>
-    
   );
 };
 
@@ -75,16 +75,16 @@ const CountTableBody = ({ rowKey, ...restProps }) => {
       cell: CountTableCell,
     },
   };
-  
+
   return (
     <div className={ countTableClassName('__body') }>
       <Table
-        components={ components }
-        onRow={ (record, index) => ({ index: record[rowKey] }) }
         bordered
-        size="small"
+        components={ components }
+        onRow={ record => ({ index: record[rowKey] }) }
         pagination={ false }
         rowKey={ rowKey }
+        size="small"
         { ...restProps }
       />
     </div>
@@ -139,8 +139,8 @@ class CountTableBodyFooter extends PureComponent {
           footer.map((item, index) => {
             return (
               <div
-                key={ index }
                 className={ countTableClassName('__footer-cell') }
+                key={ index }
                 style={{
                   width: typeof item.width === 'number' ? item.width + 'px' : item.width,
                   textAlign: item.align,
@@ -191,7 +191,7 @@ export default class CountTable extends PureComponent {
     className: '',
   };
   
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.forms = {};
   };
@@ -200,7 +200,7 @@ export default class CountTable extends PureComponent {
     this.forms = {};
   };
   
-  render () {
+  render() {
     const {
       multiple,
       data,
@@ -213,6 +213,7 @@ export default class CountTable extends PureComponent {
       style,
       ...restProps
     } = this.props;
+
     const columns = restProps.columns.map(col => ({
       ...col,
       onCell: record => ({
@@ -221,17 +222,12 @@ export default class CountTable extends PureComponent {
         validate: col.validate,
       })
     }));
-    delete restProps.columns;
+
     const TitleComponent = (title = titles) => title ? () => (<CountTableBodyTitle title={ title } />) : null;
-    let LoadingComponent, TableComponent, FooterComponent;
-    
-    if (loading && multiple) {
-      LoadingComponent = (
-        <div className={ countTableClassName('__loading') }>
-          <Spin spinning size="large" />
-        </div>
-      );
-    }
+
+    let TableComponent, FooterComponent;
+
+    delete restProps.columns;
   
     if (multiple) {
       TableComponent = data.map((table, index) => {
@@ -252,9 +248,9 @@ export default class CountTable extends PureComponent {
   
         return (
           <CountTableBody
-            key={ key }
-            dataSource={ dataSource }
             columns={ columns }
+            dataSource={ dataSource }
+            key={ key }
             title={ TitleComponent(table.title) }
             { ...restProps }
           />
@@ -263,10 +259,10 @@ export default class CountTable extends PureComponent {
     } else {
       TableComponent = (
         <CountTableBody
-          dataSource={ data }
           columns={ columns }
-          title={ TitleComponent() }
+          dataSource={ data }
           loading={ loading }
+          title={ TitleComponent() }
           { ...restProps }
         />
       );
@@ -275,9 +271,9 @@ export default class CountTable extends PureComponent {
     if (footer && footer.length > 0 && data.length > 0) {
       FooterComponent = (
         <CountTableBodyFooter
-          footer={ footer }
-          dataSource={ data }
           dataKey={ dataKey }
+          dataSource={ data }
+          footer={ footer }
         />
       );
     }
@@ -287,13 +283,21 @@ export default class CountTable extends PureComponent {
         className={ `${ countTableClassName() } ${ className }`.trim() }
         style={ style }
       >
-        { LoadingComponent }
-        
-        <CountTableFormsContext.Provider value={ this.forms }>
-          { TableComponent }
-        </CountTableFormsContext.Provider>
-        
-        { FooterComponent }
+        {
+          loading && multiple ? (
+            <div className={ countTableClassName('__loading') }>
+              <Spin size="large" spinning />
+            </div>
+          ) : (
+            <Fragment>
+              <CountTableFormsContext.Provider value={ this.forms }>
+                { TableComponent }
+              </CountTableFormsContext.Provider>
+
+              { FooterComponent }
+            </Fragment>
+          )
+        }
       </div>
     );
   };

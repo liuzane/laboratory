@@ -1,21 +1,28 @@
+const replace = function (color, content) {
+  return `{^${ color }-}${ content }{-${ color }^}`;
+};
 
-const highlightRegExList = [
-  { regex: /\/\/.*(?=\n)/g, color: '#999999' },
-  // { regex: /\/\/.*(?=\n)/g, color: '#999999' },
-];
-
-const highlightRegExReplace = htmlString => {
-  highlightRegExList.forEach(item => {
-    // let regex = item.regex.exec(htmlString);
-    let match = htmlString.match(item.regex);
-    
-    if (match) {
-      match.forEach(result => {
-        htmlString = htmlString.replace(result, `<span style="color: ${ item.color }">${ result }</span>`);
-      });
-    }
+const comments = function (html) {
+  return html.replace(/\/\/.*(?=\n)/g, function (content) {
+    return replace('#999999', content);
   });
-  return htmlString;
+};
+
+const tag = function (html) {
+  return html.replace(/&lt;[^(&t;)]+&t;/g, function (_1, _2, content) {
+    console.log(arguments);
+    return replace('#fc929e', content);
+  });
+};
+
+const highlightRegExReplace = function (html) {
+  html = comments(html);
+
+  html = tag(html);
+
+  return html.replace(/{\^(.*)-}(.*){-.*\^}/g, function (text, color, content) {
+    return `<span style="color: ${ color }">${ content }</span>`;
+  });
 };
 
 export default highlightRegExReplace;

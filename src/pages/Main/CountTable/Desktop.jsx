@@ -30,6 +30,13 @@ export default class Desktop extends PureComponent {
         title: 'Name',
         align: 'center',
         dataIndex: 'name',
+        filters: [{
+          text: 'London',
+          value: 'London',
+        }, {
+          text: 'New York',
+          value: 'New York',
+        }],
       },
     
       {
@@ -40,6 +47,15 @@ export default class Desktop extends PureComponent {
           return getFieldDecorator(dataIndex, {
             rules: [
               { required: true, message: '请输入年龄', },
+              {
+                validator: (rule, value, callback) => {
+                  if (value <= 0) {
+                    callback('年龄必须大于 0');
+                  } else {
+                    callback();
+                  }
+                },
+              },
             ],
             initialValue: record[ dataIndex ],
           })(<InputNumber onChange={ this.varInputChange.bind(this, dataIndex, record) } />);
@@ -101,6 +117,7 @@ export default class Desktop extends PureComponent {
     //   return table;
     // });
     const index = data.findIndex(item => item[key] === value);
+
     if (index > -1) data.splice(index, 1, record);
     
     return data;
@@ -135,14 +152,16 @@ export default class Desktop extends PureComponent {
   
   validate = () => {
     let isPass = true;
-    let forms = this.CountTable.current.forms;
+    const forms = this.CountTable.current.forms;
     const validate = (error, values) => {
+      console.log(error, values);
       if (error) isPass = false;
     };
     
     for (let key in forms) {
       forms[key].validateFields(validate);
     }
+
     if (isPass) {
       console.log('saved');
     }
@@ -153,7 +172,6 @@ export default class Desktop extends PureComponent {
 
     return (
       <div>
-        <Button type="primary" onClick={ this.validate }>验证</Button>
         <CountTable
           ref={ this.CountTable }
           data={ data }
@@ -162,7 +180,14 @@ export default class Desktop extends PureComponent {
           footer={ this.footer }
           rowKey="id"
           className="desktop-table"
+          onChange={(pagination, filters, sorter) => {
+            console.log(filters);
+          }}
         />
+
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <Button type="primary" onClick={ this.validate }>验证</Button>
+        </div>
         
         {/*<EditableTable */}
           {/*data={ data } */}

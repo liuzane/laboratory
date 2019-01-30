@@ -1,3 +1,8 @@
 {
-  "main.title": "Start a magical journey right now!"
+  "main.header.title": "Start a magical journey right now!",
+  "main.header.personalInfo": "Personal",
+  "main.header.changePassword": "Password",
+  "main.header.logout": "Log Out",
+  "main.header.logout.title": "Log Out Comfirm",
+  "main.header.logout.content": "Do you want to exit the system?"
 }

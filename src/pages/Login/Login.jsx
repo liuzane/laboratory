@@ -84,9 +84,9 @@ class Login extends Component {
                 { required: true, message: '账号不能为空' },
               ]))(
                 <Input
-                  prefix={<Icon type="user" style={{ color: 'rgba(0, 0, 0, .25)' }} />}
-                  placeholder={ formatMessage({ id: 'login.username' }) }
                   onPressEnter={ this.login }
+                  placeholder={ formatMessage({ id: 'login.username' }) }
+                  prefix={<Icon style={{ color: 'rgba(0, 0, 0, .25)' }} type="user" />}
                 />
               )
             }
@@ -98,10 +98,10 @@ class Login extends Component {
                 { required: true, message: '密码不能为空' },
               ]))(
                 <Input
-                  prefix={ <Icon type="lock" style={{ color: 'rgba(0, 0, 0, .25)' }} /> }
-                  placeholder={ formatMessage({ id: 'login.password' }) }
-                  type="password"
                   onPressEnter={ this.login }
+                  placeholder={ formatMessage({ id: 'login.password' }) }
+                  prefix={ <Icon style={{ color: 'rgba(0, 0, 0, .25)' }} type="lock" /> }
+                  type="password"
                 />
               )
             }
@@ -109,10 +109,10 @@ class Login extends Component {
         </Form>
         
         <Button
-          type="primary"
           block
           loading={ this.state.loading }
           onClick={ this.login }
+          type="primary"
         >
           <FormattedMessage id="login.loginText"/>
         </Button>

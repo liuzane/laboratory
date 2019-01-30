@@ -24,6 +24,13 @@ export default [
   },
 
   {
+    path: 'table',
+    title: 'table',
+    component: AsyncLoad(() => import('@/pages/Main/Table')),
+    exact: true,
+  },
+
+  {
     path: 'less',
     title: 'less',
     component: AsyncLoad(() => import('@/pages/Main/Less')),

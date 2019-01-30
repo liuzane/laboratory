@@ -17,10 +17,10 @@ import { languages } from '@/language';
 import LayMain from '@/layouts/LayMain';
 
 //多语言组件
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 
 //UI组件库
-import { Dropdown, Menu, Button, Icon } from 'antd';
+import { Dropdown, Menu, Button, Icon, Modal } from 'antd';
 
 const { Header } = LayMain;
 
@@ -50,19 +50,19 @@ const UserMenu = handleUser => {
     <Menu onClick={ handleUser }>
       <Menu.Item key="userInfo">
         <Icon type="user" />
-        <span>个人信息</span>
+        <FormattedMessage id="main.header.personalInfo" />
       </Menu.Item>
       
       <Menu.Item key="password">
         <Icon type="unlock" />
-        <span>修改密码</span>
+        <FormattedMessage id="main.header.changePassword" />
       </Menu.Item>
       
       <Menu.Divider />
       
       <Menu.Item key="logout">
         <Icon type="poweroff" />
-        <span>注销</span>
+        <FormattedMessage id="main.header.logout" />
       </Menu.Item>
     </Menu>
   );
@@ -71,6 +71,7 @@ const UserMenu = handleUser => {
 class MainHeader extends Component {
   static propTypes = {
     history: PropTypes.object,
+    intl: PropTypes.object,
     //Store
     language: PropTypes.string,
     name: PropTypes.string,
@@ -90,6 +91,7 @@ class MainHeader extends Component {
   
   handleUser = ({ item, key, keyPath }) => {
     const { history, reset_user } = this.props;
+    const { formatMessage } = this.props.intl;
     
     switch (key) {
       case 'userInfo':
@@ -99,10 +101,18 @@ class MainHeader extends Component {
         break;
         
       case 'logout':
-        clearCookie();
-        clearStorage('userInfo');
-        reset_user();
-        history.push('/login');
+        Modal.confirm({
+          title: formatMessage({ id: 'main.header.logout.title' }),
+          content: formatMessage({ id: 'main.header.logout.content' }),
+          okText: formatMessage({ id: 'global.modal.okText' }),
+          cancelText: formatMessage({ id: 'global.modal.cancelText' }),
+          onOk: () => {
+            clearCookie();
+            clearStorage('userInfo');
+            reset_user();
+            history.push('/login');
+          }
+        });
         break;
         
       default:
@@ -116,7 +126,7 @@ class MainHeader extends Component {
     return (
       <Header className="main__header">
         <h2 className="main__title">
-          <FormattedMessage id="main.title" />
+          <FormattedMessage id="main.header.title" />
         </h2>
         
         <Dropdown
@@ -144,6 +154,8 @@ class MainHeader extends Component {
   };
 }
 
+const IntlMainHeader = injectIntl(MainHeader);
+
 const mapStateToProps = state => ({
   language: state.user.language,
   name: state.user.name,
@@ -157,4 +169,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MainHeader);
+)(IntlMainHeader);

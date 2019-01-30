@@ -1,3 +1,8 @@
 {
-  "main.title": "立即开始一场神奇的旅行吧！"
+  "main.header.title": "立即开始一场神奇的旅行吧！",
+  "main.header.personalInfo": "个人信息",
+  "main.header.changePassword": "修改密码",
+  "main.header.logout": "注销",
+  "main.header.logout.title": "退出确认",
+  "main.header.logout.content": "您是否要退出系统？"
 }
