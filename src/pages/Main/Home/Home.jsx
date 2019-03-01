@@ -13,6 +13,14 @@ class Home extends Component {
 
   componentDidMount () {
     // console.log(new Date('2018-11-30 00:00:00.0').format('yyyy-MM-dd'), 15)
+
+    //数组乱序
+    // const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    // arr.sort(function () {
+    //   return Math.random() - 0.5;
+    // });
+    //
+    // console.log(arr, 21);
   };
 
   shouldComponentUpdate (nextProps, nextState) {

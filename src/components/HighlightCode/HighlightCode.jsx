@@ -26,13 +26,13 @@ class HighlightCode extends PureComponent {
     let htmlString = this.HighlightCode.current.innerHTML;
     this.HighlightCode.current.innerHTML = HighlightRegEx(htmlString);
 
-    let str = '<h1 className={ className } style={ style } ref={ this.Grammar }>\n' +
-        '        <button onClick={ this.handleRefs }>Grammar</button>\n' +
-        '        <HighlightCode code={ code } />\n' +
-        '      </h1>';
-    str = str.replace(/(<|<\/)(\w{1,}).*?>/g, function () {
-      // console.log(arguments, 31);
-    })
+    // let str = '<h1 className={ className } style={ style } ref={ this.Grammar }>\n' +
+    //     '        <button onClick={ this.handleRefs }>Grammar</button>\n' +
+    //     '        <HighlightCode code={ code } />\n' +
+    //     '      </h1>';
+    // str = str.replace(/(<|<\/)(\w{1,}).*?>/g, function () {
+    //   // console.log(arguments, 31);
+    // })
   };
 
   render() {
