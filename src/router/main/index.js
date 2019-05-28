@@ -57,4 +57,11 @@ export default [
     component: AsyncLoad(() => import('@/pages/Main/Grammar')),
     exact: true,
   },
+
+  {
+    path: 'animation',
+    title: 'animation',
+    component: AsyncLoad(() => import('@/pages/Main/Animation')),
+    exact: true,
+  },
 ];
