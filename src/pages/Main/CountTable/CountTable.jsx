@@ -148,7 +148,7 @@ class CountTableBodyFooter extends PureComponent {
               >
                 { item.render(this.handleRowData(dataSource, item)) }
               </div>
-            )
+            );
           })
         }
       </div>

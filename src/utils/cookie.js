@@ -72,7 +72,7 @@ export function clearCookie (params) {
   if (params.domain) domain = 'domain=' + params.domain + ';';
 
   for (let i = 0; i < arr.length; i ++) {
-    let key = arr[i].substring(0,arr[i].indexOf('='));
+    let key = arr[i].substring(0, arr[i].indexOf('='));
     document.cookie = key + '=0;expires=Thu, 01 Jan 1970 00:00:00 GMT;' + path + domain;
   }
 }

@@ -102,11 +102,11 @@ export default class Desktop extends PureComponent {
     ];
     
     this.CountTable = React.createRef();
-  };
+  }
 
   componentDidMount () {
     this.getUserList();
-  };
+  }
   
   updateTableData = (key, value, record) => {
     let data = JSON.parse(JSON.stringify(this.state.data));

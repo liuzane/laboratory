@@ -19,7 +19,7 @@ const loading = props => {
 
 const render = (loaded, props) => {
   NProgress.done();
-  return (<loaded.default { ...props } />)
+  return (<loaded.default { ...props } />);
 };
 
 

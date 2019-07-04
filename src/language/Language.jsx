@@ -1,6 +1,6 @@
 // 基础模块
 import React from 'react';
-import { dispatch } from "@/store";
+import { dispatch } from '@/store';
 
 // 方法
 import { getStorage, setStorage } from '@/utils/local-storage';

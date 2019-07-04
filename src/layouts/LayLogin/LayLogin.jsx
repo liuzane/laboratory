@@ -12,7 +12,7 @@ export default class LayLogin extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      special: true,//默认开启特效
+      special: true, // 默认开启特效
     };
     
     this.width = 0;

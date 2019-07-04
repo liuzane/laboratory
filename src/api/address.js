@@ -13,10 +13,10 @@ if (address_env !== 'test') {
 
 // 命名方式  XXX_YYY_ADDRESS， XXX 地址名称，YYY 地址所属服务。
 const address = Object.seal({
-  DEBUG_DEV_ADDRESS: null,  //联调地址
-  LOCALE_MOCK_ADDRESS: null,  //本地Mock地址
-  EASY_MOCK_ADDRESS: null,  //easy-mock地址
-  MAIN_PROD_ADDRESS: null,  //主要生产环境地址
+  DEBUG_DEV_ADDRESS: null, // 联调地址
+  LOCALE_MOCK_ADDRESS: null, // 本地Mock地址
+  EASY_MOCK_ADDRESS: null, // easy-mock地址
+  MAIN_PROD_ADDRESS: null, // 主要生产环境地址
 });
 
 switch (address_env) {
@@ -27,7 +27,7 @@ switch (address_env) {
     address.EASY_MOCK_ADDRESS = 'https://www.easy-mock.com/mock/5bf3ee63f0beab552d8b6fef';
     address.MAIN_PROD_ADDRESS = 'http://192.168.0.1';
     break;
-    
+
   //生产环境地址
   case 'production':
     address.DEBUG_DEV_ADDRESS = '/';
@@ -35,7 +35,7 @@ switch (address_env) {
     address.EASY_MOCK_ADDRESS = 'https://www.easy-mock.com/mock/5bf3ee63f0beab552d8b6fef';
     address.MAIN_PROD_ADDRESS = 'http://192.168.0.1';
     break;
-    
+
   //测试环境地址
   case 'test':
     address.DEBUG_DEV_ADDRESS = '/';
@@ -43,7 +43,7 @@ switch (address_env) {
     address.EASY_MOCK_ADDRESS = 'https://www.easy-mock.com/mock/5bf3ee63f0beab552d8b6fef';
     address.MAIN_PROD_ADDRESS = 'http://192.168.0.1';
     break;
-    
+
   //默认地址
   default:
     address.DEBUG_DEV_ADDRESS = '/';

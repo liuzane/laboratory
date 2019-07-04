@@ -1,9 +1,15 @@
 'use strict';
 
 const path = require('path');
+// 合并配置插件
 const merge = require('webpack-merge');
+// 代替 npm run eject 插件
 const { injectBabelPlugin } = require('react-app-rewired');
+// 配置Eslint 插件
+const rewireEslint = require('react-app-rewire-eslint');
+// 配置Less 插件
 const rewireLess = require('react-app-rewire-less');
+// 主要颜色
 const themes = require('./src/styles/theme');
 
 
@@ -14,10 +20,13 @@ module.exports = function override(config, env) {
     config,
   );
 
+  // 配置Eslint
+  config = rewireEslint(config, env);
+
   // 配置主题色
   config = rewireLess.withLoaderOptions({
     modifyVars: {
-      // "@primary-color": "#f00",
+      // "@primary-color": "#f00", // antd 主题色
       ...themes,
     },
 

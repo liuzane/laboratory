@@ -11,8 +11,8 @@ const successCallback = function (callback, errCallback, response) {
   if (response.success && response.code === '200') {
     if (callback) callback(response);
     this.update_user(response.data);
-  } else {
-    if (errCallback) errCallback(response);
+  } else if (errCallback) {
+    errCallback(response);
   }
 };
 
