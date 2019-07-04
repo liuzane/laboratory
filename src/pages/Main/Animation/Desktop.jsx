@@ -7,7 +7,7 @@ import _ from 'lodash';
 // 样式
 import './style/Desktop.css';
 
-//动画
+// 动画
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 

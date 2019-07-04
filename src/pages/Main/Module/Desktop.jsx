@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 const files = require.context('./my_module', false, /\.js$/);
-console.log(files.keys())
+console.log(files.keys());
 
 console.log(files('./bar.js'), 7);
 
