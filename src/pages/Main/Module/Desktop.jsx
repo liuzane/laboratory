@@ -1,4 +1,4 @@
-//基础模块
+// 基础模块
 import React, { Component } from 'react';
 
 const files = require.context('./my_module', false, /\.js$/);

@@ -1,4 +1,4 @@
-//异步路由
+// 异步路由
 import AsyncLoad from '@/router/config';
 
 export default [

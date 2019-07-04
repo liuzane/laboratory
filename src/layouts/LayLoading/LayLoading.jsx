@@ -1,8 +1,8 @@
-//基础模块
+// 基础模块
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-//样式
+// 样式
 import './style/LayLoading.css';
 
 

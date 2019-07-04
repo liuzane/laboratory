@@ -1,4 +1,4 @@
-import Language from './Language.jsx';
+import Language from './Language';
 
 // import * as languages from './locale';
 // import { en } from './locale';

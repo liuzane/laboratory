@@ -1,8 +1,8 @@
-//用户
+// 用户
 import { localeMock } from '@/api/config';
 
 
-//登录
+// 登录
 export const login = (data, cancelToken) => {
   return localeMock({
     method: 'post',
@@ -12,7 +12,7 @@ export const login = (data, cancelToken) => {
   });
 };
 
-//获取用户信息
+// 获取用户信息
 export const getUserInfo = (params, cancelToken) => {
   return localeMock({
     method: 'get',

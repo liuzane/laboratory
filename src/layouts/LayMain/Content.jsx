@@ -1,4 +1,4 @@
-//基础模块
+// 基础模块
 import React from 'react';
 
 const contentClassName = function (postfix = '', ...className) {

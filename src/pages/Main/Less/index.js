@@ -1,3 +1,3 @@
-import Less from './Less.jsx';
+import Less from './Less';
 
 export default Less;

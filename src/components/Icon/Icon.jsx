@@ -1,7 +1,7 @@
-//基础模块
+// 基础模块
 import React from 'react';
 
-//样式
+// 样式
 import './style/Icon.css';
 
 

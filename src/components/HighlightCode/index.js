@@ -1,3 +1,3 @@
-import HighlightCode from './HighlightCode.jsx';
+import HighlightCode from './HighlightCode';
 
 export default HighlightCode;

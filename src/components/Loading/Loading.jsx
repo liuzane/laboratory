@@ -1,11 +1,11 @@
-//基础模块
+// 基础模块
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-//第三方模块
+// 第三方模块
 import { fromJS, is } from 'immutable';
 
-//样式
+// 样式
 import './Style/Loading.css';
 
 

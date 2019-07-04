@@ -1,8 +1,8 @@
-//用户
+// 用户
 import { localeMock } from '@/api/config';
 
 
-//获取人员列表
+// 获取人员列表
 export const getUserList = (params, cancelToken) => {
   return localeMock({
     method: 'get',

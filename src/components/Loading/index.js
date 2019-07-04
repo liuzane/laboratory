@@ -1,5 +1,5 @@
-import Loading from './Loading.jsx';
-import IsLoadingCompleted from './IsLoadingCompleted.jsx';
+import Loading from './Loading';
+import IsLoadingCompleted from './IsLoadingCompleted';
 
 export default Loading;
 

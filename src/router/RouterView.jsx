@@ -1,11 +1,11 @@
-//基础模块
+// 基础模块
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-//路由模块
+// 路由模块
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 
-//第三方模块
+// 第三方模块
 import { fromJS, is } from 'immutable';
 
 

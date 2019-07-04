@@ -1,22 +1,22 @@
-//基础模块
+// 基础模块
 import React, { PureComponent } from 'react';
 
-//公共组件
+// 公共组件
 import HighlightCode from '@/components/HighlightCode';
 
-//样式
+// 样式
 import './style/Grammar.css';
 
 const code = `
-//这是这个页面的代码
+// 这是这个页面的代码
 
-//基础模块
+// 基础模块
 import React, { PureComponent } from 'react';
 
-//公共组件
+// 公共组件
 import HighlightCode from '@/components/HighlightCode';
 
-//样式
+// 样式
 import './style/Grammar.css';
 
 const code = //你所看到的代码字符串;

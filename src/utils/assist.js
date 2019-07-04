@@ -1,4 +1,4 @@
-//验证数据类型
+// 验证数据类型
 export function typeOf (obj) {
   const toString = Object.prototype.toString;
   const map = {

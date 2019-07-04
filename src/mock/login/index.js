@@ -18,7 +18,7 @@ const Users = {
 };
 
 
-//登录
+// 登录
 mock.onPost('/login').reply(config => {
   return new Promise((resolve, reject) => {
     let params = null;
@@ -53,7 +53,7 @@ mock.onPost('/login').reply(config => {
   });
 });
 
-//获取用户信息
+// 获取用户信息
 mock.onGet('/user/info').reply(config => {
   const { id } = config.params;
 

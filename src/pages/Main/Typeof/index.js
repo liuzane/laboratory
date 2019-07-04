@@ -1,3 +1,3 @@
-import Typeof from './Typeof.jsx';
+import Typeof from './Typeof';
 
 export default Typeof;

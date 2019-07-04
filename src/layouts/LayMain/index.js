@@ -1,7 +1,7 @@
-import LayMain from './LayMain.jsx';
-import Header from './Header.jsx';
-import Sider from './Sider.jsx';
-import Content from './Content.jsx';
+import LayMain from './LayMain';
+import Header from './Header';
+import Sider from './Sider';
+import Content from './Content';
 
 export default LayMain;
 

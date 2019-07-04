@@ -1,26 +1,26 @@
-//基础模块
+// 基础模块
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-//方法
+// 方法
 import { setCookie } from '@/utils/cookie';
 
-//UI库组件
+// UI库组件
 import { Form, Input, Icon, Button, message } from 'antd';
 
-//多语言组件
+// 多语言组件
 import { injectIntl, FormattedMessage } from 'react-intl';
 
-//公共组件
+// 公共组件
 import LayLogin from '@/layouts/LayLogin';
 
-//样式
+// 样式
 import './style/Login.css';
 
 const FormItem = Form.Item;
 
-//验证必填项函数
+// 验证必填项函数
 const validate = (rules, params) => {
   return {
     rules,

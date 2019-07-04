@@ -1,12 +1,12 @@
-//基础模块
+// 基础模块
 import React, { Component } from 'react';
 
-//第三方模块
+// 第三方模块
 import { fromJS, is } from 'immutable';
 
 import { Button } from 'antd';
 
-//样式
+// 样式
 // import styled from './style/Css.module.css';
 // import styled from './style/Scss.scss';
 import './style/Less.less';

@@ -1,24 +1,24 @@
-//基础模块
+// 基础模块
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-//API
+// API
 import {  } from '@/api';
 
-//方法
+// 方法
 import {  } from '@/utils/';
 
-//样式
+// 样式
 import './style/Desktop.css';
 
-//公共组件
+// 公共组件
 import  from '@/components';
 
-//组件
+// 组件
 import  from '';
 
-//UI组件
+// UI组件
 import {  } from 'antd';
 
 

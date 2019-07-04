@@ -1,25 +1,25 @@
-//基础模块
+// 基础模块
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-//第三方模块
+// 第三方模块
 import { fromJS, is } from 'immutable';
 
-//方法
+// 方法
 import { clearCookie } from '@/utils/cookie';
 import { setStorage, clearStorage } from '@/utils/local-storage';
 
-//多语言列表
+// 多语言列表
 import { languages } from '@/language';
 
-//布局组件
+// 布局组件
 import LayMain from '@/layouts/LayMain';
 
-//多语言组件
+// 多语言组件
 import { injectIntl, FormattedMessage } from 'react-intl';
 
-//UI组件库
+// UI组件库
 import { Dropdown, Menu, Button, Icon, Modal } from 'antd';
 
 const { Header } = LayMain;

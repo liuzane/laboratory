@@ -1,12 +1,12 @@
 import { createModel } from '@rematch/core';
 
-//API
+// API
 import { login, getUserInfo } from '@/api';
 
-//方法
+// 方法
 import { getStorage, setStorage } from '@/utils/local-storage';
 
-//成功回调
+// 成功回调
 const successCallback = function (callback, errCallback, response) {
   if (response.success && response.code === '200') {
     if (callback) callback(response);
@@ -16,7 +16,7 @@ const successCallback = function (callback, errCallback, response) {
   }
 };
 
-//失败回调
+// 失败回调
 const errorCallback = function (errCallback, error) {
   console.error(error);
   if (errCallback) {

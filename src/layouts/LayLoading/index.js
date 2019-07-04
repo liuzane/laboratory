@@ -1,3 +1,3 @@
-import LayLoading from './LayLoading.jsx';
+import LayLoading from './LayLoading';
 
 export default LayLoading;

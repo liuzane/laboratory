@@ -1,3 +1,3 @@
-import updateIndex from './updateIndex.jsx';
+import updateIndex from './updateIndex';
 
 export default updateIndex;

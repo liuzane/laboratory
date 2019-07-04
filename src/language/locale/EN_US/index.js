@@ -1,4 +1,4 @@
-//自动化引入文件
+// 自动化引入文件
 const files = require.context('.', false, /\.json$/);
 
 let locale = {};

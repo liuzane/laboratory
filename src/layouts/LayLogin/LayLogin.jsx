@@ -1,10 +1,10 @@
-//基础模块
+// 基础模块
 import React, {PureComponent} from 'react';
 
-//多语言组件
+// 多语言组件
 import { FormattedMessage } from 'react-intl';
 
-//样式
+// 样式
 import './style/LayLogin.css';
 
 

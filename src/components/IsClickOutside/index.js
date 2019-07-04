@@ -1,3 +1,3 @@
-import IsClickOutside from './IsClickOutside.jsx';
+import IsClickOutside from './IsClickOutside';
 
 export default IsClickOutside;

@@ -1,3 +1,3 @@
-import Todo from './Todo.jsx';
+import Todo from './Todo';
 
 export default Todo;

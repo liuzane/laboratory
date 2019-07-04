@@ -1,4 +1,4 @@
-//当执行脚本时可以使用一下变量来确认环境
+// 当执行脚本时可以使用一下变量来确认环境
 // process.env.NODE_ENV   Node环境变量
 // process.env.ADDRESS_ENV  通过package.json中scripts命令中的 set [key]=[value] 可以获取，这里是自定义变量
 // process.env.npm_lifecycle_event  执行npm run xxx 的package.json中scripts对应的脚本名称。
@@ -11,7 +11,7 @@ if (address_env !== 'test') {
   address_env = process.env.NODE_ENV;
 }
 
-//命名方式  XXX_YYY_ADDRESS， XXX 地址名称，YYY 地址所属服务。
+// 命名方式  XXX_YYY_ADDRESS， XXX 地址名称，YYY 地址所属服务。
 const address = Object.seal({
   DEBUG_DEV_ADDRESS: null,  //联调地址
   LOCALE_MOCK_ADDRESS: null,  //本地Mock地址

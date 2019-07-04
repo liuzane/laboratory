@@ -1,4 +1,4 @@
-//基础模块
+// 基础模块
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

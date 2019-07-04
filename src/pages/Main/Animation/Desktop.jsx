@@ -1,13 +1,13 @@
-//基础模块
+// 基础模块
 import React, { PureComponent } from 'react';
 
-//第三方模块
+// 第三方模块
 import _ from 'lodash';
 
-//样式
+// 样式
 import './style/Desktop.css';
 
-// 动画
+//动画
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 

@@ -1,7 +1,7 @@
-//基础模块
+// 基础模块
 import React, { Component } from 'react';
 
-//样式
+// 样式
 import './style/NotFound.css';
 
 

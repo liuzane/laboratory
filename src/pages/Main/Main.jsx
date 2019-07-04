@@ -1,25 +1,25 @@
-//基础模块
+// 基础模块
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-//路由配置
+// 路由配置
 import { RouterView, main } from '@/router';
 
-//第三方模块
+// 第三方模块
 import { fromJS, is } from 'immutable';
 
-//方法
+// 方法
 import { getCookie } from '@/utils/cookie';
 
-//样式
+// 样式
 import './style/Main.css';
 
-//布局组件
+// 布局组件
 import LayLoading from '@/layouts/LayLoading';
 import LayMain from '@/layouts/LayMain';
 
-//组件
+// 组件
 import MainMenu from './MainMenu';
 import MainHeader from './MainHeader';
 

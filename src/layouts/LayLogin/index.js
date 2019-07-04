@@ -1,3 +1,3 @@
-import LayLogin from './LayLogin.jsx';
+import LayLogin from './LayLogin';
 
 export default LayLogin;

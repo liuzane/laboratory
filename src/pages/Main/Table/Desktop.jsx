@@ -1,10 +1,10 @@
-//基础模块
+// 基础模块
 import React, { PureComponent } from 'react';
 
-//第三方模块
+// 第三方模块
 // import { fromJS, is } from 'immutable';
 
-//api
+// api
 import { getUserList } from '@/api';
 
 import { Table } from 'antd';
@@ -74,15 +74,15 @@ export default class Desktop extends PureComponent {
       // console.log('user list', response);
       if (response.success && response.code === '200') {
         // this.setState({
-        //   data: response.data.map((table, index) => ({
-        //     title: [
-        //       { label: '所在组', value: 'XXXXXX' },
-        //       { label: '管理员', value: 'Admin' },
-        //       { label: '创建时间', value: new Date().toDateString() },
-        //     ],
-        //     dataSource: response.data.map((item, j) => ({ ...item })),
-        //     key: index,
-        //   }))
+        //  data: response.data.map((table, index) => ({
+        //    title: [
+        //      { label: '所在组', value: 'XXXXXX' },
+        //      { label: '管理员', value: 'Admin' },
+        //      { label: '创建时间', value: new Date().toDateString() },
+        //    ],
+        //    dataSource: response.data.map((item, j) => ({ ...item })),
+        //    key: index,
+        //  }))
         // });
         console.log(response.data);
         this.setState({ data: response.data });

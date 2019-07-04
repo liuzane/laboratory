@@ -1,17 +1,17 @@
-//基础模块
+// 基础模块
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-//路由配置
+// 路由配置
 import { main } from '@/router';
 
-//第三方模块
+// 第三方模块
 import { fromJS, is } from 'immutable';
 
-//布局组件
+// 布局组件
 import LayMain from '@/layouts/LayMain';
 
-//UI组件
+// UI组件
 import { Menu, Icon } from 'antd';
 
 const { Sider } = LayMain;

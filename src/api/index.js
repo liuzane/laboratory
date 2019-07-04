@@ -1,14 +1,14 @@
-//暴露 config 中的实例
+// 暴露 config 中的实例
 export { default } from './config';
 export * from './config';
 
-//开启开发模式模拟数据
+// 开启开发模式模拟数据
 // if (process.env.NODE_ENV === 'development') {
   require('@/mock');
 // }
 
-//Login
+// Login
 export * from './login';
 
-//Users
+// Users
 export * from './users';

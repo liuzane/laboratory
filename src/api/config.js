@@ -1,11 +1,11 @@
 import axios from 'axios';
 import address from './address';
 
-//暴露初始实例
+// 暴露初始实例
 export default axios;
 
 
-//基本配置实例
+// 基本配置实例
 export const localeMock = axios.create({
   baseURL: address.LOCALE_MOCK_ADDRESS,
   headers: { 'Content-Type': 'application/json' },
@@ -22,7 +22,7 @@ export const http = axios.create({
 });
 
 
-//响应拦截器
+// 响应拦截器
 const handleInterceptors = instances => {
   instances.forEach(instance => {
     instance.interceptors.response.use(function (response) {

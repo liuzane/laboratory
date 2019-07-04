@@ -13,9 +13,9 @@ const highlightRegExReplace = htmlString => {
       return `{^${ item.color }-}${ content }{-${ item.color }^}`;
     });
     // if (match) {
-    //   match.forEach(result => {
-    //     htmlString = htmlString.replace(result, `<span style="color: ${ item.color }">$1</span>`);
-    //   });
+    //  match.forEach(result => {
+    //    htmlString = htmlString.replace(result, `<span style="color: ${ item.color }">$1</span>`);
+    //  });
     // }
   });
 

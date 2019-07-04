@@ -1,7 +1,7 @@
-//异步路由
+// 异步路由
 import AsyncLoad from '@/router/config';
 
-//所有路由配置
+// 所有路由配置
 const common = [
   {
     path: '/login',

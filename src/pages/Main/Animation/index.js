@@ -1,3 +1,3 @@
-import Desktop from './Desktop.jsx';
+import Desktop from './Desktop';
 
 export default Desktop;

@@ -1,11 +1,11 @@
-//基础模块
+// 基础模块
 import React, { PureComponent, Component } from 'react';
 import PropTypes from 'prop-types';
 
-//第三方模块
+// 第三方模块
 import styled from 'styled-components';
 
-//UI组件库
+// UI组件库
 import { Table } from 'antd';
 
 const Style = styled.div`
