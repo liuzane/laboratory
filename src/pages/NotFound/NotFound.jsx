@@ -9,7 +9,11 @@ class NotFound extends Component {
 	render () {
 		return (
 			<div className="not-found">
-        <img src={ require('./style/404.png') } alt="" className="not-found__img" />
+        <img
+          alt=""
+          className="not-found__img"
+          src={ require('./style/404.png') }
+        />
         <p className="not-found__text">哎呀迷路了...</p>
         <div className="not-found__reason">
           <p>可能的原因：</p>
@@ -21,7 +25,7 @@ class NotFound extends Component {
         </div>
       </div>
 		);
-	};
-};
+	}
+}
 
 export default NotFound;

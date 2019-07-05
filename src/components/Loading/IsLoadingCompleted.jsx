@@ -14,13 +14,13 @@ class IsLoadOver extends Component {
 
   shouldComponentUpdate (nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
-  };
+  }
 
   render () {
     return (
       this.props.isLoadOver ? this.props.children : null
     );
-  };
-};
+  }
+}
 
 export default IsLoadOver;

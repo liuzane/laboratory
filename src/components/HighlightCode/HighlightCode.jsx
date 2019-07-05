@@ -20,7 +20,7 @@ class HighlightCode extends PureComponent {
   constructor (props) {
     super(props);
     this.HighlightCode = React.createRef();
-  };
+  }
   
   componentDidMount() {
     let htmlString = this.HighlightCode.current.innerHTML;
@@ -33,7 +33,7 @@ class HighlightCode extends PureComponent {
     // str = str.replace(/(<|<\/)(\w{1,}).*?>/g, function () {
     //  // console.log(arguments, 31);
     // })
-  };
+  }
 
   render() {
     return (
@@ -45,7 +45,7 @@ class HighlightCode extends PureComponent {
         </pre>
       </div>
     );
-  };
+  }
 }
 
 export default HighlightCode;

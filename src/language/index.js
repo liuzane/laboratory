@@ -9,6 +9,3 @@ import * as languages from './locale';
 
 export default Language;
 export { languages };
-
-
-

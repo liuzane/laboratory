@@ -28,8 +28,8 @@ const { Header } = LayMain;
 const LanguageMenu = (language, handleLanguage) => (
   <Menu
     defaultSelectedKeys={[ language ]}
-    selectedKeys={[ language ]}
     onClick={ handleLanguage }
+    selectedKeys={[ language ]}
   >
     {
       Object.keys(languages).map(key => {
@@ -72,7 +72,7 @@ class MainHeader extends Component {
   static propTypes = {
     history: PropTypes.object,
     intl: PropTypes.object,
-    //Store
+    // Store
     language: PropTypes.string,
     name: PropTypes.string,
     update_user: PropTypes.func,
@@ -81,7 +81,7 @@ class MainHeader extends Component {
   
   shouldComponentUpdate(nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
-  };
+  }
   
   handleLanguage = ({ item, key, keyPath }) => {
     this.props.update_user({ language: key });
@@ -130,9 +130,9 @@ class MainHeader extends Component {
         </h2>
         
         <Dropdown
+          className="main__dropdown"
           overlay={ LanguageMenu(language, this.handleLanguage) }
           placement="bottomCenter"
-          className="main__dropdown"
         >
           <div className="main__dropdown-title">
             <Button size="small">{ languages[ language ] && languages[ language ].name }</Button>
@@ -140,18 +140,18 @@ class MainHeader extends Component {
         </Dropdown>
         
         <Dropdown
+          className="main__dropdown"
           overlay={ UserMenu(this.handleUser) }
           placement="bottomCenter"
-          className="main__dropdown"
         >
           <div className="main__dropdown-title">
             <span className="main__dropdown-title-text">{ name }</span>
-            <Icon type="caret-down" style={{ color: 'rgba(0, 0, 0, .5)' }} />
+            <Icon style={{ color: 'rgba(0, 0, 0, .5)' }} type="caret-down" />
           </div>
         </Dropdown>
       </Header>
     );
-  };
+  }
 }
 
 const IntlMainHeader = injectIntl(MainHeader);

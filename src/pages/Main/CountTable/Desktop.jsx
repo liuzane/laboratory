@@ -173,29 +173,29 @@ export default class Desktop extends PureComponent {
     return (
       <div>
         <CountTable
-          ref={ this.CountTable }
-          data={ data }
-          loading={ loading }
-          columns={ this.columns }
-          footer={ this.footer }
-          rowKey="id"
           className="desktop-table"
+          columns={ this.columns }
+          data={ data }
+          footer={ this.footer }
+          loading={ loading }
           onChange={(pagination, filters, sorter) => {
             console.log(filters);
           }}
+          ref={ this.CountTable }
+          rowKey="id"
         />
 
         <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <Button type="primary" onClick={ this.validate }>验证</Button>
+          <Button onClick={ this.validate } type="primary">验证</Button>
         </div>
         
-        {/*<EditableTable */}
-          {/*data={ data } */}
-          {/*loading={ loading } */}
-          {/*columns={ columns } */}
-          {/*rowKey="id" */}
-        {/*/>*/}
+        {/* <EditableTable */}
+          {/* data={ data } */}
+          {/* loading={ loading } */}
+          {/* columns={ columns } */}
+          {/* rowKey="id" */}
+        {/* /> */}
       </div>
     );
-  };
-};
+  }
+}

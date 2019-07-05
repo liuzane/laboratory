@@ -16,11 +16,11 @@ class Less extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-  };
+  }
 
   shouldComponentUpdate(nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
-  };
+  }
 
   render() {
     return (
@@ -29,7 +29,7 @@ class Less extends Component {
         <Button type="primary">Button</Button>
       </div>
     );
-  };
+  }
 }
 
 export default Less;

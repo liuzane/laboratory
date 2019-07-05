@@ -19,7 +19,7 @@ export function exportCsv (params) {
   }
 
   let url = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str.join('')),
-    downloadLink =  document.createElement('a');
+    downloadLink = document.createElement('a');
 
   downloadLink.href = url;
   downloadLink.download = params.fileName + '.csv';

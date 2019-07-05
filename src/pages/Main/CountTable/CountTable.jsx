@@ -153,34 +153,34 @@ class CountTableBodyFooter extends PureComponent {
         }
       </div>
     );
-  };
+  }
 }
 
 
 export default class CountTable extends PureComponent {
   static propTypes = {
-    //是否开启多个table模式，默认单个table
+    // 是否开启多个table模式，默认单个table
     multiple: PropTypes.bool,
-    //数据源
+    // 数据源
     data: PropTypes.array,
-    //多个table时，数据源的key，默认dataSource
+    // 多个table时，数据源的key，默认dataSource
     dataKey: PropTypes.string,
-    //Antd Table表头属性，多加一个属性validate: (form, dataIndex, record) => React.Node可以验证
+    // Antd Table表头属性，多加一个属性validate: (form, dataIndex, record) => React.Node可以验证
     columns: PropTypes.array,
-    //CountTable表头，参考columns，
+    // CountTable表头，参考columns，
     titles: PropTypes.array,
-    //底部计算，参考columns，渲染函数参数不一样render: (rowData) => Any
+    // 底部计算，参考columns，渲染函数参数不一样render: (rowData) => Any
     footer: PropTypes.array,
-    //Antd Table Loading属性，单个表格用在Antd Table，多个表格则使用内置Loading
+    // Antd Table Loading属性，单个表格用在Antd Table，多个表格则使用内置Loading
     loading: PropTypes.bool,
-    //Antd Table 行Key属性
+    // Antd Table 行Key属性
     rowKey: PropTypes.string,
-    //当有多个表格时，多个表格的key值，如果每个table数据中没有key属性，则使用index作为key
+    // 当有多个表格时，多个表格的key值，如果每个table数据中没有key属性，则使用index作为key
     tableKey: PropTypes.string,
-    //Antd Table scroll属性
+    // Antd Table scroll属性
     scroll: PropTypes.object,
     
-    //样式
+    // 样式
     className: PropTypes.string,
     style: PropTypes.object,
   };
@@ -194,7 +194,7 @@ export default class CountTable extends PureComponent {
   constructor(props) {
     super(props);
     this.forms = {};
-  };
+  }
   
   resetForms = () => {
     this.forms = {};
@@ -300,5 +300,5 @@ export default class CountTable extends PureComponent {
         }
       </div>
     );
-  };
-};
+  }
+}

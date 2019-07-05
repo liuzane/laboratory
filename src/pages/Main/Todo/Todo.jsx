@@ -17,15 +17,15 @@ class Todo extends Component {
         color: `rgb(${ this.num(255) }, ${ this.num(255) }, ${ this.num(255) })`,
       })),
     };
-  };
+  }
 
-  componentWillMount () {
+  componentDidMount () {
 
-  };
+  }
 
   shouldComponentUpdate (nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
-  };
+  }
   
   num = (max, min = 0) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -41,7 +41,7 @@ class Todo extends Component {
         }
       </ul>
     );
-  };
-};
+  }
+}
 
 export default Todo;

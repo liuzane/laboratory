@@ -1,7 +1,7 @@
 
 const highlightRegExList = [
-  { regex: /\/\/.*(?=\n)/g, color: '#999999' }, //注释
-  { regex: /(?<=<).*?(?=>)/g, color: '#fc929e' }, //注释
+  { regex: /\/\/.*(?=\n)/g, color: '#999999' }, // 注释
+  { regex: /(?<=<).*?(?=>)/g, color: '#fc929e' }, // 注释
   // { regex: /\/\/.*(?=\n)/g, color: '#999999' },
 ];
 

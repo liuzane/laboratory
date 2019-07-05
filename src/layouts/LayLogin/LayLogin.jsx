@@ -23,7 +23,7 @@ export default class LayLogin extends PureComponent {
     this.context = null;
     this.circles = [];
     this.drawTime = null;
-  };
+  }
   
   componentDidMount() {
     const width = window.innerWidth;
@@ -52,11 +52,11 @@ export default class LayLogin extends PureComponent {
       }
       this.draw();
     }, 50);
-  };
+  }
   
   componentWillUnmount() {
     clearInterval(this.drawTime);
-  };
+  }
   
   getContext = () => {
     const context = this.canvas.getContext('2d');
@@ -66,7 +66,7 @@ export default class LayLogin extends PureComponent {
     return this.context = context;
   };
   
-  //线条：开始xy坐标，结束xy坐标，线条透明度
+  // 线条：开始xy坐标，结束xy坐标，线条透明度
   line = (beginX, beginY, closeX, closeY, opacity) => {
     return {
       beginX,
@@ -77,7 +77,7 @@ export default class LayLogin extends PureComponent {
     };
   };
   
-  //点：圆心xy坐标，半径，每帧移动xy的距离
+  // 点：圆心xy坐标，半径，每帧移动xy的距离
   circle = (x, y, radius, moveX, moveY, color) => {
     return {
       x,
@@ -89,7 +89,7 @@ export default class LayLogin extends PureComponent {
     };
   };
   
-  //生成max和min之间的随机数
+  // 生成max和min之间的随机数
   num = (max, min) => {
     min = min || 0;
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -106,7 +106,7 @@ export default class LayLogin extends PureComponent {
     return circle;
   };
   
-  //绘制线条
+  // 绘制线条
   drawLine = (cxt, beginX, beginY, closeX, closeY, opacity) => {
     let line = this.line(beginX, beginY, closeX, closeY, opacity);
     cxt.beginPath();
@@ -117,7 +117,7 @@ export default class LayLogin extends PureComponent {
     cxt.stroke();
   };
   
-  //每帧绘制
+  // 每帧绘制
   draw = () => {
     let context = this.context;
     const canvas = this.canvas;
@@ -168,7 +168,7 @@ export default class LayLogin extends PureComponent {
     }
   };
   
-  //初始化生成原点
+  // 初始化生成原点
   init = () => {
     const circles = [];
     for (let i = 0; i < this.point; i++) {
@@ -223,5 +223,5 @@ export default class LayLogin extends PureComponent {
         </div>
       </div>
     );
-  };
-};
+  }
+}

@@ -20,7 +20,7 @@ const address = Object.seal({
 });
 
 switch (address_env) {
-  //开发环境地址
+  // 开发环境地址
   case 'development':
     address.DEBUG_DEV_ADDRESS = '/';
     address.LOCALE_MOCK_ADDRESS = './';
@@ -28,7 +28,7 @@ switch (address_env) {
     address.MAIN_PROD_ADDRESS = 'http://192.168.0.1';
     break;
 
-  //生产环境地址
+  // 生产环境地址
   case 'production':
     address.DEBUG_DEV_ADDRESS = '/';
     address.LOCALE_MOCK_ADDRESS = 'https://liuzane.github.io/react-laboratory';
@@ -36,7 +36,7 @@ switch (address_env) {
     address.MAIN_PROD_ADDRESS = 'http://192.168.0.1';
     break;
 
-  //测试环境地址
+  // 测试环境地址
   case 'test':
     address.DEBUG_DEV_ADDRESS = '/';
     address.LOCALE_MOCK_ADDRESS = './';
@@ -44,7 +44,7 @@ switch (address_env) {
     address.MAIN_PROD_ADDRESS = 'http://192.168.0.1';
     break;
 
-  //默认地址
+  // 默认地址
   default:
     address.DEBUG_DEV_ADDRESS = '/';
     address.LOCALE_MOCK_ADDRESS = './';

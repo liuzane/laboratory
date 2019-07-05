@@ -62,11 +62,11 @@ export default class Desktop extends PureComponent {
         },
       },
     ];
-  };
+  }
 
   componentDidMount () {
     this.getUserList();
-  };
+  }
 
   getUserList = async function () {
     this.setState({ loading: true });
@@ -97,16 +97,16 @@ export default class Desktop extends PureComponent {
     return (
       <div>
         <Table
+          className="desktop-table"
+          columns={ this.columns }
           dataSource={ data }
           loading={ loading }
-          columns={ this.columns }
-          rowKey="id"
-          className="desktop-table"
           onChange={(pagination, filters, sorter) => {
             console.log(filters);
           }}
+          rowKey="id"
         />
       </div>
     );
-  };
-};
+  }
+}

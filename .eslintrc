@@ -104,7 +104,7 @@
     "comma-dangle": "off", // 对象字面量项尾不能有逗号
     "comma-spacing": "error", // 强制在逗号前后使用一致的空格
     "comma-style": "error", // 强制使用一致的逗号风格
-    "eol-last": "warn", // 文件以单一的换行符结束
+    "eol-last": ["warn", "never"], // 文件以单一的换行符结束
     "indent": ["off", 2], // 强制使用一致的缩进
     "key-spacing": ["error", { "afterColon": true }], // 强制使用一致的缩进
     "keyword-spacing": ["error", { "before": true }], // 强制关键字周围空格的一致性

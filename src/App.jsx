@@ -30,13 +30,13 @@ class App extends PureComponent {
     return (
       <Router>
         <RouterView 
-        	routes={ routes } 
-        	onBeforeEach={ this.onBeforeEach }
           onAfterEach={ this.onAfterEach }
+          onBeforeEach={ this.onBeforeEach }
+          routes={ routes }
         />
       </Router>
     );
-  };
+  }
 }
 
 export default App;

@@ -58,11 +58,11 @@ class Desktop extends PureComponent {
     super(props);
     this.state = {};
     this.Grammar = React.createRef();
-  };
+  }
 
   componentDidMount() {
 
-  };
+  }
   
   handleRefs = () => {
     console.log(this.Grammar);
@@ -72,12 +72,14 @@ class Desktop extends PureComponent {
     const { className, style } = this.props;
     
     return (
-      <h1 className={ className } style={ style } ref={ this.Grammar }>
+      <h1 className={ className } ref={ this.Grammar }
+style={ style }
+      >
         <button onClick={ this.handleRefs }>Grammar</button>
         <HighlightCode code={ code } />
       </h1>
     );
-  };
+  }
 }
 
 export default Desktop;

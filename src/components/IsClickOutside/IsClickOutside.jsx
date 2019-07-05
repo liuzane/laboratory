@@ -22,38 +22,38 @@ class IsClickOutside extends Component {
         if (is(fromJS(node), fromJS(this.refs.tag))) {
           isChild = true;
           break;
-        };
+        }
         node = node.parentNode;
-      };
+      }
       if (!isChild && this.props.clickoutside) {
         this.props.clickoutside();
-      };
+      }
     };
-  };
+  }
 
   componentWillMount () {
     document.addEventListener('click', this.isOutside);
-  };
+  }
 
   componentWillunmount () {
     document.removeEventListener('click', this.isOutside);
-  };
+  }
 
   shouldComponentUpdate (nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
-  };
+  }
 
   render () {
     return (
       <this.props.tag 
-        ref="tag" 
         className={ this.props.className } 
-        onClick={ this.isOutside }
+        onClick={ this.isOutside } 
+        ref="tag"
       >
         { this.props.children }
       </this.props.tag>
     );
-  };
-};
+  }
+}
 
 export default IsClickOutside;

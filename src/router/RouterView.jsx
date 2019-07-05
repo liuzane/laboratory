@@ -26,14 +26,14 @@ class RouterView extends PureComponent {
     if (!is(fromJS(to), fromJS(from))) {
       this.props.onBeforeEach(to, from, this.props.history);
     }
-  };
+  }
   
   componentDidUpdate(nextProps, nextState) {
     const [ to, from ] = [ nextProps.location, this.props.location ];
     if (!is(fromJS(to), fromJS(from))) {
       this.props.onAfterEach(to, from, this.props.history);
     }
-  };
+  }
 
   render() {
     return (
@@ -42,20 +42,20 @@ class RouterView extends PureComponent {
           this.props.routes.map((item, index) => (
             <Route 
               exact={ item.exact } 
-              strict={ item.strict }
+              key={ index }
               path={ item.path } 
               render={ 
                 props => item.redirect 
                 ? (<Redirect to={ item.redirect } />) 
                 : (<item.component { ...props } routes={ item.children } />) 
               } 
-              key={ index } 
+              strict={ item.strict } 
             />
           ))
         }
       </Switch>
     );
-  };
+  }
 }
 
 export default withRouter(RouterView);

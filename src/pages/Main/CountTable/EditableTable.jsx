@@ -44,20 +44,20 @@ const Style = styled.div`
 `;
 
 const Row = ({ form, index, ...props }) => {
-  console.log(props, 47)
+  console.log(props, 47);
   return (
     <tr { ...props } />
   );
-}
+};
 
 class Cell extends Component {
   render () {
-    console.log(this.props, 52)
+    console.log(this.props, 52);
     return (
       <td { ...this.props }>{ this.props.children }</td>
     );
-  };
-};
+  }
+}
 
 
 class EditableTable extends Component {
@@ -86,16 +86,16 @@ class EditableTable extends Component {
 
     return (
       <Table
-        components={ components }
         bordered
-        dataSource={ data }
-        columns={ columns } 
-        rowKey={ rowKey } 
+        columns={ columns }
+        components={ components }
+        dataSource={ data } 
         loading={ loading } 
-        rowClassName="editable-row"
+        rowClassName="editable-row" 
+        rowKey={ rowKey }
       />
     );
-  };
-};
+  }
+}
 
 export default EditableTable;

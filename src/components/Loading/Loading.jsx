@@ -26,11 +26,11 @@ class Loading extends Component {
     this.state = {
       className: ''
     };
-  };
+  }
 
   shouldComponentUpdate (nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
-  };
+  }
 
   render () {
     let className = '';
@@ -40,11 +40,12 @@ class Loading extends Component {
     return (
       <div 
         className={ ('loading-container ' + className + this.props.className).trim() } 
-        style={ this.props.style }>
+        style={ this.props.style }
+      >
         <span className="loading-circle"></span>
       </div>
     );
-  };
-};
+  }
+}
 
 export default Loading;

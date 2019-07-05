@@ -10,11 +10,11 @@ export default class moban extends PureComponent {
     bool: PropTypes.bool,
     array: PropTypes.array,
     object: PropTypes.object,
-    func:  PropTypes.func,
+    func: PropTypes.func,
     isRequired: PropTypes.isRequired, // 必填
     stringIsRequired: PropTypes.string.isRequired,
     any: PropTypes.any, // 任意类型的数据
-    node: PropTypes.node, //任何可被渲染的元素（包括数字、字符串、子元素或数组）
+    node: PropTypes.node, // 任何可被渲染的元素（包括数字、字符串、子元素或数组）
     element: PropTypes.element, // 一个 React 元素
     optionalMessage: PropTypes.instanceOf(Message), // 你也可以声明属性为某个类的实例，这里使用 JS 的instanceof 操作符实现。
     oneOf: PropTypes.oneOf(['News', 'Photos']), // 你也可以限制你的属性值是某个特定值之一
@@ -46,5 +46,5 @@ export default class moban extends PureComponent {
         
       </div>
     );
-  };
-};
+  }
+}

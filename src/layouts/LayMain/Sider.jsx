@@ -25,7 +25,9 @@ const Sider = props => {
       style={ props.style }
     >
       <div className={ siderClassName('__top') }>
-        <img src={ logo } alt="" className={ siderClassName('__logo') } />
+        <img alt="" className={ siderClassName('__logo') }
+src={ logo }
+        />
         <span className={ siderClassName('__name') }>Laboratory</span>
       </div>
       { props.children }

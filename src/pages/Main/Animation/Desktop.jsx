@@ -18,7 +18,7 @@ class Desktop extends PureComponent {
       visible: false,
       list: [],
     };
-  };
+  }
 
   handleShow = () => {
     const { visible } = this.state;
@@ -50,18 +50,18 @@ class Desktop extends PureComponent {
       <div>
         <button onClick={ this.handleShow }>切换</button>
         <ReactCSSTransitionGroup
-          transitionName="animation-spread"
           transitionEnterTimeout={ 300 }
           transitionLeaveTimeout={ 300 }
+          transitionName="animation-spread"
         >
           { visible ? <p className="animation__text">显示</p> : null }
         </ReactCSSTransitionGroup>
 
         <button onClick={ this.handleAdd }>添加</button>
         <ReactCSSTransitionGroup
-          transitionName="animation-spread"
           transitionEnterTimeout={ 300 }
           transitionLeaveTimeout={ 300 }
+          transitionName="animation-spread"
         >
           {
             list.map((item, index) => (
@@ -71,7 +71,7 @@ class Desktop extends PureComponent {
         </ReactCSSTransitionGroup>
       </div>
     );
-  };
+  }
 }
 
 export default Desktop;

@@ -13,5 +13,5 @@ export default class Desktop extends Component {
         ES6 Module 语法测试
       </div>
     );
-  };
-};
+  }
+}

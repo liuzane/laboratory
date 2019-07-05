@@ -26,7 +26,7 @@ class MainHeader extends Component {
 
   shouldComponentUpdate (nextProps) {
     return !is(fromJS(this.props), fromJS(nextProps));
-  };
+  }
 
   goto = item => {
     this.props.history.push(item.key);
@@ -38,11 +38,11 @@ class MainHeader extends Component {
     return (
       <Sider>
         <Menu
-          defaultSelectedKeys={[ currentPathName ]}
           defaultOpenKeys={[ currentPathName ]}
+          defaultSelectedKeys={[ currentPathName ]}
           mode="inline"
-          theme="dark"
           onSelect={ this.goto }
+          theme="dark"
         >
           {
             main.map(item => {
@@ -61,7 +61,7 @@ class MainHeader extends Component {
                       item.children.map(child => (<Item key={ child.path }>{ child.title }</Item>))
                     }
                   </SubMenu>
-                )
+                );
               } else {
                 return (<Item key={ item.path }>{ item.title }</Item>);
               }
@@ -70,7 +70,7 @@ class MainHeader extends Component {
         </Menu>
       </Sider>
     );
-  };
+  }
 }
 
 export default MainHeader;

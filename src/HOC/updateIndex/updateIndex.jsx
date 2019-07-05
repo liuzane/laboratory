@@ -15,21 +15,21 @@ function updateIndex (WrappedComponent) {
 
 		componentWillMount () {
 			this.props.setIndex(this.props.index);
-		};
+		}
 
 		shouldComponentUpdate (nextProps, nextState) {
 			return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
-		};
+		}
 
 		render () {
 			return <WrappedComponent { ...this.props } />;
-		};
+		}
 	}
 
-	//约定高阶组件名字
+	// 约定高阶组件名字
 	UpdateIndex.displayName = `UpdateIndex(${ getDisplayName(WrappedComponent) })`;
 
-	//拷贝原始组件的所有静态方法
+	// 拷贝原始组件的所有静态方法
 	UpdateIndex.staticMethod = WrappedComponent.staticMethod;
 
 	return UpdateIndex;

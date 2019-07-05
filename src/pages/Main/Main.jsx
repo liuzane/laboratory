@@ -37,15 +37,15 @@ class Main extends Component {
     this.state = {
       loading: false,
     };
-  };
+  }
 
   componentDidMount() {
     this.updateUserInfo();
-  };
+  }
 
   shouldComponentUpdate(nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
-  };
+  }
   
   updateUserInfo = async () => {
     const { history, getUserInfo } = this.props;
@@ -82,7 +82,7 @@ class Main extends Component {
         </LayMain>
       </Fragment>
     );
-  };
+  }
 }
 
 const mapStateToProps = () => ({});

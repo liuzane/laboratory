@@ -42,7 +42,7 @@ class Login extends Component {
     this.state = {
       loading: false,
     };
-  };
+  }
   
   login = () => {
     const { history, form, userLogin } = this.props;
@@ -118,7 +118,7 @@ class Login extends Component {
         </Button>
       </LayLogin>
     );
-  };
+  }
 }
 
 const IntlLogin = injectIntl(Login);

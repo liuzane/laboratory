@@ -1,7 +1,7 @@
 import { init } from '@rematch/core';
 
 // 枚举
-import emums from './models/emums'
+import emums from './models/emums';
 
 // 用户信息
 import user from './models/user';

@@ -41,24 +41,24 @@ export default {
 
 // POST
 login({ username: 'admin', password: '123456' }, this.source.token).then(({ data }) => {
-  //请求成功
+  // 请求成功
 }, error => {
   if (axios.isCancel(error)) {
     console.log('Request canceled', error.message);
   } else {
     // 处理错误
-  };
+  }
 });
 
 // GET
 getUserList({}, this.source.token).then(({ data }) => {
-  //请求成功
+  // 请求成功
 }, error => {
   if (axios.isCancel(error)) {
     console.log('Request canceled', error.message);
   } else {
     // 处理错误
-  };
+  }
 });
 
 // 取消请求
