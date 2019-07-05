@@ -14,8 +14,9 @@ const Icon = props => {
   };
 
   return (
-    <i { ...props } className={ className }
-style={ style }
+    <i { ...props }
+      className={ className }
+      style={ style }
     />
   );
 };

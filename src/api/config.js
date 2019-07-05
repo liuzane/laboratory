@@ -1,9 +1,5 @@
 import axios from 'axios';
-import address from './address';
-
-// 暴露初始实例
-export default axios;
-
+import address from '@/address';
 
 // 基本配置实例
 export const localeMock = axios.create({
@@ -11,13 +7,8 @@ export const localeMock = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-export const easyMock = axios.create({
-  baseURL: address.EASY_MOCK_ADDRESS,
-  headers: { 'Content-Type': 'application/json' },
-});
-
 export const http = axios.create({
-  baseURL: address.MAIN_PROD_ADDRESS,
+  baseURL: address.MAIN_DEVE_ADDRESS,
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -35,4 +26,4 @@ const handleInterceptors = instances => {
   });
 };
 
-handleInterceptors([ localeMock, easyMock, http ]);
+handleInterceptors([ localeMock, http ]);

@@ -10,7 +10,7 @@ import {  } from '@/api';
 import {  } from '@/utils/';
 
 // 样式
-import './style/Desktop.css';
+import './style/Desktop.less';
 
 // 公共组件
 import  from '@/components';
@@ -36,11 +36,11 @@ class Desktop extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
-  };
+  }
 
   componentDidMount() {
 
-  };
+  }
 
   render() {
     const { className, style } = this.props;
@@ -53,7 +53,7 @@ class Desktop extends PureComponent {
         
       </div>
     );
-  };
+  }
 }
 
 export default Desktop;

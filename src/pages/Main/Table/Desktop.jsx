@@ -105,6 +105,7 @@ export default class Desktop extends PureComponent {
             console.log(filters);
           }}
           rowKey="id"
+          size="small"
         />
       </div>
     );

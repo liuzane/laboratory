@@ -1,23 +1,23 @@
 // 用户
-import { localeMock } from '@/api/config';
+import { http } from '@/api/config';
 
 
 // 登录
-export const login = (data, cancelToken) => {
-  return localeMock({
+export const login = (data, config) => {
+  return http({
     method: 'post',
     url: '/login',
     data,
-    cancelToken,
+    ...config,
   });
 };
 
 // 获取用户信息
-export const getUserInfo = (params, cancelToken) => {
-  return localeMock({
+export const getUserInfo = (params, config) => {
+  return http({
     method: 'get',
     url: '/user/info',
     params,
-    cancelToken,
+    ...config,
   });
 };

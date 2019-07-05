@@ -1,5 +1,5 @@
 
-const count = {
+const _count = {
   state: {
     num: 1,
     type: 2
@@ -20,4 +20,4 @@ const count = {
   }
 };
 
-export default count;
+export default _count;

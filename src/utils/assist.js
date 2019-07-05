@@ -18,7 +18,7 @@ export function typeOf (obj) {
 }
 
 // 深拷贝
-function deepCopy (data) {
+export function deepCopy (data) {
   const type = typeOf(data);
   let object;
 
@@ -42,4 +42,11 @@ function deepCopy (data) {
   return object;
 }
 
-export { deepCopy };
+export function uuid() {
+  return 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+
+    return v.toString(16);
+  });
+}

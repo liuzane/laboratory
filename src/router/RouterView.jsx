@@ -12,26 +12,24 @@ import { fromJS, is } from 'immutable';
 class RouterView extends PureComponent {
   static propTypes = {
     routes: PropTypes.array,
-    onBeforeEach: PropTypes.func,
-    onAfterEach: PropTypes.func,
+    onRouterEach: PropTypes.func,
   };
 
   static defaultProps = {
-    onBeforeEach: () => {},
-    onAfterEach: () => {},
+    onRouterEach: () => {},
   };
 
-  componentWillReceiveProps(nextProps) {
-    const [ to, from ] = [ nextProps.location, this.props.location ];
-    if (!is(fromJS(to), fromJS(from))) {
-      this.props.onBeforeEach(to, from, this.props.history);
-    }
+  componentDidMount() {
+    const [ to, from ] = [ {}, this.props.location ];
+
+    this.props.onRouterEach(to, from, this.props.history);
   }
   
   componentDidUpdate(nextProps, nextState) {
     const [ to, from ] = [ nextProps.location, this.props.location ];
+
     if (!is(fromJS(to), fromJS(from))) {
-      this.props.onAfterEach(to, from, this.props.history);
+      this.props.onRouterEach(to, from, this.props.history);
     }
   }
 

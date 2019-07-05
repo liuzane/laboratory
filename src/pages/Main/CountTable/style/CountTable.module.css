@@ -37,3 +37,7 @@
   display: table-cell;
   padding: 8px 8px;
 }
+
+/*:global(.ant-form-item) {*/
+  /*margin-bottom: 0;*/
+/*}*/

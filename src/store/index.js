@@ -1,17 +1,19 @@
 import { init } from '@rematch/core';
 
-// 枚举
-import emums from './models/emums';
+// Store Models
+const models = {};
 
-// 用户信息
-import user from './models/user';
+// 读取所有js文件
+const StoreModules = require.context('./models', false, /^\.\/[^_].+\.js$/);
 
+StoreModules.keys().forEach(file => {
+  const fileName = file.replace(/(\.\/|\.js)/g, '');
+
+  models[fileName] = StoreModules(file).default;
+});
 
 const store = init({
-  models: {
-    emums,
-    user,
-  },
+  models,
 });
 
 export default store;

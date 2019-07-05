@@ -14,24 +14,18 @@ import { getCookie } from '@/utils/cookie';
 // 全局样式
 import '@/styles';
 
-
 class App extends PureComponent {
-	onBeforeEach = (to, from, history) => {
+  onRouterEach = (to, from, history) => {
     const token = getCookie('token');
 
     if (!token) history.push('/login');
 	};
-  
-  onAfterEach = (to, from, history) => {
-  
-  };
 
   render() {
     return (
       <Router>
-        <RouterView 
-          onAfterEach={ this.onAfterEach }
-          onBeforeEach={ this.onBeforeEach }
+        <RouterView
+          onRouterEach={ this.onRouterEach }
           routes={ routes }
         />
       </Router>
