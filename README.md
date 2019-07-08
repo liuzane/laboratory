@@ -10,7 +10,7 @@ This is a the React experiment project.
 * In and out of the animation
 * The react-app-rewired configuration
 ## How to add environment variables
-.env
+在项目根目录添加 [.env](https://github.com/liuzane/react-laboratory/blob/master/.env) 文件
 > 注意：[create-react-app 会去掉node环境变量](https://www.html.cn/create-react-app/docs/adding-custom-environment-variables/)，想要添加变量需要加上前缀REACT_APP_
 
 > 如果想更改端口等配置，请参考 [create-react-app 高级配置](https://www.html.cn/create-react-app/docs/advanced-configuration/)

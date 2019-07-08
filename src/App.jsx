@@ -19,7 +19,7 @@ class App extends PureComponent {
     const token = getCookie('token');
 
     if (!token) history.push('/login');
-	};
+  };
 
   render() {
     return (

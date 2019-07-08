@@ -13,7 +13,7 @@ import { fromJS, is } from 'immutable';
 import { getCookie } from '@/utils/cookie';
 
 // 样式
-import './style/Main.css';
+import './style/Main.less';
 
 // 布局组件
 import LayLoading from '@/layouts/LayLoading';

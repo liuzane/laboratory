@@ -20,7 +20,7 @@ import LayMain from '@/layouts/LayMain';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
 // UI组件库
-import { Dropdown, Menu, Button, Icon, Modal } from 'antd';
+import { Dropdown, Menu, Button, Modal } from 'antd';
 
 const { Header } = LayMain;
 
@@ -45,29 +45,6 @@ const LanguageMenu = (language, handleLanguage) => (
   </Menu>
 );
 
-const UserMenu = handleUser => {
-  return (
-    <Menu onClick={ handleUser }>
-      <Menu.Item key="userInfo">
-        <Icon type="user" />
-        <FormattedMessage id="main.header.personalInfo" />
-      </Menu.Item>
-      
-      <Menu.Item key="password">
-        <Icon type="unlock" />
-        <FormattedMessage id="main.header.changePassword" />
-      </Menu.Item>
-      
-      <Menu.Divider />
-      
-      <Menu.Item key="logout">
-        <Icon type="poweroff" />
-        <FormattedMessage id="main.header.logout" />
-      </Menu.Item>
-    </Menu>
-  );
-};
-
 class MainHeader extends Component {
   static propTypes = {
     history: PropTypes.object,
@@ -89,35 +66,54 @@ class MainHeader extends Component {
     window.location.reload();
   };
   
-  handleUser = ({ item, key, keyPath }) => {
+  // handleUser = ({ item, key, keyPath }) => {
+  //   const { history, reset_user } = this.props;
+  //   const { formatMessage } = this.props.intl;
+  //
+  //   switch (key) {
+  //     case 'userInfo':
+  //       break;
+  //
+  //     case 'password':
+  //       break;
+  //
+  //     case 'logout':
+  //       Modal.confirm({
+  //         title: formatMessage({ id: 'main.header.logout.title' }),
+  //         content: formatMessage({ id: 'main.header.logout.content' }),
+  //         okText: formatMessage({ id: 'global.modal.okText' }),
+  //         cancelText: formatMessage({ id: 'global.modal.cancelText' }),
+  //         onOk: () => {
+  //           clearCookie();
+  //           clearStorage('userInfo');
+  //           reset_user();
+  //           history.push('/login');
+  //         }
+  //       });
+  //       break;
+  //
+  //     default:
+  //       break;
+  //   }
+  // };
+
+  handleLogout = () => {
     const { history, reset_user } = this.props;
     const { formatMessage } = this.props.intl;
-    
-    switch (key) {
-      case 'userInfo':
-        break;
-        
-      case 'password':
-        break;
-        
-      case 'logout':
-        Modal.confirm({
-          title: formatMessage({ id: 'main.header.logout.title' }),
-          content: formatMessage({ id: 'main.header.logout.content' }),
-          okText: formatMessage({ id: 'global.modal.okText' }),
-          cancelText: formatMessage({ id: 'global.modal.cancelText' }),
-          onOk: () => {
-            clearCookie();
-            clearStorage('userInfo');
-            reset_user();
-            history.push('/login');
-          }
-        });
-        break;
-        
-      default:
-        break;
-    }
+
+    Modal.confirm({
+      centered: true,
+      title: formatMessage({ id: 'main.header.logout.title' }),
+      content: formatMessage({ id: 'main.header.logout.content' }),
+      okText: formatMessage({ id: 'global.modal.okText' }),
+      cancelText: formatMessage({ id: 'global.modal.cancelText' }),
+      onOk: () => {
+        clearCookie();
+        clearStorage('userInfo');
+        reset_user();
+        history.push('/login');
+      }
+    });
   };
   
   render() {
@@ -129,24 +125,23 @@ class MainHeader extends Component {
           <FormattedMessage id="main.header.title" />
         </h2>
         
+
+
+        <div className="main__user-info">
+          <FormattedMessage id="main.header.welcome" />
+          <span className="main__user-name">{ name }</span>
+          <button className="main__logout" onClick={ this.handleLogout }>
+            <FormattedMessage id="main.header.logout" />
+          </button>
+        </div>
+
         <Dropdown
-          className="main__dropdown"
-          overlay={ LanguageMenu(language, this.handleLanguage) }
-          placement="bottomCenter"
+            className="main__dropdown"
+            overlay={ LanguageMenu(language, this.handleLanguage) }
+            placement="bottomCenter"
         >
           <div className="main__dropdown-title">
-            <Button size="small">{ languages[ language ] && languages[ language ].name }</Button>
-          </div>
-        </Dropdown>
-        
-        <Dropdown
-          className="main__dropdown"
-          overlay={ UserMenu(this.handleUser) }
-          placement="bottomCenter"
-        >
-          <div className="main__dropdown-title">
-            <span className="main__dropdown-title-text">{ name }</span>
-            <Icon style={{ color: 'rgba(0, 0, 0, .5)' }} type="caret-down" />
+            <Button size="small" type="link">{ languages[ language ] && languages[ language ].name }</Button>
           </div>
         </Dropdown>
       </Header>

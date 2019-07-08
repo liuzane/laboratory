@@ -10,7 +10,7 @@ const rewireEslint = require('react-app-rewire-eslint');
 // 配置Less 插件
 const rewireLess = require('react-app-rewire-less');
 // 主要颜色
-const colors = require('./src/styles/color');
+const colors = require('./src/styles/colors');
 
 
 module.exports = function override(config, env) {
