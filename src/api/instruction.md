@@ -1,65 +1,64 @@
-// 如何使用？
+## How to use?
+api.js
+```javascript
+import axios from 'axios';
 
-// api.js --start--
-export const login = (data, cancelToken) => {
+export const login = (data, config) => {
   return axios({
     method: 'post',
-    url: '/login',
+    url: '/user/login',
     data,
-    cancelToken,
+    ...config,
   });
 };
 
-export const getUserList = (params, cancelToken) => {
+export const getUserList = (params, config) => {
   return axios({
     method: 'get',
     url: '/user/list',
     params,
-    cancelToken,
+    ...config,
   });
 };
-// api.js --end--
+```
+在JS文件中
+* 注意：下面使用了别名
+> @ 符号在Webpack中进行配置，这里指向 src/api
+```javascript
+import { login } from '@/api';
 
+// 发送请求
+login({ username: 'admin', password: '123456' }).then(
+  response => {
+    // 请求成功
+  }, 
 
-// 在任意组件调用api时参考一下步骤：
-
-// 第一步: 引入
-import axios, { GET } from 'api';
-
-// 第二步: 设置中断参数（如果不需要取消请求请直接看第三步）
-// 在 data 中设置全局可取消的 token
-export default {
-  data () {
-    return {
-      source: axios.CancelToken.source(),
-    };
-  }
-};
-
-// 第三步: 调用
-// 如果想中断请求，请添加一个空的对象参数。
-
-// POST
-login({ username: 'admin', password: '123456' }, this.source.token).then(({ data }) => {
-  // 请求成功
-}, error => {
-  if (axios.isCancel(error)) {
-    console.log('Request canceled', error.message);
-  } else {
+  error => {
     // 处理错误
   }
-});
+);
+```
+## How to cancel the request?
+```javascript
+import axios, { login } from 'api';
 
-// GET
-getUserList({}, this.source.token).then(({ data }) => {
-  // 请求成功
-}, error => {
-  if (axios.isCancel(error)) {
-    console.log('Request canceled', error.message);
-  } else {
-    // 处理错误
+const source = axios.CancelToken.source();
+
+// 发送请求
+login({ username: 'admin', password: '123456' }, source.token).then(
+  response => {
+    // 请求成功
+  }, 
+
+  error => {
+    if (axios.isCancel(error)) {
+      console.log('Request canceled', error.message);
+    } else {
+      // 处理错误
+    }
   }
-});
+);
 
 // 取消请求
-this.source.cancel('Operation canceled by the user.');
+source.cancel('Operation canceled by the user.');
+```

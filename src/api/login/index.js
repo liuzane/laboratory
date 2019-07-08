@@ -6,7 +6,7 @@ import { http } from '@/api/config';
 export const login = (data, config) => {
   return http({
     method: 'post',
-    url: '/login',
+    url: '/user/login',
     data,
     ...config,
   });
