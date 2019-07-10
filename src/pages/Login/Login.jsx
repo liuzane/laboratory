@@ -1,10 +1,15 @@
 // 基础模块
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+
+// 样式
+import './style/Login.css';
 
 // 方法
 import { setCookie } from '@/utils/cookie';
+
+// API
+import { login } from '@/api';
 
 // UI库组件
 import { Form, Input, Icon, Button, message } from 'antd';
@@ -14,9 +19,6 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 
 // 公共组件
 import LayLogin from '@/layouts/LayLogin';
-
-// 样式
-import './style/Login.css';
 
 const FormItem = Form.Item;
 
@@ -31,10 +33,8 @@ const validate = (rules, params) => {
 
 class Login extends Component {
   static propTypes = {
-    history: PropTypes.object,
     intl: PropTypes.object,
     form: PropTypes.object,
-    userLogin: PropTypes.func,
   };
   
   constructor(props) {
@@ -45,24 +45,25 @@ class Login extends Component {
   }
   
   login = () => {
-    const { history, form, userLogin } = this.props;
+    const { form } = this.props;
 
     form.validateFields((error, params) => {
       if (!error) {
         this.setState({ loading: true });
-        userLogin({
-          params,
-          callback: response => {
+        login(params).then(
+          response => {
             setCookie({ key: 'token', value: response.data.id, hours: 0.5 });
             message.success(response.message);
             this.setState({ loading: false });
-            history.push('/main');
+
+            window.location.href= window.location.origin + '/index.html';
           },
-          errCallback: error => {
+
+          error => {
             message.error(error.message);
             this.setState({ loading: false });
           }
-        });
+        );
       }
     });
   };
@@ -125,11 +126,4 @@ const IntlLogin = injectIntl(Login);
 
 const FormIntlLogin = Form.create()(IntlLogin);
 
-const mapDispatchToProps = dispatch => ({
-  userLogin: dispatch.user.userLogin,
-});
-
-export default connect(
-  () => ({}),
-  mapDispatchToProps
-)(FormIntlLogin);
+export default FormIntlLogin;

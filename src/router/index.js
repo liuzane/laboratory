@@ -1,54 +1,33 @@
+// 处理路由配置
+const handleRoutes = (routes, parentPath) => {
+  return routes.reduce((prevRoutes, currentRoute) => {
+    if (parentPath && currentRoute.path.substr(0, 1) !== '/') {
+      currentRoute.path = parentPath + (currentRoute.path === '' ? '' : '/' + currentRoute.path);
+    }
+
+    if (currentRoute.children) {
+      handleRoutes(currentRoute.children, currentRoute.path);
+    }
+
+    if (!currentRoute.component && currentRoute.children) {
+      return prevRoutes.concat(currentRoute.children);
+    } else {
+      return prevRoutes.concat(currentRoute);
+    }
+  }, []);
+};
+
+
+export default handleRoutes;
+
 // 路由视图
-import RouterView from './RouterView';
+export { default as RouterView } from './RouterView';
 
 // 异步路由
-import AsyncLoad from '@/router/config';
+export { default as AsyncLoad } from './AsyncLoad';
 
-// 主路由配置
-import main from './main';
+// 路由 history 对象
+export { default as history } from './history';
 
-// 所有路由配置
-const routes = [
-  {
-    path: '/login',
-    strict: true,
-    component: AsyncLoad(() => import('@/pages/Login')),
-  },
-  
-  {
-    path: '/main',
-    title: '首页',
-    strict: true,
-    component: AsyncLoad(() => import('@/pages/Main')),
-    children: main,
-  },
-
-  {
-    path: '/',
-    exact: true,
-    redirect: '/main',
-  },
-
-  // 404 未找到页面
-  {
-    path: '',
-    component: AsyncLoad(() => import('@/pages/NotFound')),
-  },
-];
-
-const handleRoutes = (routes, parentPath) => {
-  return routes.map(route => {
-    if (parentPath && route.path.substr(0, 1) !== '/') route.path = parentPath + (route.path === '' ? '' : '/' + route.path);
-    if (route.children) handleRoutes(route.children, route.path);
-    return route;
-  });
-};
-
-export default handleRoutes(routes);
-
-// 路由视图
-export { 
-  RouterView, 
-  main,
-};
-// export * as RouterView from './RouterView';
+// 页面之间跳转方法
+export { default as goto } from './goto';

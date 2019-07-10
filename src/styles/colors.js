@@ -5,6 +5,7 @@ module.exports = {
   '@success-color': '#52c41a', // 成功色
   '@warning-color': '#faad14', // 警告色
   '@error-color': '#f5222d', // 错误色
+
   '@primary-white': '#fff',
   '@primary-orange': '#FF7800',
   '@primary-blue': '#09205F',

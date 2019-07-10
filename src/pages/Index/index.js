@@ -9,16 +9,21 @@ import ReactDOM from 'react-dom';
 import '@/styles';
 
 // 入口组件
-import Login from './Login';
+import Main from './Main';
+
+// Redux状态库
+import { Provider } from 'react-redux';
+import store from './store';
 
 // 多语言配置组件
 import Language from './languages';
 
-
 ReactDOM.render(
-  <Language>
-    <Login />
-  </Language>,
+  <Provider store={ store }>
+    <Language>
+      <Main />
+    </Language>
+  </Provider>,
   document.getElementById('root')
 );
 
