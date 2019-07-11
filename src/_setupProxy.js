@@ -1,6 +1,7 @@
 const proxy = require('http-proxy-middleware');
 
 module.exports = function(app) {
+  console.log('http-proxy-middleware', '=================');
   app.use(proxy('/easy-mock', {
     target: 'https://www.easy-mock.com',
     secure: false,

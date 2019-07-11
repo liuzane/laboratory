@@ -12,39 +12,39 @@ const SCRIPT = process.env.REACT_APP_SCRIPT;
 const protocol = window.location.protocol;
 const host = window.location.host;
 
-// 命名方式  XXX_YYY_ADDRESS， XXX 地址名称，YYY 地址所属服务。
+// 命名方式  XXX_YYY_ADDRESS， XXX 所属服务，YYY 服务页面。
 const address = Object.seal({
-  LOCALE_MOCK_ADDRESS: null, // 本地 Mock 地址
-  MAIN_DEVE_ADDRESS: null, // 开发环境地址
-  MAIN_TEST_ADDRESS: null, // 测试环境地址
-  MAIN_PROD_ADDRESS: null, // 生产环境地址
+  SERVER_MAIN_ADDRESS: null, // 服务地址
+  LOCALEMOCK_MAIN_ADDRESS: null, // 本地 Mock 地址
+  EASYMOCK_MAIN_ADDRESS: null, // EasyMock 地址
+  BAIDU_MAIN_ADDRESS: null, // 百度地址
 });
 
 switch (SCRIPT) {
   // 开发环境地址
   case 'start':
-    address.LOCALE_MOCK_ADDRESS = '/';
-    address.MAIN_DEVE_ADDRESS = '/easy-mock';
+    address.SERVER_MAIN_ADDRESS = '/';
+    address.LOCALEMOCK_MAIN_ADDRESS = '/';
     break;
 
   // 生产环境地址
   case 'build':
-    address.LOCALE_MOCK_ADDRESS = '/';
-    address.MAIN_PROD_ADDRESS = 'liuzane.github.io';
+    address.SERVER_MAIN_ADDRESS = '/';
+    address.LOCALEMOCK_MAIN_ADDRESS = '/';
     break;
 
   // 测试环境地址
-  case 'test':
-    address.LOCALE_MOCK_ADDRESS = '/';
-    address.MAIN_TEST_ADDRESS = 'liuzane.github.io';
+  case 'build:test':
+    address.SERVER_MAIN_ADDRESS = '/';
+    address.LOCALEMOCK_MAIN_ADDRESS = '/';
     break;
 
   // 默认地址
   default:
-    address.LOCALE_MOCK_ADDRESS = '/';
-    address.MAIN_DEVE_ADDRESS = '/easy-mock';
-    address.MAIN_PROD_ADDRESS = 'liuzane.github.io';
-    address.MAIN_TEST_ADDRESS = 'liuzane.github.io';
+    address.SERVER_MAIN_ADDRESS = '/';
+    address.LOCALEMOCK_MAIN_ADDRESS = '/';
+    address.EASYMOCK_MAIN_ADDRESS = '/easy-mock';
+    address.BAIDU_MAIN_ADDRESS = '/baidu';
     break;
 }
 

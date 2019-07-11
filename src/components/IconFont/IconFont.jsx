@@ -2,23 +2,24 @@
 import React from 'react';
 
 // 样式
-import './style/Icon.css';
+import './style/IconFont.css';
 
 
-const Icon = props => {
+const IconFont = props => {
   const className = `iconfont ${ props.type } ${ props.className }`.trim();
-  const style = { 
-    fontSize: props.size + 'px', 
+  const style = {
+    fontSize: props.size + 'px',
     color: props.color,
-    ...props.style, 
+    ...props.style,
   };
 
   return (
-    <i { ...props }
+    <i
+      { ...props }
       className={ className }
       style={ style }
     />
   );
 };
 
-export default Icon;
+export default IconFont;

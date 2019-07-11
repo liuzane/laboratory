@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-// 路由配置
+// 路由跳转方法
 import { goto } from '@/router';
 
 // 第三方模块

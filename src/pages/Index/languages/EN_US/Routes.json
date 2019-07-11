@@ -1,0 +1,10 @@
+{
+  "routes.home": "home",
+  "routes.todo": "todo",
+  "routes.count-table": "count-table",
+  "routes.table": "table",
+  "routes.less": "Less",
+  "routes.module": "module",
+  "routes.grammar": "grammar",
+  "routes.animation": "animation"
+}

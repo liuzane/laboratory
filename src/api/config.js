@@ -3,12 +3,12 @@ import address from '@/address';
 
 // 基本配置实例
 export const localeMock = axios.create({
-  baseURL: address.LOCALE_MOCK_ADDRESS,
+  baseURL: address.LOCALEMOCK_MAIN_ADDRESS,
   headers: { 'Content-Type': 'application/json' },
 });
 
 export const http = axios.create({
-  baseURL: address.MAIN_DEVE_ADDRESS,
+  baseURL: address.SERVER_MAIN_ADDRESS,
   headers: { 'Content-Type': 'application/json' },
 });
 

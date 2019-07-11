@@ -19,7 +19,7 @@ const Users = {
 
 
 // 登录
-mock.onPost('/login').reply(config => {
+mock.onPost('/user/login').reply(config => {
   return new Promise((resolve, reject) => {
     let params = null;
     try {

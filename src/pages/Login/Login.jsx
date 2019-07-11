@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// 路由跳转方法
+import { goto } from '@/router';
+
 // 样式
 import './style/Login.css';
 
@@ -56,7 +59,7 @@ class Login extends Component {
             message.success(response.message);
             this.setState({ loading: false });
 
-            window.location.href= window.location.origin + '/index.html';
+            goto('/');
           },
 
           error => {
