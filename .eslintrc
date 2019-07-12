@@ -44,7 +44,7 @@
     "react/jsx-no-literals": "off", // 防止使用未包装的JSX字符串
     "react/jsx-no-undef": "warn", // 在JSX中禁止未声明的变量
     "react/jsx-pascal-case": "error", // 为用户定义的JSX组件强制使用PascalCase
-    "react/jsx-sort-props": "warn", // 强化props按字母排序
+    "react/jsx-sort-props": "off", // 强化props按字母排序
     "react/jsx-uses-react": "warn", // 防止反应被错误地标记为未使用
     "react/jsx-uses-vars": "error", // 防止在JSX中使用的变量被错误地标记为未使用
     "react/no-array-index-key": "off", // 防止在数组中遍历中使用数组key做索引

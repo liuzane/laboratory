@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { HashRouter as Router } from 'react-router-dom';
 
 // 路由配置
-import { RouterView, history, goto } from '@/router';
+import { RouterView, history, goto, getUrlPath } from '@/router';
 import routes from './router';
 
 // 第三方模块
@@ -19,8 +19,10 @@ import { getCookie } from '@/utils/cookie';
 import './style/Main.less';
 
 // 布局组件
-import ScreenLoading from '@/components/ScreenLoading';
 import LayMain from '@/layouts/LayMain';
+
+// 公共组件
+import ScreenLoading from '@/components/ScreenLoading';
 
 // 组件
 import MainMenu from './MainMenu';
@@ -54,7 +56,9 @@ class Main extends Component {
       await getUserInfo({ id });
       this.setState({ loading: false });
     } else {
-      goto('/login.html');
+      const url = getUrlPath('admin');
+
+      goto('/login.html' + url);
     }
   };
 

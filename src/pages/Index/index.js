@@ -28,3 +28,31 @@ ReactDOM.render(
 );
 
 serviceWorker.unregister();
+
+// const targetPath = '/login.html?url=123';
+//
+// const pathname01 = '/react-lab/';
+// const pathname02 = '/react-lab/index';
+// const pathname03 = '/react-lab/index.html';
+// const pathname04 = '/';
+// const pathname05 = '/index';
+// const pathname06 = '/index.html';
+//
+// const replacePath = (pathname) => {
+//   const matchPath = pathname.match(/\/[a-zA-Z0-9\\._-]{0,}$/);
+//
+//   if (matchPath) {
+//     const frontPath = pathname.substring(0, pathname.lastIndexOf(matchPath[0]));
+//
+//     return frontPath + targetPath;
+//   } else {
+//     return pathname + targetPath;
+//   }
+// };
+//
+// console.log('pathname01', replacePath(pathname01));
+// console.log('pathname02', replacePath(pathname02));
+// console.log('pathname03', replacePath(pathname03));
+// console.log('pathname04', replacePath(pathname04));
+// console.log('pathname05', replacePath(pathname05));
+// console.log('pathname06', replacePath(pathname06));

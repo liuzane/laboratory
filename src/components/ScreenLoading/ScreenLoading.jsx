@@ -19,11 +19,11 @@ class ScreenLoading extends PureComponent {
   }
   
   render() {
-    return this.state.isHidden ? null : (
+    return this.props.loading ? (
       <div
         id="screen-loading"
         onTransitionEnd={ () => this.setState({ isHidden: true }) }
-        style={{ opacity: this.props.loading ? 1 : 0 }}
+        style={{ opacity: this.state.isHidden ? 0 : 1 }}
       >
         <div className="screen-loading__viewbox">
           <svg
@@ -111,7 +111,7 @@ class ScreenLoading extends PureComponent {
           <p className="screen-loading__text">Wecome to React Laboratory</p>
         </div>
       </div>
-    );
+    ): null;
   }
 }
 

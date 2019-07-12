@@ -55,11 +55,12 @@ class Login extends Component {
         this.setState({ loading: true });
         login(params).then(
           response => {
+            const search = window.location.search;
+
             setCookie({ key: 'token', value: response.data.id, hours: 0.5 });
             message.success(response.message);
             this.setState({ loading: false });
-
-            goto('/');
+            goto(search ? search.replace('?url=', '') : '/');
           },
 
           error => {
