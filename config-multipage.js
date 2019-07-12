@@ -21,7 +21,11 @@ module.exports = function (config) {
 
     files.forEach(filePath => {
       const tmp = filePath.split('/');
-      const name = tmp[tmp.length - 2].toLowerCase();
+      const name = tmp[tmp.length - 2]
+        .replace(/([A-Z])/g, function(a, b, index) {
+          return index ? ('-' + a) : a;
+        })
+        .toLowerCase();
 
       if (env === 'production') {
         entries[name] = [
@@ -40,13 +44,12 @@ module.exports = function (config) {
 
   let htmlPlugin; // 配置 HtmlWebpackPlugin 插件, 指定入口文件生成对应的 html 文件
   const entries = getEntries(); // 入口文件对象
-  const htmlEntriePostfix = [ 'index', 'login', 'register' ]; // 这些目录添加 .html 后缀
 
   htmlPlugin = Object.keys(entries).map(item => {
     const options = {
       inject: true,
       template: paths.appHtml,
-      filename: htmlEntriePostfix.indexOf(item) > -1 ? (item + '.html') : item,
+      filename: item + '.html',
       chunks: [item],
     };
 
