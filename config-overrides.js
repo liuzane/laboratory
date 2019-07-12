@@ -7,6 +7,8 @@ const {
   addLessLoader,
   useEslintRc,
 } = require('customize-cra');
+
+// 多页面配置
 const multipageConfig = require('./config-multipage');
 
 // 主要颜色

@@ -16,13 +16,13 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 // 多语言配置组件
-import Language from './languages';
+import Languages from './languages';
 
 ReactDOM.render(
   <Provider store={ store }>
-    <Language>
+    <Languages>
       <Main />
-    </Language>
+    </Languages>
   </Provider>,
   document.getElementById('root')
 );

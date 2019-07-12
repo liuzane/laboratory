@@ -25,12 +25,10 @@ module.exports = function (config) {
 
       if (env === 'production') {
         entries[name] = [
-          // require.resolve('./node_modules/react-scripts/config/polyfills.js'),
           filePath,
         ];
       } else {
         entries[name] = [
-          // require.resolve('./node_modules/react-scripts/config/polyfills.js'),
           require.resolve('react-dev-utils/webpackHotDevClient'),
           filePath,
         ];
@@ -39,42 +37,36 @@ module.exports = function (config) {
     return entries;
   }
 
-  // 入口文件对象
-  const entries = getEntries();
 
-  // 配置 HtmlWebpackPlugin 插件, 指定入口文件生成对应的 html 文件
-  let htmlPlugin;
-  if (env === 'production') {
-    htmlPlugin = Object.keys(entries).map(item => {
-      return new HtmlWebpackPlugin({
-        inject: true,
-        template: paths.appHtml,
-        filename: item + '.html',
-        chunks: [item],
-        minify: {
-          removeComments: true,
-          collapseWhitespace: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeStyleLinkTypeAttributes: true,
-          keepClosingSlash: true,
-          minifyJS: true,
-          minifyCSS: true,
-          minifyURLs: true,
-        },
-      });
-    });
-  } else {
-    htmlPlugin = Object.keys(entries).map(item => {
-      return new HtmlWebpackPlugin({
-        inject: true,
-        template: paths.appHtml,
-        filename: item + '.html',
-        chunks: [item],
-      });
-    });
-  }
+  let htmlPlugin; // 配置 HtmlWebpackPlugin 插件, 指定入口文件生成对应的 html 文件
+  const entries = getEntries(); // 入口文件对象
+  const htmlEntriePostfix = [ 'index', 'login', 'register' ]; // 这些目录添加 .html 后缀
+
+  htmlPlugin = Object.keys(entries).map(item => {
+    const options = {
+      inject: true,
+      template: paths.appHtml,
+      filename: htmlEntriePostfix.indexOf(item) > -1 ? (item + '.html') : item,
+      chunks: [item],
+    };
+
+    if (env === 'production') {
+      options.minify = {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      };
+    }
+
+    return new HtmlWebpackPlugin(options);
+  });
 
   if (env === 'production') {
     for (let i = 0; i < config.plugins.length; i++) {
@@ -82,31 +74,24 @@ module.exports = function (config) {
 
       // 更改输出的样式文件名
       if (item.constructor.toString().indexOf('class MiniCssExtractPlugin') > -1) {
-        // item.options.filename = 'static/css/[name].css?_v=[contenthash:8]';
         item.options.filename = 'static/css/[name].[contenthash:8].css';
-        // item.options.chunkFilename = 'static/css/[name].chunk.css?_v=[contenthash:8]';
         item.options.chunkFilename = 'static/css/[name].[contenthash:8].chunk.css';
       }
 
       // SWPrecacheWebpackPlugin: 使用 service workers 缓存项目依赖
       if (item.constructor.toString().indexOf('function GenerateSW') > -1) {
         // 更改输出的文件名
-        // item.config.precacheManifestFilename = 'precache-manifest.js?_v=[manifestHash]';
         item.config.precacheManifestFilename = 'precache-manifest.[manifestHash].js';
       }
     }
 
     // 更改生产模式输出的文件名
-    // config.output.filename = 'static/js/[name].js?_v=[chunkhash:8]';
     config.output.filename = 'static/js/[name].[contenthash:8].js';
-    // config.output.chunkFilename = 'static/js/[name].chunk.js?_v=[chunkhash:8]';
     config.output.chunkFilename = 'static/js/[name].[contenthash:8].chunk.js';
 
   } else {
     // 更改开发模式输出的文件名
-    // config.output.filename = 'static/js/[name].js';
     config.output.filename = 'static/js/[name].[hash:8].js';
-    // config.output.chunkFilename = 'static/js/[name].chunk.js';
     config.output.chunkFilename = 'static/js/[name].[hash:8].chunk.js';
   }
 
@@ -135,7 +120,7 @@ module.exports = function (config) {
     }
     let str = item.options.name.toString();
     if (str.indexOf('static/media/[name].[hash:8].[ext]') > -1) {
-      item.options.name = 'static/media/[name].[ext]?_v=[hash:8]';
+      item.options.name = 'static/media/[name].[hash:8].[ext]';
     }
   }
 
@@ -173,13 +158,13 @@ module.exports = function (config) {
           chunks: 'all', // all, async, and initial
         },
 
-        // 将 (common|reset|antd|nprogress) 文件合并成一个文件, mini-css-extract-plugin 的用法请参见文档：https://www.npmjs.com/package/mini-css-extract-plugin
+        // 将 (common|reset|nprogress) 文件合并成一个文件, mini-css-extract-plugin 的用法请参见文档：https://www.npmjs.com/package/mini-css-extract-plugin
         // MiniCssExtractPlugin 会将动态 import 引入的模块的样式文件也分离出去，将这些样式文件合并成一个文件可以提高渲染速度
         // 其实如果可以不使用 mini-css-extract-plugin 这个插件，即不分离样式文件，可能更适合本方案，但是我没有找到方法去除这个插件
         styles: {
           name: 'commons',
           // test: /\.css|less$/,
-          test: /(common|reset|antd|nprogress)\.css$/,
+          test: /(common|reset|nprogress)\.css$/,
           chunks: 'all', // merge all the css chunk to one file
           enforce: true
         }

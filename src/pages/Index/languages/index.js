@@ -17,7 +17,8 @@ languageFiles.keys().forEach(filePath => {
 // 获取语言后返回的匹配的语言包
 const languagePackage = getPackage(languages);
 
-export default function ({ children }) {
+
+const Languages = ({ children }) => {
   return (
     <Language
       locale={ languagePackage.language }
@@ -26,6 +27,8 @@ export default function ({ children }) {
       { children }
     </Language>
   );
-}
+};
+
+export default Languages;
 
 export { languages };

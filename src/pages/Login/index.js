@@ -6,19 +6,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // 全局样式
-// import '@/styles';
+import '@/styles';
 
 // 入口组件
 import Login from './Login';
 
 // 多语言配置组件
-import Language from './languages';
+import Languages from './languages';
 
 
 ReactDOM.render(
-  <Language>
+  <Languages>
     <Login />
-  </Language>,
+  </Languages>,
   document.getElementById('root')
 );
 
