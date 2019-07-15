@@ -39,7 +39,7 @@ class Login extends Component {
     intl: PropTypes.object,
     form: PropTypes.object,
   };
-  
+
   constructor(props) {
     super(props);
     this.state = {
