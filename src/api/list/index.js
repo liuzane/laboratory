@@ -6,7 +6,7 @@ import { http } from '@/api/config';
 export const getUserList = (params, config) => {
   return http({
     method: 'get',
-    url: '/user/list',
+    url: '/list/persons',
     params,
     ...config,
   });

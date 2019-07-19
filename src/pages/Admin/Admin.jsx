@@ -49,7 +49,7 @@ class Admin extends Component {
       await waiting();
       this.setState({ loading: false });
     } else {
-      const url = getUrlPath('admin');
+      const url = getUrlPath('admin.html');
 
       goto('/login.html' + url);
     }

@@ -65,4 +65,12 @@ export default [
     component: AsyncLoad(() => import('@/pages/Index/views/Animation')),
     exact: true,
   },
+
+  {
+    path: 'svg',
+    title: 'routes.svg',
+    icon: 'icon-svg',
+    component: AsyncLoad(() => import('@/pages/Index/views/Svg')),
+    exact: true,
+  },
 ];

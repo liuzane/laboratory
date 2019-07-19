@@ -11,9 +11,8 @@ let Data = Array.apply(null, { length: 100 }).map((item, i) => {
   }; 
 });
 
-
 // 获取人员列表
-mock.onGet('/user/list').reply(config => {
+mock.onGet('/list/persons').reply(config => {
   let { page, size } = config.params;
 
   let data = [];

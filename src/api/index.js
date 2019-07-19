@@ -5,8 +5,8 @@ if (process.env.NODE_ENV) {
   require('@/mock');
 }
 
-// Login
-export * from './login';
+// User
+export * from './user';
 
-// Users
-export * from './users';
+// List
+export * from './list';

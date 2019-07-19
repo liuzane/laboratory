@@ -7,6 +7,7 @@ module.exports = {
   '@error-color': '#f5222d', // 错误色
 
   '@primary-white': '#fff',
+  '@primary-black': '#333',
   '@primary-orange': '#FF7800',
   '@primary-green': '#77c111',
   '@primary-blue': '#09205F',

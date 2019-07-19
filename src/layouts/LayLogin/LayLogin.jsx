@@ -5,7 +5,11 @@ import React, {PureComponent} from 'react';
 import { FormattedMessage } from 'react-intl';
 
 // 样式
-import './style/LayLogin.css';
+import './style/LayLogin.less';
+
+// 组件
+// import LayLoginFlask from './LayLoginFlask';
+// import LayLoginMicroscope from './LayLoginMicroscope';
 
 
 export default class LayLogin extends PureComponent {
@@ -212,12 +216,17 @@ export default class LayLogin extends PureComponent {
     return (
       <div className="login-layout">
         <canvas id="MyCanvas"/>
+
+        {/* <LayLoginFlask /> */}
+        {/* <LayLoginMicroscope /> */}
+
         <button
           className="login-layout__switch"
           onClick={ this.handleSpecial }
         >
           <FormattedMessage id={ this.state.special ? 'login.offSpecial' : 'login.onSpecial' } />
         </button>
+
         <div className="login-layout__content">
           { this.props.children }
         </div>

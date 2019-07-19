@@ -1,5 +1,6 @@
-// 登录
-import './login';
+// 读取目录下所有js文件
+const MockFiles = require.context('./', true, /^\.\/((?!moban|666|abc).)*\/index\.js$/);
 
-// 用户数据
-import './users';
+MockFiles.keys().forEach(file => {
+  MockFiles(file);
+});

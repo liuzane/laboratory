@@ -14,16 +14,26 @@ class ScreenLoading extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isHidden: false,
+      isHidden: true,
     };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    let state = null;
+
+    if (nextProps.loading) {
+      state = { isHidden: true };
+    }
+
+    return state;
   }
   
   render() {
-    return this.props.loading ? (
+    return this.state.isHidden ? (
       <div
         id="screen-loading"
-        onTransitionEnd={ () => this.setState({ isHidden: true }) }
-        style={{ opacity: this.state.isHidden ? 0 : 1 }}
+        onTransitionEnd={ () => this.setState({ isHidden: false }) }
+        style={{ opacity: this.props.loading ? 1 : 0 }}
       >
         <div className="screen-loading__viewbox">
           <svg

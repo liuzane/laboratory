@@ -20,7 +20,7 @@ import IconFont from '@/components/IconFont';
 // UI组件
 import { Menu } from 'antd';
 
-const menuRoutes = routes.filter(item => item.title);
+const menus = routes.filter(item => item.title);
 
 const { Sider } = LayMain;
 const { SubMenu, Item } = Menu;
@@ -41,7 +41,7 @@ class MainHeader extends Component {
 
   render() {
     const pathname = this.props.history.location.pathname;
-    const currentPathName = menuRoutes.some(item => item.path === pathname) ? pathname : menuRoutes[0].path;
+    const currentPathName = menus.some(item => item.path === pathname) ? pathname : menus[0].path;
 
     return (
       <Sider>
@@ -53,7 +53,7 @@ class MainHeader extends Component {
           theme="dark"
         >
           {
-            menuRoutes.map(item => {
+            menus.map(item => {
               if (item.children) {
                 return (
                   <SubMenu

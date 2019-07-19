@@ -27,8 +27,25 @@
   box-sizing: border-box;
   position: absolute;
   top: 50%;
-  right: 15%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
   border-radius: 4px;
+}
+
+.SvgPosition() {
+  position: absolute;
+  top: 50%;
+}
+
+.login-layout__microscope {
+  .SvgPosition;
+  right: 20%;
+  transform: translate(50%, -50%);
+}
+
+.login-layout__flask {
+  .SvgPosition;
+  left: 20%;
+  transform: translate(-50%, -50%);
 }

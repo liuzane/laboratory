@@ -8,21 +8,14 @@ import { getStorage, setStorage } from '@/utils/local-storage';
 
 // 成功回调
 const successCallback = function (callback, errCallback, response) {
-  if (response.success && response.code === '200') {
-    if (callback) callback(response);
-    this.update_user(response.data);
-  } else if (errCallback) {
-    errCallback(response);
-  }
+  if (callback) callback(response);
+  this.update_user(response.data);
 };
 
 // 失败回调
 const errorCallback = function (errCallback, error) {
   console.error(error);
   if (errCallback) {
-    if (error.response && error.response.data) {
-      error = error.response.data;
-    }
     errCallback(error);
   }
 };

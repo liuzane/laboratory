@@ -1,4 +1,3 @@
-// import { Random } from 'mockjs';
 import mock from '@/mock/config';
 
 const Users = {
@@ -8,7 +7,7 @@ const Users = {
     password: '123456',
     permission: []
   },
-  
+
   manager: {
     id: 'a3Ac3dAD-f6Ba-B04C-ae81-16D6e4A85fB8',
     name: '经理',
@@ -28,14 +27,14 @@ mock.onPost('/user/login').reply(config => {
       reject([ 200, { code: '500', success: false, data: [], message: '参数解析失败' } ]);
       return;
     }
-    
+
     const { username, password } = params;
-  
+
     if (Users[username] && Users[username].password === password) {
       const data = { username, ...Users[username] };
-      
+
       delete data.password;
-      
+
       resolve([ 200, {
         code: '200',
         success: true,
@@ -59,7 +58,7 @@ mock.onGet('/user/info').reply(config => {
 
   return new Promise((resolve, reject) => {
     let data = null;
-    
+
     for (let key in Users) {
       if (Users[key].id === id && id !== undefined) {
         data = JSON.parse(JSON.stringify(Users[key]));
