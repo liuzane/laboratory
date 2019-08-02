@@ -39,10 +39,7 @@ export default class moban extends PureComponent {
 
   render() {
     return (
-      <div 
-        className={ ('typeof ' + this.props.className).trim() }
-        style={ this.props.style }
-      >
+      <div>
         
       </div>
     );

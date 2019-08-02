@@ -46,10 +46,7 @@ class Desktop extends PureComponent {
     const { className, style } = this.props;
     
     return (
-      <div 
-        className={ ('moban ' + className).trim() }
-        style={ style }
-      >
+      <div>
         
       </div>
     );
