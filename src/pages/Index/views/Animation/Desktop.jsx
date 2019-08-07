@@ -11,12 +11,18 @@ import './style/Desktop.less';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
+const Box = (props) => (
+  <div className="animation__box">{ props.children }</div>
+);
+
 class Desktop extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       visible: false,
       list: [],
+      currentIndex: 0,
+      animationMode: 'animation-fade',
     };
   }
 
@@ -43,32 +49,76 @@ class Desktop extends PureComponent {
     this.setState({ list });
   };
 
+  handleTrigger = (index) => {
+    if (index === 0) {
+      this.setState({ animationMode: 'animation-left' });
+    } else if (index === 1) {
+      this.setState({ animationMode: 'animation-right' });
+    } else {
+      this.setState({ animationMode: 'animation-fade' });
+    }
+    this.setState({ currentIndex: index });
+  };
+
   render() {
-    const { visible, list } = this.state;
+    const { visible, list, animationMode } = this.state;
     
     return (
-      <div>
-        <button onClick={ this.handleShow }>切换</button>
-        <ReactCSSTransitionGroup
-          transitionEnterTimeout={ 300 }
-          transitionLeaveTimeout={ 300 }
-          transitionName="animation-spread"
-        >
-          { visible ? <p className="animation__text">显示</p> : null }
-        </ReactCSSTransitionGroup>
+      <div className="animation">
+        <div className="animation-container">
+          <button onClick={ this.handleShow }>切换</button>
+          <ReactCSSTransitionGroup
+            transitionEnterTimeout={ 300 }
+            transitionLeaveTimeout={ 300 }
+            transitionName="animation-spread"
+          >
+            { visible ? <p className="animation__text">显示</p> : null }
+          </ReactCSSTransitionGroup>
+        </div>
 
-        <button onClick={ this.handleAdd }>添加</button>
-        <ReactCSSTransitionGroup
-          transitionEnterTimeout={ 300 }
-          transitionLeaveTimeout={ 300 }
-          transitionName="animation-spread"
-        >
-          {
-            list.map((item, index) => (
-              <p key={ item } onClick={ this.handleRemove.bind(this, index) }>{ item }.{ index }</p>
-            ))
-          }
-        </ReactCSSTransitionGroup>
+        <h1>h1</h1>
+        <h2>h2</h2>
+        <p>p</p>
+
+        <div className="animation-container">
+          <button onClick={ this.handleTrigger.bind(this, 0) }>1</button>
+          <button onClick={ this.handleTrigger.bind(this, 1) }>2</button>
+          <button onClick={ this.handleTrigger.bind(this, 2) }>3</button>
+
+          <ReactCSSTransitionGroup
+            component={ Box }
+            transitionEnterTimeout={ 300 }
+            transitionLeaveTimeout={ 300 }
+            transitionName={ animationMode }
+          >
+            {
+              [ 1, 2, 3].map((item, index) => {
+                if (this.state.currentIndex === index) {
+                  return (
+                    <div key={ item } className="animation__box-item">{ item }</div>
+                  );
+                } else {
+                  return null;
+                }
+              })
+            }
+          </ReactCSSTransitionGroup>
+        </div>
+
+        <div className="animation-container">
+          <button onClick={ this.handleAdd }>添加</button>
+          <ReactCSSTransitionGroup
+            transitionEnterTimeout={ 300 }
+            transitionLeaveTimeout={ 300 }
+            transitionName="animation-spread"
+          >
+            {
+              list.map((item, index) => (
+                <p key={ item } onClick={ this.handleRemove.bind(this, index) }>{ item }.{ index }</p>
+              ))
+            }
+          </ReactCSSTransitionGroup>
+        </div>
       </div>
     );
   }

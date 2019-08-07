@@ -1,9 +1,37 @@
+.animation button {
+  padding: 4px 10px;
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.animation-container {
+  margin: 15px;
+  padding: 15px;
+  border: 1px solid orangered;
+}
+
 .animation__text {
   color: crimson;
   font-size: 48px;
   text-align: center;
   transform-origin: center top;
 }
+
+.animation__box {
+  height: 30px;
+  position: relative;
+}
+
+.animation__box-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
 
 .animation-fade-enter {
   opacity: 0.01;
@@ -23,6 +51,8 @@
   transition: opacity 300ms ease-in-out;
 }
 
+
+
 .animation-spread-enter {
   transform: scaleY(0);
 }
@@ -39,4 +69,47 @@
 .animation-spread-leave.animation-spread-leave-active {
   transform: scaleY(0);
   transition: transform 300ms ease-in-out;
+}
+
+
+
+.animation-left-enter {
+  margin-left: 10px;
+}
+
+.animation-left-enter.animation-left-enter-active {
+  margin-left: 0;
+  transition: margin-left 500ms ease-in-out;
+}
+
+.animation-left-leave {
+  margin-left: 0;
+}
+
+.animation-left-leave.animation-left-leave-active {
+  margin-left: -10px;
+  transition: margin-left 500ms ease-in-out;
+}
+
+.animation-left-enter {
+  margin-left: 10px;
+}
+
+
+.animation-right-enter {
+  margin-left: -10px;
+}
+
+.animation-right-enter.animation-right-enter-active {
+  margin-left: 0;
+  transition: margin-left 500ms ease-in-out;
+}
+
+.animation-right-leave {
+  margin-left: 0;
+}
+
+.animation-right-leave.animation-right-leave-active {
+  margin-left: 10px;
+  transition: margin-left 500ms ease-in-out;
 }
