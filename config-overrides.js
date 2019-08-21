@@ -16,7 +16,7 @@ const colors = require('./src/styles/colors');
 
 // webpack 配置
 const webpack = config => {
-  config.output.publicPath = './';
+  config.output.publicPath = process.env.npm_config_publicPath || '/';
   config.resolve.alias['@'] = path.resolve(__dirname, './src');
   return config;
 };

@@ -33,12 +33,6 @@ switch (SCRIPT) {
     address.LOCALEMOCK_MAIN_ADDRESS = '/';
     break;
 
-  // 测试环境地址
-  case 'build:test':
-    address.SERVER_MAIN_ADDRESS = '/';
-    address.LOCALEMOCK_MAIN_ADDRESS = '/';
-    break;
-
   // 默认地址
   default:
     address.SERVER_MAIN_ADDRESS = '/';
@@ -48,12 +42,21 @@ switch (SCRIPT) {
     break;
 }
 
-// 根据http方式加上protocol
+// 处理 address
 for (const key in address) {
-  if (address[key] && address[key].length > 0 && address[key][0] === '/') {
+  if (!address[key]) {
+    address[key] = `${ protocol }//${ host }`;
+    continue;
+  }
+
+  if (address[key][0] === '/') {
     address[key] = `${ protocol }//${ host }${ address[key] }`;
-  } else {
+    continue;
+  }
+
+  if (!(/^https?:\/\/.*/.test(address[key]))) {
     address[key] = `${ protocol }//${ address[key] }`;
+    continue;
   }
 }
 

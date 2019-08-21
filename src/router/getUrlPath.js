@@ -1,9 +1,16 @@
 import history from './history';
 
-const getUrlPath = (from) => {
-  const url = history.location.pathname;
+const getFromPathname = () => {
+  const pathnames = window.location.pathname.split('/');
+  const lastPathname = pathnames[pathnames.length - 1];
+  return '/' + lastPathname;
+};
 
-  return url === '/' ? '' : (`?url=/${ from }#` + url);
+const getUrlPath = (from = getFromPathname()) => {
+  const pathname = history.location.pathname;
+  const url = escape(from + '#' + pathname);
+
+  return url === '/' ? '' : ('?url=' + url);
 };
 
 export default getUrlPath;

@@ -44,13 +44,11 @@ class Admin extends Component {
           }, 1500);
         });
       };
-
       this.setState({ loading: true });
       await waiting();
       this.setState({ loading: false });
     } else {
-      const url = getUrlPath('admin.html');
-
+      const url = getUrlPath();
       goto('/login.html' + url);
     }
   };

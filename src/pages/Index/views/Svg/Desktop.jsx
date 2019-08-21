@@ -148,8 +148,6 @@ class Desktop extends PureComponent {
                 strokeLinecap="round"
                 fill="transparent"
               />
-
-
             </g>
 
             <g id="test-tube">
@@ -268,6 +266,33 @@ class Desktop extends PureComponent {
             strokeLinecap="round"
             strokeLinejoin="round"
             points="150,10 100,60 125,110 175,110 200,60"
+          />
+        </SvgItem>
+
+        <SvgItem>
+          <defs>
+            <path
+              id="bar"
+              d="
+                M 5 0
+                L 80 0
+                L 75 10
+                L 0 10
+                Z
+              "
+            />
+          </defs>
+          <use
+            href="#bar"
+            x="0"
+            y="0"
+            fill="blue"
+          />
+          <use
+            href="#bar"
+            x="100"
+            y="0"
+            fill="red"
           />
         </SvgItem>
       </ul>

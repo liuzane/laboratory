@@ -56,7 +56,7 @@ class Main extends Component {
       await getUserInfo({ id });
       this.setState({ loading: false });
     } else {
-      const url = getUrlPath('admin');
+      const url = getUrlPath();
 
       goto('/login.html' + url);
     }
