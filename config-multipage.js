@@ -164,13 +164,13 @@ module.exports = function (config) {
         // 将 (common|reset|nprogress) 文件合并成一个文件, mini-css-extract-plugin 的用法请参见文档：https://www.npmjs.com/package/mini-css-extract-plugin
         // MiniCssExtractPlugin 会将动态 import 引入的模块的样式文件也分离出去，将这些样式文件合并成一个文件可以提高渲染速度
         // 其实如果可以不使用 mini-css-extract-plugin 这个插件，即不分离样式文件，可能更适合本方案，但是我没有找到方法去除这个插件
-        styles: {
-          name: 'commons',
-          // test: /\.css|less$/,
-          test: /(common|reset|nprogress)\.css$/,
-          chunks: 'all', // merge all the css chunk to one file
-          enforce: true
-        }
+        // styles: {
+        //   name: 'commons',
+        //   // test: /\.css|less$/,
+        //   test: /(common|reset|nprogress)\.css$/,
+        //   chunks: 'all', // merge all the css chunk to one file
+        //   enforce: true
+        // }
       },
     },
   };

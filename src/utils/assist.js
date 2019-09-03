@@ -35,7 +35,7 @@ export function deepCopy (data) {
       object.push(deepCopy(data[i]));
     }
   } else if (type === 'object') {
-    for (let key in data) {
+    for (const key in data) {
       object[key] = deepCopy(data[key]);
     }
   }
@@ -49,4 +49,13 @@ export function uuid() {
 
     return v.toString(16);
   });
+}
+
+export function download(name, url) {
+  const aDom = document.createElement('a');
+  aDom.download = name;
+  aDom.href = url;
+  document.body.appendChild(aDom);
+  aDom.click();
+  aDom.remove(); // 下载之后把创建的元素删除
 }

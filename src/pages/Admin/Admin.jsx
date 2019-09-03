@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // 路由配置
-import { goto, getUrlPath } from '@/router';
+import { goto, getCurrentUrlPath } from '@/router';
 
 // 第三方模块
 import { fromJS, is } from 'immutable';
@@ -48,7 +48,7 @@ class Admin extends Component {
       await waiting();
       this.setState({ loading: false });
     } else {
-      const url = getUrlPath();
+      const url = getCurrentUrlPath();
       goto('/login.html' + url);
     }
   };
