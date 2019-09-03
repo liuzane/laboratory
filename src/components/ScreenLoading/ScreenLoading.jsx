@@ -1,5 +1,5 @@
 // 基础模块
-import React, { PureComponent, memo } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // 动画
