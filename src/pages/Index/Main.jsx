@@ -1,12 +1,13 @@
 // 基础模块
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // 路由模块
 import { HashRouter as Router } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
 
 // 路由配置
-import { RouterView, history, goto, getUrlPath } from '@/router';
+import { RouterView, goto, getCurrentUrlPath } from '@/router';
 import routes from './router';
 
 // 第三方模块
@@ -14,9 +15,6 @@ import { fromJS, is } from 'immutable';
 
 // 方法
 import { getCookie } from '@/utils/cookie';
-
-// 样式
-import './style/Main.less';
 
 // 布局组件
 import LayMain from '@/layouts/LayMain';
@@ -28,6 +26,9 @@ import ScreenLoading from '@/components/ScreenLoading';
 import MainMenu from './MainMenu';
 import MainHeader from './MainHeader';
 
+// 样式
+import './style/Main.less';
+
 const { Content } = LayMain;
 
 
@@ -35,7 +36,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
+      loading: true,
     };
   }
 
@@ -56,30 +57,27 @@ class Main extends Component {
       await getUserInfo({ id });
       this.setState({ loading: false });
     } else {
-      const url = getUrlPath();
-
+      const url = getCurrentUrlPath();
       goto('/login.html' + url);
     }
   };
 
   render() {
     return (
-      <Fragment>
+      <Router>
         <ScreenLoading loading={ this.state.loading } />
         <LayMain>
-          <MainMenu history={ history } />
+          <MainMenu />
     
           <LayMain>
             <MainHeader />
       
             <Content>
-              <Router>
-                <RouterView routes={ routes } />
-              </Router>
+              <RouterView routes={ routes } />
             </Content>
           </LayMain>
         </LayMain>
-      </Fragment>
+      </Router>
     );
   }
 }

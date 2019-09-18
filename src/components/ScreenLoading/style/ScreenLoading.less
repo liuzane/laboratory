@@ -1,4 +1,4 @@
-#screen-loading {
+.screen-loading {
   position: fixed;
   top: 0;
   right: 0;
@@ -24,4 +24,22 @@
   font-size: 18px;
   font-weight: 200;
   text-align: center;
+}
+
+.screen-loading-fade-enter {
+  opacity: 0.01;
+}
+
+.screen-loading-fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in-out;
+}
+
+.screen-loading-fade-exit {
+  opacity: 1;
+}
+
+.screen-loading-fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in-out;
 }

@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// 路由模块
+import { withRouter } from 'react-router-dom';
+
 // 路由配置
 import routes from './router';
 
@@ -91,4 +94,4 @@ class MainHeader extends Component {
   }
 }
 
-export default MainHeader;
+export default withRouter(MainHeader);

@@ -27,11 +27,8 @@ export { default as RouterView } from './RouterView';
 // 异步路由
 export { default as AsyncLoad } from './AsyncLoad';
 
-// 路由 history 对象
-export { default as history } from './history';
-
 // 页面之间跳转方法
 export { default as goto } from './goto';
 
 // 获取 url 路径转换为参数
-export { default as getUrlPath } from './getUrlPath';
+export { default as getCurrentUrlPath } from './getCurrentUrlPath';

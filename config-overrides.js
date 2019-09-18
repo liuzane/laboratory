@@ -30,8 +30,8 @@ module.exports = override(
 
   addLessLoader({
     modifyVars: colors,
-
     javascriptEnabled: true,
+    localIdentName: '[name]__[local]--[hash:5]'
   }),
 
   useEslintRc(),

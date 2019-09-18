@@ -5,9 +5,6 @@ import * as serviceWorker from '@/serviceWorker';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// 全局样式
-import '@/styles';
-
 // 入口组件
 import Main from './Main';
 
@@ -17,6 +14,9 @@ import store from './store';
 
 // 多语言配置组件
 import Languages from './languages';
+
+// 全局样式
+import '@/styles';
 
 ReactDOM.render(
   <Provider store={ store }>
