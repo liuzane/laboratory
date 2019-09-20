@@ -15,17 +15,17 @@ function RotationToMouse(t, n, e, o) {
     return Math.atan2(a, r);
 }
 
+function WindowToCanvas(t, n, e) {
+    let o = t.getBoundingClientRect();
+    return { x: n - o.left * (t.width / o.width), y: e - o.top * (t.height / o.height) };
+}
+
 function CaptureMouse(t) {
     let n = { x: 0, y: 0 };
     return t.addEventListener('mousemove', function (e) {
         let o = WindowToCanvas(t, e.clientX, e.clientY);
         n.x = o.x, n.y = o.y;
     }, !1), n;
-}
-
-function WindowToCanvas(t, n, e) {
-    let o = t.getBoundingClientRect();
-    return { x: n - o.left * (t.width / o.width), y: e - o.top * (t.height / o.height) };
 }
 
 function IsCollision(t, n, e, o) {
