@@ -37,7 +37,7 @@ export const login = (data, config) => {
   });
 };
 
-export const getUserList = (params, config) => {
+export const getListPersons = (params, config) => {
   return axios({
     method: 'get',
     url: '/user/list',
@@ -73,7 +73,7 @@ import axios, { login } from 'api';
 const source = axios.CancelToken.source();
 
 // Send request
-login({ username: 'admin', password: '123456' }, source.token).then(
+login({ username: 'admin', password: '123456' }, { cancelToken: source.token }).then(
   response => {
     // succeed
   }, 

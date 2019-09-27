@@ -7,7 +7,7 @@ export function setStorage (key, data, hours) {
   let expires;
 
   if (!key || !data) {
-    console.error('[ localStorage ]: Key and Data is a must fill parameter');
+    console.error('[localStorage Error]: Key and Data is a must parameter');
     return false;
   }
 
@@ -25,7 +25,7 @@ export function setStorage (key, data, hours) {
 export function getStorage (key) {
   let data, nowTime = new Date().getTime();
 
-  if (!key) console.error('[ localStorage ]: Key is a must fill parameter');
+  if (!key) console.error('[localStorage Error]: Key is a must parameter');
 
   try {
     data = JSON.parse(localStorage.getItem(key));

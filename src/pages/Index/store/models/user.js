@@ -1,7 +1,9 @@
+// 第三方模块
 import { createModel } from '@rematch/core';
+import _ from 'lodash';
 
 // API
-import { login, getUserInfo } from '@/api';
+import api from '@/api';
 
 // 方法
 import { getStorage, setStorage } from '@/utils/local-storage';
@@ -9,7 +11,7 @@ import { getStorage, setStorage } from '@/utils/local-storage';
 // 成功回调
 const successCallback = function (callback, errCallback, response) {
   if (callback) callback(response);
-  this.update_user(response.data);
+  this.updateUser(response.data);
 };
 
 // 失败回调
@@ -32,7 +34,7 @@ const user = createModel({
   state: { ...initialState },
 
   reducers: {
-    update_user(state, data) {
+    updateUser(state, data) {
       const userInfo = getStorage('userInfo');
       const language = getStorage('language');
       
@@ -45,13 +47,15 @@ const user = createModel({
       setStorage('userInfo', data, 24);
 
       for (const key in state) {
-        if (data[key]) state[key] = data[key];
+        if (state.hasOwnProperty(key) && data[key] !== undefined) {
+          state[key] = data[key];
+        }
       }
 
-      return JSON.parse(JSON.stringify(state));
+      return _.cloneDeep(state);
     },
     
-    reset_user() {
+    resetUser() {
       return { ...initialState };
     },
   },
@@ -59,11 +63,11 @@ const user = createModel({
   effects: {
     userLogin({ params, callback, errCallback }, rootState) {
       if (!params || !params.username || !params.password) {
-        console.error('[ userLogin Error ]: Please confirm params is complete?');
+        console.error('[userLogin Error]: Please confirm params is complete?');
         return;
       }
 
-      return login(params).then(
+      return api.login(params).then(
         successCallback.bind(this, callback, errCallback),
         errorCallback.bind(this, errCallback)
       );
@@ -71,11 +75,11 @@ const user = createModel({
     
     getUserInfo (params, rootState, callback, errCallback) {
       if (!params || !params.id) {
-        console.error('[ getUserInfo Error ]: Please confirm params is complete?', params);
+        console.error('[getUserInfo Error]: Please confirm params is complete?', params);
         return;
       }
   
-      return getUserInfo(params).then(
+      return api.getUserInfo(params).then(
         successCallback.bind(this, callback, errCallback),
         errorCallback.bind(this, errCallback)
       );

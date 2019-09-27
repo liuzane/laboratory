@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { Form, Table, Spin } from 'antd';
 
 // 样式
-import style from './style/CountTable.module.less';
+import './style/CountTable.less';
 
 const FormItem = Form.Item;
 
@@ -15,7 +15,7 @@ const FormItem = Form.Item;
 const CountTableRowContext = React.createContext();
 const CountTableFormsContext = React.createContext();
 
-const countTableClassName = (postfix = '') => style['count-table' + postfix];
+const countTableCls = (postfix = '') => 'count-table' + postfix;
 
 
 const CountTableRow = ({ form, index, ...props }) => {
@@ -77,7 +77,7 @@ const CountTableBody = ({ rowKey, ...restProps }) => {
   };
 
   return (
-    <div className={ countTableClassName('__body') }>
+    <div className={ countTableCls('__body') }>
       <Table
         bordered
         components={ components }
@@ -99,7 +99,7 @@ const CountTableBodyTitle = ({ title }) => {
   }
   
   return (
-    <div className={ countTableClassName('__title') }>
+    <div className={ countTableCls('__title') }>
       {
         title.map((item, i) => (<span key={ i }>{ item.label }：{ item.value }</span>))
       }
@@ -134,12 +134,12 @@ class CountTableBodyFooter extends PureComponent {
     const { footer, dataSource } = this.props;
     
     return (
-      <div className={ countTableClassName('__footer') }>
+      <div className={ countTableCls('__footer') }>
         {
           footer.map((item, index) => {
             return (
               <div
-                className={ countTableClassName('__footer-cell') }
+                className={ countTableCls('__footer-cell') }
                 key={ index }
                 style={{
                   width: typeof item.width === 'number' ? item.width + 'px' : item.width,
@@ -280,12 +280,12 @@ export default class CountTable extends PureComponent {
     
     return (
       <div
-        className={ `${ countTableClassName() } ${ className }`.trim() }
+        className={ `${ countTableCls() } ${ className }`.trim() }
         style={ style }
       >
         {
           loading && multiple ? (
-            <div className={ countTableClassName('__loading') }>
+            <div className={ countTableCls('__loading') }>
               <Spin size="large" spinning />
             </div>
           ) : (

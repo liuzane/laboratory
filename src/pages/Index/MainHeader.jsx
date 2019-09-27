@@ -34,11 +34,13 @@ const languageName = languages[ language ] && languages[ language ].name;
 
 class MainHeader extends Component {
   static propTypes = {
-    intl: PropTypes.object,
-    // Store
+    // State
     name: PropTypes.string,
-    update_user: PropTypes.func,
-    reset_user: PropTypes.func,
+    // Dispatch
+    updateUser: PropTypes.func,
+    resetUser: PropTypes.func,
+    // Props
+    intl: PropTypes.object,
   };
   
   shouldComponentUpdate(nextProps, nextState) {
@@ -47,14 +49,14 @@ class MainHeader extends Component {
 
   // 切换语言并保存到本地
   handleLanguage = ({ item, key, keyPath }) => {
-    this.props.update_user({ language: key });
+    this.props.updateUser({ language: key });
     setStorage('language', key);
     window.location.reload();
   };
 
   // 处理用户行为
   handleUser = ({ item, key, keyPath }) => {
-    const { reset_user } = this.props;
+    const { resetUser } = this.props;
     const { formatMessage } = this.props.intl;
 
     switch (key) {
@@ -74,7 +76,7 @@ class MainHeader extends Component {
           onOk: () => {
             clearCookie();
             clearStorage('userInfo');
-            reset_user();
+            resetUser();
             goto('/login.html');
           }
         });
@@ -168,14 +170,16 @@ class MainHeader extends Component {
 
 const IntlMainHeader = injectIntl(MainHeader);
 
-const mapStateToProps = state => ({
-  language: state.user.language,
-  name: state.user.name,
+// State
+const mapStateToProps = ({ user }) => ({
+  language: user.language,
+  name: user.name,
 });
 
-const mapDispatchToProps = dispatch => ({
-  update_user: dispatch.user.update_user,
-  reset_user: dispatch.user.reset_user,
+// Dispatch
+const mapDispatchToProps = ({ user }) => ({
+  updateUser: user.updateUser,
+  resetUser: user.resetUser,
 });
 
 export default connect(

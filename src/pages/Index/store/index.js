@@ -1,3 +1,4 @@
+// 基础模块
 import { init } from '@rematch/core';
 
 // Store Models
@@ -24,4 +25,4 @@ export const { dispatch, getState } = store;
 // getState().user;
 
 // 提交（同步和异步都是该方法提交，异步把后面的方法名换成异步的方法名就可以了）
-// dispatch.user.update_user(x, y);
+// dispatch.user.updateUser(x, y);

@@ -11,7 +11,7 @@ import { fromJS, is } from 'immutable';
 import { getCookie } from '@/utils/cookie';
 
 // 样式
-import './style/Admin.less';
+// import './style/Admin.less';
 
 // 公共组件
 import ScreenLoading from '@/components/ScreenLoading';

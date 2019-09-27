@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 
 // api
-import { getUserList } from '@/api';
+import api, { axios } from '@/api';
 
 import { InputNumber, Button, message } from 'antd';
 
@@ -21,7 +21,7 @@ export default class Desktop extends PureComponent {
       data: [],
       loading: false,
     };
-  
+    this.source = axios.CancelToken.source();
     this.columns = [
       {
         title: 'Name',
@@ -55,7 +55,7 @@ export default class Desktop extends PureComponent {
               },
             ],
             initialValue: record[ dataIndex ],
-          })(<InputNumber onChange={ this.varInputChange.bind(this, dataIndex, record) } />);
+          })(<InputNumber onChange={ this.onInputChange.bind(this, dataIndex, record) } />);
         },
       },
     
@@ -71,9 +71,15 @@ export default class Desktop extends PureComponent {
         render: (text, record, index) => {
           return (
             <div className="btns">
-              <button onClick={ this.test }>Check</button>
-              <button>Edit</button>
-              <button>Delete</button>
+              <Button
+                type="primary"
+                size="small"
+                onClick={ this.test }
+              >
+                Check
+              </Button>
+              <Button size="small">Edit</Button>
+              <Button type="danger" size="small">Delete</Button>
             </div>
           );
         },
@@ -102,7 +108,11 @@ export default class Desktop extends PureComponent {
   }
 
   componentDidMount () {
-    this.getUserList();
+    this.getListPersons();
+  }
+
+  componentWillUnmount() {
+    this.source.cancel();
   }
   
   updateTableData = (key, value, record) => {
@@ -120,23 +130,25 @@ export default class Desktop extends PureComponent {
     return data;
   };
   
-  varInputChange = (key, record, value) => {
+  onInputChange = (key, record, value) => {
     record[ key ] = value;
     this.setState({ data: this.updateTableData('id', record.id, record) });
   };
   
-  getUserList = async function () {
+  getListPersons = () => {
     this.setState({ loading: true });
-    await getUserList({ page: 1, size: 2 }).then(
+    api.getListPersons({ page: 1, size: 2 }, { cancelToken: this.source.token }).then(
       response => {
-        this.setState({ data: response.data });
+        this.setState({ loading: false, data: response.data });
       },
 
       error => {
-        message.error(error.message);
+        if (!axios.isCancel(error)) {
+          message.error(error.message);
+          this.setState({ loading: false });
+        }
       }
     );
-    this.setState({ loading: false });
   };
   
   validate = () => {
@@ -157,19 +169,22 @@ export default class Desktop extends PureComponent {
   };
 
   render () {
+    const { columns, footer } = this;
     const { data, loading } = this.state;
 
     return (
       <div>
         <CountTable
           className="desktop-table"
-          columns={ this.columns }
+          columns={ columns }
           data={ data }
-          footer={ this.footer }
+          footer={ footer }
           loading={ loading }
-          onChange={(pagination, filters, sorter) => {
-            console.log(filters);
-          }}
+          onChange={
+            (pagination, filters, sorter) => {
+              console.log(filters);
+            }
+          }
           ref={ this.CountTable }
           rowKey="id"
         />

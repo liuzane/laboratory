@@ -13,7 +13,7 @@ function updateIndex (WrappedComponent) {
 			setIndex: PropTypes.func
 		};
 
-		componentWillMount () {
+		componentDidMount () {
 			this.props.setIndex(this.props.index);
 		}
 

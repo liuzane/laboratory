@@ -3,10 +3,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+
 class Redux extends Component {
   static propTypes = {
+    // State
     array: PropTypes.array,
+    // Dispatch
     func: PropTypes.func,
+    // Props
+    string: PropTypes.string,
   };
   
   render() {
@@ -14,10 +19,12 @@ class Redux extends Component {
   };
 }
 
+// State
 const mapStateToProps = state => ({
   one: state.user.one,
 });
 
+// Dispatch
 const mapDispatchToProps = dispatch => ({
   emit: dispatch.user.emit,
 });

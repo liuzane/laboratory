@@ -36,7 +36,9 @@ export function deepCopy (data) {
     }
   } else if (type === 'object') {
     for (const key in data) {
-      object[key] = deepCopy(data[key]);
+      if (data.hasOwnProperty(key)) {
+        object[key] = deepCopy(data[key]);
+      }
     }
   }
   return object;

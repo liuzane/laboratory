@@ -2,19 +2,19 @@
 import React, { PureComponent } from 'react';
 
 // api
-import { getUserList } from '@/api';
+import api, { axios } from '@/api';
 
 import { message, Table } from 'antd';
 
 
-export default class Desktop extends PureComponent {
+class Desktop extends PureComponent {
   constructor (props) {
     super(props);
     this.state = {
       data: [],
       loading: false,
     };
-  
+    this.source = axios.CancelToken.source();
     this.columns = [
       {
         title: 'Name',
@@ -62,36 +62,45 @@ export default class Desktop extends PureComponent {
   }
 
   componentDidMount () {
-    this.getUserList();
+    this.getListPersons();
   }
 
-  getUserList = async function () {
+  componentWillUnmount() {
+    this.source.cancel();
+  }
+
+  getListPersons = () => {
     this.setState({ loading: true });
-    await getUserList({ page: 1, size: 2 }).then(
+    api.getListPersons({ page: 1, size: 2 }, { cancelToken: this.source.token }).then(
       response => {
-        this.setState({ data: response.data });
+        this.setState({ loading: false, data: response.data });
       },
 
       error => {
-        message.error(error.message);
+        if (!axios.isCancel(error)) {
+          message.error(error.message);
+          this.setState({ loading: false });
+        }
       }
     );
-    this.setState({ loading: false });
   };
 
   render () {
+    const { columns } = this;
     const { data, loading } = this.state;
 
     return (
       <div>
         <Table
           className="desktop-table"
-          columns={ this.columns }
+          columns={ columns }
           dataSource={ data }
           loading={ loading }
-          onChange={(pagination, filters, sorter) => {
-            console.log(filters);
-          }}
+          onChange={
+            (pagination, filters, sorter) => {
+              console.log(filters);
+            }
+          }
           rowKey="id"
           size="small"
         />
@@ -99,3 +108,5 @@ export default class Desktop extends PureComponent {
     );
   }
 }
+
+export default Desktop;

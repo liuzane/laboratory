@@ -95,7 +95,7 @@
     "no-delete-var": "error", // 不能对var声明的变量使用delete操作符
     "no-undef": "error", // 不能有未定义的变量
     "no-unused-vars": ["warn", {"vars": "all", "args": "none"}], // 不能有声明后未被使用的变量或参数
-    "no-use-before-define": "error", // 未定义前不能使用
+    "no-use-before-define": "off", // 未定义前不能使用
 
 
     /* Stylistic Issues 这些规则是关于风格指南的，而且是非常主观的 */

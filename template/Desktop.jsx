@@ -3,23 +3,26 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+// 第三方模块
+import _ from 'lodash';
+
 // API
 import {  } from '@/api';
 
 // 方法
 import {  } from '@/utils/';
 
-// 样式
-import './style/Desktop.less';
+// UI组件
+import {  } from 'antd';
 
 // 公共组件
 import  from '@/components';
 
+// 样式
+import './style/Desktop.less';
+
 // 组件
 import  from '';
-
-// UI组件
-import {  } from 'antd';
 
 
 class Desktop extends PureComponent {
@@ -43,8 +46,6 @@ class Desktop extends PureComponent {
   }
 
   render() {
-    const { className, style } = this.props;
-    
     return (
       <div>
         

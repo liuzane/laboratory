@@ -5,14 +5,11 @@ import PropTypes from 'prop-types';
 // 路由跳转方法
 import { goto } from '@/router';
 
-// 样式
-import './style/Login.css';
-
 // 方法
 import { setCookie } from '@/utils/cookie';
 
 // API
-import { login } from '@/api';
+import api from '@/api';
 
 // UI库组件
 import { Form, Input, Icon, Button, message } from 'antd';
@@ -22,6 +19,9 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 
 // 公共组件
 import LayLogin from '@/layouts/LayLogin';
+
+// 样式
+import './style/Login.css';
 
 const FormItem = Form.Item;
 
@@ -53,7 +53,7 @@ class Login extends Component {
     form.validateFields((error, params) => {
       if (!error) {
         this.setState({ loading: true });
-        login(params).then(
+        api.login(params).then(
           response => {
             const search = window.location.search;
             setCookie({ key: 'token', value: response.data.id, hours: 0.5 });
@@ -113,6 +113,7 @@ class Login extends Component {
         </Form>
         
         <Button
+          className="login__btn"
           block
           loading={ this.state.loading }
           onClick={ this.login }

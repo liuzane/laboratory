@@ -13,7 +13,7 @@ class IsClickOutside extends Component {
     className: PropTypes.string,
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.isOutside = event => {
@@ -31,19 +31,19 @@ class IsClickOutside extends Component {
     };
   }
 
-  componentWillMount () {
+  componentDidMount() {
     document.addEventListener('click', this.isOutside);
   }
 
-  componentWillunmount () {
-    document.removeEventListener('click', this.isOutside);
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
   }
 
-  render () {
+  componentWillunmount() {
+    document.removeEventListener('click', this.isOutside);
+  }
+
+  render() {
     return (
       <this.props.tag 
         className={ this.props.className } 

@@ -1,9 +1,9 @@
 // 异步路由
 import handleRoutes, { AsyncLoad } from '@/router';
 
-const routes = [
+const children = [
   {
-    path: '/',
+    path: 'home',
     title: 'routes.home',
     icon: 'icon-home',
     component: AsyncLoad(() => import('@/pages/Index/views/Home')),
@@ -11,7 +11,7 @@ const routes = [
   },
 
   {
-    path: '/todo',
+    path: 'todo',
     title: 'routes.todo',
     icon: 'icon-todo',
     component: AsyncLoad(() => import('@/pages/Index/views/Todo')),
@@ -19,7 +19,7 @@ const routes = [
   },
 
   {
-    path: '/count-table',
+    path: 'count-table',
     title: 'routes.count-table',
     icon: 'icon-table',
     component: AsyncLoad(() => import('@/pages/Index/views/CountTable')),
@@ -27,7 +27,7 @@ const routes = [
   },
 
   {
-    path: '/table',
+    path: 'table',
     title: 'routes.table',
     icon: 'icon-table',
     component: AsyncLoad(() => import('@/pages/Index/views/Table')),
@@ -35,7 +35,7 @@ const routes = [
   },
 
   {
-    path: '/less',
+    path: 'less',
     title: 'routes.less',
     icon: 'icon-less',
     component: AsyncLoad(() => import('@/pages/Index/views/Less')),
@@ -43,7 +43,7 @@ const routes = [
   },
 
   {
-    path: '/module',
+    path: 'module',
     title: 'routes.module',
     icon: 'icon-module',
     component: AsyncLoad(() => import('@/pages/Index/views/Module')),
@@ -51,7 +51,7 @@ const routes = [
   },
 
   {
-    path: '/grammar',
+    path: 'grammar',
     title: 'routes.grammar',
     icon: 'icon-grammar',
     component: AsyncLoad(() => import('@/pages/Index/views/Grammar')),
@@ -59,7 +59,7 @@ const routes = [
   },
 
   {
-    path: '/animation',
+    path: 'animation',
     title: 'routes.animation',
     icon: 'icon-animation',
     component: AsyncLoad(() => import('@/pages/Index/views/Animation')),
@@ -67,10 +67,29 @@ const routes = [
   },
 
   {
-    path: '/svg',
+    path: 'svg',
     title: 'routes.svg',
     icon: 'icon-svg',
     component: AsyncLoad(() => import('@/pages/Index/views/Svg')),
+    exact: true,
+  },
+
+  {
+    path: '',
+    redirect: 'home',
+    exact: true,
+  },
+];
+
+const routes = [
+  {
+    path: '/:language',
+    children,
+  },
+
+  {
+    path: '/',
+    redirect: '/:language/',
     exact: true,
   },
 

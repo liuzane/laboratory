@@ -5,6 +5,10 @@ import * as serviceWorker from '@/serviceWorker';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// 路由模块
+import { HashRouter as Router } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
+
 // 入口组件
 import Main from './Main';
 
@@ -19,20 +23,14 @@ import Languages from './languages';
 import '@/styles';
 
 ReactDOM.render(
-  <Provider store={ store }>
-    <Languages>
-      <Main />
-    </Languages>
-  </Provider>,
+  <Router>
+    <Provider store={ store }>
+      <Languages>
+        <Main />
+      </Languages>
+    </Provider>
+  </Router>,
   document.getElementById('root')
 );
 
 serviceWorker.unregister();
-
-serviceWorker.register({
-  onUpdate: async (registration) => {
-    await registration.update();
-    console.info('网站更新完成, 请刷新页面');
-  },
-  onSuccess: () => {}
-});

@@ -8,6 +8,10 @@ const handleRoutes = (routes, parentPath) => {
   return cloneRoutes.reduce((prevRoutes, currentRoute) => {
     if (parentPath && currentRoute.path.substr(0, 1) !== '/') {
       currentRoute.path = parentPath + (currentRoute.path === '' ? '' : '/' + currentRoute.path);
+
+      if (currentRoute.redirect) {
+        currentRoute.redirect = currentRoute.redirect.substr(0, 1) === '/' ? currentRoute.redirect : (parentPath + '/' + currentRoute.redirect);
+      }
     }
 
     if (!currentRoute.component && currentRoute.children) {

@@ -1,10 +1,9 @@
 // 基础模块
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-// 路由模块
-import { HashRouter as Router } from 'react-router-dom';
-// import { BrowserRouter as Router } from 'react-router-dom';
+
 
 // 路由配置
 import { RouterView, goto, getCurrentUrlPath } from '@/router';
@@ -33,6 +32,11 @@ const { Content } = LayMain;
 
 
 class Main extends Component {
+  static propTypes = {
+    // Dispatch
+    getUserInfo: PropTypes.func,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -63,9 +67,10 @@ class Main extends Component {
   };
 
   render() {
+    const { loading } = this.state;
     return (
-      <Router>
-        <ScreenLoading loading={ this.state.loading } />
+      <Fragment>
+        <ScreenLoading loading={ loading } />
         <LayMain>
           <MainMenu />
     
@@ -73,27 +78,21 @@ class Main extends Component {
             <MainHeader />
       
             <Content>
-              <RouterView routes={ routes } />
+              { loading ? null : (<RouterView routes={ routes } />) }
             </Content>
           </LayMain>
         </LayMain>
-      </Router>
+      </Fragment>
     );
   }
 }
 
-// Redux
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = dispatch => {
-  const { getUserInfo } = dispatch.user;
-
-  return {
-    getUserInfo,
-  };
-};
+// Dispatch
+const mapDispatchToProps = ({ user }) => ({
+  getUserInfo: user.getUserInfo
+});
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Main);
