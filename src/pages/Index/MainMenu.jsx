@@ -6,10 +6,11 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 // 路由配置
-import routes from './router';
+import { menu } from './router';
 
 // 第三方模块
 import { fromJS, is } from 'immutable';
+import _ from 'lodash';
 
 // 布局组件
 import LayMain from '@/layouts/LayMain';
@@ -23,19 +24,30 @@ import IconFont from '@/components/IconFont';
 // UI组件
 import { Menu } from 'antd';
 
-const menus = routes.filter(item => item.title);
-
 const { Sider } = LayMain;
 const { SubMenu, Item } = Menu;
 
 
-class MainHeader extends Component {
+class MainMenu extends Component {
   static propTypes = {
+    // Props
     history: PropTypes.object,
+    match: PropTypes.object,
+    location: PropTypes.object,
   };
 
-  shouldComponentUpdate(nextProps) {
-    return !is(fromJS(this.props), fromJS(nextProps));
+  constructor(props) {
+    super(props);
+    const { match } = props;
+    const language = match.params.language || 'en';
+    this.menuRoutes = _.cloneDeep(menu).filter(item => item.title).map(item => {
+      item.path = item.path.replace(':language', language);
+      return item;
+    });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
   }
 
   goto = item => {
@@ -43,8 +55,10 @@ class MainHeader extends Component {
   };
 
   render() {
-    const pathname = this.props.history.location.pathname;
-    const currentPathName = menus.some(item => item.path === pathname) ? pathname : menus[0].path;
+    const { menuRoutes } = this;
+    console.log('menuRoutes', menuRoutes);
+    const pathname = this.props.location.pathname;
+    const currentPathName = menuRoutes.some(item => item.path === pathname) ? pathname : menuRoutes[0].path;
 
     return (
       <Sider>
@@ -56,7 +70,7 @@ class MainHeader extends Component {
           theme="dark"
         >
           {
-            menus.map(item => {
+            menuRoutes.map(item => {
               if (item.children) {
                 return (
                   <SubMenu
@@ -94,4 +108,4 @@ class MainHeader extends Component {
   }
 }
 
-export default withRouter(MainHeader);
+export default withRouter(MainMenu);

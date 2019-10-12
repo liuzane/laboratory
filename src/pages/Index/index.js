@@ -9,27 +9,29 @@ import ReactDOM from 'react-dom';
 import { HashRouter as Router } from 'react-router-dom';
 // import { BrowserRouter as Router } from 'react-router-dom';
 
+// 路由配置
+import { RouterView } from '@/router';
+import routes from './router';
+
 // 入口组件
-import Main from './Main';
+// import Main from './Main';
 
 // Redux状态库
 import { Provider } from 'react-redux';
 import store from './store';
 
 // 多语言配置组件
-import Languages from './languages';
+// import Languages from './languages';
 
 // 全局样式
 import '@/styles';
 
 ReactDOM.render(
-  <Router>
-    <Provider store={ store }>
-      <Languages>
-        <Main />
-      </Languages>
-    </Provider>
-  </Router>,
+  <Provider store={ store }>
+    <Router>
+      <RouterView routes={ routes } />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

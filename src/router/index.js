@@ -14,8 +14,15 @@ const handleRoutes = (routes, parentPath) => {
       }
     }
 
-    if (!currentRoute.component && currentRoute.children) {
-      return prevRoutes.concat(handleRoutes(currentRoute.children, currentRoute.path));
+    if (currentRoute.children) {
+      const children = handleRoutes(currentRoute.children, currentRoute.path);
+
+      if (currentRoute.component) {
+        currentRoute.children = children;
+        return prevRoutes.concat([ currentRoute ]);
+      } else {
+        return prevRoutes.concat(children);
+      }
     } else {
       return prevRoutes.concat(currentRoute);
     }

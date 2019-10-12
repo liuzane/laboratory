@@ -3,17 +3,19 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-
-
 // 路由配置
-import { RouterView, goto, getCurrentUrlPath } from '@/router';
-import routes from './router';
+// import { RouterView, goto, getCurrentUrlPath } from '@/router';
+// import routes from './router';
+import { goto, getCurrentUrlPath } from '@/router';
 
 // 第三方模块
 import { fromJS, is } from 'immutable';
 
 // 方法
 import { getCookie } from '@/utils/cookie';
+
+// 多语言配置组件
+import Languages from './languages';
 
 // 布局组件
 import LayMain from '@/layouts/LayMain';
@@ -35,6 +37,8 @@ class Main extends Component {
   static propTypes = {
     // Dispatch
     getUserInfo: PropTypes.func,
+    // Props
+    children: PropTypes.node,
   };
 
   constructor(props) {
@@ -67,22 +71,26 @@ class Main extends Component {
   };
 
   render() {
+    const { children } = this.props;
     const { loading } = this.state;
+
     return (
-      <Fragment>
-        <ScreenLoading loading={ loading } />
-        <LayMain>
-          <MainMenu />
-    
+      <Languages>
+        <Fragment>
+          <ScreenLoading loading={ loading } />
           <LayMain>
-            <MainHeader />
-      
-            <Content>
-              { loading ? null : (<RouterView routes={ routes } />) }
-            </Content>
+            <MainMenu />
+
+            <LayMain>
+              <MainHeader />
+
+              <Content>
+                { loading ? null : children }
+              </Content>
+            </LayMain>
           </LayMain>
-        </LayMain>
-      </Fragment>
+        </Fragment>
+      </Languages>
     );
   }
 }

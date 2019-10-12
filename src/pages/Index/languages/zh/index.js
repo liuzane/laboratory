@@ -11,8 +11,6 @@ files.keys().forEach(key => {
 
 export default {
   name: '简体中文',
-  language: 'zh-CN',
-  fullName: 'zh_CN',
-  fileName: 'ZH_CN',
+  language: 'zh',
   messages,
 };

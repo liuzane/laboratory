@@ -33,24 +33,41 @@ class RouterView extends PureComponent {
     }
   }
 
+  renderRoutes = (routes) => {
+    return routes.map((item, index) => {
+      const restProps = {
+        key: index,
+        path: item.path,
+        exact: item.exact,
+        strict: item.strict,
+      };
+      if (item.component && item.children) {
+        return (
+          <Route { ...restProps }>
+            <item.component>
+              { this.renderRoutes(item.children) }
+            </item.component>
+          </Route>
+        );
+      } else {
+        return (
+          <Route
+            { ...restProps }
+            render={
+              props => item.redirect
+                ? (<Redirect to={ item.redirect } />)
+                : (<item.component { ...props } routes={ item.children } />)
+            }
+          />
+        );
+      }
+    });
+  };
+
   render() {
     return (
       <Switch>
-        {
-          this.props.routes.map((item, index) => (
-            <Route 
-              exact={ item.exact } 
-              key={ index }
-              path={ item.path } 
-              render={ 
-                props => item.redirect 
-                ? (<Redirect to={ item.redirect } />) 
-                : (<item.component { ...props } routes={ item.children } />) 
-              } 
-              strict={ item.strict } 
-            />
-          ))
-        }
+        { this.renderRoutes(this.props.routes) }
       </Switch>
     );
   }

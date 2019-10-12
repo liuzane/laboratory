@@ -84,12 +84,13 @@ const children = [
 const routes = [
   {
     path: '/:language',
+    component: AsyncLoad(() => import('@/pages/Index/Main')),
     children,
   },
 
   {
     path: '/',
-    redirect: '/:language/',
+    redirect: '/:language',
     exact: true,
   },
 
@@ -100,4 +101,8 @@ const routes = [
   },
 ];
 
-export default handleRoutes(routes);
+const router = handleRoutes(routes);
+
+export default router;
+
+export const menu = router[0].children;

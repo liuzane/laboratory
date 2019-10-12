@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+// 路由模块
+import { withRouter } from 'react-router-dom';
+
 // 路由跳转方法
 import { goto } from '@/router';
 
@@ -41,7 +44,17 @@ class MainHeader extends Component {
     resetUser: PropTypes.func,
     // Props
     intl: PropTypes.object,
+    location: PropTypes.object,
   };
+
+  constructor(props) {
+    super(props);
+    const { location, match } = props;
+    const pathname = location.pathname;
+    const pathnameMatch = pathname.match(/\/(.{1,8})\/.*/);
+    const language = pathnameMatch && pathnameMatch[1] || 'en';
+    this.languagePackage = languages[language];
+  }
   
   shouldComponentUpdate(nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
@@ -170,6 +183,8 @@ class MainHeader extends Component {
 
 const IntlMainHeader = injectIntl(MainHeader);
 
+const RouterHeader = withRouter(IntlMainHeader);
+
 // State
 const mapStateToProps = ({ user }) => ({
   language: user.language,
@@ -185,4 +200,4 @@ const mapDispatchToProps = ({ user }) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(IntlMainHeader);
+)(RouterHeader);
