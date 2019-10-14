@@ -14,10 +14,10 @@ import { fromJS, is } from 'immutable';
 
 // 方法
 import { clearCookie } from '@/utils/cookie';
-import { getStorage, setStorage, clearStorage } from '@/utils/local-storage';
+import { clearStorage } from '@/utils/local-storage';
 
 // 多语言列表
-import { languages } from './languages';
+import { languages } from '../languages';
 
 // 布局组件
 import LayMain from '@/layouts/LayMain';
@@ -30,30 +30,24 @@ import { Dropdown, Menu, Button, Icon, Modal } from 'antd';
 
 const { Header } = LayMain;
 
-// 获取存储语言信息
-const language = getStorage('language');
-const languageName = languages[ language ] && languages[ language ].name;
-
 
 class MainHeader extends Component {
   static propTypes = {
     // State
-    name: PropTypes.string,
+    username: PropTypes.string,
     // Dispatch
-    updateUser: PropTypes.func,
     resetUser: PropTypes.func,
     // Props
+    language: PropTypes.string,
     intl: PropTypes.object,
     location: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
-    const { location, match } = props;
-    const pathname = location.pathname;
-    const pathnameMatch = pathname.match(/\/(.{1,8})\/.*/);
-    const language = pathnameMatch && pathnameMatch[1] || 'en';
-    this.languagePackage = languages[language];
+    const { language } = props;
+    this.languageKey = languages[language].language;
+    this.languageName = languages[language].name;
   }
   
   shouldComponentUpdate(nextProps, nextState) {
@@ -62,8 +56,11 @@ class MainHeader extends Component {
 
   // 切换语言并保存到本地
   handleLanguage = ({ item, key, keyPath }) => {
-    this.props.updateUser({ language: key });
-    setStorage('language', key);
+    const { history, location, match } = this.props;
+    const beforeUrl = match.url;
+    const afterUrl = match.path.replace(':language', key);
+    const url = location.pathname.replace(beforeUrl, afterUrl);
+    history.push(url);
     window.location.reload();
   };
 
@@ -128,9 +125,9 @@ class MainHeader extends Component {
   renderLanguageMenu() {
     return (
       <Menu
-        defaultSelectedKeys={[ language ]}
+        defaultSelectedKeys={[ this.languageKey ]}
         onClick={ this.handleLanguage }
-        selectedKeys={[ language ]}
+        selectedKeys={[ this.languageKey ]}
       >
         {
           Object.keys(languages).map(key => {
@@ -148,7 +145,7 @@ class MainHeader extends Component {
   }
   
   render() {
-    const { name } = this.props;
+    const { username } = this.props;
 
     return (
       <Header className="main__header">
@@ -162,7 +159,7 @@ class MainHeader extends Component {
           placement="bottomCenter"
         >
           <div className="main__dropdown-title">
-            <Button size="small">{ languageName }</Button>
+            <Button size="small">{ this.languageName }</Button>
           </div>
         </Dropdown>
 
@@ -172,7 +169,7 @@ class MainHeader extends Component {
           placement="bottomCenter"
         >
           <div className="main__dropdown-title">
-            <span className="main__dropdown-title-text">{ name }</span>
+            <span className="main__dropdown-title-text">{ username }</span>
             <Icon style={{ color: 'rgba(0, 0, 0, .5)' }} type="caret-down" />
           </div>
         </Dropdown>
@@ -187,13 +184,11 @@ const RouterHeader = withRouter(IntlMainHeader);
 
 // State
 const mapStateToProps = ({ user }) => ({
-  language: user.language,
-  name: user.name,
+  username: user.name,
 });
 
 // Dispatch
 const mapDispatchToProps = ({ user }) => ({
-  updateUser: user.updateUser,
   resetUser: user.resetUser,
 });
 

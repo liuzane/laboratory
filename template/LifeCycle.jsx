@@ -36,7 +36,7 @@ export default class moban extends PurComponent {
     // 该生命周期不可调setState，否则会递归卡死。
   }
 
-  componentDidUpdate(nextProps, nextState) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     // 组件初始化时不调用，组件更新完成后调用，此时可以获取dom节点。
   }
 

@@ -18,56 +18,33 @@ class RouterView extends PureComponent {
   static defaultProps = {
     onRouterEach: () => {},
   };
-
-  componentDidMount() {
-    const [ to, from ] = [ {}, this.props.location ];
-
-    this.props.onRouterEach(to, from, this.props.history);
-  }
   
-  componentDidUpdate(nextProps, nextState) {
-    const [ to, from ] = [ nextProps.location, this.props.location ];
+  componentDidUpdate(prevProps) {
+    const [ to, from ] = [ this.props.location, prevProps.location ];
 
     if (!is(fromJS(to), fromJS(from))) {
       this.props.onRouterEach(to, from, this.props.history);
     }
   }
 
-  renderRoutes = (routes) => {
-    return routes.map((item, index) => {
-      const restProps = {
-        key: index,
-        path: item.path,
-        exact: item.exact,
-        strict: item.strict,
-      };
-      if (item.component && item.children) {
-        return (
-          <Route { ...restProps }>
-            <item.component>
-              { this.renderRoutes(item.children) }
-            </item.component>
-          </Route>
-        );
-      } else {
-        return (
-          <Route
-            { ...restProps }
-            render={
-              props => item.redirect
-                ? (<Redirect to={ item.redirect } />)
-                : (<item.component { ...props } routes={ item.children } />)
-            }
-          />
-        );
-      }
-    });
-  };
-
   render() {
     return (
       <Switch>
-        { this.renderRoutes(this.props.routes) }
+        {
+          this.props.routes.map((item, index) => (
+            <Route
+              key={ index }
+              path={ item.path }
+              exact={ item.exact }
+              strict={ item.strict }
+              render={
+                props => item.redirect
+                  ? (<Redirect to={ item.redirect } />)
+                  : (<item.component { ...props } routes={ item.children } />)
+              }
+            />
+          ))
+        }
       </Switch>
     );
   }

@@ -2,7 +2,7 @@
 import React from 'react';
 
 // 多语言组件
-import Language, { getPackage } from '@/components/Language';
+import Language from '@/components/Language';
 
 // 自动引入语言包
 const languageFiles = require.context('./', true, /^\.\/.*\/index\.js$/);
@@ -15,7 +15,8 @@ languageFiles.keys().forEach(filePath => {
 });
 
 // 获取语言后返回的匹配的语言包
-const languagePackage = getPackage(languages);
+const browserLanguage = window.navigator.language.toLocaleLowerCase();
+const languagePackage = languages[browserLanguage] || languages[Object.keys(languages)[0]];
 
 export default function ({ children }) {
   return (

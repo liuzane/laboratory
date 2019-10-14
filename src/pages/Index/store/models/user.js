@@ -36,13 +36,8 @@ const user = createModel({
   reducers: {
     updateUser(state, data) {
       const userInfo = getStorage('userInfo');
-      const language = getStorage('language');
       
       data = Object.assign({}, userInfo, data);
-
-      if (!data.language) {
-        data.language = language || navigator.language.replace('-', '_');
-      }
 
       setStorage('userInfo', data, 24);
 
@@ -59,7 +54,7 @@ const user = createModel({
       return { ...initialState };
     },
   },
-  
+
   effects: {
     userLogin({ params, callback, errCallback }, rootState) {
       if (!params || !params.username || !params.password) {
@@ -72,7 +67,7 @@ const user = createModel({
         errorCallback.bind(this, errCallback)
       );
     },
-    
+
     getUserInfo (params, rootState, callback, errCallback) {
       if (!params || !params.id) {
         console.error('[getUserInfo Error]: Please confirm params is complete?', params);

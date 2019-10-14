@@ -3,19 +3,21 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+// 路由模块
+import { withRouter } from 'react-router-dom';
+
 // 路由配置
-// import { RouterView, goto, getCurrentUrlPath } from '@/router';
-// import routes from './router';
-import { goto, getCurrentUrlPath } from '@/router';
+import { RouterView, goto, getCurrentUrlPath } from '@/router';
 
 // 第三方模块
 import { fromJS, is } from 'immutable';
+import _ from 'lodash';
 
 // 方法
 import { getCookie } from '@/utils/cookie';
 
 // 多语言配置组件
-import Languages from './languages';
+import Languages, {languages} from '../languages';
 
 // 布局组件
 import LayMain from '@/layouts/LayMain';
@@ -38,14 +40,24 @@ class Main extends Component {
     // Dispatch
     getUserInfo: PropTypes.func,
     // Props
-    children: PropTypes.node,
+    routes: PropTypes.array,
+    history: PropTypes.object,
+    match: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true,
-    };
+    const { match } = props;
+    const browserLanguage = window.navigator.language.toLocaleLowerCase();
+    const matchLanguage = match.params.language;
+    this.language = languages[matchLanguage] ? matchLanguage : languages[browserLanguage] ? browserLanguage : Object.keys(languages)[0];
+    this.menu = _.cloneDeep(props.routes)
+      .filter(item => item.title)
+      .map(item => ({
+        ...item,
+        path: item.path.replace(':language', this.language)
+      }));
+    this.state = { loading: true };
   }
 
   componentDidMount() {
@@ -70,22 +82,29 @@ class Main extends Component {
     }
   };
 
+  onRouterEach = (to, from, history) => {
+    if (typeof to.pathname === 'string' && to.pathname.search(':language') > -1) {
+      history.replace(to.pathname.replace(':language', this.language));
+    }
+  };
+
   render() {
-    const { children } = this.props;
+    const { language, menu } = this;
+    const { routes } = this.props;
     const { loading } = this.state;
 
     return (
-      <Languages>
+      <Languages language={ language }>
         <Fragment>
           <ScreenLoading loading={ loading } />
           <LayMain>
-            <MainMenu />
+            <MainMenu menu={ menu } />
 
             <LayMain>
-              <MainHeader />
+              <MainHeader language={ language } />
 
               <Content>
-                { loading ? null : children }
+                { loading ? null : <RouterView routes={ routes } onRouterEach={ this.onRouterEach } /> }
               </Content>
             </LayMain>
           </LayMain>
@@ -95,12 +114,14 @@ class Main extends Component {
   }
 }
 
+const RouterMain = withRouter(Main);
+
 // Dispatch
 const mapDispatchToProps = ({ user }) => ({
-  getUserInfo: user.getUserInfo
+  getUserInfo: user.getUserInfo,
 });
 
 export default connect(
   null,
   mapDispatchToProps
-)(Main);
+)(RouterMain);

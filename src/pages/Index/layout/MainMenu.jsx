@@ -5,12 +5,8 @@ import PropTypes from 'prop-types';
 // 路由模块
 import { withRouter } from 'react-router-dom';
 
-// 路由配置
-import { menu } from './router';
-
 // 第三方模块
 import { fromJS, is } from 'immutable';
-import _ from 'lodash';
 
 // 布局组件
 import LayMain from '@/layouts/LayMain';
@@ -31,20 +27,10 @@ const { SubMenu, Item } = Menu;
 class MainMenu extends Component {
   static propTypes = {
     // Props
+    menu: PropTypes.array,
     history: PropTypes.object,
-    match: PropTypes.object,
     location: PropTypes.object,
   };
-
-  constructor(props) {
-    super(props);
-    const { match } = props;
-    const language = match.params.language || 'en';
-    this.menuRoutes = _.cloneDeep(menu).filter(item => item.title).map(item => {
-      item.path = item.path.replace(':language', language);
-      return item;
-    });
-  }
 
   shouldComponentUpdate(nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
@@ -55,10 +41,9 @@ class MainMenu extends Component {
   };
 
   render() {
-    const { menuRoutes } = this;
-    console.log('menuRoutes', menuRoutes);
-    const pathname = this.props.location.pathname;
-    const currentPathName = menuRoutes.some(item => item.path === pathname) ? pathname : menuRoutes[0].path;
+    const { menu, location } = this.props;
+    const pathname = location.pathname;
+    const currentPathName = menu.some(item => item.path === pathname) ? pathname : menu[0].path;
 
     return (
       <Sider>
@@ -70,7 +55,7 @@ class MainMenu extends Component {
           theme="dark"
         >
           {
-            menuRoutes.map(item => {
+            menu.map(item => {
               if (item.children) {
                 return (
                   <SubMenu

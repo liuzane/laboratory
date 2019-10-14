@@ -23,20 +23,16 @@ languageFiles.keys().forEach(filePath => {
 
 class Languages extends PureComponent {
   static propTypes = {
+    language: PropTypes.string,
     history: PropTypes.object,
+    location: PropTypes.object,
     match: PropTypes.object,
     children: PropTypes.node,
   };
 
   constructor(props) {
     super(props);
-    const { history, match } = props;
-    let language = match.params.language;
-    if (!languages[language]) {
-      language = 'en';
-      history.replace('/' + language);
-    }
-    this.languagePackage = languages[language];
+    this.languagePackage = languages[props.language];
   }
 
   render() {

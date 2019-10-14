@@ -84,7 +84,7 @@ const children = [
 const routes = [
   {
     path: '/:language',
-    component: AsyncLoad(() => import('@/pages/Index/Main')),
+    component: AsyncLoad(() => import('@/pages/Index/layout/Main')),
     children,
   },
 
@@ -101,8 +101,5 @@ const routes = [
   },
 ];
 
-const router = handleRoutes(routes);
 
-export default router;
-
-export const menu = router[0].children;
+export default handleRoutes(routes);

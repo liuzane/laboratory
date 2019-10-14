@@ -10,7 +10,7 @@ files.keys().forEach(key => {
 
 
 export default {
-  name: '简体中文',
-  language: 'zh',
+  name: 'English',
+  language: 'en-us',
   messages,
 };
