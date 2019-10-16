@@ -22,11 +22,7 @@ class Todo extends Component {
     };
   }
 
-  componentDidMount () {
-
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
   }
   
@@ -34,7 +30,7 @@ class Todo extends Component {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  render () {
+  render() {
     return (
       <LayContainer>
         <ul className="todo">
