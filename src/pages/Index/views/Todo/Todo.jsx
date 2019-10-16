@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 // 第三方模块
 import { fromJS, is } from 'immutable';
 
+// 布局组件
+import { LayContainer } from '@/layouts/LayMain';
+
 // 样式
 import './style/Todo.css';
 
@@ -33,19 +36,21 @@ class Todo extends Component {
 
   render () {
     return (
-      <ul className="todo">
-        {
-          this.state.floor.map(item => (
-            <li
-              className="todo-list"
-              key={ item.index }
-              style={{ color: item.color }}
-            >
-              { item.index }
-            </li>
-          ))
-        }
-      </ul>
+      <LayContainer>
+        <ul className="todo">
+          {
+            this.state.floor.map(item => (
+              <li
+                className="todo-list"
+                key={ item.index }
+                style={{ color: item.color }}
+              >
+                { item.index }
+              </li>
+            ))
+          }
+        </ul>
+      </LayContainer>
     );
   }
 }

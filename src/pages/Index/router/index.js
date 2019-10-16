@@ -84,7 +84,7 @@ const children = [
 const routes = [
   {
     path: '/:language',
-    component: AsyncLoad(() => import('@/pages/Index/layout/Main')),
+    component: AsyncLoad(() => import('@/pages/Index/Main')),
     children,
   },
 

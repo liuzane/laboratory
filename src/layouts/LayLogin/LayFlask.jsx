@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const LayLoginFlask = () => (
+const LayFlask = () => (
   <div className="login-layout__flask">
     <svg
       width="230"
@@ -96,4 +96,4 @@ const LayLoginFlask = () => (
   </div>
 );
 
-export default LayLoginFlask;
+export default LayFlask;

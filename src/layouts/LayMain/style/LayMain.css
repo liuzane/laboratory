@@ -47,13 +47,23 @@
 }
 
 .layout-content {
-  height: calc(100% - 80px);
+  height: calc(100% - 64px);
+  overflow: auto;
+}
+
+.layout-container {
+  height: calc(100% - 16px);
   background-color: #fff;
   box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
   box-sizing: border-box;
   margin: 8px;
+  overflow: auto;
+}
+
+.layout-wrapper {
+  width: 100%;
+  min-width: 1000px;
   overflow-x: hidden;
-  overflow-y: auto;
 }
 
 @keyframes layout-logo-spin {

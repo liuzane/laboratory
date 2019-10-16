@@ -1,30 +1,20 @@
 // 基础模块
-import React from 'react';
+import React, { memo } from 'react';
+
+// 第三方模块
+import classnames from 'classnames';
 
 // 样式
 import './style/LayMain.css';
 
-const mainClassName = function (postfix = '', ...className) {
-  if (className.length > 0) {
-    className = className.filter(item => item);
-    if (className.length > 0) {
-      className = ' ' + className.join(' ');
-    }
-  } else {
-    className = '';
-  }
-  
-  return 'layout' + postfix + className;
-};
-
 
 const LayMain = props => (
   <article
-    className={ mainClassName('', props.className) }
+    className={ classnames('layout', props.className) }
     style={ props.style }
   >
     { props.children }
   </article>
 );
 
-export default LayMain;
+export default memo(LayMain);

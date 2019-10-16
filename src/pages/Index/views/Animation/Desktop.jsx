@@ -1,6 +1,9 @@
 // 基础模块
 import React, { PureComponent } from 'react';
 
+// 布局组件
+import { LayContainer } from '@/layouts/LayMain';
+
 // 样式
 import './style/Desktop.less';
 
@@ -20,12 +23,14 @@ class Desktop extends PureComponent {
 
   render() {
     return (
-      <div className="animation">
-        <CSSTransition />
-        <SwitchTransition />
-        <TransitionGroup />
-        <CSSModuleTransition />
-      </div>
+      <LayContainer>
+        <div className="animation">
+          <CSSTransition />
+          <SwitchTransition />
+          <TransitionGroup />
+          <CSSModuleTransition />
+        </div>
+      </LayContainer>
     );
   }
 }

@@ -4,6 +4,10 @@ import React, { Component } from 'react';
 // 第三方模块
 import { fromJS, is } from 'immutable';
 
+// 布局组件
+import { LayContainer } from '@/layouts/LayMain';
+
+
 // 样式
 // import styled from './style/Css.module.css';
 // import styled from './style/Scss.scss';
@@ -22,10 +26,12 @@ class Less extends Component {
 
   render() {
     return (
-      <div className={ styles['container'] }>
-        <div className={ styles['box'] }>box</div>
-        <div className="box-global">box-global</div>
-      </div>
+      <LayContainer>
+        <div className={ styles['container'] }>
+          <div className={ styles['box'] }>box</div>
+          <div className="box-global">box-global</div>
+        </div>
+      </LayContainer>
     );
   }
 }

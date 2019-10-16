@@ -17,18 +17,16 @@ import { clearCookie } from '@/utils/cookie';
 import { clearStorage } from '@/utils/local-storage';
 
 // 多语言列表
-import { languages } from '../languages';
+import { languages } from './languages';
 
 // 布局组件
-import LayMain from '@/layouts/LayMain';
+import { LayHeader } from '@/layouts/LayMain';
 
 // 多语言组件
 import { injectIntl, FormattedMessage } from 'react-intl';
 
 // UI组件库
 import { Dropdown, Menu, Button, Icon, Modal } from 'antd';
-
-const { Header } = LayMain;
 
 
 class MainHeader extends Component {
@@ -148,7 +146,7 @@ class MainHeader extends Component {
     const { username } = this.props;
 
     return (
-      <Header className="main__header">
+      <LayHeader className="main__header">
         <h2 className="main__title">
           <FormattedMessage id="main.header.title" />
         </h2>
@@ -173,7 +171,7 @@ class MainHeader extends Component {
             <Icon style={{ color: 'rgba(0, 0, 0, .5)' }} type="caret-down" />
           </div>
         </Dropdown>
-      </Header>
+      </LayHeader>
     );
   }
 }

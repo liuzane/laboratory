@@ -17,10 +17,10 @@ import _ from 'lodash';
 import { getCookie } from '@/utils/cookie';
 
 // 多语言配置组件
-import Languages, {languages} from '../languages';
+import Languages, {languages} from './languages';
 
 // 布局组件
-import LayMain from '@/layouts/LayMain';
+import { LayMain, LayContent } from '@/layouts/LayMain';
 
 // 公共组件
 import ScreenLoading from '@/components/ScreenLoading';
@@ -31,8 +31,6 @@ import MainHeader from './MainHeader';
 
 // 样式
 import './style/Main.less';
-
-const { Content } = LayMain;
 
 
 class Main extends Component {
@@ -103,9 +101,9 @@ class Main extends Component {
             <LayMain>
               <MainHeader language={ language } />
 
-              <Content>
+              <LayContent>
                 { loading ? null : <RouterView routes={ routes } onRouterEach={ this.onRouterEach } /> }
-              </Content>
+              </LayContent>
             </LayMain>
           </LayMain>
         </Fragment>

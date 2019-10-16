@@ -4,7 +4,11 @@ import React, { PureComponent } from 'react';
 // api
 import api, { axios } from '@/api';
 
+// UI组件库
 import { message, Table } from 'antd';
+
+// 布局组件
+import { LayContainer } from '@/layouts/LayMain';
 
 
 class Desktop extends PureComponent {
@@ -90,7 +94,7 @@ class Desktop extends PureComponent {
     const { data, loading } = this.state;
 
     return (
-      <div>
+      <LayContainer>
         <Table
           className="desktop-table"
           columns={ columns }
@@ -104,7 +108,7 @@ class Desktop extends PureComponent {
           rowKey="id"
           size="small"
         />
-      </div>
+      </LayContainer>
     );
   }
 }

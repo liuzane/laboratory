@@ -1,37 +1,61 @@
 // 基础模块
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-// 第三方模块
-import { fromJS, is } from 'immutable';
+// api
+import api, { axios } from '@/api';
+
+// 样式
+import './style/Home.less';
+
+// UI组件库
+import { message } from 'antd';
 
 
-class Home extends Component {
+class Home extends PureComponent {
   constructor (props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: false,
+    };
+    this.source = axios.CancelToken.source();
   }
 
   componentDidMount () {
-    // console.log('match', this.props.match);
-    // console.log(new Date('2018-11-30 00:00:00.0').format('yyyy-MM-dd'), 15)
-
-    // 数组乱序
-    // const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    // arr.sort(function () {
-    //  return Math.random() - 0.5;
-    // });
-    //
-    // console.log(arr, 21);
+    console.log(123);
+    // this.getHeweaterByType();
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
-  }
+  getHeweaterByType = () => {
+    const params = {
+      type: 'now',
+      location: 'chaoyang,beijing',
+      key: '81c887d621274b71ad5e694d0f6e94c4',
+    };
+    this.setState({ loading: true });
+    api.getHeweaterByType(params, { cancelToken: this.source.token }).then(
+      response => {
+        console.log('response', response);
+        this.setState({ loading: false });
+      },
+
+      error => {
+        if (!axios.isCancel(error)) {
+          message.error(error.message);
+          this.setState({ loading: false });
+        }
+      }
+    );
+  };
 
   render () {
     return (
-      <div>
-        Home
+      <div className="home">
+        <ul className="home-container">
+          <li className="home-block"></li>
+          <li className="home-block"></li>
+          <li className="home-block"></li>
+          <li className="home-block"></li>
+        </ul>
       </div>
     );
   }

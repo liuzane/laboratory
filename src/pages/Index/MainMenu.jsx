@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import { fromJS, is } from 'immutable';
 
 // 布局组件
-import LayMain from '@/layouts/LayMain';
+import { LaySider } from '@/layouts/LayMain';
 
 // 多语言组件
 import { FormattedMessage } from 'react-intl';
@@ -20,7 +20,6 @@ import IconFont from '@/components/IconFont';
 // UI组件
 import { Menu } from 'antd';
 
-const { Sider } = LayMain;
 const { SubMenu, Item } = Menu;
 
 
@@ -46,7 +45,7 @@ class MainMenu extends Component {
     const currentPathName = menu.some(item => item.path === pathname) ? pathname : menu[0].path;
 
     return (
-      <Sider>
+      <LaySider>
         <Menu
           defaultOpenKeys={[ currentPathName ]}
           defaultSelectedKeys={[ currentPathName ]}
@@ -88,7 +87,7 @@ class MainMenu extends Component {
             })
           }
         </Menu>
-      </Sider>
+      </LaySider>
     );
   }
 }

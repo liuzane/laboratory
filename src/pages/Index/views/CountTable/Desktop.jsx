@@ -10,6 +10,9 @@ import { InputNumber, Button, message } from 'antd';
 import CountTable from './CountTable';
 // import EditableTable from './EditableTable';
 
+// 布局组件
+import { LayContainer } from '@/layouts/LayMain';
+
 // 样式
 import './style/Desktop.less';
 
@@ -173,7 +176,7 @@ export default class Desktop extends PureComponent {
     const { data, loading } = this.state;
 
     return (
-      <div>
+      <LayContainer>
         <CountTable
           className="desktop-table"
           columns={ columns }
@@ -199,7 +202,7 @@ export default class Desktop extends PureComponent {
           {/* columns={ columns } */}
           {/* rowKey="id" */}
         {/* /> */}
-      </div>
+      </LayContainer>
     );
   }
 }

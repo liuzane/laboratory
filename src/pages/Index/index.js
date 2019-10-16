@@ -5,14 +5,27 @@ import * as serviceWorker from '@/serviceWorker';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// 入口组件
-import Index from './Index.jsx';
+// Redux状态库
+import { Provider } from 'react-redux';
+import store from './store';
+
+// 路由模块
+import { HashRouter as Router } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
+
+// 路由配置
+import { RouterView } from '@/router';
+import routes from './router';
 
 // 全局样式
 import '@/styles';
 
 ReactDOM.render(
-  <Index />,
+  <Provider store={ store }>
+    <Router>
+      <RouterView routes={ routes } />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

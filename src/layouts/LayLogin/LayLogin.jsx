@@ -8,8 +8,8 @@ import { FormattedMessage } from 'react-intl';
 import './style/LayLogin.less';
 
 // 组件
-// import LayLoginFlask from './LayLoginFlask';
-// import LayLoginMicroscope from './LayLoginMicroscope';
+// import LayFlask from './LayFlask';
+// import LayMicroscope from './LayMicroscope';
 
 
 export default class LayLogin extends PureComponent {

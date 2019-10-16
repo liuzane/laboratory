@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const LayLoginMicroscope = () => (
+const LayMicroscope = () => (
   <div className="login-layout__microscope">
     <svg
       width="130"
@@ -87,4 +87,4 @@ const LayLoginMicroscope = () => (
   </div>
 );
 
-export default LayLoginMicroscope;
+export default LayMicroscope;
