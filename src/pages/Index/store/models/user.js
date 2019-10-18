@@ -27,6 +27,7 @@ const initialState = Object.freeze({
   name: '',
   username: '',
   permission: [],
+  language: '',
 });
 
 

@@ -17,7 +17,7 @@ import _ from 'lodash';
 import { getCookie } from '@/utils/cookie';
 
 // 多语言配置组件
-import Languages, {languages} from './languages';
+import Languages, { languages } from './languages';
 
 // 布局组件
 import { LayMain, LayContent } from '@/layouts/LayMain';
@@ -37,6 +37,7 @@ class Main extends Component {
   static propTypes = {
     // Dispatch
     getUserInfo: PropTypes.func,
+    updateUser: PropTypes.func,
     // Props
     routes: PropTypes.array,
     history: PropTypes.object,
@@ -45,7 +46,7 @@ class Main extends Component {
 
   constructor(props) {
     super(props);
-    const { match } = props;
+    const { updateUser, match } = props;
     const browserLanguage = window.navigator.language.toLocaleLowerCase();
     const matchLanguage = match.params.language;
     this.language = languages[matchLanguage] ? matchLanguage : languages[browserLanguage] ? browserLanguage : Object.keys(languages)[0];
@@ -56,6 +57,7 @@ class Main extends Component {
         path: item.path.replace(':language', this.language)
       }));
     this.state = { loading: true };
+    updateUser({ language: this.language });
   }
 
   componentDidMount() {
@@ -117,6 +119,7 @@ const RouterMain = withRouter(Main);
 // Dispatch
 const mapDispatchToProps = ({ user }) => ({
   getUserInfo: user.getUserInfo,
+  updateUser: user.updateUser,
 });
 
 export default connect(

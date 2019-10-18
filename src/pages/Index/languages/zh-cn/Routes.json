@@ -7,5 +7,6 @@
   "routes.module": "模块",
   "routes.grammar": "语法",
   "routes.animation": "动画",
-  "routes.svg": "Svg"
+  "routes.svg": "Svg",
+  "routes.iframe": "Iframe"
 }

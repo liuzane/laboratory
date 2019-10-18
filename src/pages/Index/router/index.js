@@ -75,6 +75,14 @@ const children = [
   },
 
   {
+    path: 'iframe',
+    title: 'routes.iframe',
+    icon: 'icon-iframe',
+    component: AsyncLoad(() => import('@/pages/Index/views/Iframe')),
+    exact: true,
+  },
+
+  {
     path: '',
     redirect: 'home',
     exact: true,

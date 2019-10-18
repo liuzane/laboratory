@@ -124,7 +124,7 @@
         ctx.fill();
         ctx.restore();
       }
-    };
+    }
 
 		/**
 		 * 太阳
@@ -227,7 +227,8 @@
         this.y = this.cy + this.b * Math.sin(this.angle + t);
       }
 
-      draw() {
+      draw(ctx) {
+        console.log('Comet');
         ctx.save();
         ctx.rotate(this.angle);
         //画运动轨迹
@@ -360,7 +361,7 @@
         r = 3, duration = 30, angle = 0, color = '#fff',
         comet = null;
       for (var i = 0; i < 20; i++) {
-        l = Random(120, 350)
+        l = Random(120, 350);
         a = Random(600, 1000);
         b = a / Random(1, 3);
         cx = a - l;

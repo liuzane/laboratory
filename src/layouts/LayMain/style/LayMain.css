@@ -48,6 +48,7 @@
 
 .layout-content {
   height: calc(100% - 64px);
+  position: relative;
   overflow: auto;
 }
 
@@ -57,13 +58,15 @@
   box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
   box-sizing: border-box;
   margin: 8px;
+  position: relative;
   overflow: auto;
 }
 
 .layout-wrapper {
   width: 100%;
   min-width: 1000px;
-  overflow-x: hidden;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 @keyframes layout-logo-spin {

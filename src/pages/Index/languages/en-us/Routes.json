@@ -7,5 +7,6 @@
   "routes.module": "Module",
   "routes.grammar": "Grammar",
   "routes.animation": "Animation",
-  "routes.svg": "Svg"
+  "routes.svg": "Svg",
+  "routes.iframe": "Iframe"
 }
