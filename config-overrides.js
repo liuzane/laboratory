@@ -1,8 +1,10 @@
 'use strict';
 
 const path = require('path');
+// const paths = require('react-scripts/config/paths');
 const {
   override,
+  addWebpackAlias,
   fixBabelImports,
   addLessLoader,
   useEslintRc,
@@ -16,12 +18,17 @@ const colors = require('./src/styles/colors');
 
 // webpack 配置
 const webpack = config => {
+  // paths.appBuild = path.join(path.dirname(paths.appBuild), 'build');
+  // config.output.path = path.join(path.dirname(config.output.path), 'build');
   config.output.publicPath = process.env.npm_config_publicPath || '/';
-  config.resolve.alias['@'] = path.resolve(__dirname, './src');
   return config;
 };
 
 module.exports = override(
+  addWebpackAlias({
+    '@': path.resolve(__dirname, './src'),
+  }),
+
   fixBabelImports('import', {
     libraryName: 'antd',
     libraryDirectory: 'es',
