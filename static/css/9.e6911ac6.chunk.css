@@ -464,6 +464,9 @@ textarea.ant-input-number {
 form .has-feedback .ant-input {
   padding-right: 24px;
 }
+form .has-feedback .ant-input-affix-wrapper .ant-input-suffix {
+  padding-right: 18px;
+}
 form .has-feedback .ant-input-password-icon {
   margin-right: 18px;
 }

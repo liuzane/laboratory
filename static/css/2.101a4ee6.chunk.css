@@ -972,6 +972,8 @@
 }
 .ant-btn.ant-btn-loading {
   position: relative;
+}
+.ant-btn.ant-btn-loading:not([disabled]) {
   pointer-events: none;
 }
 .ant-btn.ant-btn-loading::before {
@@ -1011,6 +1013,9 @@
 .ant-btn-group > span > .ant-btn:disabled {
   z-index: 0;
 }
+.ant-btn-group > .ant-btn-icon-only {
+  font-size: 14px;
+}
 .ant-btn-group-lg > .ant-btn,
 .ant-btn-group-lg > span > .ant-btn {
   height: 40px;
@@ -1018,6 +1023,12 @@
   font-size: 16px;
   border-radius: 0;
   line-height: 38px;
+}
+.ant-btn-group-lg > .ant-btn.ant-btn-icon-only {
+  width: 40px;
+  height: 40px;
+  padding-right: 0;
+  padding-left: 0;
 }
 .ant-btn-group-sm > .ant-btn,
 .ant-btn-group-sm > span > .ant-btn {
@@ -1030,6 +1041,12 @@
 .ant-btn-group-sm > .ant-btn > .anticon,
 .ant-btn-group-sm > span > .ant-btn > .anticon {
   font-size: 14px;
+}
+.ant-btn-group-sm > .ant-btn.ant-btn-icon-only {
+  width: 24px;
+  height: 24px;
+  padding-right: 0;
+  padding-left: 0;
 }
 .ant-btn-group .ant-btn + .ant-btn,
 .ant-btn + .ant-btn-group,
@@ -1586,6 +1603,15 @@ a.ant-btn-sm {
       -ms-transform-origin: 0 0;
           transform-origin: 0 0;
 }
+.ant-dropdown-menu-submenu-popup ul,
+.ant-dropdown-menu-submenu-popup li {
+  list-style: none;
+}
+.ant-dropdown-menu-submenu-popup ul {
+  margin-right: 0.3em;
+  margin-left: 0.3em;
+  padding: 0;
+}
 .ant-dropdown-menu-item,
 .ant-dropdown-menu-submenu-title {
   clear: both;
@@ -1601,9 +1627,12 @@ a.ant-btn-sm {
   transition: all 0.3s;
 }
 .ant-dropdown-menu-item > .anticon:first-child,
-.ant-dropdown-menu-submenu-title > .anticon:first-child {
+.ant-dropdown-menu-submenu-title > .anticon:first-child,
+.ant-dropdown-menu-item > span > .anticon:first-child,
+.ant-dropdown-menu-submenu-title > span > .anticon:first-child {
   min-width: 12px;
   margin-right: 8px;
+  font-size: 12px;
 }
 .ant-dropdown-menu-item > a,
 .ant-dropdown-menu-submenu-title > a {
@@ -1664,6 +1693,11 @@ a.ant-btn-sm {
 :root .ant-dropdown-menu-submenu-title .ant-dropdown-menu-submenu-arrow-icon {
   font-size: 12px;
 }
+.ant-dropdown-menu-item-group-list {
+  margin: 0 8px;
+  padding: 0;
+  list-style: none;
+}
 .ant-dropdown-menu-submenu-title {
   padding-right: 26px;
 }
@@ -1685,6 +1719,9 @@ a.ant-btn-sm {
   color: rgba(0, 0, 0, 0.25);
   background-color: #fff;
   cursor: not-allowed;
+}
+.ant-dropdown-menu-submenu-selected .ant-dropdown-menu-submenu-title {
+  color: #1890ff;
 }
 .ant-dropdown.slide-down-enter.slide-down-enter-active.ant-dropdown-placement-bottomLeft,
 .ant-dropdown.slide-down-appear.slide-down-appear-active.ant-dropdown-placement-bottomLeft,
