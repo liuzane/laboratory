@@ -14,35 +14,33 @@ const host = window.location.host;
 
 // 命名方式  XXX_YYY_ADDRESS， XXX 所属服务，YYY 服务页面。
 const address = Object.seal({
-  SERVER_INDEX_ADDRESS: null, // 服务地址
-  LOCALEMOCK_INDEX_ADDRESS: null, // 本地 Mock 地址
-  EASYMOCK_INDEX_ADDRESS: null, // EasyMock 地址
-  BAIDU_INDEX_ADDRESS: null, // 百度地址
-  HEWEATHER_INDEX_ADDRESS: null, // 和风天气地址
+  SERVER_ADDRESS: null, // 服务地址
+  LOCALEMOCK_ADDRESS: null, // 本地 Mock 地址
+  EASYMOCK_ADDRESS: null, // EasyMock 地址
+  HEWEATHER_ADDRESS: null, // 和风天气地址
 });
 
 switch (SCRIPT) {
   // 开发环境地址
   case 'start':
-    address.SERVER_INDEX_ADDRESS = '/';
-    address.LOCALEMOCK_INDEX_ADDRESS = '/';
-    address.HEWEATHER_INDEX_ADDRESS = 'https://free-api.heweather.net';
+    address.SERVER_ADDRESS = null;
+    address.LOCALEMOCK_ADDRESS = '/';
+    address.HEWEATHER_ADDRESS = 'https://free-api.heweather.net';
     break;
 
   // 生产环境地址
   case 'build':
-    address.SERVER_INDEX_ADDRESS = '/';
-    address.LOCALEMOCK_INDEX_ADDRESS = '/';
-    address.HEWEATHER_INDEX_ADDRESS = 'https://free-api.heweather.net';
+    address.SERVER_ADDRESS = '/react-laboratory';
+    address.LOCALEMOCK_ADDRESS = '/';
+    address.HEWEATHER_ADDRESS = 'https://free-api.heweather.net';
     break;
 
   // 默认地址
   default:
-    address.SERVER_INDEX_ADDRESS = '/';
-    address.LOCALEMOCK_INDEX_ADDRESS = '/';
-    address.EASYMOCK_INDEX_ADDRESS = '/easy-mock';
-    address.BAIDU_INDEX_ADDRESS = '/baidu';
-    address.HEWEATHER_INDEX_ADDRESS = 'https://free-api.heweather.net';
+    address.SERVER_ADDRESS = '/';
+    address.LOCALEMOCK_ADDRESS = '/';
+    address.EASYMOCK_ADDRESS = '/easy-mock';
+    address.HEWEATHER_ADDRESS = 'https://free-api.heweather.net';
     break;
 }
 

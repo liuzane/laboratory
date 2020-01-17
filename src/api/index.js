@@ -1,7 +1,7 @@
 // 开发环境开启 mock
-if (process.env.NODE_ENV === 'development') {
+// if (process.env.NODE_ENV === 'development') {
   require('@/mock');
-}
+// }
 
 // Api
 const api = {};

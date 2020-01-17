@@ -63,6 +63,7 @@ class Login extends Component {
           },
 
           error => {
+            console.log(error);
             message.error(error.message);
             this.setState({ loading: false });
           }

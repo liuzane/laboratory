@@ -11,7 +11,7 @@ import { LayContainer } from '@/layouts/LayMain';
 class Desktop extends PureComponent {
   constructor() {
     super();
-    this.src = address.SERVER_INDEX_ADDRESS + 'solar-system.html';
+    this.src = address.SERVER_ADDRESS + '/solar-system.html';
   }
 
   render() {

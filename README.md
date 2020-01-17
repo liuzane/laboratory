@@ -11,6 +11,11 @@ This is a the React experiment project.
 * In and out of the animation
 * The react-app-rewired configuration
 
+## Account
+username: admin
+
+password: 123456
+
 ## How to add environment variables
 Add the [.env](https://github.com/liuzane/react-laboratory/blob/master/.env) file to the project root directory.
 > Note: the [CRA removes the node environment variable](https://www.html.cn/create-react-app/docs/adding-custom-environment-variables/). To add the variable, you need to prefix it with REACT_APP_

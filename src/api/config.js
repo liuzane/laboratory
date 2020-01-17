@@ -3,17 +3,17 @@ import address from '@/address';
 
 // 基本配置实例
 export const localeMock = axios.create({
-  baseURL: address.LOCALEMOCK_INDEX_ADDRESS,
+  baseURL: address.LOCALEMOCK_ADDRESS,
   headers: { 'Content-Type': 'application/json' },
 });
 
 export const http = axios.create({
-  baseURL: address.SERVER_INDEX_ADDRESS,
+  baseURL: address.SERVER_ADDRESS,
   headers: { 'Content-Type': 'application/json' },
 });
 
 export const heweather = axios.create({
-  baseURL: address.HEWEATHER_INDEX_ADDRESS,
+  baseURL: address.HEWEATHER_ADDRESS,
   headers: { 'Content-Type': 'application/json' },
 });
 

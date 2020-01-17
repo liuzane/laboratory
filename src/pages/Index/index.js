@@ -20,6 +20,8 @@ import routes from './router';
 // 全局样式
 import '@/styles';
 
+// console.log('root_path', root_path);
+
 ReactDOM.render(
   <Provider store={ store }>
     <Router>

@@ -20,7 +20,7 @@ const colors = require('./src/styles/colors');
 const webpack = config => {
   // paths.appBuild = path.join(path.dirname(paths.appBuild), 'build');
   // config.output.path = path.join(path.dirname(config.output.path), 'build');
-  config.output.publicPath = process.env.npm_config_publicPath || '/';
+  config.output.publicPath = process.env.NODE_ENV === 'production' ? './' : '/';
   return config;
 };
 
