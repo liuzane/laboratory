@@ -35,6 +35,13 @@ switch (SCRIPT) {
     address.HEWEATHER_ADDRESS = 'https://free-api.heweather.net';
     break;
 
+  // 部署生产环境地址
+  case 'deploy':
+    address.SERVER_ADDRESS = '/react-laboratory';
+    address.LOCALEMOCK_ADDRESS = '/';
+    address.HEWEATHER_ADDRESS = 'https://free-api.heweather.net';
+    break;
+
   // 默认地址
   default:
     address.SERVER_ADDRESS = '/';
