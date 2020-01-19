@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "efe6bb8ee64bb5c2a6db",
+    "revision": "76e1460f785f8becf643",
     "url": "./static/css/1.e7c6d06f.chunk.css"
   },
   {
@@ -72,15 +72,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/css/9.368e9c57.chunk.css"
   },
   {
-    "revision": "04df72d645954c416fc3",
+    "revision": "941b1e3a2c69e0c0deee",
     "url": "./static/css/admin.a921a724.css"
   },
   {
-    "revision": "33a65c6ccdbb942a5499",
+    "revision": "c218f9d7937b78724ddf",
     "url": "./static/css/index.7ed81015.css"
   },
   {
-    "revision": "c26d053b2702233ad63b",
+    "revision": "4d9629a7c4be2ce94049",
     "url": "./static/css/login.265e668b.css"
   },
   {
@@ -88,8 +88,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/css/solar-system.7ed81015.css"
   },
   {
-    "revision": "efe6bb8ee64bb5c2a6db",
-    "url": "./static/js/1.21f65570.chunk.js"
+    "revision": "76e1460f785f8becf643",
+    "url": "./static/js/1.139dc6ab.chunk.js"
   },
   {
     "revision": "412cdb22bba2dc8122f1",
@@ -164,16 +164,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/js/9.e9feed2b.chunk.js"
   },
   {
-    "revision": "04df72d645954c416fc3",
-    "url": "./static/js/admin.5793f13c.js"
+    "revision": "941b1e3a2c69e0c0deee",
+    "url": "./static/js/admin.7946e4f8.js"
   },
   {
-    "revision": "33a65c6ccdbb942a5499",
-    "url": "./static/js/index.34ae7cc7.js"
+    "revision": "c218f9d7937b78724ddf",
+    "url": "./static/js/index.6e3fe174.js"
   },
   {
-    "revision": "c26d053b2702233ad63b",
-    "url": "./static/js/login.d0bddb22.js"
+    "revision": "4d9629a7c4be2ce94049",
+    "url": "./static/js/login.66b9ce7e.js"
   },
   {
     "revision": "323e3b421208712eebc2",
