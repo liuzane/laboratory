@@ -27,14 +27,6 @@ const children = [
   },
 
   {
-    path: 'table',
-    title: 'routes.table',
-    icon: 'icon-table',
-    component: AsyncLoad(() => import('@/pages/Index/views/Table')),
-    exact: true,
-  },
-
-  {
     path: 'less',
     title: 'routes.less',
     icon: 'icon-less',
@@ -79,6 +71,14 @@ const children = [
     title: 'routes.iframe',
     icon: 'icon-iframe',
     component: AsyncLoad(() => import('@/pages/Index/views/Iframe')),
+    exact: true,
+  },
+
+  {
+    path: 'validate',
+    title: 'routes.validate',
+    icon: 'icon-svg',
+    component: AsyncLoad(() => import('@/pages/Index/views/Validate')),
     exact: true,
   },
 

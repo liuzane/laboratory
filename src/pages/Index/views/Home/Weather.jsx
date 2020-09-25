@@ -20,7 +20,6 @@ class Weather extends PureComponent {
         'height': '300',
         'background': 1,
         'dataColor': 'ffffff',
-        'borderRadius': 10,
         'language': language,
         'key': '54ccfb1d4159431db97d9f1adac745ed'
       }

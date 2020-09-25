@@ -7,6 +7,7 @@ import './style/Home.less';
 // 组件
 import Weather from './Weather';
 import Lifestyle from './Lifestyle';
+import Calendar from '@/components/Calendar';
 
 
 class Home extends PureComponent {
@@ -29,7 +30,7 @@ class Home extends PureComponent {
             <Lifestyle />
           </li>
           <li className="home-block">
-
+            <Calendar></Calendar>
           </li>
           <li className="home-block"></li>
         </ul>

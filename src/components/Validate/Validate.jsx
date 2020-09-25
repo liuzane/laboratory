@@ -19,7 +19,7 @@ class Validate extends Component {
     this.state = {
       messages: {},
       originalModel: {},
-      countModel: {},
+      isValidated: {},
     };
     Validate.validate = this.validate;
   }
@@ -62,12 +62,12 @@ class Validate extends Component {
   getValidateMessages = (model, isValidate) => {
     const messages = {};
     const { rules } = this.props;
-    const { originalModel, countModel } = this.state;
+    const { originalModel, isValidated } = this.state;
 
     for (const key in rules) {
-      if (isValidate || (model[key] !== undefined && (model[key] !== originalModel[key] || countModel[key] > 0))) {
+      if (isValidate || (model[key] !== undefined && (model[key] !== originalModel[key] || isValidated[key]))) {
         // 计算 key 更新次数
-        countModel[key] = (countModel[key] || 0) + 1;
+        isValidated[key] = true;
 
         // 如果规则项是数组
         if (_.isArray(rules[key])) {
@@ -90,7 +90,7 @@ class Validate extends Component {
       }
     }
 
-    this.setState({ countModel: _.cloneDeep(countModel) });
+    this.setState({ countModel: _.cloneDeep(isValidated) });
 
     return messages;
   }
@@ -106,9 +106,9 @@ class Validate extends Component {
 
   render () {
     const { children } = this.props;
-    const { messages, countModel } = this.state;
+    const { messages } = this.state;
 
-    return children(messages, countModel);
+    return children(messages);
   }
 }
 

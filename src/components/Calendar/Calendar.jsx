@@ -3,12 +3,11 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // 样式
-import './calendar.less';
+import './Calendar.less';
 
 
 class Calendar extends PureComponent {
   static propTypes = {
-    string: PropTypes.string,
     className: PropTypes.string,
     style: PropTypes.object,
     children: PropTypes.node,

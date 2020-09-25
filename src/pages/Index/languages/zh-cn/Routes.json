@@ -1,12 +1,12 @@
 {
   "routes.home": "首页",
   "routes.todo": "待办",
-  "routes.count-table": "count-table",
-  "routes.table": "Antd表格",
+  "routes.count-table": "Count Table",
   "routes.less": "Less",
   "routes.module": "模块",
   "routes.grammar": "语法",
   "routes.animation": "动画",
   "routes.svg": "Svg",
-  "routes.iframe": "Iframe"
+  "routes.iframe": "Iframe",
+  "routes.validate": "Validate"
 }
