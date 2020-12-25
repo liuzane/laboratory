@@ -25,7 +25,7 @@ class Validate extends Component {
   }
 
   // 初始化设置原始model数据
-  componentDidMount() {
+  componentWillMount() {
     const { model } = this.props;
     this.setState({ originalModel: model });
   }

@@ -40,12 +40,12 @@ class Desktop extends PureComponent {
               console.log('rule', rule);
               console.log('value', value);
               if (!/^1\d{10}$/.test(value)) {
-                callback('Please type the correct phone, validator');
+                callback('Please type the correct phone, inside');
               } else {
                 callback();
               }
             },
-            message: 'Please type the correct phone',
+            message: 'Please type the correct phone, outside',
           }
         ]
       }
