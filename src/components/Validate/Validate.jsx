@@ -50,8 +50,8 @@ class Validate extends Component {
     
     if (rule.validator) {
       let message;
-      const callback = error => {
-        message = typeof error === 'string' ? error : error && error.message;
+      const callback = errorMsg => {
+        message = errorMsg || rule.message;
       };
       rule.validator(rule, value, callback);
       return message;
