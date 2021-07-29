@@ -1,12 +1,5 @@
-/*
-* 当执行脚本时可以使用一下变量来确认环境，由于 create-react-app 限制环境变量除了 NODE_ENV 和 PUBLIC_URL 两个变量，其他变量都要以REACT_APP_开头
-* process.env.NODE_ENV   Node 环境变量
-* process.env.PUBLIC_URL   React 公共路径
-* process.env.REACT_APP_SCRIPT   同等 process.env.npm_lifecycle_event
-*/
-
 // 执行脚本名称
-const SCRIPT = process.env.REACT_APP_SCRIPT;
+const NODE_ENV = process.env.NODE_ENV;
 
 // http方式
 const protocol = window.location.protocol;
@@ -20,7 +13,7 @@ const address = Object.seal({
   HEWEATHER_ADDRESS: null, // 和风天气地址
 });
 
-switch (SCRIPT) {
+switch (NODE_ENV) {
   // 开发环境地址
   case 'start':
     address.SERVER_ADDRESS = null;
