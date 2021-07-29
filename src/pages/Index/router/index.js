@@ -83,6 +83,14 @@ const children = [
   },
 
   {
+    path: 'rc-table',
+    title: 'routes.rc-table',
+    icon: 'icon-svg',
+    component: AsyncLoad(() => import('@/pages/Index/views/RcTable')),
+    exact: true,
+  },
+
+  {
     path: '',
     redirect: 'home',
     exact: true,

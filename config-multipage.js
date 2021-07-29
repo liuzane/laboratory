@@ -175,5 +175,6 @@ module.exports = function (config) {
     },
   };
 
+  // console.log(config.plugins);
   return config;
 };

@@ -1,5 +1,6 @@
 'use strict';
 
+
 const path = require('path');
 // const paths = require('react-scripts/config/paths');
 const {
