@@ -1,7 +1,11 @@
+// Node 环境变量
 process.env.NODE_ENV = 'start';
 
+// Webpack
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
+
+// 配置
 const webpackBaseConfig = require('./webpack.base.config.js');
 
 
@@ -19,10 +23,6 @@ module.exports = merge(webpackBaseConfig, {
     clientLogLevel: 'none',
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('start'),
-    }),
-
     new webpack.HotModuleReplacementPlugin(),
   ]
 });

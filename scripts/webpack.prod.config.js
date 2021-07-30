@@ -1,16 +1,16 @@
+// Node 环境变量
 process.env.NODE_ENV = 'production';
 
+// Webpack
 const { merge } = require('webpack-merge');
-const webpackBaseConfig = require('./webpack.base.config.js');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+// 配置
+const webpackBaseConfig = require('./webpack.base.config.js');
+
 module.exports = merge(webpackBaseConfig, {
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-    }),
-    
     // 清空输出文件夹
     new CleanWebpackPlugin(),
 

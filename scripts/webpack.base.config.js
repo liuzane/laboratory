@@ -1,10 +1,11 @@
-// Node 模块
-const path = require('path');
-
-// Webpack Plugin
+// Webpack
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// Node 模块
+const path = require('path');
 
 // 变量
 const isDevEnv = process.env.NODE_ENV === 'start';
@@ -90,6 +91,11 @@ module.exports = {
     }
   },
   plugins: [
+    // 赋值程序环境变量 ENVIRONMENT
+    new webpack.DefinePlugin({
+      ENVIRONMENT: JSON.stringify(process.env.NODE_ENV),
+    }),
+
     new HtmlWebpackPlugin({
       filename: 'login.html',
       chunks: ['login', 'vendors'],
@@ -98,6 +104,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
+      title: 'React Laboratory',
       filename: 'index.html',
       chunks: ['index', 'vendors'],
       inject: true,

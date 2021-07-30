@@ -8,9 +8,11 @@
 
 # production
 /build
+/dist
 
-# idea config
+# editor config
 /.idea
+/.vscode
 
 # misc
 .DS_Store

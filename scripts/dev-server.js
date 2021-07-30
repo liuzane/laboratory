@@ -1,7 +1,11 @@
-const webpackDevServer = require('webpack-dev-server');
+// Webpack
 const webpack = require('webpack');
+const webpackDevServer = require('webpack-dev-server');
 
+// 开发配置
 const config = require('./webpack.start.config.js');
+
+// devServer 配置
 const options = {
   contentBase: './dist',
   // hot: true, // 开始热模块（不会自动刷新浏览器）
