@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // 路由配置
-import { goto, getCurrentUrlPath } from '@/router';
+import { goto, getCurrentUrlPath } from './router';
 
 // 第三方模块
 import { fromJS, is } from 'immutable';
@@ -14,7 +14,7 @@ import { getCookie } from '@/utils/cookie';
 import './style/Admin.less';
 
 // 公共组件
-import ScreenLoading from '@/components/ScreenLoading';
+import ScreenLoading from './components/ScreenLoading';
 
 
 class Admin extends Component {

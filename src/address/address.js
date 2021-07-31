@@ -1,6 +1,3 @@
-// 执行脚本名称
-const NODE_ENV = ENVIRONMENT;
-
 // http方式
 const protocol = window.location.protocol;
 const host = window.location.host;

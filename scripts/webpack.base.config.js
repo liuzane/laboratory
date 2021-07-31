@@ -13,16 +13,48 @@ const isDevEnv = process.env.NODE_ENV === 'start';
 // Less Colors
 const colors = require('../src/styles/colors');
 
+// 多文件配置
+const multiplePageConfig = [
+  {
+    entry: 'login',
+    path: './src/pages/login/index.js',
+    title: 'Login',
+  },
+  {
+    entry: 'index',
+    path: './src/pages/index/index.js',
+    title: 'My Laboratory Index',
+  },
+  {
+    entry: 'react',
+    path: './src/pages/react/index.js',
+    title: 'React Laboratory',
+  },
+  // {
+  //   entry: 'vue',
+  //   path: './src/pages/vue/index.js',
+  //   title: 'Vue Laboratory',
+  // },
+  {
+    entry: 'admin',
+    path: './src/pages/admin/index.js',
+    title: 'Admin Laboratory',
+  },
+  {
+    entry: 'solar-system',
+    path: './src/pages/SolarSystem/index.js',
+    title: 'Solar System',
+  },
+];
+
 
 module.exports = {
   mode: isDevEnv ? 'development' : 'production',
   devtool: isDevEnv ? 'cheap-module-source-map' : false,
-  entry: {
-    login: './src/pages/Login/index.js',
-    index: './src/pages/Index/index.js',
-    admin: './src/pages/Admin/index.js',
-    'solar-system': './src/pages/SolarSystem/index.js',
-  },
+  entry: multiplePageConfig.reduce((entries, current) => {
+    entries[current.entry] = current.path;
+    return entries;
+  }, {}),
   output: {
     filename: '[name].[hash:6].js',
     path: path.resolve(__dirname, '../dist'),
@@ -32,6 +64,8 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
       '@': path.resolve(__dirname, '../src'),
+      '@react': path.resolve(__dirname, '../src/pages/react'),
+      '@vue': path.resolve(__dirname, '../src/pages/vue'),
     },
   },
   module: {
@@ -45,9 +79,6 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react'],
             plugins: ['@babel/plugin-proposal-class-properties', '@babel/plugin-syntax-dynamic-import']
           },
-          // cacheDirectory: true,
-          // cacheCompression: false,
-          // compact: !isDevEnv,
         },
       },
       {
@@ -60,7 +91,7 @@ module.exports = {
             options: {
               modifyVars: colors,
               javascriptEnabled: true,
-              localIdentName: '[name]__[local]--[hash:5]'
+              localIdentName: '[name]__[local]--[hash:6]'
             }
           }
         ],
@@ -70,21 +101,36 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'img/[name].[hash:8].[ext]',
+          name: 'img/[name].[hash:6].[ext]',
         },
       },
       {
         test: /.(woff|woff2|eot|ttf|otf)$/,
-        use: 'file-loader'
+        loader: 'url-loader',
+        options: {
+          limit: false,
+          name: 'font/[name].[hash:6].[ext]',
+        },
       }
     ],
   },
   optimization: {
+    runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
         commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
+          test: /[\\/]node_modules[\\/](?!(react-?.*|vue-?.*|@rematch\/core|antd|ant-design|rc-?.*))/,
+          // name: 'commons',
+          chunks: 'all'
+        },
+        reactChunks: {
+          test: /[\\/]node_modules[\\/](react-?.*|@rematch\/core|antd|ant-design|rc-?.*)/,
+          // name: 'reactChunks',
+          chunks: 'all'
+        },
+        vueChunks: {
+          test: /[\\/]node_modules[\\/](vue-?.*)/,
+          // name: 'vueChunks',
           chunks: 'all'
         },
       }
@@ -93,36 +139,18 @@ module.exports = {
   plugins: [
     // 赋值程序环境变量 ENVIRONMENT
     new webpack.DefinePlugin({
-      ENVIRONMENT: JSON.stringify(process.env.NODE_ENV),
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
     }),
 
-    new HtmlWebpackPlugin({
-      filename: 'login.html',
-      chunks: ['login', 'vendors'],
-      inject: true,
-      template: 'index.template.html',
-    }),
-
-    new HtmlWebpackPlugin({
-      title: 'React Laboratory',
-      filename: 'index.html',
-      chunks: ['index', 'vendors'],
-      inject: true,
-      template: 'index.template.html',
-    }),
-
-    new HtmlWebpackPlugin({
-      filename: 'admin.html',
-      chunks: ['admin', 'vendors'],
-      inject: true,
-      template: 'index.template.html',
-    }),
-
-    new HtmlWebpackPlugin({
-      filename: 'solar-system.html',
-      chunks: ['solar-system', 'vendors'],
-      inject: true,
-      template: 'index.template.html',
+    // HtmlWebpackPlugin 多页面配置
+    ...multiplePageConfig.map(item => {
+      return new HtmlWebpackPlugin({
+        title: item.title,
+        filename: item.entry + '.html',
+        chunks: [item.entry],
+        inject: true,
+        template: 'index.template.html',
+      });
     }),
 
     //提取css至独立文件

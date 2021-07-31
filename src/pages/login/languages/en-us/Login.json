@@ -1,0 +1,8 @@
+{
+  "login.onSpecial": "On Special",
+  "login.offSpecial": "Off Special",
+  "login.title": "Login to React Laboratory",
+  "login.username": "Please type the username",
+  "login.password": "Please type the password",
+  "login.loginText": "log in"
+}
