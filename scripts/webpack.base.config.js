@@ -10,9 +10,10 @@ const path = require('path');
 
 // 变量
 const isDevEnv = process.env.NODE_ENV === 'start';
+const processEnv = require('./env.js');
 
 // Less Colors
-const colors = require('../src/styles/colors');
+const colors = require('../src/styles/colors.js');
 
 // 多文件配置
 const multiplePageConfig = [
@@ -30,17 +31,13 @@ const multiplePageConfig = [
     entry: 'react',
     path: './src/pages/react/main.js',
     title: 'React Laboratory',
-    templateParameters: {
-      favicon: '/react-favicon.ico',
-    },
+    favicon: `${processEnv.STATIC_URL}/react-favicon.ico`,
   },
   {
     entry: 'vue',
     path: './src/pages/vue/main.js',
     title: 'Vue Laboratory',
-    templateParameters: {
-      favicon: '/vue-favicon.ico',
-    },
+    favicon: `${processEnv.STATIC_URL}/vue-favicon.ico`,
   },
   {
     entry: 'admin',
@@ -65,7 +62,7 @@ module.exports = {
   output: {
     filename: '[name].[hash:6].js',
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
+    publicPath: processEnv.PUBLIC_URL,
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -166,6 +163,10 @@ module.exports = {
     // 赋值程序环境变量 ENVIRONMENT
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      ...Object.keys(processEnv).reduce((env, currentKey) => {
+        env[currentKey] = JSON.stringify(processEnv[currentKey]);
+        return env;
+      }, {})
     }),
 
     // HtmlWebpackPlugin 多页面配置
@@ -174,6 +175,7 @@ module.exports = {
         filename: entry + '.html',
         chunks: [entry],
         inject: true,
+        publicPath: processEnv.PUBLIC_URL,
         template: 'index.template.html',
         ...restOptions
       });

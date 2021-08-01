@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <% var options = htmlWebpackPlugin.options; %>
+  <% var parameters = htmlWebpackPlugin.options.templateParameters; %>
   <meta charset="utf-8">
-  <link rel="shortcut icon" href="<%= htmlWebpackPlugin.options.templateParameters.favicon %>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="theme-color" content="#000000">
   <meta name="keywords" content="laboratory, vue, react, angular, solar-system">
-  <link rel="manifest" href="/manifest.json">
-  <title><%= htmlWebpackPlugin.options.title %></title>
+  <% if (parameters.manifest) { %>
+  <link rel="manifest" href="<%= parameters.manifest %>">
+  <% } %>
+  <title><%= options.title %></title>
 </head>
 <body>
 <div id="root"></div>
