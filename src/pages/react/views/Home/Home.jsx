@@ -7,7 +7,7 @@ import './style/Home.less';
 // 组件
 import Weather from './Weather';
 import Lifestyle from './Lifestyle';
-import Calendar from '@react/components/Calendar';
+import Calendar from '@~react/components/Calendar';
 
 
 class Home extends PureComponent {

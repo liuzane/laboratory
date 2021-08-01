@@ -26,14 +26,14 @@ import { LayMain, LayContent } from './layouts/LayMain';
 import ScreenLoading from './components/ScreenLoading';
 
 // 组件
-import MainMenu from './MainMenu';
-import MainHeader from './MainHeader';
+import AppMenu from './AppMenu';
+import AppHeader from './AppHeader';
 
 // 样式
-import './style/Main.less';
+import './style/App.less';
 
 
-class Main extends Component {
+class App extends Component {
   static propTypes = {
     // Dispatch
     getUserInfo: PropTypes.func,
@@ -98,10 +98,10 @@ class Main extends Component {
         <Fragment>
           <ScreenLoading loading={ loading } />
           <LayMain>
-            <MainMenu menu={ menu } />
+            <AppMenu menu={ menu } />
 
             <LayMain>
-              <MainHeader language={ language } />
+              <AppHeader language={ language } />
 
               <LayContent>
                 { loading ? null : <RouterView routes={ routes } onRouterEach={ this.onRouterEach } /> }
@@ -114,7 +114,7 @@ class Main extends Component {
   }
 }
 
-const RouterMain = withRouter(Main);
+const RouterMain = withRouter(App);
 
 // Dispatch
 const mapDispatchToProps = ({ user }) => ({

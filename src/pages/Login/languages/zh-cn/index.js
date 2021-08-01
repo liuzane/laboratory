@@ -4,7 +4,7 @@ const files = require.context('.', false, /\.json$/);
 let messages = {};
 
 files.keys().forEach(key => {
-  if (key === './index.js') return;
+  if (key === './main.js') return;
   messages = { ...messages, ...files(key) };
 });
 

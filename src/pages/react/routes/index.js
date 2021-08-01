@@ -6,7 +6,7 @@ const children = [
     path: 'home',
     title: 'routes.home',
     icon: 'icon-home',
-    component: AsyncLoad(() => import('@react/views/Home')),
+    component: AsyncLoad(() => import('@~react/views/Home')),
     exact: true,
   },
 
@@ -14,7 +14,7 @@ const children = [
     path: 'todo',
     title: 'routes.todo',
     icon: 'icon-todo',
-    component: AsyncLoad(() => import('@react/views/Todo')),
+    component: AsyncLoad(() => import('@~react/views/Todo')),
     exact: true,
   },
 
@@ -22,7 +22,7 @@ const children = [
     path: 'count-table',
     title: 'routes.count-table',
     icon: 'icon-table',
-    component: AsyncLoad(() => import('@react/views/CountTable')),
+    component: AsyncLoad(() => import('@~react/views/CountTable')),
     exact: true,
   },
 
@@ -30,7 +30,7 @@ const children = [
     path: 'less',
     title: 'routes.less',
     icon: 'icon-less',
-    component: AsyncLoad(() => import('@react/views/Less')),
+    component: AsyncLoad(() => import('@~react/views/Less')),
     exact: true,
   },
 
@@ -38,7 +38,7 @@ const children = [
     path: 'module',
     title: 'routes.module',
     icon: 'icon-module',
-    component: AsyncLoad(() => import('@react/views/Module')),
+    component: AsyncLoad(() => import('@~react/views/Module')),
     exact: true,
   },
 
@@ -46,7 +46,7 @@ const children = [
     path: 'grammar',
     title: 'routes.grammar',
     icon: 'icon-grammar',
-    component: AsyncLoad(() => import('@react/views/Grammar')),
+    component: AsyncLoad(() => import('@~react/views/Grammar')),
     exact: true,
   },
 
@@ -54,7 +54,7 @@ const children = [
     path: 'animation',
     title: 'routes.animation',
     icon: 'icon-animation',
-    component: AsyncLoad(() => import('@react/views/Animation')),
+    component: AsyncLoad(() => import('@~react/views/Animation')),
     exact: true,
   },
 
@@ -62,7 +62,7 @@ const children = [
     path: 'svg',
     title: 'routes.svg',
     icon: 'icon-svg',
-    component: AsyncLoad(() => import('@react/views/Svg')),
+    component: AsyncLoad(() => import('@~react/views/Svg')),
     exact: true,
   },
 
@@ -70,7 +70,7 @@ const children = [
     path: 'iframe',
     title: 'routes.iframe',
     icon: 'icon-iframe',
-    component: AsyncLoad(() => import('@react/views/Iframe')),
+    component: AsyncLoad(() => import('@~react/views/Iframe')),
     exact: true,
   },
 
@@ -78,7 +78,7 @@ const children = [
     path: 'validate',
     title: 'routes.validate',
     icon: 'icon-svg',
-    component: AsyncLoad(() => import('@react/views/Validate')),
+    component: AsyncLoad(() => import('@~react/views/Validate')),
     exact: true,
   },
 
@@ -86,7 +86,7 @@ const children = [
     path: 'rc-table',
     title: 'routes.rc-table',
     icon: 'icon-svg',
-    component: AsyncLoad(() => import('@react/views/RcTable')),
+    component: AsyncLoad(() => import('@~react/views/RcTable')),
     exact: true,
   },
 
@@ -100,7 +100,7 @@ const children = [
 const routes = [
   {
     path: '/:language',
-    component: AsyncLoad(() => import('@react/Main')),
+    component: AsyncLoad(() => import('@~react/App')),
     children,
   },
 

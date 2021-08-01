@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // 布局组件
-import { LayContainer } from '@react/layouts/LayMain';
+import { LayContainer } from '@~react/layouts/LayMain';
 
 const files = require.context('./my_module', false, /\.js$/);
 console.log(files.keys());

@@ -29,7 +29,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { Dropdown, Menu, Button, Icon, Modal } from 'antd';
 
 
-class MainHeader extends Component {
+class AppHeader extends Component {
   static propTypes = {
     // State
     username: PropTypes.string,
@@ -176,7 +176,7 @@ class MainHeader extends Component {
   }
 }
 
-const IntlMainHeader = injectIntl(MainHeader);
+const IntlMainHeader = injectIntl(AppHeader);
 
 const RouterHeader = withRouter(IntlMainHeader);
 

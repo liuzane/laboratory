@@ -9,7 +9,7 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 module.exports = function (config) {
   const env = process.env.NODE_ENV;
-  const entriesPath = globby.sync([resolveApp('src') + '/pages/*/index.js'], {cwd: process.cwd()});
+  const entriesPath = globby.sync([resolveApp('src') + '/pages/*/main.js'], {cwd: process.cwd()});
 
   // 入口文件路径
   paths.entriesPath = entriesPath;

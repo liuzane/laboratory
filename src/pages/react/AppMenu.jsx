@@ -23,7 +23,7 @@ import { Menu } from 'antd';
 const { SubMenu, Item } = Menu;
 
 
-class MainMenu extends Component {
+class AppMenu extends Component {
   static propTypes = {
     // Props
     menu: PropTypes.array,
@@ -92,4 +92,4 @@ class MainMenu extends Component {
   }
 }
 
-export default withRouter(MainMenu);
+export default withRouter(AppMenu);

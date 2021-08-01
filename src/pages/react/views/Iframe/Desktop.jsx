@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react';
 import address from '@/address';
 
 // 布局组件
-import { LayContainer } from '@react/layouts/LayMain';
+import { LayContainer } from '@~react/layouts/LayMain';
 
 
 class Desktop extends PureComponent {
