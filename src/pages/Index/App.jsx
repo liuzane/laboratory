@@ -8,11 +8,14 @@ import './App.css';
 export default class App extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      activePosition: null,
+    };
     this.entrances = [
       {
         title: 'Admin',
         href: '/admin.html',
-        img: '',
+        img: require('./images/admin-logo.png'),
       },
       {
         title: 'React',
@@ -27,13 +30,28 @@ export default class App extends PureComponent {
     ];
   }
 
+  onMouseOver = (event) => {
+    const dom = {};
+    for (const key in event.currentTarget) {
+      dom[key] = event.currentTarget[key];
+    }
+    console.log('offsetTop', dom.offsetTop);
+    console.log('offsetLeft', dom.offsetLeft);
+  }
+
   render() {
+    const { activePosition } = this.state;
+
     return (
       <div className="index">
         <ul className="index__entrance">
           {
             this.entrances.map((item, index) => (
-              <li key={ index } className="index__entrance-item">
+              <li
+                key={ index }
+                className="index__entrance-item"
+                onMouseOver={this.onMouseOver}
+              >
                 <a href={ item.href } className="index__entrance-link">
                   {
                     item.img
@@ -48,6 +66,7 @@ export default class App extends PureComponent {
               </li>
             ))
           }
+          <li className="index__entrance-active" style={activePosition ? {...activePosition} : null} />
         </ul>
       </div>
     );

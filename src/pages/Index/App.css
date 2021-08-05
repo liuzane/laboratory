@@ -2,7 +2,9 @@
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: #f0f2f5;
+  /*background-color: #f0f2f5;*/
+  background-image: url(./images/background.jpg);
+  background-size: 100% auto;
 }
 
 .index__entrance {
@@ -17,6 +19,18 @@
   width: 10rem;
   height: 10rem;
   border-right: 1px dotted #ddd;
+}
+
+.index__entrance-item:last-child {
+  border-right: none;
+}
+
+.index__entrance-active {
+  display: none;
+  background: #eee;
+  opacity: 0.5;
+  position: absolute;
+  z-index: -1;
 }
 
 .index__entrance-link {

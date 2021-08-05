@@ -120,7 +120,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpe?g|gif)$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
@@ -130,15 +130,15 @@ module.exports = {
       },
       {
         test: /.(woff|woff2|eot|ttf|otf)$/,
-        loader: 'url-loader',
+        loader: 'file-loader',
         options: {
-          limit: 10000,
           name: 'fonts/[name].[hash:6].[ext]',
         },
       }
     ],
   },
   optimization: {
+    sideEffects: true,
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
