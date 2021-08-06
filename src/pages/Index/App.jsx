@@ -35,8 +35,11 @@ export default class App extends PureComponent {
     for (const key in event.currentTarget) {
       dom[key] = event.currentTarget[key];
     }
-    console.log('offsetTop', dom.offsetTop);
-    console.log('offsetLeft', dom.offsetLeft);
+    this.setState({
+      activePosition: { top: dom.offsetTop, left: dom.offsetLeft }
+    });
+    // console.log('offsetTop', dom.offsetTop);
+    // console.log('offsetLeft', dom.offsetLeft);
   }
 
   render() {
@@ -50,7 +53,7 @@ export default class App extends PureComponent {
               <li
                 key={ index }
                 className="index__entrance-item"
-                onMouseOver={this.onMouseOver}
+                onMouseEnter={ this.onMouseOver }
               >
                 <a href={ item.href } className="index__entrance-link">
                   {
@@ -66,7 +69,7 @@ export default class App extends PureComponent {
               </li>
             ))
           }
-          <li className="index__entrance-active" style={activePosition ? {...activePosition} : null} />
+          <li className="index__entrance-active" style={ activePosition ? { ...activePosition } : null }/>
         </ul>
       </div>
     );

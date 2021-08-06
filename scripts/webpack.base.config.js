@@ -31,13 +31,13 @@ const multiplePageConfig = [
     entry: 'react',
     path: './src/pages/react/main.js',
     title: 'React Laboratory',
-    favicon: `${processEnv.STATIC_URL}/react-favicon.ico`,
+    favicon: `${ processEnv.STATIC_URL }/react-favicon.ico`,
   },
   {
     entry: 'vue',
     path: './src/pages/vue/main.js',
     title: 'Vue Laboratory',
-    favicon: `${processEnv.STATIC_URL}/vue-favicon.ico`,
+    favicon: `${ processEnv.STATIC_URL }/vue-favicon.ico`,
   },
   {
     entry: 'admin',
@@ -60,9 +60,10 @@ module.exports = {
     return entries;
   }, {}),
   output: {
-    filename: '[name].[hash:6].js',
     path: path.resolve(__dirname, '../dist'),
     publicPath: processEnv.PUBLIC_URL,
+    filename: 'scripts/[name].[hash:6].js',
+    chunkFilename: 'scripts/[name].[hash:6].min.js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -106,7 +107,13 @@ module.exports = {
           {
             use: [
               isDevEnv ? 'style-loader' : MiniCssExtractPlugin.loader,
-              'css-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  url: true,
+                  importLoaders: 1,
+                },
+              },
               {
                 loader: 'less-loader',
                 options: {
@@ -118,30 +125,48 @@ module.exports = {
             ],
           }
         ],
+        type: 'javascript/auto',
       },
       {
-        test: /\.(png|svg|jpe?g|gif)$/,
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
-          name: 'img/[name].[hash:6].[ext]',
+          limit: 10240,
+          name: 'images/[name].[hash:6].[ext]',
           esModule: false,
         },
+        type: 'javascript/auto',
+        // dependency: {
+        //   not: ['url']
+        // },
       },
+      // {
+      //   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+      //   type: 'asset/resource',
+      //   generator: {
+      //     filename: 'images/[name].[hash:6].[ext][query]'
+      //   },
+      // },
       {
         test: /.(woff|woff2|eot|ttf|otf)$/,
         loader: 'file-loader',
         options: {
           name: 'fonts/[name].[hash:6].[ext]',
         },
-      }
+        type: 'javascript/auto',
+      },
     ],
   },
   optimization: {
-    sideEffects: true,
+    sideEffects: false,
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
+        // commons: {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   name: 'vendors',
+        //   chunks: 'all'
+        // },
         commons: {
           test: /[\\/]node_modules[\\/](?!(react-?.*|@?vue-?.*|@rematch\/core|antd|ant-design|rc-?.*))/,
           // name: 'commons',

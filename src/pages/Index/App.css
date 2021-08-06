@@ -3,8 +3,10 @@
   height: 100%;
   position: relative;
   /*background-color: #f0f2f5;*/
-  background-image: url(./images/background.jpg);
+  background-image: url(./images/index-background.jpg);
   background-size: 100% auto;
+  background-position: 50% 100%;
+  /*background-repeat: no-repeat;*/
 }
 
 .index__entrance {
@@ -12,6 +14,7 @@
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  overflow: hidden;
 }
 
 .index__entrance-item {
@@ -19,6 +22,7 @@
   width: 10rem;
   height: 10rem;
   border-right: 1px dotted #ddd;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .index__entrance-item:last-child {
@@ -26,8 +30,11 @@
 }
 
 .index__entrance-active {
-  display: none;
-  background: #eee;
+  /*display: none;*/
+  width: 10rem;
+  height: 10rem;
+  background-color: #eee;
+  transition: all 0.3s ease-in-out;
   opacity: 0.5;
   position: absolute;
   z-index: -1;
