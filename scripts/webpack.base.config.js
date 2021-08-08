@@ -125,7 +125,7 @@ module.exports = {
             ],
           }
         ],
-        type: 'javascript/auto',
+        // type: 'javascript/auto',
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -153,7 +153,7 @@ module.exports = {
         options: {
           name: 'fonts/[name].[hash:6].[ext]',
         },
-        type: 'javascript/auto',
+        // type: 'javascript/auto',
       },
     ],
   },

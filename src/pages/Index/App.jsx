@@ -30,16 +30,54 @@ export default class App extends PureComponent {
     ];
   }
 
-  onMouseOver = (event) => {
-    const dom = {};
-    for (const key in event.currentTarget) {
-      dom[key] = event.currentTarget[key];
-    }
+  // 鼠标切入方向
+  onMouseDirection = (event) => {
+    const target = event.currentTarget;
+    const width = target.clientWidth;
+    const height = target.clientHeight;
+    const x = (event.pageX - target.offsetLeft - (width / 2)) * (width > height ? (height / width) : 1);
+    const y = (event.pageY - target.offsetTop - (height / 2)) * (height > width ? (width / height) : 1);
+    const res = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
+    const directions = {
+      0: 'up',
+      1: 'right',
+      2: 'down',
+      3: 'left',
+    };
+    return directions[res];
+  }
+
+  onMouseEnter = (event) => {
+    const target = event.currentTarget;
     this.setState({
-      activePosition: { top: dom.offsetTop, left: dom.offsetLeft }
+      activePosition: {
+        top: target.offsetTop,
+        left: target.offsetLeft,
+      }
     });
-    // console.log('offsetTop', dom.offsetTop);
-    // console.log('offsetLeft', dom.offsetLeft);
+  }
+
+  onMouseLeave = (event) => {
+    const direction = this.onMouseDirection(event);
+    const activePosition = { ...this.state.activePosition };
+    switch (direction) {
+      case 'up':
+        activePosition.top = -160;
+        break;
+
+      case 'right':
+        activePosition.left = '100%';
+        break;
+
+      case 'down':
+        activePosition.top = '100%';
+        break;
+
+      case 'left':
+        activePosition.left = -160;
+        break;
+    }
+    this.setState({ activePosition });
   }
 
   render() {
@@ -47,13 +85,17 @@ export default class App extends PureComponent {
 
     return (
       <div className="index">
-        <ul className="index__entrance">
+        <ul className="index__entrance" onMouseLeave={this.onMouseLeave}>
+          <li
+            className="index__entrance-active"
+            style={ activePosition ? { ...activePosition } : null }
+          />
           {
             this.entrances.map((item, index) => (
               <li
                 key={ index }
                 className="index__entrance-item"
-                onMouseEnter={ this.onMouseOver }
+                onMouseEnter={ this.onMouseEnter }
               >
                 <a href={ item.href } className="index__entrance-link">
                   {
@@ -69,7 +111,6 @@ export default class App extends PureComponent {
               </li>
             ))
           }
-          <li className="index__entrance-active" style={ activePosition ? { ...activePosition } : null }/>
         </ul>
       </div>
     );
