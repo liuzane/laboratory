@@ -21,15 +21,15 @@ class Desktop extends PureComponent {
     let points = '';
 
     // 这里本是渲染5次，10个顶点，但由于最后一个顶点没有与第一个顶点链接，造成了在加上边框后最后一条边没有边框，故多渲染一点与第一个顶点重合
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 6; i ++) {
       points = points
         + (Math.cos((18 + i * 72) / 180 * Math.PI) * R + x)
         + ' '
-        + (-Math.sin((18 + i * 72) / 180 * Math.PI) * R + y)
+        + (- Math.sin((18 + i * 72) / 180 * Math.PI) * R + y)
         + ', '
         + (Math.cos((54 + i * 72) / 180 * Math.PI) * r + x)
         + ' '
-        + (-Math.sin((54 + i * 72) / 180 * Math.PI) * r + y)
+        + (- Math.sin((54 + i * 72) / 180 * Math.PI) * r + y)
         + (i === 5 ? '' : ', ');
     }
 
@@ -248,14 +248,14 @@ class Desktop extends PureComponent {
 
           <SvgItem>
             <polyline
-              points={ this.computed(100, 100, 50, 20) }
+              points={this.computed(100, 100, 50, 20)}
               fill="red"
               stroke="orange"
               strokeWidth="3"
             />
 
             <polyline
-              points={ this.computed(300, 100, 50, 30) }
+              points={this.computed(300, 100, 50, 30)}
               fill="red"
               stroke="orange"
               strokeWidth="3"

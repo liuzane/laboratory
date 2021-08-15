@@ -153,7 +153,7 @@ class SolarSystem extends PureComponent {
   // 小行星带
   asteroids() {
     function getAsteroidColor() {
-      const ret = ['#'];
+      const ret = [ '#' ];
       const val = random(10, 15).toString(16);
       for (let i = 0; i < 3; i++) {
         ret.push(val);
@@ -182,7 +182,7 @@ class SolarSystem extends PureComponent {
   // 彗星
   comets() {
     function getCometColor() {
-      const ret = ['#'];
+      const ret = [ '#' ];
       for (let i = 0; i < 6; i++) {
         ret.push(random(3, 15).toString(16));
       }

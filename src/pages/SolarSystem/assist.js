@@ -25,7 +25,7 @@ export function randomColor() {
 }
 
 export function randomHsl() {
-  return [Math.floor(360 * Math.random()), Math.floor(50 * Math.random() + 50), Math.floor(20 * Math.random() + 40)];
+  return [ Math.floor(360 * Math.random()), Math.floor(50 * Math.random() + 50), Math.floor(20 * Math.random() + 40) ];
 }
 
 export function rotationToMouse(t, n, e, o) {
@@ -114,16 +114,16 @@ export const Color = {
     n = 0 === e ? 0 : r === u ? (a - i) / c % 6 : a === u ? (i - r) / c + 2 : (r - a) / c + 4;
     n *= 60;
     n < 0 && (n += 360);
-    return [Math.round(n), (100 * e).toFixed(1), (100 * o).toFixed(1)];
+    return [ Math.round(n), (100 * e).toFixed(1), (100 * o).toFixed(1) ];
   }, 
   
   hslToRgb: function (t) {
     const n = parseFloat(t[0] / 360, 10), e = parseFloat(t[1] / 100, 10), o = parseFloat(t[2] / 100, 10);
     if (0 === e) {
       const r = Math.ceil(255 * o), g = r, b = r;
-      return [r, g, b];
+      return [ r, g, b ];
     }
-    let r = o >= .5 ? o + e - o * e : o * (1 + e), a = 2 * o - r, i = [1 / 3, 0, -1 / 3];
+    let r = o >= .5 ? o + e - o * e : o * (1 + e), a = 2 * o - r, i = [ 1 / 3, 0, -1 / 3 ];
     for (let u = 0; u < 3; u++) {
       let s = n + i[u];
       s < 0 && (s += 1), s > 1 && (s -= 1), s = 6 * s < 1 ? a + 6 * (r - a) * s : 2 * s < 1 ? r : 3 * s < 2 ? a + (r - a) * (2 / 3 - s) * 6 : a, i[u] = Math.ceil(255 * s);

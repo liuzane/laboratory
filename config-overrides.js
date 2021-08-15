@@ -2,7 +2,7 @@
 
 
 const path = require('path');
-// const paths = require('react-scripts/config/paths');
+// const paths = require('react-config/config/paths');
 const {
   override,
   addWebpackAlias,

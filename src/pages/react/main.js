@@ -21,7 +21,6 @@ import routes from './routes';
 import '@/styles';
 
 serviceWorker.register();
-console.log('PUBLIC_URL', PUBLIC_URL);
 
 ReactDOM.render(
   <Provider store={ store }>

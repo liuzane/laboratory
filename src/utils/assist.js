@@ -93,7 +93,7 @@ export function getDeepValueOfObject(object, keyPath, defaultValue) {
     let value = object;
     for (let index = 0; index < keys.length; index++) {
       const key = keys[index];
-      if (Boolean(value[key])) {
+      if (value[key]) {
         value = value[key];
       } else {
         value = defaultValue;

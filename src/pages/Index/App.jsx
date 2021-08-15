@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react';
 // 样式
 import './App.css';
 
+let a = 1;
 
 export default class App extends PureComponent {
   constructor(props) {
@@ -77,7 +78,7 @@ export default class App extends PureComponent {
     const activePosition = { ...this.state.activePosition };
     switch (direction) {
       case 'up':
-        activePosition.top = -160;
+        activePosition.top = - 160;
         break;
 
       case 'right':
@@ -89,7 +90,7 @@ export default class App extends PureComponent {
         break;
 
       case 'left':
-        activePosition.left = -160;
+        activePosition.left = - 160;
         break;
     }
     this.setState({ activePosition });
@@ -100,7 +101,7 @@ export default class App extends PureComponent {
 
     return (
       <div className="index">
-        <ul className="index__entrance" onMouseLeave={this.onMouseLeave}>
+        <ul className="index__entrance" onMouseLeave={ this.onMouseLeave }>
           <li
             className="index__entrance-active"
             style={ activePosition ? { ...activePosition } : null }
@@ -119,7 +120,7 @@ export default class App extends PureComponent {
                         src={ item.img }
                         alt={ item.title }
                         className="index__entrance-img"
-                      />
+                        />
                       : <span>{ item.title }</span>
                   }
                 </a>

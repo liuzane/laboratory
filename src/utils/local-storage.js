@@ -35,7 +35,7 @@ export function getStorage (key) {
 
   if (!data) return null;
 
-  if (!Boolean(data.expires) || data.expires >= nowTime) {
+  if (!data.expires || data.expires >= nowTime) {
     return data.data;
   } else {
     localStorage.removeItem(key);

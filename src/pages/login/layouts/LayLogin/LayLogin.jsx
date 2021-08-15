@@ -1,5 +1,5 @@
 // 基础模块
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 
 // 多语言组件
 import { FormattedMessage } from 'react-intl';

@@ -19,7 +19,7 @@ import './style/Desktop.less';
 
 
 export default class Desktop extends PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       data: [],
@@ -31,15 +31,15 @@ export default class Desktop extends PureComponent {
         title: 'Name',
         align: 'center',
         dataIndex: 'name',
-        filters: [{
+        filters: [ {
           text: 'London',
           value: 'London',
         }, {
           text: 'New York',
           value: 'New York',
-        }],
+        } ],
       },
-    
+
       {
         title: 'Age',
         align: 'center',
@@ -58,17 +58,17 @@ export default class Desktop extends PureComponent {
                 },
               },
             ],
-            initialValue: record[ dataIndex ],
-          })(<InputNumber onChange={ this.onInputChange.bind(this, dataIndex, record) } />);
+            initialValue: record[dataIndex],
+          })(<InputNumber onChange={ this.onInputChange.bind(this, dataIndex, record) }/>);
         },
       },
-    
+
       {
         title: 'Address',
         align: 'center',
         dataIndex: 'address',
       },
-    
+
       {
         title: 'Action',
         align: 'center',
@@ -97,7 +97,7 @@ export default class Desktop extends PureComponent {
           return '合计';
         },
       },
-    
+
       {
         // align: 'center',
         dataIndex: 'age',
@@ -107,21 +107,21 @@ export default class Desktop extends PureComponent {
         },
       },
     ];
-    
+
     this.CountTable = React.createRef();
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.getListPersons();
   }
 
   componentWillUnmount() {
     this.source.cancel();
   }
-  
+
   updateTableData = (key, value, record) => {
     let data = JSON.parse(JSON.stringify(this.state.data));
-    
+
     // data.map(table => {
     //  const index = table.dataSource.findIndex(item => item[key] === value);
     //  if (index > -1) table.dataSource.splice(index, 1, record);
@@ -129,16 +129,16 @@ export default class Desktop extends PureComponent {
     // });
     const index = data.findIndex(item => item[key] === value);
 
-    if (index > -1) data.splice(index, 1, record);
-    
+    if (index > - 1) data.splice(index, 1, record);
+
     return data;
   };
-  
+
   onInputChange = (key, record, value) => {
-    record[ key ] = value;
+    record[key] = value;
     this.setState({ data: this.updateTableData('id', record.id, record) });
   };
-  
+
   getListPersons = () => {
     this.setState({ loading: true });
     api.getListPersons({ page: 1, size: 2 }, { cancelToken: this.source.token }).then(
@@ -154,7 +154,7 @@ export default class Desktop extends PureComponent {
       }
     );
   };
-  
+
   validate = () => {
     let isPass = true;
     const forms = this.CountTable.current.forms;
@@ -162,7 +162,7 @@ export default class Desktop extends PureComponent {
       console.log(error, values);
       if (error) isPass = false;
     };
-    
+
     for (let key in forms) {
       forms[key].validateFields(validate);
     }
@@ -172,7 +172,7 @@ export default class Desktop extends PureComponent {
     }
   };
 
-  render () {
+  render() {
     const { columns, footer } = this;
     const { data, loading } = this.state;
 
@@ -193,16 +193,16 @@ export default class Desktop extends PureComponent {
           rowKey="id"
         />
 
-        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+        <div style={ { textAlign: 'center', marginTop: '10px' } }>
           <Button onClick={ this.validate } type="primary">验证</Button>
         </div>
-        
-        {/* <EditableTable */}
-          {/* data={ data } */}
-          {/* loading={ loading } */}
-          {/* columns={ columns } */}
-          {/* rowKey="id" */}
-        {/* /> */}
+
+        {/* <EditableTable */ }
+        {/* data={ data } */ }
+        {/* loading={ loading } */ }
+        {/* columns={ columns } */ }
+        {/* rowKey="id" */ }
+        {/* /> */ }
       </LayContainer>
     );
   }

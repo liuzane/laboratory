@@ -2,7 +2,7 @@
 const webpack = require('webpack');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // Node 模块
@@ -62,11 +62,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: processEnv.PUBLIC_URL,
-    filename: 'scripts/[name].[hash:6].js',
-    chunkFilename: 'scripts/[name].[hash:6].min.js',
+    filename: 'config/[name].[hash:6].js',
+    chunkFilename: 'config/[name].[hash:6].min.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: [ '.js', '.jsx', '.json' ],
     alias: {
       '@': path.resolve(__dirname, '../src'),
       '@~react': path.resolve(__dirname, '../src/pages/react'),
@@ -79,14 +79,21 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-proposal-class-properties', '@babel/plugin-syntax-dynamic-import']
-          },
+        loader: 'eslint-loader',
+        options: {
+          // fix: true
+        }
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: [ '@babel/preset-env', '@babel/preset-react' ],
+          plugins: [ '@babel/plugin-proposal-class-properties', '@babel/plugin-syntax-dynamic-import' ]
         },
       },
       {
@@ -199,7 +206,7 @@ module.exports = {
     ...multiplePageConfig.map(({ entry, path, ...restOptions }) => {
       return new HtmlWebpackPlugin({
         filename: entry + '.html',
-        chunks: [entry],
+        chunks: [ entry ],
         inject: true,
         publicPath: processEnv.PUBLIC_URL,
         template: 'index.template.html',
@@ -209,13 +216,13 @@ module.exports = {
 
     new VueLoaderPlugin(),
 
-    //提取css至独立文件
+    // 提取css至独立文件
     new MiniCssExtractPlugin({
-      filename: `[name].[hash:6].min.css`,
-      chunkFilename: `[name].[hash:6].min.css`,
+      filename: '[name].[hash:6].min.css',
+      chunkFilename: '[name].[hash:6].min.css',
     }),
 
-    //压缩css
+    // 压缩css
     new OptimizeCssAssetsPlugin(),
   ],
 };

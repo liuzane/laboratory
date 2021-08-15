@@ -57,32 +57,36 @@ class Desktop extends PureComponent {
     const model = _.cloneDeep(this.state.model);
     model[key] = value;
     this.setState({ model });
-  }
+  };
 
   handleValidate = () => {
     Validate.validate((error, model) => {
       console.log('error', error);
       console.log('model', model);
     });
-  }
+  };
 
   render() {
     const { model, rules } = this.state;
     return (
       <LayContainer>
-        <Validate model={model} rules={rules}>
+        <Validate model={ model } rules={ rules }>
           {
             (messages) => (
               <div className="validate-wrap">
                 <div className="validate-row">
-                  <Input value={model.name} placeholder="Please type name" onChange={this.onSetValue.bind(this, 'name')}/>
-                  <p>{messages.name}</p>
+                  <Input value={ model.name } placeholder="Please type name"
+                         onChange={ this.onSetValue.bind(this, 'name') }
+                  />
+                  <p>{ messages.name }</p>
                 </div>
                 <div className="validate-row">
-                  <Input value={model.phone} placeholder="Please type phone" onChange={this.onSetValue.bind(this, 'phone')}/>
-                  <p>{messages.phone}</p>
+                  <Input value={ model.phone } placeholder="Please type phone"
+                         onChange={ this.onSetValue.bind(this, 'phone') }
+                  />
+                  <p>{ messages.phone }</p>
                 </div>
-                <Button onClick={this.handleValidate}>验证</Button>
+                <Button onClick={ this.handleValidate }>验证</Button>
               </div>
             )
           }

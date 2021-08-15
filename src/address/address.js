@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // http方式
 const protocol = window.location.protocol;
 const host = window.location.host;

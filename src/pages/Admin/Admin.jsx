@@ -38,7 +38,7 @@ class Admin extends Component {
 
     if (id) {
       const waiting = () => {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
           setTimeout(() => {
             resolve();
           }, 1500);
@@ -56,7 +56,7 @@ class Admin extends Component {
   render() {
     return (
       <div>
-        <ScreenLoading loading={ this.state.loading } />
+        <ScreenLoading loading={ this.state.loading }/>
         <h1 className="admin">Admin</h1>
       </div>
     );

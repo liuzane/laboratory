@@ -67,13 +67,13 @@ class Desktop extends PureComponent {
         title: 'Name',
         align: 'center',
         dataIndex: 'name',
-        filters: [{
+        filters: [ {
           text: 'London',
           value: 'London',
         }, {
           text: 'New York',
           value: 'New York',
-        }],
+        } ],
       },
 
       {
@@ -143,7 +143,8 @@ class Desktop extends PureComponent {
           columns={this.columns}
           data={this.state.dataSource}
           scroll={{ x: 300, y: 400 }}
-          className="table" />
+          className="table"
+        />
       </LayContainer>
     );
   }
