@@ -20,7 +20,7 @@ const multiplePageConfig = [
   {
     entry: 'login',
     path: './src/pages/login/main.js',
-    title: 'Login',
+    title: 'login',
   },
   {
     entry: 'index',
@@ -42,7 +42,7 @@ const multiplePageConfig = [
   {
     entry: 'admin',
     path: './src/pages/admin/main.js',
-    title: 'Admin Laboratory',
+    title: 'admin Laboratory',
   },
   {
     entry: 'solar-system',
@@ -51,8 +51,14 @@ const multiplePageConfig = [
   },
 ];
 
+// chunks
+const nodeModulesRegexp = '[\\/]node_modules[\\/]';
+const reactChunksRegexp = 'react-?.*|@rematch\\/core|antd|ant-design|rc-?.*';
+const vueChunksRegexp = '@?vue-?.*|ant-design-vue';
+const commonsChunksRegexp = '(?!(' + reactChunksRegexp + '|' + vueChunksRegexp + '))';
 
-module.exports = {
+
+  module.exports = {
   mode: isDevEnv ? 'development' : 'production',
   devtool: isDevEnv ? 'cheap-module-source-map' : false,
   entry: multiplePageConfig.reduce((entries, current) => {
@@ -73,7 +79,7 @@ module.exports = {
       '@~vue': path.resolve(__dirname, '../src/pages/vue'),
 
       // 是一个简单的 'export * from '@vue/runtime-dom'。 然而在这额外的重新导出莫名其妙地导致webpack总是使模块无效
-      vue: '@vue/runtime-dom',
+      // vue: '@vue/runtime-dom',
     },
   },
   module: {
@@ -81,7 +87,7 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        exclude: new RegExp(nodeModulesRegexp),
         loader: 'eslint-loader',
         options: {
           // fix: true
@@ -89,7 +95,7 @@ module.exports = {
       },
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        exclude: new RegExp(nodeModulesRegexp),
         loader: 'babel-loader',
         options: {
           presets: [ '@babel/preset-env', '@babel/preset-react' ],
@@ -98,6 +104,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
+        exclude: new RegExp(nodeModulesRegexp),
         use: 'vue-loader',
       },
       {
@@ -175,17 +182,20 @@ module.exports = {
         //   chunks: 'all'
         // },
         commons: {
-          test: /[\\/]node_modules[\\/](?!(react-?.*|@?vue-?.*|@rematch\/core|antd|ant-design|rc-?.*))/,
+          // test: /[\\/]node_modules[\\/](?!(react-?.*|@?vue-?.*|@rematch\/core|antd|ant-design|ant-design-vue|rc-?.*))/,
+          test: new RegExp(nodeModulesRegexp + commonsChunksRegexp),
           // name: 'commons',
           chunks: 'all'
         },
         reactChunks: {
-          test: /[\\/]node_modules[\\/](react-?.*|@rematch\/core|antd|ant-design|rc-?.*)/,
+          // test: /[\\/]node_modules[\\/](react-?.*|@rematch\/core|antd|ant-design|rc-?.*)/,
+          test: new RegExp(nodeModulesRegexp + reactChunksRegexp),
           // name: 'reactChunks',
           chunks: 'all'
         },
         vueChunks: {
-          test: /[\\/]node_modules[\\/](@?vue-?.*)/,
+          // test: /[\\/]node_modules[\\/](@?vue-?.*|ant-design-vue)/,
+          test: new RegExp(nodeModulesRegexp + vueChunksRegexp),
           // name: 'vueChunks',
           chunks: 'all'
         },

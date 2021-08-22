@@ -1,6 +1,18 @@
-/* PC端 */
-html, 
+/* 电脑等设备屏幕 */
+html,
 body,
 #root {
 	height: 100%;
+}
+
+.clearfix:after {
+	content: '.';
+	clear: both;
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.clearfix {
+	zoom:1;
 }

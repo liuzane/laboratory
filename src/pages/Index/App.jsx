@@ -28,21 +28,6 @@ export default class App extends PureComponent {
         href: '/vue.html',
         img: require('./images/vue-logo.png'),
       },
-      {
-        title: 'Admin',
-        href: '/admin.html',
-        img: require('./images/admin-logo.png'),
-      },
-      {
-        title: 'React',
-        href: '/react.html',
-        img: require('./images/react-logo.png'),
-      },
-      {
-        title: 'Vue',
-        href: '/vue.html',
-        img: require('./images/vue-logo.png'),
-      }
     ];
   }
 

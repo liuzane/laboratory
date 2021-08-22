@@ -1,10 +1,25 @@
 {
   "plugins": [
     "@babel/plugin-transform-runtime",
-    ["import", {
-      "libraryName": "antd",
-      "libraryDirectory": "es",
-      "style": true
-    }]
+
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "es",
+        "style": true
+      },
+      "antd"
+    ],
+
+    [
+      "import",
+      {
+        "libraryName": "ant-design-vue",
+        "libraryDirectory": "lib",
+        "style": true
+      },
+      "ant-design-vue"
+    ]
   ]
 }
