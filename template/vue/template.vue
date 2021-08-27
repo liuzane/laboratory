@@ -5,58 +5,57 @@
 </template>
 
 <script>
-// 请求
-// import axios, {  } from 'api';
+  // 请求
+  // import axios, {  } from 'api';
 
-// 方法
-// import  from '@/utils/';
+  // 第三方工具
+  // import {  } from 'lodash';
 
-// 混入
-// import  from '@/mixins/';
+  // 方法
+  // import  from '@/utils/';
 
-// 公共组件
-// import  from '@/components/';
+  // UI组件
+  // import {  } from '@ant-design-vue';
 
-// 组件
-// import  from '';
+  // 公共组件
+  // import  from '@/components/';
 
-export default {
-  name: 'template',
+  // 组件
+  // import  from '';
 
-  components: {
+  export default {
+    name: 'template',
 
-  },
+    components: {},
 
-  props: {
-    string: String,
+    props: {
+      string: String,
 
-    number: Number,
+      number: Number,
 
-    boolean: Boolean,
+      boolean: Boolean,
 
-    array: Array,
-    
-    object: Object,
-  },
+      array: Array,
 
-  data () {
-    return {
-      message: 'template',
-    };
-  },
-  
-  methods: {
+      object: Object,
+    },
 
-  },
-};
+    data() {
+      return {
+        message: 'template',
+      };
+    },
+
+    methods: {},
+  };
 </script>
 
 <style scoped>
-. {
+  . {
 
-}
+  }
 
-. {
+  . {
 
-}
+  }
 </style>

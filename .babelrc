@@ -17,7 +17,7 @@
       {
         "libraryName": "ant-design-vue",
         "libraryDirectory": "lib",
-        "style": true
+        "style": false
       },
       "ant-design-vue"
     ]

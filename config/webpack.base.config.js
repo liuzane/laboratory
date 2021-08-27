@@ -109,34 +109,22 @@ const commonsChunksRegexp = '(?!(' + reactChunksRegexp + '|' + vueChunksRegexp +
       },
       {
         test: /\.(css|less)$/,
-        oneOf: [
+        use: [
+          isDevEnv ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
-            issuer: /\.vue$/,
-            use: [
-              isDevEnv ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-              'css-loader',
-              'less-loader',
-            ],
+            loader: 'css-loader',
+            options: {
+              url: true,
+              importLoaders: 1,
+            },
           },
           {
-            use: [
-              isDevEnv ? 'style-loader' : MiniCssExtractPlugin.loader,
-              {
-                loader: 'css-loader',
-                options: {
-                  url: true,
-                  importLoaders: 1,
-                },
-              },
-              {
-                loader: 'less-loader',
-                options: {
-                  modifyVars: colors,
-                  javascriptEnabled: true,
-                  localIdentName: '[name]__[local]--[hash:6]'
-                }
-              }
-            ],
+            loader: 'less-loader',
+            options: {
+              modifyVars: colors,
+              javascriptEnabled: true,
+              localIdentName: '[name]__[local]--[hash:6]'
+            }
           }
         ],
         // type: 'javascript/auto',

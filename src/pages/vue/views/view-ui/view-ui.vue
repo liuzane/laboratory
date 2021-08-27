@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .view-ui {
   font-size: 1.8rem;
   text-align: center;
