@@ -1,7 +1,6 @@
 <template>
-  <div class="view-ui">
-    view-ui
-    <Button type="primary">Primary Button</Button>
+  <div class="element-ui">
+    <Button type="primary">element-ui</Button>
   </div>
 </template>
 
@@ -25,7 +24,7 @@ import { Button } from 'ant-design-vue';
 // import  from '';
 
 export default {
-  name: 'view-ui',
+  name: 'element-ui',
 
   components: {
     Button,
@@ -33,8 +32,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.view-ui {
+<style>
+.element-ui {
   font-size: 1.8rem;
   text-align: center;
 }

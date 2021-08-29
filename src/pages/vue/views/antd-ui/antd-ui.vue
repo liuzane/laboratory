@@ -1,32 +1,39 @@
 <template>
-  <div className="home">
-    home
+  <div class="antd-ui">
+    <Button type="primary">antd-ui</Button>
   </div>
 </template>
 
 <script>
-//请求
+// 请求
 // import axios, {  } from 'api';
 
-//方法
+// 方法
 // import  from '@/utils/';
 
-//混入
+// 混入
 // import  from '@/mixins/';
 
-//公共组件
+// UI组件
+import { Button } from 'ant-design-vue';
+
+// 公共组件
 // import  from '@/components/';
 
-//组件
+// 组件
 // import  from '';
 
 export default {
-  name: 'home',
+  name: 'antd-ui',
+
+  components: {
+    Button,
+  },
 };
 </script>
 
 <style>
-.home {
+.antd-ui {
   font-size: 1.8rem;
   text-align: center;
 }

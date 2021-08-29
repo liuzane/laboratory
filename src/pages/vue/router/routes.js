@@ -7,9 +7,16 @@ export default [
   },
 
   {
-    path: '/view-ui',
-    title: 'routes.view-ui',
+    path: '/antd-ui',
+    title: 'routes.antd-ui',
     icon: 'icon-home',
-    component: () => import('@~vue/views/view-ui'),
+    component: () => import('@~vue/views/antd-ui'),
+  },
+
+  {
+    path: '/element-ui',
+    title: 'routes.element-ui',
+    icon: 'icon-home',
+    component: () => import('@~vue/views/element-ui'),
   },
 ];

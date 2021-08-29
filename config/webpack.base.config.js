@@ -130,25 +130,22 @@ const commonsChunksRegexp = '(?!(' + reactChunksRegexp + '|' + vueChunksRegexp +
         // type: 'javascript/auto',
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10240,
-          name: 'images/[name].[hash:6].[ext]',
+          name: 'images/[name].[hash:6][ext][query]',
           esModule: false,
         },
         type: 'javascript/auto',
-        // dependency: {
-        //   not: ['url']
-        // },
       },
-      // {
-      //   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      //   type: 'asset/resource',
-      //   generator: {
-      //     filename: 'images/[name].[hash:6].[ext][query]'
-      //   },
-      // },
+      {
+        test: /\.svg(\?.*)?$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name].[hash:6][ext][query]'
+        },
+      },
       {
         test: /.(woff|woff2|eot|ttf|otf)$/,
         loader: 'file-loader',

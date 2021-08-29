@@ -1,13 +1,29 @@
 <template>
-  <layout>
-    <p>
-      <router-link to="/home">Go to Home</router-link>
-    </p>
-    <p>
-      <router-link to="/view-ui">Go to view-ui</router-link>
-    </p>
-    <router-view/>
-  </layout>
+  <ant-layout class="app">
+    <ant-sider v-model:collapsed="collapsed" collapsible>
+      <ant-menu
+        v-model:selectedKeys="selectedKeys"
+        theme="dark"
+        mode="inline"
+      >
+        <ant-menu-item key="1">
+          <router-link to="/home">Home</router-link>
+        </ant-menu-item>
+        <ant-menu-item key="2">
+          <router-link to="/ant-ui">AntdUI</router-link>
+        </ant-menu-item>
+        <ant-menu-item key="3">
+          <router-link to="/element-ui">ElementUI</router-link>
+        </ant-menu-item>
+      </ant-menu>
+    </ant-sider>
+    <ant-layout>
+      <ant-header class="app__header">header</ant-header>
+      <ant-content>
+        <router-view/>
+      </ant-content>
+    </ant-layout>
+  </ant-layout>
 </template>
 
 <script>
@@ -23,7 +39,7 @@
   // UI组件
   import { Layout, Menu, Breadcrumb } from 'ant-design-vue';
   const { Header, Sider, Content } = Layout;
-  const { SubMenu, MenuItem } = Menu;
+  const { SubMenu, Item } = Menu;
 
   // 公共组件
   // import  from '@/components/';
@@ -35,18 +51,31 @@
     name: 'App',
 
     components: {
-      Layout,
-      Header,
-      Sider,
-      Content,
-      Menu,
-      SubMenu,
-      MenuItem,
-      Breadcrumb,
+      AntLayout: Layout,
+      AntHeader: Header,
+      AntSider: Sider,
+      AntContent: Content,
+      AntMenu: Menu,
+      AntSubMenu: SubMenu,
+      AntMenuItem: Item,
+      AntBreadcrumb: Breadcrumb,
+    },
+
+    data() {
+      return {
+        collapsed: false,
+        selectedKeys: [],
+      };
     },
   }
 </script>
 
 <style>
+.app {
+  height: 100%;
+}
 
+.app__header {
+  background-color: #fff;
+}
 </style>
