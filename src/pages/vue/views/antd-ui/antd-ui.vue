@@ -1,40 +1,41 @@
 <template>
   <div class="antd-ui">
     <Button type="primary">antd-ui</Button>
+    <Icon type="earth" />
   </div>
 </template>
 
 <script>
-// 请求
-// import axios, {  } from 'api';
+  // 方法
+  // import  from '@/utils/';
 
-// 方法
-// import  from '@/utils/';
+  // 混入
+  // import  from '@/mixins/';
 
-// 混入
-// import  from '@/mixins/';
+  // UI组件
+  import { Button } from 'ant-design-vue';
 
-// UI组件
-import { Button } from 'ant-design-vue';
+  // 公共组件
+  import Icon from '@-vue/components/Icon';
 
-// 公共组件
-// import  from '@/components/';
+  // 组件
+  // import  from '';
 
-// 组件
-// import  from '';
+  export default {
+    name: 'antd-ui',
 
-export default {
-  name: 'antd-ui',
-
-  components: {
-    Button,
-  },
-};
+    components: {
+      Button,
+      Icon,
+    },
+  };
 </script>
 
 <style>
-.antd-ui {
-  font-size: 1.8rem;
-  text-align: center;
-}
+  .antd-ui {
+    height: 2000px;
+    background-color: #fff;
+    font-size: 1.8rem;
+    text-align: center;
+  }
 </style>
