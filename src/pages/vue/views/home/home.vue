@@ -1,6 +1,9 @@
 <template>
   <div className="home">
     home
+    <div>
+      <router-link to="/ui">ui</router-link>
+    </div>
   </div>
 </template>
 

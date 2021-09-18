@@ -1,7 +1,6 @@
 <template>
   <div class="antd-ui">
     <Button type="primary">antd-ui</Button>
-    <Icon type="earth" />
   </div>
 </template>
 
@@ -15,9 +14,6 @@
   // UI组件
   import { Button } from 'ant-design-vue';
 
-  // 公共组件
-  import Icon from '@-vue/components/Icon';
-
   // 组件
   // import  from '';
 
@@ -26,7 +22,6 @@
 
     components: {
       Button,
-      Icon,
     },
   };
 </script>

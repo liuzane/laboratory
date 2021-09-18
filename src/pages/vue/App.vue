@@ -15,26 +15,14 @@
       </div>
 
       <ant-menu
-        v-model:selectedKeys="selectedKeys"
+        v-model:selectedKeys="menuSelectedKeys"
+        v-model:openKeys="menuOpenKeys"
         theme="dark"
         mode="inline"
+        :inlineIndent="12"
         class="app__menu"
       >
-        <ant-menu-item key="1">
-          <template #icon>
-            <icon type="home"/>
-          </template>
-          <router-link to="/home">Home</router-link>
-        </ant-menu-item>
-        <ant-menu-item key="2">
-          <template #icon>
-            <icon type="home"/>
-          </template>
-          <router-link to="/antd-ui">AntdUI</router-link>
-        </ant-menu-item>
-        <ant-menu-item key="3">
-          <router-link to="/element-ui">ElementUI</router-link>
-        </ant-menu-item>
+        <app-sub-menus :menus="menus"/>
       </ant-menu>
     </ant-sider>
 
@@ -42,11 +30,14 @@
       <ant-header class="app__header">
         <div class="app__breadcrumb">
           <ant-breadcrumb>
-            <ant-breadcrumb-item>home</ant-breadcrumb-item>
-            <ant-breadcrumb-item>test</ant-breadcrumb-item>
-            <ant-breadcrumb-item>desktop</ant-breadcrumb-item>
+            <ant-breadcrumb-item
+              v-for="item in breadcrumbs"
+              :key="item.path"
+            >
+              {{ item.name }}
+            </ant-breadcrumb-item>
           </ant-breadcrumb>
-          <h3 class="app__breadcrumb-name">desktop</h3>
+          <h3 class="app__breadcrumb-name">{{ breadcrumbs[breadcrumbs.length - 1]?.name }}</h3>
         </div>
 
         <ul class="app__tooltip">
@@ -61,19 +52,15 @@
             </li>
             <template #overlay>
               <ant-menu class="app__dropdown-menu">
-                <ant-menu-item>
-                  <icon type="user" />
-                  <span>个人中心</span>
-                </ant-menu-item>
-                <ant-menu-item>
-                  <icon type="password" />
-                  <span>修改密码</span>
-                </ant-menu-item>
-                <ant-menu-divider />
-                <ant-menu-item>
-                  <icon type="logout" />
-                  <span>注销</span>
-                </ant-menu-item>
+                <template v-for="(menu, index) in dropdownMenus" :key="index">
+                  <ant-menu-item v-if="menu.title" :key="index">
+                    <template v-if="menu.icon" #icon>
+                      <icon type="user"/>
+                    </template>
+                    <span>{{ menu.title }}</span>
+                  </ant-menu-item>
+                  <ant-menu-divider v-else/>
+                </template>
               </ant-menu>
             </template>
           </ant-dropdown>
@@ -103,10 +90,13 @@
   // import axios, {  } from 'api';
 
   // 第三方工具
-  // import {  } from 'lodash';
+  import { cloneDeep } from 'lodash';
 
   // 方法
   // import  from '@/utils/';
+
+  // 路由菜单
+  import menus from '@-vue/router/menus';
 
   // UI组件
   import { Layout, Menu, Breadcrumb, Dropdown } from 'ant-design-vue';
@@ -120,6 +110,13 @@
 
   // 组件
   // import  from '';
+
+  const dropdownMenus = [
+    { title: '个人中心', icon: 'user' },
+    { title: '修改密码', icon: 'password' },
+    { divider: true },
+    { title: '注销', icon: 'logout' },
+  ];
 
   export default {
     name: 'App',
@@ -137,13 +134,88 @@
       AntBreadcrumbItem: BreadcrumbItem,
       AntDropdown: Dropdown,
       Icon,
+      AppSubMenus: {
+        name: 'app-sub-menus',
+        props: ['menus'],
+        components: {
+          AntSubMenu: SubMenu,
+          AntMenuItem: MenuItem,
+          Icon,
+        },
+        template: `
+          <template v-for="menu in menus" :key="menu.path">
+            <template v-if="menu.children">
+              <ant-sub-menu :key="menu.path">
+                <template v-if="menu.icon" #icon>
+                  <icon :type="menu.icon"/>
+                </template>
+                <template #title>{{ menu.name }}</template>
+                <app-sub-menus :menus="menu.children" />
+              </ant-sub-menu>
+            </template>
+            <template v-else>
+              <ant-menu-item :key="menu.path">
+                <template v-if="menu.icon" #icon>
+                  <icon :type="menu.icon"/>
+                </template>
+                <router-link :to="menu.path">{{ menu.name }}</router-link>
+              </ant-menu-item>
+            </template>
+          </template>
+        `
+      },
     },
 
     data() {
       return {
+        menus,
         collapsed: false,
-        selectedKeys: [],
+        menuSelectedKeys: [],
+        menuOpenKeys: [],
+        dropdownMenus,
       };
+    },
+
+    computed: {
+      breadcrumbs() {
+        const { pathKeys } = this.getRoutePath(this.$route.path);
+        let newMenus = cloneDeep(menus);
+        return pathKeys.map((pathname) => {
+          const menu = newMenus.find((menu) => menu.path === pathname);
+          if (menu && menu.children) newMenus = menu.children;
+          return menu || {};
+        });
+      },
+    },
+
+    mounted() {
+      console.log('menus', menus);
+      this.init();
+    },
+
+    methods: {
+      init() {
+        const hash = window.location.hash;
+        const { pathKeys, openKeys } = this.getRoutePath(hash);
+        this.menuSelectedKeys = [pathKeys[pathKeys.length - 1]];
+        this.menuOpenKeys = openKeys;
+      },
+
+      getRoutePath(path) {
+        const pathnames = path.replace(/[#]?\//g, ',/').split(',').filter(name => name);
+        const pathKeys = pathnames.reduce((total, current) => {
+          const lastPathname = total[total.length - 1];
+          total.push(lastPathname ? lastPathname + current : current);
+          return total;
+        }, []);
+        const openKeys = pathKeys.slice(0, pathKeys.length - 1);
+        return {
+          pathname: pathKeys[pathKeys.length - 1],
+          pathnames,
+          pathKeys,
+          openKeys,
+        };
+      },
     },
   }
 </script>
@@ -259,11 +331,6 @@
   }
 
   .app__dropdown-menu {
-    .ant-dropdown-menu-title-content {
-      display: flex;
-      align-items: center;
-    }
-
     .iconfont {
       margin-right: 8px;
     }
