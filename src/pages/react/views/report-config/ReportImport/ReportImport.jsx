@@ -171,7 +171,7 @@ class ReportImport extends PureComponent {
 
       const SheetName = 'sheet1';
       const workbook = {
-        SheetNames: [SheetName],
+        SheetNames: [ SheetName ],
         Sheets: {
           [SheetName]: sheet
         },
@@ -186,7 +186,7 @@ class ReportImport extends PureComponent {
       const buffer = new ArrayBuffer(wbout.length);
       const view = new Uint8Array(buffer);
       for (let index = 0; index < view.length; ++index) view[index] = wbout.charCodeAt(index) & 0xFF;
-      const blob = new Blob([view], { type: 'application/octet-stream' });
+      const blob = new Blob([ view ], { type: 'application/octet-stream' });
       const url = window.URL.createObjectURL(blob);
       download(url, config.enums[module].name + '-模板.xlsx');
     } catch (error) {
@@ -197,7 +197,7 @@ class ReportImport extends PureComponent {
   // 表格数据变更保存
   onTableSave = (row) => {
     console.log('row', row);
-    const dataSource = [...this.state.dataSource];
+    const dataSource = [ ...this.state.dataSource ];
     const index = dataSource.findIndex((item) => row.index === item.index);
     const item = dataSource[index];
     dataSource.splice(index, 1, { ...item, ...row });
