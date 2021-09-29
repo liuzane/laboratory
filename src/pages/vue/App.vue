@@ -6,16 +6,18 @@
       class="app__sider"
     >
       <div class="app__logo">
-        <img
-          :class="{ 'app__logo-image': true, 'app__logo-image--center': collapsed }"
-          src="./assets/logo.svg"
-          alt=""
-        >
+        <a href="/">
+          <img
+            :class="{ 'app__logo-image': true, 'app__logo-image--center': collapsed }"
+            src="./assets/logo.svg"
+            alt=""
+          >
+        </a>
         <span v-if="!collapsed" class="app__logo-text">Laboratory</span>
       </div>
 
       <ant-menu
-        v-model:selectedKeys="menuSelectedKeys"
+        :selectedKeys="menuSelectedKeys"
         v-model:openKeys="menuOpenKeys"
         theme="dark"
         mode="inline"
@@ -55,7 +57,7 @@
                 <template v-for="(menu, index) in dropdownMenus" :key="index">
                   <ant-menu-item v-if="menu.title" :key="index">
                     <template v-if="menu.icon" #icon>
-                      <icon type="user"/>
+                      <icon :type="menu.icon"/>
                     </template>
                     <span>{{ menu.title }}</span>
                   </ant-menu-item>
@@ -178,30 +180,30 @@
 
     computed: {
       breadcrumbs() {
-        const { pathKeys } = this.getRoutePath(this.$route.path);
+        const { pathKeys } = this.getRoutePathInfo(this.$route.path);
         let newMenus = cloneDeep(menus);
-        return pathKeys.map((pathname) => {
+        return pathKeys.reduce((total, pathname) => {
           const menu = newMenus.find((menu) => menu.path === pathname);
-          if (menu && menu.children) newMenus = menu.children;
-          return menu || {};
-        });
+          if (menu) {
+            if (menu.children) newMenus = menu.children;
+            return total.concat(menu);
+          } else {
+            return total;
+          }
+        }, []);
       },
     },
 
-    mounted() {
-      console.log('menus', menus);
-      this.init();
+    watch: {
+      '$route.path'(path) {
+        const { pathname, pathKeys, openKeys } = this.getRoutePathInfo(path);
+        this.menuSelectedKeys = [pathname];
+        this.menuOpenKeys = [...new Set(this.menuOpenKeys.concat(openKeys))];
+      }
     },
 
     methods: {
-      init() {
-        const hash = window.location.hash;
-        const { pathKeys, openKeys } = this.getRoutePath(hash);
-        this.menuSelectedKeys = [pathKeys[pathKeys.length - 1]];
-        this.menuOpenKeys = openKeys;
-      },
-
-      getRoutePath(path) {
+      getRoutePathInfo(path) {
         const pathnames = path.replace(/[#]?\//g, ',/').split(',').filter(name => name);
         const pathKeys = pathnames.reduce((total, current) => {
           const lastPathname = total[total.length - 1];

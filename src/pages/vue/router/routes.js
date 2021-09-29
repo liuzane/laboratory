@@ -3,6 +3,12 @@ import { Container, createRoutes } from './tools';
 
 export default createRoutes([
   {
+    path: '',
+    redirect: '/home',
+    hidden: true,
+  },
+
+  {
     path: '/home',
     name: 'routes.home',
     icon: 'home',
@@ -24,13 +30,33 @@ export default createRoutes([
       {
         path: 'antd-ui',
         name: 'routes.antd-ui',
-        component: () => import('@-vue/views/antd-ui'),
+        component: () => import('@-vue/views/ui/antd-ui'),
       },
 
       {
         path: 'element-ui',
         name: 'routes.element-ui',
-        component: () => import('@-vue/views/element-ui'),
+        component: () => import('@-vue/views/ui/element-ui'),
+      },
+    ],
+  },
+
+  {
+    path: '/vue-api',
+    name: 'routes.vue-api',
+    icon: 'home',
+    component: Container,
+    children: [
+      {
+        path: '',
+        redirect: 'setup',
+        hidden: true,
+      },
+
+      {
+        path: 'setup',
+        name: 'routes.setup',
+        component: () => import('@-vue/views/vue-api/setup'),
       },
     ],
   },
