@@ -55,7 +55,11 @@
             <template #overlay>
               <ant-menu class="app__dropdown-menu">
                 <template v-for="(menu, index) in dropdownMenus" :key="index">
-                  <ant-menu-item v-if="menu.title" :key="index">
+                  <ant-menu-item
+                    v-if="menu.title"
+                    :key="index"
+                    @click="menu.click"
+                  >
                     <template v-if="menu.icon" #icon>
                       <icon :type="menu.icon"/>
                     </template>
@@ -88,6 +92,9 @@
 </template>
 
 <script>
+  // 基础模块
+  import { h } from 'vue';
+
   // 请求
   // import axios, {  } from 'api';
 
@@ -101,7 +108,8 @@
   import menus from '@-vue/router/menus';
 
   // UI组件
-  import { Layout, Menu, Breadcrumb, Dropdown } from 'ant-design-vue';
+  import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
+  import { Layout, Menu, Breadcrumb, Dropdown, Modal } from 'ant-design-vue';
 
   const { Header, Sider, Content } = Layout;
   const { SubMenu, Item: MenuItem, Divider: MenuDivider } = Menu;
@@ -112,13 +120,6 @@
 
   // 组件
   // import  from '';
-
-  const dropdownMenus = [
-    { title: '个人中心', icon: 'user' },
-    { title: '修改密码', icon: 'password' },
-    { divider: true },
-    { title: '注销', icon: 'logout' },
-  ];
 
   export default {
     name: 'App',
@@ -174,7 +175,12 @@
         collapsed: false,
         menuSelectedKeys: [],
         menuOpenKeys: [],
-        dropdownMenus,
+        dropdownMenus: [
+          { title: '个人中心', icon: 'user' },
+          { title: '修改密码', icon: 'password' },
+          { divider: true },
+          { title: '注销', icon: 'logout', click: this.handleLogout },
+        ],
       };
     },
 
@@ -218,6 +224,22 @@
           openKeys,
         };
       },
+
+      handleLogout() {
+        Modal.confirm({
+          title: 'app.logout.title?',
+          icon: h(ExclamationCircleOutlined),
+          okText: 'global.modal.okText',
+          cancelText: 'global.modal.cancelText',
+          onOk() {
+            console.log('OK');
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+          class: 'test',
+        });
+      }
     },
   }
 </script>

@@ -2,7 +2,7 @@
   <div className="home">
     home
     <div>
-      <router-link to="/ui">ui</router-link>
+      <router-link to="/library">library</router-link>
     </div>
   </div>
 </template>

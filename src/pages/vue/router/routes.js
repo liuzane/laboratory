@@ -16,9 +16,9 @@ export default createRoutes([
   },
 
   {
-    path: '/ui',
-    name: 'routes.ui',
-    icon: 'home',
+    path: '/library',
+    name: 'routes.library',
+    icon: 'library',
     component: Container,
     children: [
       {
@@ -44,7 +44,7 @@ export default createRoutes([
   {
     path: '/vue-api',
     name: 'routes.vue-api',
-    icon: 'home',
+    icon: 'api',
     component: Container,
     children: [
       {
