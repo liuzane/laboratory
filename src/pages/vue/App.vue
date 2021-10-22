@@ -176,10 +176,10 @@
         menuSelectedKeys: [],
         menuOpenKeys: [],
         dropdownMenus: [
-          { title: '个人中心', icon: 'user' },
-          { title: '修改密码', icon: 'password' },
+          { title: 'app.dropdown.my-center', icon: 'user' },
+          { title: 'app.dropdown.change-password', icon: 'password' },
           { divider: true },
-          { title: '注销', icon: 'logout', click: this.handleLogout },
+          { title: 'app.dropdown.logout', icon: 'logout', click: this.handleLogout },
         ],
       };
     },
