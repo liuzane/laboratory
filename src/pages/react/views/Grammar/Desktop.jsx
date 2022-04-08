@@ -2,10 +2,10 @@
 import React, { PureComponent } from 'react';
 
 // 公共组件
-import HighlightCode from '@~react/components/Highlight';
+import HighlightCode from '@-react/components/Highlight';
 
 // 布局组件
-import { LayContainer } from '@~react/layouts/LayMain';
+import { LayContainer } from '@-react/layouts/LayMain';
 
 // 样式
 import './style/Desktop.less';

@@ -1,6 +1,9 @@
 <template>
   <div className="home">
     home
+    <div>
+      <router-link to="/library">library</router-link>
+    </div>
   </div>
 </template>
 
@@ -25,7 +28,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .home {
   font-size: 1.8rem;
   text-align: center;

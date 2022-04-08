@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 
 // 布局组件
-import { LayContainer } from '@~react/layouts/LayMain';
+import { LayContainer } from '@-react/layouts/LayMain';
 
 // 样式
 import './style/Desktop.less';

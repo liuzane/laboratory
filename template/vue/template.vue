@@ -5,20 +5,17 @@
 </template>
 
 <script>
-  // 请求
-  // import axios, {  } from 'api';
-
   // 第三方工具
   // import {  } from 'lodash';
 
   // 方法
-  // import  from '@/utils/';
+  // import  from '@-vue/utils/';
 
   // UI组件
   // import {  } from '@ant-design-vue';
 
   // 公共组件
-  // import  from '@/components/';
+  // import  from '@-vue/components/';
 
   // 组件
   // import  from '';

@@ -52,13 +52,18 @@ const multiplePageConfig = [
 ];
 
 // chunks
-const nodeModulesRegexp = '[\\/]node_modules[\\/]';
-const reactChunksRegexp = 'react-?.*|@rematch\\/core|antd|ant-design|rc-?.*';
-const vueChunksRegexp = '@?vue-?.*|ant-design-vue';
-const commonsChunksRegexp = '(?!(' + reactChunksRegexp + '|' + vueChunksRegexp + '))';
+const nodeModulesRegexp = '[\\\\/]node_modules[\\\\/]';
+const reactModulesRegexp = 'react-?.*|@rematch\\\\/core|antd|ant-design|rc-?.*';
+const vueModulesRegexp = '@?vue-?.*|ant-design-vue';
+const commonsModulesRegexp = '(?!(' + reactModulesRegexp + '|' + vueModulesRegexp + '))';
 
 
-  module.exports = {
+const reactChunksTest = new RegExp(nodeModulesRegexp + '(' + reactModulesRegexp + ')$');
+const vueChunksTest = new RegExp(nodeModulesRegexp + '(' + vueModulesRegexp + ')$');
+const commonsChunksTest = new RegExp(nodeModulesRegexp + commonsModulesRegexp);
+
+
+module.exports = {
   mode: isDevEnv ? 'development' : 'production',
   devtool: isDevEnv ? 'cheap-module-source-map' : false,
   entry: multiplePageConfig.reduce((entries, current) => {
@@ -68,18 +73,17 @@ const commonsChunksRegexp = '(?!(' + reactChunksRegexp + '|' + vueChunksRegexp +
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: processEnv.PUBLIC_URL,
-    filename: 'config/[name].[hash:6].js',
-    chunkFilename: 'config/[name].[hash:6].min.js',
+    filename: 'scripts/[name].[hash:6].js',
+    chunkFilename: 'scripts/[name].[hash:6].min.js',
   },
   resolve: {
-    extensions: [ '.js', '.jsx', '.json' ],
+    extensions: ['.js', '.jsx', '.json'],
     alias: {
       '@': path.resolve(__dirname, '../src'),
-      '@~react': path.resolve(__dirname, '../src/pages/react'),
-      '@~vue': path.resolve(__dirname, '../src/pages/vue'),
+      '@-react': path.resolve(__dirname, '../src/pages/react'),
+      '@-vue': path.resolve(__dirname, '../src/pages/vue'),
 
-      // 是一个简单的 'export * from '@vue/runtime-dom'。 然而在这额外的重新导出莫名其妙地导致webpack总是使模块无效
-      // vue: '@vue/runtime-dom',
+      'vue$': isDevEnv ? 'vue/dist/vue.esm-bundler.js' : 'vue/dist/vue.runtime.esm-bundler.js',
     },
   },
   module: {
@@ -98,8 +102,14 @@ const commonsChunksRegexp = '(?!(' + reactChunksRegexp + '|' + vueChunksRegexp +
         exclude: new RegExp(nodeModulesRegexp),
         loader: 'babel-loader',
         options: {
-          presets: [ '@babel/preset-env', '@babel/preset-react' ],
-          plugins: [ '@babel/plugin-proposal-class-properties', '@babel/plugin-syntax-dynamic-import' ]
+          presets: [
+            '@babel/preset-env',
+            '@babel/preset-react'
+          ],
+          plugins: [
+            '@babel/plugin-proposal-class-properties',
+            '@babel/plugin-syntax-dynamic-import'
+          ]
         },
       },
       {
@@ -130,36 +140,35 @@ const commonsChunksRegexp = '(?!(' + reactChunksRegexp + '|' + vueChunksRegexp +
         // type: 'javascript/auto',
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10240,
-          name: 'images/[name].[hash:6].[ext]',
+          name: 'images/[name].[hash:6][ext][query]',
           esModule: false,
         },
         type: 'javascript/auto',
-        // dependency: {
-        //   not: ['url']
-        // },
       },
-      // {
-      //   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      //   type: 'asset/resource',
-      //   generator: {
-      //     filename: 'images/[name].[hash:6].[ext][query]'
-      //   },
-      // },
       {
-        test: /.(woff|woff2|eot|ttf|otf)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'fonts/[name].[hash:6].[ext]',
+        test: /\.svg(\?.*)?$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name].[hash:6][ext][query]'
         },
-        // type: 'javascript/auto',
+      },
+      {
+        test: /.(woff|woff2|eot|ttf|otf)\??.*$/,
+        loader: 'url-loader',
+        options: {
+          name: 'fonts/[name].[hash:6].[ext][query]',
+          esModule: false,
+        },
+        type: 'javascript/auto',
       },
     ],
   },
   optimization: {
+    usedExports: true,
     sideEffects: false,
     runtimeChunk: 'single',
     splitChunks: {
@@ -170,21 +179,21 @@ const commonsChunksRegexp = '(?!(' + reactChunksRegexp + '|' + vueChunksRegexp +
         //   chunks: 'all'
         // },
         commons: {
-          // test: /[\\/]node_modules[\\/](?!(react-?.*|@?vue-?.*|@rematch\/core|antd|ant-design|ant-design-vue|rc-?.*))/,
-          test: new RegExp(nodeModulesRegexp + commonsChunksRegexp),
-          // name: 'commons',
+          // test: /[\\/]node_modules[\\/](?!(react-?.*|@rematch[\\/]core|antd|ant-design|rc-?.*|vue-?.*|ant-design-vue))/,
+          test: commonsChunksTest,
+          name: 'commons',
           chunks: 'all'
         },
         reactChunks: {
-          // test: /[\\/]node_modules[\\/](react-?.*|@rematch\/core|antd|ant-design|rc-?.*)/,
-          test: new RegExp(nodeModulesRegexp + reactChunksRegexp),
-          // name: 'reactChunks',
+          // test: /[\\/]node_modules[\\/](react-?.*|@rematch[\\/]core|antd|ant-design|rc-?.*)$/,
+          test: reactChunksTest,
+          name: 'reactChunks',
           chunks: 'all'
         },
         vueChunks: {
-          // test: /[\\/]node_modules[\\/](@?vue-?.*|ant-design-vue)/,
-          test: new RegExp(nodeModulesRegexp + vueChunksRegexp),
-          // name: 'vueChunks',
+          // test: /[\\/]node_modules[\\/](vue-?.*|ant-design-vue)$/,
+          test: vueChunksTest,
+          name: 'vueChunks',
           chunks: 'all'
         },
       }
@@ -204,7 +213,7 @@ const commonsChunksRegexp = '(?!(' + reactChunksRegexp + '|' + vueChunksRegexp +
     ...multiplePageConfig.map(({ entry, path, ...restOptions }) => {
       return new HtmlWebpackPlugin({
         filename: entry + '.html',
-        chunks: [ entry ],
+        chunks: [entry],
         inject: true,
         publicPath: processEnv.PUBLIC_URL,
         template: 'index.template.html',
