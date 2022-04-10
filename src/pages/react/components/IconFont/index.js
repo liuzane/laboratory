@@ -1,3 +1,1 @@
-import IconFont from './IconFont';
-
-export default IconFont;
+export { default } from './IconFont';

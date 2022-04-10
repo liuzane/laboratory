@@ -2,8 +2,7 @@
 import React from 'react';
 
 // 样式
-import './style/IconFont.css';
-// import '@/iconfont/iconfont.css';
+import '@/iconfont/iconfont.css';
 
 
 const IconFont = props => {

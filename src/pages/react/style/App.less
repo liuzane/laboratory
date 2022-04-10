@@ -1,4 +1,4 @@
-.main__title {
+.app__title {
   display: inline-block;
   line-height: 64px;
   color: rgba(0, 0, 0, .65);
@@ -7,7 +7,23 @@
   text-align: center;
 }
 
-.main__dropdown {
+.app__breadcrumb {
+  float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.app__breadcrumb-name {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.app__dropdown {
   float: right;
   position: relative;
   top: 50%;
@@ -15,21 +31,21 @@
   cursor: pointer;
 }
 
-.main__dropdown-title {
+.app__dropdown-title {
   margin: 0 15px;
   font-size: 15px;
   text-align: center;
 }
 
-.main__dropdown-title-text {
+.app__dropdown-title-text {
   color: #1890ff;
   margin-right: 5px;
 }
 
-.main__logout {
+.app__logout {
   color: #D50020 !important;
 }
 
-.menu__icon {
-  margin-right: 10px;
+.app__menu-icon {
+  margin-right: 8px;
 }

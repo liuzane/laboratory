@@ -1,5 +1,5 @@
 // 基础模块
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -7,17 +7,16 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 // 路由配置
-import { RouterView, goto, getCurrentUrlPath } from './router';
+import { RouterView, goto, getCurrentUrlPath, routesToMenus } from './router';
 
 // 第三方模块
 import { fromJS, is } from 'immutable';
-import _ from 'lodash';
 
 // 方法
 import { getCookie } from '@/utils/cookie';
 
 // 多语言配置组件
-import Languages, { languages } from './languages';
+import { languages } from './languages';
 
 // 布局组件
 import { LayMain, LayContent } from './layouts/LayMain';
@@ -31,14 +30,13 @@ import AppHeader from './AppHeader';
 
 // 样式
 import './style/App.less';
+import { cloneDeep } from 'lodash';
 
 
-class App extends Component {
+class App extends PureComponent {
   static propTypes = {
-    // Dispatch
+    language: PropTypes.string,
     getUserInfo: PropTypes.func,
-    updateUser: PropTypes.func,
-    // Props
     routes: PropTypes.array,
     history: PropTypes.object,
     match: PropTypes.object,
@@ -46,28 +44,81 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    const { updateUser, match } = props;
     const browserLanguage = window.navigator.language.toLocaleLowerCase();
-    const matchLanguage = match.params.language;
-    this.language = languages[matchLanguage] ? matchLanguage : languages[browserLanguage] ? browserLanguage : Object.keys(languages)[0];
-    this.menu = _.cloneDeep(props.routes)
-      .filter(item => item.title)
-      .map(item => ({
-        ...item,
-        path: item.path.replace(':language', this.language)
-      }));
-    this.state = { loading: true };
-    updateUser({ language: this.language });
+    const matchLanguage = props.match.params.language;
+    // this.language = languages[matchLanguage] ? matchLanguage : languages[browserLanguage] ? browserLanguage : Object.keys(languages)[0];
+    this.language = matchLanguage || browserLanguage;
+    this.menu = routesToMenus(props.routes);
+    this.state = {
+      loading: true,
+      routeInfo: {},
+    };
   }
 
   componentDidMount() {
     this.updateUserInfo();
+    const routeInfo = this.getRouteMenuInfo();
+    this.setState({ routeInfo });
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      const routeInfo = this.getRouteMenuInfo();
+      this.setState({ routeInfo });
+    }
   }
-  
+
+  // 获取路由菜单路径
+  getRouteMenuInfo = () => {
+    const { routes, match, location } = this.props;
+    const pathname = location.pathname;
+    const pathnames = location.pathname
+      .split('/')
+      .filter((name) => name)
+      .map((name) => '/' + name);
+    pathnames.splice(0, 1, match.path);
+    const routePaths = pathnames.reduce((total, current) => {
+      const lastPathname = total[total.length - 1];
+      total.push(lastPathname ? lastPathname + current : current);
+      return total;
+    }, []);
+    routePaths.splice(0, 1);
+    let newRoutes = cloneDeep(routes);
+    const pathRoutes = routePaths.reduce((total, pathname) => {
+      const route = newRoutes.find((route) => {
+        const currentRoutePath = route.path;
+        if (currentRoutePath.search(':') > - 1) {
+          const routePathRegexp = '^' + currentRoutePath.replace(/:[^\\/]+/g, '[^\\/]*') + '$';
+          return new RegExp(routePathRegexp).test(pathname);
+        } else {
+          return route.path === pathname;
+        }
+      });
+      if (route) {
+        if (route.children) newRoutes = route.children;
+        if (!route.hidden) newRoutes.push(route);
+        return total.concat(route);
+      } else {
+        return total;
+      }
+    }, []);
+    let lastChildrenKey = '';
+    for (let index = pathRoutes.length - 1; index >= 0; index --) {
+      const currentRoute = pathRoutes[index];
+      if (currentRoute.children && currentRoute.children.length > 0) {
+        lastChildrenKey = pathRoutes[index].path;
+        break;
+      }
+    }
+
+    return {
+      routePaths,
+      pathRoutes,
+      lastChildrenKey,
+      lastKey: routePaths[routePaths.length - 1],
+    };
+  };
+
   updateUserInfo = async () => {
     const { getUserInfo } = this.props;
     const id = getCookie('token');
@@ -83,46 +134,48 @@ class App extends Component {
   };
 
   onRouterEach = (to, from, history) => {
-    if (typeof to.pathname === 'string' && to.pathname.search(':language') > -1) {
-      history.replace(to.pathname.replace(':language', this.language));
+    if (typeof to.pathname === 'string' && to.pathname.search(':language') > - 1) {
+      history.replace(to.pathname.replace(':language', this.props.language));
     }
   };
 
   render() {
-    const { language, menu } = this;
-    const { routes } = this.props;
-    const { loading } = this.state;
+    const { menu } = this;
+    const { language, routes } = this.props;
+    const { loading, routeInfo } = this.state;
 
     return (
-      <Languages language={ language }>
-        <Fragment>
-          <ScreenLoading loading={ loading } />
+      <Fragment>
+        <ScreenLoading loading={loading}/>
+        <LayMain>
+          <AppMenu menu={menu} routeInfo={routeInfo} />
+
           <LayMain>
-            <AppMenu menu={ menu } />
+            <AppHeader language={language} routeInfo={routeInfo} />
 
-            <LayMain>
-              <AppHeader language={ language } />
-
-              <LayContent>
-                { loading ? null : <RouterView routes={ routes } onRouterEach={ this.onRouterEach } /> }
-              </LayContent>
-            </LayMain>
+            <LayContent>
+              {loading ? null : <RouterView routes={routes} onRouterEach={this.onRouterEach}/>}
+            </LayContent>
           </LayMain>
-        </Fragment>
-      </Languages>
+        </LayMain>
+      </Fragment>
     );
   }
 }
 
 const RouterMain = withRouter(App);
 
+// State
+const mapStateToProps = ({ user }) => ({
+  language: user.language,
+});
+
 // Dispatch
 const mapDispatchToProps = ({ user }) => ({
   getUserInfo: user.getUserInfo,
-  updateUser: user.updateUser,
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(RouterMain);

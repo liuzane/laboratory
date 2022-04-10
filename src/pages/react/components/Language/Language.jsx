@@ -5,8 +5,8 @@ import React from 'react';
 import { IntlProvider, addLocaleData } from 'react-intl';
 
 // 时间格式，数字格式等。
-import en from 'react-intl/locale-data/en';
-import zh from 'react-intl/locale-data/zh';
+import en from 'react-intl/languages-data/en';
+import zh from 'react-intl/languages-data/zh';
 
 addLocaleData([ ...en, ...zh ]);
 

@@ -1,5 +1,5 @@
 // 基础模块
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -26,10 +26,11 @@ import { LayHeader } from './layouts/LayMain';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
 // UI组件库
-import { Dropdown, Menu, Button, Icon, Modal } from 'antd';
+import { Dropdown, Menu, Button, Modal, Breadcrumb } from 'antd';
+import { UserOutlined, UnlockOutlined, PoweroffOutlined, CaretDownOutlined } from '@ant-design/icons';
 
 
-class AppHeader extends Component {
+class AppHeader extends PureComponent {
   static propTypes = {
     // State
     username: PropTypes.string,
@@ -39,17 +40,17 @@ class AppHeader extends Component {
     language: PropTypes.string,
     intl: PropTypes.object,
     location: PropTypes.object,
+    routeInfo: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
     const { language } = props;
-    this.languageKey = languages[language].language;
-    this.languageName = languages[language].name;
-  }
-  
-  shouldComponentUpdate(nextProps, nextState) {
-    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState));
+    const currentLanguage = languages.find(item => item.code === language);
+    if (currentLanguage) {
+      this.languageKey = currentLanguage.code;
+      this.languageName = currentLanguage.name;
+    }
   }
 
   // 切换语言并保存到本地
@@ -100,19 +101,19 @@ class AppHeader extends Component {
     return (
       <Menu onClick={ this.handleUser }>
         <Menu.Item key="userInfo">
-          <Icon type="user" />
+          <UserOutlined className="app__menu-icon" />
           <FormattedMessage id="main.header.personalInfo" />
         </Menu.Item>
 
         <Menu.Item key="password">
-          <Icon type="unlock" />
+          <UnlockOutlined className="app__menu-icon" />
           <FormattedMessage id="main.header.changePassword" />
         </Menu.Item>
 
         <Menu.Divider />
 
-        <Menu.Item className="main__logout" key="logout">
-          <Icon type="poweroff" />
+        <Menu.Item className="app__logout" key="logout">
+          <PoweroffOutlined className="app__menu-icon" />
           <FormattedMessage id="main.header.logout" />
         </Menu.Item>
       </Menu>
@@ -128,47 +129,70 @@ class AppHeader extends Component {
         selectedKeys={[ this.languageKey ]}
       >
         {
-          Object.keys(languages).map(key => {
-            const item = languages[key];
-
-            return (
-              <Menu.Item key={ key }>
-                <span>{ item.name }</span>
-              </Menu.Item>
-            );
-          })
+          languages.map(lang => (
+            <Menu.Item key={ lang.code }>
+              <span>{ lang.name }</span>
+            </Menu.Item>
+          ))
         }
       </Menu>
     );
   }
   
   render() {
-    const { username } = this.props;
+    const { username, routeInfo } = this.props;
+    let breadcrumbs = [];
+    if (routeInfo.pathRoutes) {
+      breadcrumbs = routeInfo.pathRoutes;
+    }
 
     return (
-      <LayHeader className="main__header">
-        <h2 className="main__title">
-          <FormattedMessage id="main.header.title" />
-        </h2>
+      <LayHeader className="app__header">
+        {
+          routeInfo.lastKey === '/:language/home' ? (
+            <h2 className="app__title">
+              <FormattedMessage id="main.header.title" />
+            </h2>
+          ) : (
+            <div className="app__breadcrumb">
+              <Breadcrumb>
+                {
+                  breadcrumbs.map(route => (
+                    <Breadcrumb.Item key={route.path}>
+                      <FormattedMessage id={route.title} />
+                    </Breadcrumb.Item>
+                  ))
+                }
+              </Breadcrumb>
+              <h3 className="app__breadcrumb-name">
+                {
+                  routeInfo.pathRoutes ? (
+                    <FormattedMessage id={breadcrumbs[breadcrumbs.length - 1].title} />
+                  ) : null
+                }
+              </h3>
+            </div>
+          )
+        }
         
         <Dropdown
-          className="main__dropdown"
+          className="app__dropdown"
           overlay={ this.renderLanguageMenu.bind(this) }
-          placement="bottomCenter"
+          placement="bottom"
         >
-          <div className="main__dropdown-title">
+          <div className="app__dropdown-title">
             <Button size="small">{ this.languageName }</Button>
           </div>
         </Dropdown>
 
         <Dropdown
-          className="main__dropdown"
+          className="app__dropdown"
           overlay={ this.renderUserMenu.bind(this) }
-          placement="bottomCenter"
+          placement="bottom"
         >
-          <div className="main__dropdown-title">
-            <span className="main__dropdown-title-text">{ username }</span>
-            <Icon style={{ color: 'rgba(0, 0, 0, .5)' }} type="caret-down" />
+          <div className="app__dropdown-title">
+            <span className="app__dropdown-title-text">{ username }</span>
+            <CaretDownOutlined style={{ color: 'rgba(0, 0, 0, .5)' }} />
           </div>
         </Dropdown>
       </LayHeader>

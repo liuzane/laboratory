@@ -5,20 +5,20 @@ import * as serviceWorker from '@/serviceWorker';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// 多语言模块
+import LangProvider from './languages';
+
 // 全局样式
 import '@/styles';
 
 // 入口组件
 import Login from './Login';
 
-// 多语言配置组件
-import Languages from './languages';
-
 
 ReactDOM.render(
-  <Languages>
+  <LangProvider>
     <Login />
-  </Languages>,
+  </LangProvider>,
   document.getElementById('root')
 );
 

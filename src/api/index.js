@@ -1,13 +1,13 @@
 // 开发环境开启 mock
 // if (process.env.NODE_ENV === 'development') {
-  require('@/mock');
+  require('./__server-mock__');
 // }
 
 // Api
 const api = {};
 
 // 读取所有js文件
-const apiFiles = require.context('./', true, /^\.\/(?!_|.*_|index\.|config\.).*js$/);
+const apiFiles = require.context('./', true, /^\.\/(?!_|.*_|index|config).*\.js$/);
 
 apiFiles.keys().forEach(file => {
   const apiFile = apiFiles(file);

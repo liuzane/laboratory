@@ -14,11 +14,6 @@ export default class App extends PureComponent {
     };
     this.entrances = [
       {
-        title: 'Admin',
-        href: '/admin.html',
-        img: require('./images/admin-logo.png'),
-      },
-      {
         title: 'React',
         href: '/react.html',
         img: require('./images/react-logo.png'),

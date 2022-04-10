@@ -13,6 +13,7 @@ import api from '@/api';
 
 // UI库组件
 import { Form, Input, Icon, Button, message } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 // 多语言组件
 import { injectIntl, FormattedMessage } from 'react-intl';
@@ -22,8 +23,6 @@ import LayLogin from './layouts/LayLogin';
 
 // 样式
 import './style/Login.css';
-
-const FormItem = Form.Item;
 
 // 验证必填项函数
 const validate = (rules, params) => {
@@ -37,7 +36,6 @@ const validate = (rules, params) => {
 class Login extends Component {
   static propTypes = {
     intl: PropTypes.object,
-    form: PropTypes.object,
   };
 
   constructor(props) {
@@ -45,83 +43,76 @@ class Login extends Component {
     this.state = {
       loading: false,
     };
+    this.formRef = React.createRef();
   }
-  
-  login = () => {
-    const { form } = this.props;
 
-    form.validateFields((error, params) => {
-      if (!error) {
-        this.setState({ loading: true });
-        api.login(params).then(
-          response => {
-            const search = window.location.search;
-            setCookie({ key: 'token', value: response.data.id, hours: 0.5 });
-            message.success(response.message);
-            this.setState({ loading: false });
-            goto(search ? decodeURIComponent(search.replace('?url=', '')) : '/');
-          },
+  login = (values) => {
+    this.setState({ loading: true });
+    api.login(values).then(
+      response => {
+        const search = window.location.search;
+        setCookie({ key: 'token', value: response.data.id, hours: 0.5 });
+        message.success(response.message);
+        this.setState({ loading: false });
+        goto(search ? decodeURIComponent(search.replace('?url=', '')) : '/');
+      },
 
-          error => {
-            console.log(error);
-            message.error(error.message);
-            this.setState({ loading: false });
-          }
-        );
+      error => {
+        message.error(error.message);
+        this.setState({ loading: false });
       }
-    });
+    );
   };
 
   render() {
     const { formatMessage } = this.props.intl;
-    const { getFieldDecorator } = this.props.form;
-    
+
     return (
       <LayLogin>
-        <Form>
+        <Form ref={this.formRef} onFinish={this.login}>
           <h3 className="login__title">
             <FormattedMessage id="login.title" />
           </h3>
-          
-          <FormItem>
-            {
-              getFieldDecorator('username', validate([
-                { required: true, message: '账号不能为空' },
-              ]))(
-                <Input
-                  onPressEnter={ this.login }
-                  placeholder={ formatMessage({ id: 'login.username' }) }
-                  prefix={<Icon style={{ color: 'rgba(0, 0, 0, .25)' }} type="user" />}
-                />
-              )
-            }
-          </FormItem>
-  
-          <FormItem>
-            {
-              getFieldDecorator('password', validate([
-                { required: true, message: '密码不能为空' },
-              ]))(
-                <Input
-                  onPressEnter={ this.login }
-                  placeholder={ formatMessage({ id: 'login.password' }) }
-                  prefix={ <Icon style={{ color: 'rgba(0, 0, 0, .25)' }} type="lock" /> }
-                  type="password"
-                />
-              )
-            }
-          </FormItem>
+
+          <Form.Item
+            name="username"
+            rules={[
+              { required: true, message: formatMessage({ id: 'login.username-empty' }) },
+            ]}
+          >
+            <Input
+              onPressEnter={ this.login }
+              placeholder={ formatMessage({ id: 'login.username' }) }
+              prefix={<UserOutlined style={{ color: 'rgba(0, 0, 0, .25)' }} />}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="password"
+            rules={[
+              { required: true, message: formatMessage({ id: 'login.password-empty' }) },
+            ]}
+          >
+            <Input
+              onPressEnter={ this.login }
+              placeholder={ formatMessage({ id: 'login.password' }) }
+              prefix={ <LockOutlined style={{ color: 'rgba(0, 0, 0, .25)' }} /> }
+              type="password"
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              className="login__btn"
+              block
+              loading={ this.state.loading }
+              type="primary"
+              htmlType="submit"
+            >
+              <FormattedMessage id="login.loginText"/>
+            </Button>
+          </Form.Item>
         </Form>
-        
-        <Button
-          className="login__btn"
-          block
-          loading={ this.state.loading }
-          onClick={ this.login }
-          type="primary"
-        >
-          <FormattedMessage id="login.loginText"/>
-        </Button>
       </LayLogin>
     );
   }
@@ -129,6 +120,4 @@ class Login extends Component {
 
 const IntlLogin = injectIntl(Login);
 
-const FormIntlLogin = Form.create()(IntlLogin);
-
-export default FormIntlLogin;
+export default IntlLogin;

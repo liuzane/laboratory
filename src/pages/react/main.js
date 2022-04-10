@@ -14,8 +14,8 @@ import { HashRouter as Router } from 'react-router-dom';
 // import { BrowserRouter as Router } from 'react-router-dom';
 
 // 路由配置
-import { RouterView } from './router';
-import routes from './routes';
+import { RouterView, routes } from './router';
+import LangProvider from './languages';
 
 // 全局样式
 import '@/styles';
@@ -25,7 +25,9 @@ serviceWorker.register();
 ReactDOM.render(
   <Provider store={ store }>
     <Router>
-      <RouterView routes={ routes } />
+      <LangProvider>
+        <RouterView routes={ routes } />
+      </LangProvider>
     </Router>
   </Provider>,
   document.getElementById('root')
