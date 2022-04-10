@@ -67,7 +67,7 @@ module.exports = {
   }, {}),
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath: processEnv.PUBLIC_URL,
+    publicPath: isDevEnv ? processEnv.PUBLIC_URL : '/laboratory/',
     filename: 'scripts/[name].[hash:6].js',
     chunkFilename: 'scripts/[name].[hash:6].min.js',
   },
@@ -212,7 +212,6 @@ module.exports = {
         filename: entry + '.html',
         chunks: [entry],
         inject: true,
-        publicPath: processEnv.PUBLIC_URL,
         template: 'index.template.html',
         ...restOptions
       });

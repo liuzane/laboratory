@@ -11,12 +11,12 @@ module.exports = function(app) {
     },
   }));
 
-  app.use(proxy('/react-laboratory', {
+  app.use(proxy('/laboratory', {
     target: 'https://www.easy-mock.com',
     secure: false,
     changeOrigin: true,
     pathRewrite: {
-      '^/react-laboratory': '/mock/5bf3ee63f0beab552d8b6fef'
+      '^/laboratory': '/mock/5bf3ee63f0beab552d8b6fef'
     },
   }));
 };

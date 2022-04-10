@@ -1,4 +1,4 @@
-# [React Laboratory](https://liuzane.github.io/react-laboratory/)
+# [Laboratory](https://liuzane.github.io/laboratory/)
 This is a the React experiment project.
 
 ## Features
@@ -17,7 +17,7 @@ username: admin
 password: 123456
 
 ## How to add environment variables
-Add the [.env](https://github.com/liuzane/react-laboratory/blob/master/.env) file to the project root directory.
+Add the [.env](https://github.com/liuzane/laboratory/blob/master/.env) file to the project root directory.
 > Note: the [CRA removes the node environment variable](https://www.html.cn/create-react-app/docs/adding-custom-environment-variables/). To add the variable, you need to prefix it with REACT_APP_
  
 > If you want to change the port and so on configuration, please refer to the [CRA advanced configuration](https://www.html.cn/create-react-app/docs/advanced-configuration/).
