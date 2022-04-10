@@ -1,0 +1,28 @@
+{
+  "global.modal.okText": "OK",
+  "global.modal.cancelText": "Cancel",
+
+  "main.header.title": "Start a magical journey right now!",
+  "main.header.welcome": "Welcome, ",
+  "main.header.personalInfo": "Personal",
+  "main.header.changePassword": "Password",
+  "main.header.logout": "Log out",
+  "main.header.logout.title": "Log Out Comfirm",
+  "main.header.logout.content": "Do you want to exit the system?",
+
+  "routes.home": "Home",
+  "routes.components": "Components",
+  "routes.components.count-table": "Count Table",
+  "routes.components.filter": "Filter",
+  "routes.components.rc-table": "RcTable",
+  "routes.components.validate": "Validate",
+  "routes.funnies": "Funnies",
+  "routes.funnies.animation": "Animation",
+  "routes.funnies.floors": "Floors",
+  "routes.funnies.svg": "Svg",
+  "routes.funnies.iframe": "Iframe",
+  "routes.others": "others",
+  "routes.others.less": "Less",
+  "routes.others.module": "Module",
+  "routes.others.grammar": "Grammar"
+}

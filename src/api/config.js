@@ -25,7 +25,6 @@ const handleInterceptors = instances => {
       function (response) {
         // 对响应数据做点什么
         const data = response.data;
-
         return data.success && data.code === '200' || data.HeWeather6 ? data : Promise.reject(data);
       },
 

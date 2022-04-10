@@ -40,13 +40,8 @@ const multiplePageConfig = [
     favicon: `${ processEnv.STATIC_URL }/vue-favicon.ico`,
   },
   {
-    entry: 'admin',
-    path: './src/pages/admin/main.js',
-    title: 'admin Laboratory',
-  },
-  {
     entry: 'solar-system',
-    path: './src/pages/SolarSystem/main.js',
+    path: './src/pages/solar-system/main.js',
     title: 'Solar System',
   },
 ];
@@ -131,9 +126,11 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-              modifyVars: colors,
-              javascriptEnabled: true,
-              localIdentName: '[name]__[local]--[hash:6]'
+              lessOptions: {
+                modifyVars: colors,
+                javascriptEnabled: true,
+              },
+              // localIdentName: '[name]__[local]--[hash:6]'
             }
           }
         ],

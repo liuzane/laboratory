@@ -1,0 +1,28 @@
+{
+  "global.modal.okText": "确认",
+  "global.modal.cancelText": "取消",
+
+  "main.header.title": "立即开始一场神奇的旅行吧！",
+  "main.header.welcome": "欢迎，",
+  "main.header.personalInfo": "个人信息",
+  "main.header.changePassword": "修改密码",
+  "main.header.logout": "注销",
+  "main.header.logout.title": "退出确认",
+  "main.header.logout.content": "您是否要退出系统？",
+
+  "routes.home": "首页",
+  "routes.components": "组件",
+  "routes.components.count-table": "Count Table",
+  "routes.components.filter": "Filter",
+  "routes.components.rc-table": "RcTable",
+  "routes.components.validate": "Validate",
+  "routes.funnies": "好玩",
+  "routes.funnies.animation": "动画",
+  "routes.funnies.floors": "滚动层",
+  "routes.funnies.svg": "Svg",
+  "routes.funnies.iframe": "Iframe",
+  "routes.others": "其他",
+  "routes.others.less": "Less",
+  "routes.others.module": "模块",
+  "routes.others.grammar": "语法"
+}

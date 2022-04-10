@@ -42,7 +42,7 @@ switch (NODE_ENV) {
     break;
 }
 
-// 处理 address
+// 处理 address.js
 for (const key in address) {
   if (!address[key]) {
     address[key] = `${ protocol }//${ host }`;

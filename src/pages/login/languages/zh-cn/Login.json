@@ -1,8 +1,0 @@
-{
-  "login.onSpecial": "开启特效",
-  "login.offSpecial": "关闭特效",
-  "login.title": "Login to React Laboratory",
-  "login.username": "请输入账号",
-  "login.password": "请输入密码",
-  "login.loginText": "登录"
-}

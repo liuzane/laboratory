@@ -1,5 +1,4 @@
 // 第三方模块
-import { createModel } from '@rematch/core';
 import _ from 'lodash';
 
 // API
@@ -31,7 +30,7 @@ const initialState = Object.freeze({
 });
 
 
-const user = createModel({
+export default {
   state: { ...initialState },
 
   reducers: {
@@ -81,6 +80,4 @@ const user = createModel({
       );
     },
   },
-});
-
-export default user;
+};

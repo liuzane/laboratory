@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 // Module
-import address from './modules/address';
+import address from './modules/address.js';
 import app from './modules/app';
 
 const isDev = process.env !== 'production';

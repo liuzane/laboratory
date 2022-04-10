@@ -19,11 +19,13 @@ const LaySider = props => {
       style={ props.style }
     >
       <div className={ cls('__top') }>
-        <img
-          alt="logo"
-          className={ cls('__logo') }
-          src={ logo }
-        />
+        <a href="/">
+          <img
+            alt="logo"
+            className={ cls('__logo') }
+            src={ logo }
+          />
+        </a>
         <span className={ cls('__name') }>Laboratory</span>
       </div>
       { props.children }
