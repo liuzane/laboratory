@@ -6,7 +6,8 @@
       class="app__sider"
     >
       <div class="app__logo">
-        <a href="/">
+        <!-- eslint-disable-next-line no-undef -->
+        <a :href="PUBLIC_URL">
           <img
             :class="{ 'app__logo-image': true, 'app__logo-image--center': collapsed }"
             src="./assets/logo.svg"
@@ -292,10 +293,17 @@
   }
 
   .app__menu {
-    width: calc(100% + 17px) !important;
+    // width: calc(100% + 17px) !important;
+    width: 100% !important;
     height: calc(100% - 64px);
     overflow-x: hidden;
     overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+
+  .app__menu::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
   }
 
   .app__header {

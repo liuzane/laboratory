@@ -16,7 +16,7 @@ import { fromJS, is } from 'immutable';
 import { getCookie } from '@/utils/cookie';
 
 // 多语言配置组件
-import { languages } from './languages';
+import LangProvider, { languages } from './languages';
 
 // 布局组件
 import { LayMain, LayContent } from './layouts/LayMain';
@@ -103,7 +103,7 @@ class App extends PureComponent {
       }
     }, []);
     let lastChildrenKey = '';
-    for (let index = pathRoutes.length - 1; index >= 0; index --) {
+    for (let index = pathRoutes.length - 1; index >= 0; index--) {
       const currentRoute = pathRoutes[index];
       if (currentRoute.children && currentRoute.children.length > 0) {
         lastChildrenKey = pathRoutes[index].path;
@@ -145,20 +145,20 @@ class App extends PureComponent {
     const { loading, routeInfo } = this.state;
 
     return (
-      <Fragment>
-        <ScreenLoading loading={loading}/>
+      <LangProvider>
+        <ScreenLoading loading={loading} />
         <LayMain>
           <AppMenu menu={menu} routeInfo={routeInfo} />
 
           <LayMain>
-            <AppHeader language={language} routeInfo={routeInfo} />
+            <AppHeader key={language} language={language} routeInfo={routeInfo} />
 
             <LayContent>
-              {loading ? null : <RouterView routes={routes} onRouterEach={this.onRouterEach}/>}
+              {loading ? null : <RouterView routes={routes} onRouterEach={this.onRouterEach} />}
             </LayContent>
           </LayMain>
         </LayMain>
-      </Fragment>
+      </LangProvider>
     );
   }
 }

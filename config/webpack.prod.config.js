@@ -12,7 +12,6 @@ const processEnv = require('./env.js');
 // 配置
 const webpackBaseConfig = require('./webpack.base.config.js');
 
-
 module.exports = merge(webpackBaseConfig, {
   plugins: [
     // 清空输出文件夹

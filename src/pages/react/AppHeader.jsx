@@ -145,7 +145,7 @@ class AppHeader extends PureComponent {
     if (routeInfo.pathRoutes) {
       breadcrumbs = routeInfo.pathRoutes;
     }
-
+    console.log('breadcrumbs', breadcrumbs);
     return (
       <LayHeader className="app__header">
         {
@@ -166,7 +166,7 @@ class AppHeader extends PureComponent {
               </Breadcrumb>
               <h3 className="app__breadcrumb-name">
                 {
-                  routeInfo.pathRoutes ? (
+                  breadcrumbs.length > 0 ? (
                     <FormattedMessage id={breadcrumbs[breadcrumbs.length - 1].title} />
                   ) : null
                 }

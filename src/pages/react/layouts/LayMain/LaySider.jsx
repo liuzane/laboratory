@@ -19,7 +19,8 @@ const LaySider = props => {
       style={ props.style }
     >
       <div className={ cls('__top') }>
-        <a href="/">
+        {/* eslint-disable-next-line no-undef */}
+        <a href={PUBLIC_URL}>
           <img
             alt="logo"
             className={ cls('__logo') }

@@ -1,5 +1,5 @@
 // service worker
-import * as serviceWorker from '@/serviceWorker';
+// import * as serviceWorker from '@/serviceWorker';
 
 // 基础模块
 import React from 'react';
@@ -15,22 +15,19 @@ import { HashRouter as Router } from 'react-router-dom';
 
 // 路由配置
 import { RouterView, routes } from './router';
-import LangProvider from './languages';
 
 // 全局样式
 import '@/styles';
 
-serviceWorker.register();
-
+// serviceWorker.register();
+// console.log('routes', routes);
 ReactDOM.render(
-  <Provider store={ store }>
+  <Provider store={store}>
     <Router>
-      <LangProvider>
-        <RouterView routes={ routes } />
-      </LangProvider>
+      <RouterView routes={routes} />
     </Router>
   </Provider>,
   document.getElementById('root')
 );
 
-serviceWorker.unregister();
+// serviceWorker.unregister();

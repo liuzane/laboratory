@@ -4,8 +4,6 @@ import React, { PureComponent } from 'react';
 // 样式
 import './App.css';
 
-let a = 1;
-
 export default class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -15,12 +13,14 @@ export default class App extends PureComponent {
     this.entrances = [
       {
         title: 'React',
-        href: '/react.html',
+        /* eslint-disable-next-line no-undef */
+        href: `${PUBLIC_URL}/react.html`,
         img: require('./images/react-logo.png'),
       },
       {
         title: 'Vue',
-        href: '/vue.html',
+        /* eslint-disable-next-line no-undef */
+        href: `${PUBLIC_URL}/vue.html`,
         img: require('./images/vue-logo.png'),
       },
     ];

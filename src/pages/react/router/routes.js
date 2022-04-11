@@ -1,11 +1,18 @@
 // 工具方法
-import { handleRoutes } from './tools';
+import { createRoutes } from './tools';
 
 // 异步加载
 import AsyncLoad from './AsyncLoad';
 
 // 容器组件
 import Container from './Container';
+
+// 404 未找到页面
+const NotFound = {
+  path: '',
+  hidden: true,
+  component: AsyncLoad(() => import('@-react/components/NotFound')),
+};
 
 const children = [
   {
@@ -155,16 +162,12 @@ const routes = [
 
   {
     path: '/',
+    hidden: true,
     redirect: `/${window.navigator.language.toLocaleLowerCase()}`,
+    // redirect: '/:language',
     exact: true,
-  },
-
-  // 404 未找到页面
-  {
-    path: '',
-    component: AsyncLoad(() => import('../components/NotFound')),
   },
 ];
 
 
-export default handleRoutes(routes);
+export default createRoutes(routes, NotFound, true);

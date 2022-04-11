@@ -1,6 +1,13 @@
 // 路由处理工具
 import { Container, createRoutes } from './tools';
 
+// 404 未找到页面
+const NotFound = {
+  path: '/:pathMatch(.*)*',
+  hidden: true,
+  component: () => import('@-vue/views/not-found'),
+};
+
 export default createRoutes([
   {
     path: '',
@@ -106,9 +113,4 @@ export default createRoutes([
       },
     ],
   },
-
-  {
-    path: '/:pathMatch(.*)*',
-    component: () => import('@-vue/views/not-found'),
-  },
-]);
+], NotFound, true);

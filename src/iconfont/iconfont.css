@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 1289001 */
-  src: url('iconfont.woff2?t=1649587875435') format('woff2'),
-       url('iconfont.woff?t=1649587875435') format('woff'),
-       url('iconfont.ttf?t=1649587875435') format('truetype');
+  src: url('iconfont.woff2?t=1649668127371') format('woff2'),
+       url('iconfont.woff?t=1649668127371') format('woff'),
+       url('iconfont.ttf?t=1649668127371') format('truetype');
 }
 
 .iconfont {
@@ -31,6 +31,18 @@
 
 .icon-api:before {
   content: "\e63b";
+}
+
+.icon-password:before {
+  content: "\e66b";
+}
+
+.icon-logout:before {
+  content: "\e651";
+}
+
+.icon-user:before {
+  content: "\e67f";
 }
 
 .icon-earth:before {

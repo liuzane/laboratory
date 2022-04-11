@@ -67,7 +67,7 @@ module.exports = {
   }, {}),
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath: isDevEnv ? processEnv.PUBLIC_URL : '/laboratory/',
+    publicPath: processEnv.PUBLIC_URL,
     filename: 'scripts/[name].[hash:6].js',
     chunkFilename: 'scripts/[name].[hash:6].min.js',
   },
@@ -203,7 +203,7 @@ module.exports = {
       ...Object.keys(processEnv).reduce((env, currentKey) => {
         env[currentKey] = JSON.stringify(processEnv[currentKey]);
         return env;
-      }, {})
+      }, {}),
     }),
 
     // HtmlWebpackPlugin 多页面配置

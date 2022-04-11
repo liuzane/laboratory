@@ -1,35 +1,57 @@
 // 地址
 import address from '@/address';
 
-// 方法
-import { deepCopy } from '@/utils/assist';
+// 第三方模块
+import { cloneDeep } from 'lodash';
 
 // 处理路由配置
-export const handleRoutes = (routes, parentPath) => {
-  const cloneRoutes = deepCopy(routes);
-
-  return cloneRoutes.reduce((prevRoutes, currentRoute) => {
-    if (parentPath && currentRoute.path.substr(0, 1) !== '/') {
-      currentRoute.path = parentPath + (currentRoute.path === '' ? '' : '/' + currentRoute.path);
-
-      if (currentRoute.redirect) {
-        currentRoute.redirect = currentRoute.redirect.substr(0, 1) === '/' ? currentRoute.redirect : (parentPath + '/' + currentRoute.redirect);
+export const createRoutes = (routes, NotFound, isEndConcat) => {
+  const recursionRoutes = (routes, parentPath) => {
+    return routes.reduce((prevRoutes, currentRoute) => {
+      if (!currentRoute.code) {
+        currentRoute.code = (currentRoute.redirect || currentRoute.path).replace(/\//g, '');
       }
-    }
 
-    if (currentRoute.children) {
-      const children = handleRoutes(currentRoute.children, currentRoute.path);
+      if (parentPath && currentRoute.path.substr(0, 1) !== '/') {
+        currentRoute.path = parentPath + (currentRoute.path === '' ? '' : '/' + currentRoute.path);
 
-      if (currentRoute.component) {
-        currentRoute.children = children;
-        return prevRoutes.concat([ currentRoute ]);
+        if (currentRoute.redirect) {
+          currentRoute.redirect =
+            currentRoute.redirect.substr(0, 1) === '/'
+              ? currentRoute.redirect
+              : parentPath + '/' + currentRoute.redirect;
+        }
+      }
+
+      // if (process.env.NODE_ENV !== 'start' && currentRoute.path === '/test') {
+      //   return prevRoutes;
+      // } else if (currentRoute.children) {
+      //   const children = recursionRoutes(currentRoute.children, currentRoute.path);
+      //   NotFound && children.push(cloneDeep(NotFound));
+      //   if (currentRoute.component) {
+      //     currentRoute.children = children;
+      //     return prevRoutes.concat([currentRoute]);
+      //   } else {
+      //     return prevRoutes.concat(children);
+      //   }
+      // } else {
+      //   return prevRoutes.concat(currentRoute);
+      // }
+      if (currentRoute.children) {
+        const children = recursionRoutes(currentRoute.children, currentRoute.path);
+        NotFound && children.push(cloneDeep(NotFound));
+        if (currentRoute.component) {
+          currentRoute.children = children;
+          return prevRoutes.concat([currentRoute]);
+        } else {
+          return prevRoutes.concat(children);
+        }
       } else {
-        return prevRoutes.concat(children);
+        return prevRoutes.concat(currentRoute);
       }
-    } else {
-      return prevRoutes.concat(currentRoute);
-    }
-  }, []);
+    }, []);
+  };
+  return NotFound && isEndConcat ? recursionRoutes(routes).concat(NotFound) : recursionRoutes(routes);
 };
 
 // 路由转化为菜单
