@@ -8,6 +8,8 @@ const address = Object.seal({
   LOCALEMOCK_ADDRESS: null, // 本地 Mock 地址
   EASYMOCK_ADDRESS: null, // EasyMock 地址
   HEWEATHER_ADDRESS: null, // 和风天气地址
+  /* eslint-disable-next-line no-undef */
+  PUBLIC_URL: PUBLIC_URL, // 公共资源前缀URL
 });
 
 /* eslint-disable-next-line no-undef */
@@ -15,23 +17,20 @@ switch (NODE_ENV) {
   // 开发环境地址
   case 'start':
     address.SERVER_ADDRESS = null;
-    /* eslint-disable-next-line no-undef */
-    address.LOCALEMOCK_ADDRESS = PUBLIC_URL;
+    address.LOCALEMOCK_ADDRESS = '/';
     address.HEWEATHER_ADDRESS = 'https://free-api.heweather.net';
     break;
 
   // 生产环境地址
   case 'build':
-    /* eslint-disable-next-line no-undef */
-    address.SERVER_ADDRESS = PUBLIC_URL;
+    address.SERVER_ADDRESS = address.PUBLIC_URL;
     address.LOCALEMOCK_ADDRESS = '/';
     address.HEWEATHER_ADDRESS = 'https://free-api.heweather.net';
     break;
 
   // 部署生产环境地址
   case 'deploy':
-    /* eslint-disable-next-line no-undef */
-    address.SERVER_ADDRESS = PUBLIC_URL;
+    address.SERVER_ADDRESS = address.PUBLIC_URL;
     address.LOCALEMOCK_ADDRESS = '/';
     address.HEWEATHER_ADDRESS = 'https://free-api.heweather.net';
     break;
@@ -39,8 +38,7 @@ switch (NODE_ENV) {
   // 默认地址
   default:
     address.SERVER_ADDRESS = '/';
-    /* eslint-disable-next-line no-undef */
-    address.LOCALEMOCK_ADDRESS = PUBLIC_URL;
+    address.LOCALEMOCK_ADDRESS = '/';
     address.EASYMOCK_ADDRESS = '/easy-mock';
     address.HEWEATHER_ADDRESS = 'https://free-api.heweather.net';
     break;

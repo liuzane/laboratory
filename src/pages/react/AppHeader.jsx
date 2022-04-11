@@ -3,14 +3,14 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+// 地址
+import address from '@/address';
+
 // 路由模块
 import { withRouter } from 'react-router-dom';
 
 // 路由跳转方法
 import { goto } from './router';
-
-// 第三方模块
-import { fromJS, is } from 'immutable';
 
 // 方法
 import { clearCookie } from '@/utils/cookie';
@@ -86,7 +86,7 @@ class AppHeader extends PureComponent {
             clearCookie();
             clearStorage('userInfo');
             resetUser();
-            goto('/login.html');
+            goto(`${address.SERVER_ADDRESS}/login.html`);
           }
         });
         break;

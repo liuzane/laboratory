@@ -19,7 +19,7 @@ const countTableCls = (postfix = '') => 'count-table' + postfix;
 
 
 const CountTableRow = ({ index, ...props }) => {
-  const formRef = React.createRef();
+  const form = {};
   return (
     <CountTableFormsContext.Consumer>
       {

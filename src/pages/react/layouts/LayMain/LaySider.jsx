@@ -1,6 +1,9 @@
 // 基础模块
 import React, { memo } from 'react';
 
+// 地址
+import address from '@/address';
+
 // 第三方模块
 import classnames from 'classnames';
 
@@ -20,7 +23,7 @@ const LaySider = props => {
     >
       <div className={ cls('__top') }>
         {/* eslint-disable-next-line no-undef */}
-        <a href={PUBLIC_URL}>
+        <a href={address.SERVER_ADDRESS}>
           <img
             alt="logo"
             className={ cls('__logo') }

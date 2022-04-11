@@ -9,8 +9,8 @@ const GridLayoutWidthProvider = WidthProvider(GridLayout);
 export const defaultProps = {
   cols: 24,
   rowHeight: 50, // itemHeight: Math.round(rowHeight * h + Math.max(0, h - 1) * margin[1])
-  margin: [16, 16],
-  containerPadding: [0, 0],
+  margin: [ 16, 16 ],
+  containerPadding: [ 0, 0 ],
 };
 
 export default ({

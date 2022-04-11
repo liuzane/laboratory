@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node config/dev-server.js -max_old_space_size=4096",
     "build": "webpack --config config/webpack.prod.config.js",
-    "deploy": "webpack --config config/webpack.prod.config.js & gh-pages -d dist -m \\\"Update GitHub Page\\\"",
+    "deploy": "webpack --config config/webpack.prod.config.js & gh-pages -d dist -m Update GitHub Page",
     "eslint": "eslint --ext .js --ext .jsx --fix src"
   },
   "dependencies": {

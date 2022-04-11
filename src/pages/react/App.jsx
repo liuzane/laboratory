@@ -3,14 +3,14 @@ import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+// 地址
+import address from '@/address';
+
 // 路由模块
 import { withRouter } from 'react-router-dom';
 
 // 路由配置
 import { RouterView, goto, getCurrentUrlPath, routesToMenus } from './router';
-
-// 第三方模块
-import { fromJS, is } from 'immutable';
 
 // 方法
 import { getCookie } from '@/utils/cookie';
@@ -129,7 +129,7 @@ class App extends PureComponent {
       this.setState({ loading: false });
     } else {
       const url = getCurrentUrlPath();
-      goto('/login.html' + url);
+      goto(`${address.SERVER_ADDRESS}/login.html${url}`);
     }
   };
 
@@ -151,7 +151,11 @@ class App extends PureComponent {
           <AppMenu menu={menu} routeInfo={routeInfo} />
 
           <LayMain>
-            <AppHeader key={language} language={language} routeInfo={routeInfo} />
+            <AppHeader
+              key={language}
+              language={language}
+              routeInfo={routeInfo}
+            />
 
             <LayContent>
               {loading ? null : <RouterView routes={routes} onRouterEach={this.onRouterEach} />}

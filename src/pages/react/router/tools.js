@@ -42,7 +42,7 @@ export const createRoutes = (routes, NotFound, isEndConcat) => {
         NotFound && children.push(cloneDeep(NotFound));
         if (currentRoute.component) {
           currentRoute.children = children;
-          return prevRoutes.concat([currentRoute]);
+          return prevRoutes.concat([ currentRoute ]);
         } else {
           return prevRoutes.concat(children);
         }
