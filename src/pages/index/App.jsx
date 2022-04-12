@@ -1,9 +1,6 @@
 // 基础模块
 import React, { PureComponent } from 'react';
 
-// 地址
-import address from '@/address';
-
 // 样式
 import './App.css';
 
@@ -16,12 +13,14 @@ export default class App extends PureComponent {
     this.entrances = [
       {
         title: 'React',
-        href: `${address.SERVER_ADDRESS}/react.html`,
+        /* eslint-disable-next-line no-undef */
+        href: `${PUBLIC_URL}/react.html`,
         img: require('./images/react-logo.png'),
       },
       {
         title: 'Vue',
-        href: `${address.SERVER_ADDRESS}/vue.html`,
+        /* eslint-disable-next-line no-undef */
+        href: `${PUBLIC_URL}/vue.html`,
         img: require('./images/vue-logo.png'),
       },
     ];

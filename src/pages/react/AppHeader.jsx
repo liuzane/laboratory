@@ -3,9 +3,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-// 地址
-import address from '@/address';
-
 // 路由模块
 import { withRouter } from 'react-router-dom';
 
@@ -86,7 +83,7 @@ class AppHeader extends PureComponent {
             clearCookie();
             clearStorage('userInfo');
             resetUser();
-            goto(`${address.SERVER_ADDRESS}/login.html`);
+            goto('/login.html');
           }
         });
         break;

@@ -67,7 +67,7 @@ module.exports = {
   }, {}),
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath: processEnv.PUBLIC_URL,
+    publicPath: processEnv.PUBLIC_URL + '/',
     filename: 'scripts/[name].[hash:6].js',
     chunkFilename: 'scripts/[name].[hash:6].min.js',
   },

@@ -3,9 +3,6 @@ import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-// 地址
-import address from '@/address';
-
 // 路由模块
 import { withRouter } from 'react-router-dom';
 
@@ -129,7 +126,7 @@ class App extends PureComponent {
       this.setState({ loading: false });
     } else {
       const url = getCurrentUrlPath();
-      goto(`${address.SERVER_ADDRESS}/login.html${url}`);
+      goto(`/login.html${url}`);
     }
   };
 
