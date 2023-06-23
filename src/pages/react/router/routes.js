@@ -117,6 +117,28 @@ const children = [
   },
 
   {
+    path: 'typescript',
+    title: 'routes.typescript',
+    icon: 'icon-funnies',
+    component: Container,
+    children: [
+      {
+        path: '',
+        exact: true,
+        redirect: 'basic-types',
+        hidden: true,
+      },
+
+      {
+        path: 'basic-types',
+        title: 'routes.typescript.basic-types',
+        component: AsyncLoad(() => import('@-react/views/typescript/basic-types')),
+        exact: true,
+      },
+    ],
+  },
+
+  {
     path: 'others',
     title: 'routes.others',
     icon: 'icon-others',

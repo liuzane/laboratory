@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "strict": false,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@-react/*": ["src/pages/react/*"],
+      "@-vue/*": ["src/pages/vue/*"]
+    }
+  }
+}

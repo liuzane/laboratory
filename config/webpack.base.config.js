@@ -72,7 +72,7 @@ module.exports = {
     chunkFilename: 'scripts/[name].[hash:6].min.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'],
     alias: {
       '@': path.resolve(__dirname, '../src'),
       '@-react': path.resolve(__dirname, '../src/pages/react'),
@@ -106,6 +106,11 @@ module.exports = {
             '@babel/plugin-syntax-dynamic-import'
           ]
         },
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.vue$/,
