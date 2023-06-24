@@ -6,9 +6,9 @@ interface LayoutCommonType {
   children?: any;
 }
 
-interface LayMainType extends LayoutCommonType {
-  wrapperClassName?: string;
-  wrapperStyle?: {
+interface LayContainerType extends LayoutCommonType {
+  contentClassName?: string;
+  contentStyle?: {
     [key: string]: string | number;
   };
 }
@@ -16,5 +16,5 @@ interface LayMainType extends LayoutCommonType {
 export declare const LayMain: React.FC<LayoutCommonType>;
 export declare const LayHeader: React.FC<LayoutCommonType>;
 export declare const LaySider: React.FC<LayoutCommonType>;
-export declare const LayContent: React.FC<LayoutCommonType>;
-export declare const LayContainer: React.FC<LayMainType>;
+export declare const LaySection: React.FC<LayoutCommonType>;
+export declare const LayContainer: React.FC<LayContainerType>;

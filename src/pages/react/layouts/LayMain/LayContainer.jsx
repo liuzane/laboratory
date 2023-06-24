@@ -11,8 +11,8 @@ const LayContainer = props => (
     style={ props.style }
   >
     <div
-      className={ classnames('layout-wrapper', props.wrapperClassName) }
-      style={ props.wrapperStyle }
+      className={ classnames('layout-content', props.contentClassName) }
+      style={ props.contentStyle }
     >
       { props.children }
     </div>

@@ -5,13 +5,13 @@ import React, { memo } from 'react';
 import classnames from 'classnames';
 
 
-const LayContent = props => (
-  <div
-    className={ classnames('layout-content', props.className) }
+const LaySection = props => (
+  <section
+    className={ classnames('layout-section', props.className) }
     style={ props.style }
   >
     { props.children }
-  </div>
+  </section>
 );
 
-export default memo(LayContent);
+export default memo(LaySection);

@@ -117,22 +117,22 @@ const children = [
   },
 
   {
-    path: 'typescript',
-    title: 'routes.typescript',
+    path: 'syntax',
+    title: 'routes.syntax',
     icon: 'icon-funnies',
     component: Container,
     children: [
       {
         path: '',
         exact: true,
-        redirect: 'basic-types',
+        redirect: 'typescript',
         hidden: true,
       },
 
       {
-        path: 'basic-types',
-        title: 'routes.typescript.basic-types',
-        component: AsyncLoad(() => import('@-react/views/typescript/basic-types')),
+        path: 'typescript',
+        title: 'routes.syntax.typescript',
+        component: AsyncLoad(() => import('@-react/views/syntax/typescript')),
         exact: true,
       },
     ],

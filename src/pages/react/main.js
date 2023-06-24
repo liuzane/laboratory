@@ -2,7 +2,7 @@
 // import * as serviceWorker from '@/serviceWorker';
 
 // 基础模块
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 
 // Redux状态库
@@ -22,11 +22,13 @@ import '@/styles';
 // serviceWorker.register();
 // console.log('routes', routes);
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <RouterView routes={routes} />
-    </Router>
-  </Provider>,
+  <StrictMode>
+    <Provider store={store}>
+      <Router>
+        <RouterView routes={routes} />
+      </Router>
+    </Provider>
+  </StrictMode>,
   document.getElementById('root')
 );
 

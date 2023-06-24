@@ -8,9 +8,6 @@ import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 // 第三方模块
 import { fromJS, is } from 'immutable';
 
-// 容器组件
-import Container from './Container';
-
 
 class RouterView extends PureComponent {
   static propTypes = {

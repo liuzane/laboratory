@@ -72,7 +72,7 @@ module.exports = {
     chunkFilename: 'scripts/[name].[hash:6].min.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'],
+    extensions: [ '.js', '.jsx', '.tsx', '.ts', '.json' ],
     alias: {
       '@': path.resolve(__dirname, '../src'),
       '@-react': path.resolve(__dirname, '../src/pages/react'),
@@ -215,7 +215,7 @@ module.exports = {
     ...multiplePageConfig.map(({ entry, path, ...restOptions }) => {
       return new HtmlWebpackPlugin({
         filename: entry + '.html',
-        chunks: [entry],
+        chunks: [ entry ],
         inject: true,
         template: 'index.template.html',
         ...restOptions

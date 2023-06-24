@@ -46,7 +46,7 @@
   transform: translateY(-50%);
 }
 
-.layout-content {
+.layout-section {
   height: calc(100% - 64px);
   position: relative;
   overflow: auto;
@@ -62,7 +62,7 @@
   overflow: auto;
 }
 
-.layout-wrapper {
+.layout-content {
   width: 100%;
   /* min-width: 1000px; */
   min-height: 100%;

@@ -16,7 +16,7 @@ import { getCookie } from '@/utils/cookie';
 import LangProvider, { languages } from './languages';
 
 // 布局组件
-import { LayMain, LayContent } from './layouts/LayMain';
+import { LayMain, LaySection } from './layouts/LayMain';
 
 // 公共组件
 import ScreenLoading from './components/ScreenLoading';
@@ -154,9 +154,9 @@ class App extends PureComponent {
               routeInfo={routeInfo}
             />
 
-            <LayContent>
+            <LaySection>
               {loading ? null : <RouterView routes={routes} onRouterEach={this.onRouterEach} />}
-            </LayContent>
+            </LaySection>
           </LayMain>
         </LayMain>
       </LangProvider>
