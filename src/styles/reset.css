@@ -1,10 +1,34 @@
-body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+html body, 
+html h1, 
+html h2, 
+html h3, 
+html h4, 
+html h5, 
+html h6, 
+html hr, 
+html p, 
+html blockquote, 
+html dl, 
+html dt, 
+html dd, 
+html ul, 
+html ol, 
+html li, 
+html pre, 
+html form, 
+html fieldset, 
+html legend, 
+html button, 
+html input, 
+html textarea, 
+html th, 
+html td {
   margin: 0;
   padding: 0;
 }
 
 body, button, input, select, textarea {
-  font: 12px/1.5 "Microsoft YaHei", arial, georgia, verdana, helvetica, sans-serif;
+  font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 h1, h2, h3, h4, h5, h6 {

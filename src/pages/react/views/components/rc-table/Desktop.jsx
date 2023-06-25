@@ -9,7 +9,7 @@ import Table from 'rc-table';
 import { Button } from 'antd';
 
 // 布局组件
-import { LayContainer } from '@-react/layouts/LayMain';
+import { LayContent } from '@-react/layouts/LayMain';
 
 // 样式
 import 'rc-table/assets/index.css';
@@ -138,14 +138,14 @@ class Desktop extends PureComponent {
 
   render() {
     return (
-      <LayContainer>
+      <LayContent>
         <Table
           columns={this.columns}
           data={this.state.dataSource}
           scroll={{ x: 300, y: 400 }}
           className="table"
         />
-      </LayContainer>
+      </LayContent>
     );
   }
 }

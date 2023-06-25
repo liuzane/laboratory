@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 // 布局组件
-import { LayContainer } from '@-react/layouts/LayMain';
+import { LayContent } from '@-react/layouts/LayMain';
 
 const Desktop: React.FC = () => {
   const [ imString, setImString ] = useState<string>('');
@@ -14,19 +14,25 @@ const Desktop: React.FC = () => {
   const theListDom = useRef<any>(null);
 
   useEffect(() => {
-    console.log('Mounted');
-    console.log('theListDom:', theListDom);
+    // console.log('Mounted');
+    // console.log('theListDom:', theListDom);
     return () => {
-      console.log('Destoryed');
+      // console.log('Mounted destoryed');
     };
   }, []);
 
   useEffect(() => {
-    console.log('Updated');
+    // console.log('Updated');
+    return () => {
+      // console.log('Updated destoryed');
+    };
   });
 
   useEffect(() => {
-    console.log('Updated by count:' + count);
+    // console.log('Updated by count:' + count);
+    return () => {
+      // console.log('Updated by count destoryed');
+    };
   }, [ count ]);
 
   const handleCount = (isAdd: boolean): void => {
@@ -34,7 +40,7 @@ const Desktop: React.FC = () => {
   };
 
   return (
-    <LayContainer>
+    <LayContent>
       <h3>basic-types:</h3>
       <ul ref={theListDom}>
         <li>string: { typeof imString }</li>
@@ -44,7 +50,7 @@ const Desktop: React.FC = () => {
       </ul>
       <button onClick={ handleCount.bind(this, true) }>Add</button>
       <button onClick={ handleCount.bind(this, false) }>Minus</button>
-    </LayContainer>
+    </LayContent>
   );
 };
 

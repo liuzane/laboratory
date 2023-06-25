@@ -3,10 +3,13 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // 路由模块
-import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 // 第三方模块
 import { fromJS, is } from 'immutable';
+
+// 容器组件
+import Container from './Container';
 
 
 class RouterView extends PureComponent {
@@ -28,25 +31,7 @@ class RouterView extends PureComponent {
   }
 
   render() {
-    return (
-      <Switch>
-        {
-          this.props.routes.map((item, index) => (
-            <Route
-              key={ index }
-              path={ item.path }
-              exact={ item.exact }
-              strict={ item.strict }
-              render={
-                props => item.redirect
-                  ? (<Redirect to={ item.redirect } />)
-                  : (<item.component { ...props } routes={ item.children } />)
-              }
-            />
-          ))
-        }
-      </Switch>
-    );
+    return (<Container routes={this.props.routes} />);
   }
 }
 

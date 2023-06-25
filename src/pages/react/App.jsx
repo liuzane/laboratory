@@ -7,13 +7,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 // 路由配置
-import { RouterView, goto, getCurrentUrlPath, routesToMenus } from './router';
+import { RouterView, routes, goto, getCurrentUrlPath, routesToMenus } from './router';
 
 // 方法
 import { getCookie } from '@/utils/cookie';
-
-// 多语言配置组件
-import LangProvider, { languages } from './languages';
 
 // 布局组件
 import { LayMain, LaySection } from './layouts/LayMain';
@@ -32,20 +29,19 @@ import { cloneDeep } from 'lodash';
 
 class App extends PureComponent {
   static propTypes = {
-    language: PropTypes.string,
+    // Action
     getUserInfo: PropTypes.func,
-    routes: PropTypes.array,
+    // Props
+    i18n: PropTypes.object,
+    location: PropTypes.object,
     history: PropTypes.object,
     match: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
-    const browserLanguage = window.navigator.language.toLocaleLowerCase();
-    const matchLanguage = props.match.params.language;
-    // this.language = languages[matchLanguage] ? matchLanguage : languages[browserLanguage] ? browserLanguage : Object.keys(languages)[0];
-    this.language = matchLanguage || browserLanguage;
-    this.menu = routesToMenus(props.routes);
+    this.menu = routesToMenus(routes);
+    this.language = props.i18n.getLanguage();
     this.state = {
       loading: true,
       routeInfo: {},
@@ -67,19 +63,18 @@ class App extends PureComponent {
 
   // 获取路由菜单路径
   getRouteMenuInfo = () => {
-    const { routes, match, location } = this.props;
-    const pathname = location.pathname;
+    const { location } = this.props;
     const pathnames = location.pathname
       .split('/')
       .filter((name) => name)
       .map((name) => '/' + name);
-    pathnames.splice(0, 1, match.path);
+    // pathnames.splice(0, 1, match.path);
     const routePaths = pathnames.reduce((total, current) => {
       const lastPathname = total[total.length - 1];
       total.push(lastPathname ? lastPathname + current : current);
       return total;
     }, []);
-    routePaths.splice(0, 1);
+    // routePaths.splice(0, 1);
     let newRoutes = cloneDeep(routes);
     const pathRoutes = routePaths.reduce((total, pathname) => {
       const route = newRoutes.find((route) => {
@@ -131,35 +126,40 @@ class App extends PureComponent {
   };
 
   onRouterEach = (to, from, history) => {
-    if (typeof to.pathname === 'string' && to.pathname.search(':language') > - 1) {
-      history.replace(to.pathname.replace(':language', this.props.language));
+    if (typeof to.pathname === 'string') {
+      history.replace(to.pathname);
     }
   };
 
   render() {
     const { menu } = this;
-    const { language, routes } = this.props;
+    const { i18n } = this.props;
     const { loading, routeInfo } = this.state;
 
     return (
-      <LangProvider>
-        <ScreenLoading loading={loading} />
-        <LayMain>
-          <AppMenu menu={menu} routeInfo={routeInfo} />
-
-          <LayMain>
-            <AppHeader
-              key={language}
-              language={language}
-              routeInfo={routeInfo}
-            />
-
-            <LaySection>
-              {loading ? null : <RouterView routes={routes} onRouterEach={this.onRouterEach} />}
-            </LaySection>
-          </LayMain>
-        </LayMain>
-      </LangProvider>
+      <Fragment>
+        {
+          loading 
+          ? <ScreenLoading loading /> 
+          : <LayMain>
+              <AppMenu 
+                i18n={i18n} 
+                menu={menu} 
+                routeInfo={routeInfo} 
+              />
+              <LayMain>
+                <AppHeader i18n={i18n} routeInfo={routeInfo}/>
+                <LaySection>
+                  <RouterView 
+                    routes={routes} 
+                    i18n={i18n} 
+                    onRouterEach={this.onRouterEach} 
+                  />
+                </LaySection>
+              </LayMain>
+            </LayMain>
+        }
+      </Fragment>
     );
   }
 }

@@ -2,7 +2,7 @@
 // import * as serviceWorker from '@/serviceWorker';
 
 // 基础模块
-import React, { StrictMode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Redux状态库
@@ -13,22 +13,25 @@ import store from './store';
 import { HashRouter as Router } from 'react-router-dom';
 // import { BrowserRouter as Router } from 'react-router-dom';
 
-// 路由配置
-import { RouterView, routes } from './router';
+// 入口页面
+import App from '@-react/App';
+
+// i18n
+import I18n from '@/i18n';
 
 // 全局样式
 import '@/styles';
 
+const i18n = new I18n();
+
 // serviceWorker.register();
 // console.log('routes', routes);
 ReactDOM.render(
-  <StrictMode>
-    <Provider store={store}>
-      <Router>
-        <RouterView routes={routes} />
-      </Router>
-    </Provider>
-  </StrictMode>,
+  <Provider store={store}>
+    <Router>
+      <App i18n={i18n} />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

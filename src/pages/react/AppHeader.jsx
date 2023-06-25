@@ -13,14 +13,8 @@ import { goto } from './router';
 import { clearCookie } from '@/utils/cookie';
 import { clearStorage } from '@/utils/local-storage';
 
-// 多语言列表
-import { languages } from './languages';
-
 // 布局组件
 import { LayHeader } from './layouts/LayMain';
-
-// 多语言组件
-import { injectIntl, FormattedMessage } from 'react-intl';
 
 // UI组件库
 import { Dropdown, Menu, Button, Modal, Breadcrumb } from 'antd';
@@ -31,19 +25,19 @@ class AppHeader extends PureComponent {
   static propTypes = {
     // State
     username: PropTypes.string,
-    // Dispatch
+    // Action
     resetUser: PropTypes.func,
     // Props
-    language: PropTypes.string,
-    intl: PropTypes.object,
+    i18n: PropTypes.object,
     location: PropTypes.object,
     routeInfo: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
-    const { language } = props;
-    const currentLanguage = languages.find(item => item.code === language);
+    const language = props.i18n.getLanguage();
+    const languageList = props.i18n.getLanguageList();
+    const currentLanguage = languageList.find(item => item.code === language);
     if (currentLanguage) {
       this.languageKey = currentLanguage.code;
       this.languageName = currentLanguage.name;
@@ -51,19 +45,14 @@ class AppHeader extends PureComponent {
   }
 
   // 切换语言并保存到本地
-  handleLanguage = ({ item, key, keyPath }) => {
-    const { history, location, match } = this.props;
-    const beforeUrl = match.url;
-    const afterUrl = match.path.replace(':language', key);
-    const url = location.pathname.replace(beforeUrl, afterUrl);
-    history.push(url);
+  handleLanguage = ({ key }) => {
+    this.props.i18n.setLanguage(key);
     window.location.reload();
   };
 
   // 处理用户行为
   handleUser = ({ item, key, keyPath }) => {
-    const { resetUser } = this.props;
-    const { formatMessage } = this.props.intl;
+    const { resetUser, i18n: { getText } } = this.props;
 
     switch (key) {
       case 'userInfo':
@@ -75,10 +64,10 @@ class AppHeader extends PureComponent {
       case 'logout':
         Modal.confirm({
           centered: true,
-          title: formatMessage({ id: 'main.header.logout.title' }),
-          content: formatMessage({ id: 'main.header.logout.content' }),
-          okText: formatMessage({ id: 'global.modal.okText' }),
-          cancelText: formatMessage({ id: 'global.modal.cancelText' }),
+          title: getText('main.header.logout.title'),
+          content: getText('main.header.logout.content'),
+          okText: getText('global.modal.okText'),
+          cancelText: getText('global.modal.cancelText'),
           onOk: () => {
             clearCookie();
             clearStorage('userInfo');
@@ -95,23 +84,24 @@ class AppHeader extends PureComponent {
 
   // 渲染用户行为下拉列表
   renderUserMenu() {
+    const { i18n: { getText } } = this.props;
     return (
       <Menu onClick={ this.handleUser }>
         <Menu.Item key="userInfo">
           <UserOutlined className="app__menu-icon" />
-          <FormattedMessage id="main.header.personalInfo" />
+          {getText('main.header.personalInfo')}
         </Menu.Item>
 
         <Menu.Item key="password">
           <UnlockOutlined className="app__menu-icon" />
-          <FormattedMessage id="main.header.changePassword" />
+          {getText('main.header.changePassword')}
         </Menu.Item>
 
         <Menu.Divider />
 
         <Menu.Item className="app__logout" key="logout">
           <PoweroffOutlined className="app__menu-icon" />
-          <FormattedMessage id="main.header.logout" />
+          {getText('main.header.logout')}
         </Menu.Item>
       </Menu>
     );
@@ -119,6 +109,7 @@ class AppHeader extends PureComponent {
 
   // 渲染多语言下拉列表
   renderLanguageMenu() {
+    const languageList = this.props.i18n.getLanguageList();
     return (
       <Menu
         defaultSelectedKeys={[ this.languageKey ]}
@@ -126,7 +117,7 @@ class AppHeader extends PureComponent {
         selectedKeys={[ this.languageKey ]}
       >
         {
-          languages.map(lang => (
+          languageList.map(lang => (
             <Menu.Item key={ lang.code }>
               <span>{ lang.name }</span>
             </Menu.Item>
@@ -137,18 +128,18 @@ class AppHeader extends PureComponent {
   }
   
   render() {
-    const { username, routeInfo } = this.props;
+    const { i18n: { getText }, username, routeInfo } = this.props;
     let breadcrumbs = [];
     if (routeInfo.pathRoutes) {
       breadcrumbs = routeInfo.pathRoutes;
     }
-    console.log('breadcrumbs', breadcrumbs);
+
     return (
       <LayHeader className="app__header">
         {
-          routeInfo.lastKey === '/:language/home' ? (
+          routeInfo.lastKey === '/home' ? (
             <h2 className="app__title">
-              <FormattedMessage id="main.header.title" />
+              {getText('main.header.title')}
             </h2>
           ) : (
             <div className="app__breadcrumb">
@@ -156,16 +147,14 @@ class AppHeader extends PureComponent {
                 {
                   breadcrumbs.map(route => (
                     <Breadcrumb.Item key={route.path}>
-                      <FormattedMessage id={route.title} />
+                      {getText(route.title)}
                     </Breadcrumb.Item>
                   ))
                 }
               </Breadcrumb>
               <h3 className="app__breadcrumb-name">
                 {
-                  breadcrumbs.length > 0 ? (
-                    <FormattedMessage id={breadcrumbs[breadcrumbs.length - 1].title} />
-                  ) : null
+                  breadcrumbs.length > 0 ? getText(breadcrumbs[breadcrumbs.length - 1].title) : null
                 }
               </h3>
             </div>
@@ -197,9 +186,7 @@ class AppHeader extends PureComponent {
   }
 }
 
-const IntlMainHeader = injectIntl(AppHeader);
-
-const RouterHeader = withRouter(IntlMainHeader);
+const RouterHeader = withRouter(AppHeader);
 
 // State
 const mapStateToProps = ({ user }) => ({

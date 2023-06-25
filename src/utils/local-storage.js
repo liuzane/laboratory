@@ -3,7 +3,7 @@
 * @param { key: String, required } { data: Any, required } { hours: Number }
 * @return { Boolean }
 */
-export function setStorage (key, data, hours) {
+export function setStorage(key, data, hours) {
   let expires;
 
   if (!key || !data) {
@@ -22,7 +22,7 @@ export function setStorage (key, data, hours) {
 * @param { key: String, required }
 * @return { Boolean | null }
 */
-export function getStorage (key) {
+export function getStorage(key) {
   let data, nowTime = new Date().getTime();
 
   if (!key) console.error('[localStorage Error]: Key is a must parameter');
@@ -48,7 +48,7 @@ export function getStorage (key) {
 * @param { key: String, required }
 * @return null
 */
-export function clearStorage (key) {
+export function clearStorage(key) {
   if (key) {
     localStorage.removeItem(key);
   } else {

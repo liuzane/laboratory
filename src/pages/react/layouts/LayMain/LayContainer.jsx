@@ -6,17 +6,12 @@ import classnames from 'classnames';
 
 
 const LayContainer = props => (
-  <div
+  <section
     className={ classnames('layout-container', props.className) }
     style={ props.style }
   >
-    <div
-      className={ classnames('layout-content', props.contentClassName) }
-      style={ props.contentStyle }
-    >
-      { props.children }
-    </div>
-  </div>
+    { props.children }
+  </section>
 );
 
 export default memo(LayContainer);

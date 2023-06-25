@@ -8,7 +8,7 @@ import _ from 'lodash';
 import { Input, Button } from 'antd';
 
 // 布局组件
-import { LayContainer } from '@-react/layouts/LayMain';
+import { LayContent } from '@-react/layouts/LayMain';
 
 // 组件
 import Validate from './Validate';
@@ -69,7 +69,7 @@ class Desktop extends PureComponent {
   render() {
     const { model, rules } = this.state;
     return (
-      <LayContainer>
+      <LayContent>
         <Validate model={ model } rules={ rules }>
           {
             (messages) => (
@@ -91,7 +91,7 @@ class Desktop extends PureComponent {
             )
           }
         </Validate>
-      </LayContainer>
+      </LayContent>
     );
   }
 }

@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { fromJS, is } from 'immutable';
 
 // 布局组件
-import { LayContainer } from '@-react/layouts/LayMain';
+import { LayContent } from '@-react/layouts/LayMain';
 
 // 样式
 import './Desktop.css';
@@ -32,7 +32,7 @@ class Todo extends Component {
 
   render() {
     return (
-      <LayContainer>
+      <LayContent>
         <ul className="todo">
           {
             this.state.floor.map(item => (
@@ -46,7 +46,7 @@ class Todo extends Component {
             ))
           }
         </ul>
-      </LayContainer>
+      </LayContent>
     );
   }
 }

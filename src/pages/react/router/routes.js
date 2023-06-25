@@ -14,7 +14,7 @@ const NotFound = {
   component: AsyncLoad(() => import('@-react/components/NotFound')),
 };
 
-const children = [
+const routes = [
   {
     path: '',
     redirect: 'home',
@@ -119,7 +119,7 @@ const children = [
   {
     path: 'syntax',
     title: 'routes.syntax',
-    icon: 'icon-funnies',
+    icon: 'icon-syntax',
     component: Container,
     children: [
       {
@@ -133,6 +133,13 @@ const children = [
         path: 'typescript',
         title: 'routes.syntax.typescript',
         component: AsyncLoad(() => import('@-react/views/syntax/typescript')),
+        exact: true,
+      },
+
+      {
+        path: 'react-hooks',
+        title: 'routes.syntax.react-hooks',
+        component: AsyncLoad(() => import('@-react/views/syntax/react-hooks')),
         exact: true,
       },
     ],
@@ -172,22 +179,6 @@ const children = [
         exact: true,
       },
     ],
-  },
-];
-
-const routes = [
-  {
-    path: '/:language',
-    component: AsyncLoad(() => import('@-react/App')),
-    children,
-  },
-
-  {
-    path: '/',
-    hidden: true,
-    redirect: `/${window.navigator.language.toLocaleLowerCase()}`,
-    // redirect: '/:language',
-    exact: true,
   },
 ];
 

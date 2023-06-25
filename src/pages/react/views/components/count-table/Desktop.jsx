@@ -12,7 +12,7 @@ import CountTable from './CountTable';
 // import EditableTable from './EditableTable';
 
 // 布局组件
-import { LayContainer } from '@-react/layouts/LayMain';
+import { LayContent } from '@-react/layouts/LayMain';
 
 // 样式
 import './style/Desktop.less';
@@ -177,7 +177,7 @@ export default class Desktop extends PureComponent {
     const { data, loading } = this.state;
 
     return (
-      <LayContainer>
+      <LayContent>
         <CountTable
           className="desktop-table"
           columns={ columns }
@@ -203,7 +203,7 @@ export default class Desktop extends PureComponent {
         {/* columns={ columns } */ }
         {/* rowKey="id" */ }
         {/* /> */ }
-      </LayContainer>
+      </LayContent>
     );
   }
 }

@@ -1,5 +1,5 @@
 .highlight {
-  margin: 20px;
+  margin: 0;
   border: 1px solid #e1e1e1;
   border-radius: 2px;
   line-height: 1.1em;
@@ -23,7 +23,7 @@
 }
 
 .highlight-code {
-  padding: 1.2em 1.4em;
+  padding: 1em;
   line-height: 1.5em;
   margin: 0;
 }

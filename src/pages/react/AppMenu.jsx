@@ -12,9 +12,6 @@ import { cloneDeep } from 'lodash';
 // 布局组件
 import { LaySider } from './layouts/LayMain';
 
-// 多语言组件
-import { FormattedMessage } from 'react-intl';
-
 // 公共组件
 import IconFont from './components/IconFont';
 
@@ -27,6 +24,7 @@ const { SubMenu, Item } = Menu;
 class AppMenu extends PureComponent {
   static propTypes = {
     // Props
+    i18n: PropTypes.object,
     menu: PropTypes.array,
     routeInfo: PropTypes.object,
     match: PropTypes.object,
@@ -35,12 +33,12 @@ class AppMenu extends PureComponent {
   };
 
   goto = item => {
-    console.log(item.key);
+    console.log('goto', item);
     this.props.history.push(item.key);
   };
 
   render() {
-    const { menu, routeInfo } = this.props;
+    const { i18n: { getText }, menu, routeInfo } = this.props;
     let defaultOpenKeys = [];
     let defaultSelectedKeys = [];
     if (routeInfo.lastChildrenKey) {
@@ -49,6 +47,26 @@ class AppMenu extends PureComponent {
     if (routeInfo.lastKey) {
       defaultSelectedKeys = [ routeInfo.lastKey ];
     }
+
+    // return (
+    //   <LaySider>
+    //     <Menu
+    //       key={routeInfo.lastKey}
+    //       defaultOpenKeys={defaultOpenKeys}
+    //       defaultSelectedKeys={defaultSelectedKeys}
+    //       mode="inline"
+    //       onSelect={this.goto}
+    //       theme="dark"
+    //       inlineIndent={12}
+    //     >
+    //       <Item key="/home">Home</Item>
+    //       <SubMenu key="/others" title="Others">
+    //         <Item key="/others/less">Less</Item>
+    //         <Item key="/others/module">Module</Item>
+    //       </SubMenu>
+    //     </Menu>
+    //   </LaySider>
+    // );
 
     return (
       <LaySider>
@@ -64,21 +82,20 @@ class AppMenu extends PureComponent {
           {
             menu.map(item => {
               if (item.children) {
-                console.log();
                 return (
                   <SubMenu
                     key={item.path}
                     title={
                       <span>
                         <IconFont className="app__menu-icon" type={item.icon}/>
-                        <FormattedMessage id={item.title}/>
+                        {getText(item.title)}
                       </span>
                     }
                   >
                     {
                       item.children.map(child => (
                         <Item key={child.path}>
-                          <FormattedMessage id={child.title}/>
+                          {getText(child.title)}
                         </Item>
                       ))
                     }
@@ -88,7 +105,7 @@ class AppMenu extends PureComponent {
                 return (
                   <Item key={item.path}>
                     <IconFont className="app__menu-icon" type={item.icon}/>
-                    <FormattedMessage id={item.title}/>
+                    {getText(item.title)}
                   </Item>
                 );
               }

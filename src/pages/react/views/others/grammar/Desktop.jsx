@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react';
 import HighlightCode from '@-react/components/Highlight';
 
 // 布局组件
-import { LayContainer } from '@-react/layouts/LayMain';
+import { LayContent } from '@-react/layouts/LayMain';
 
 // 样式
 import './style/Desktop.less';
@@ -46,7 +46,7 @@ class Desktop extends PureComponent {
     const { className, style } = this.props;
     
     return (
-      <LayContainer>
+      <LayContent>
         <h1
           ref={ this.Grammar }
           className={ className }
@@ -55,7 +55,7 @@ class Desktop extends PureComponent {
           <button onClick={ this.handleRefs }>Grammar</button>
         </h1>
         <HighlightCode code={ code } />
-      </LayContainer>
+      </LayContent>
     );
   }
 }

@@ -52,21 +52,36 @@
   overflow: auto;
 }
 
-.layout-container {
+.layout-scrolling {
   height: calc(100% - 16px);
   background-color: #fff;
   box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
-  box-sizing: border-box;
   margin: 8px;
-  position: relative;
   overflow: auto;
 }
 
 .layout-content {
+  box-sizing: border-box;
   width: 100%;
-  /* min-width: 1000px; */
   min-height: 100%;
+  padding: 8px;
+  position: relative;
   overflow: hidden;
+}
+
+.layout-container {
+  height: calc(100% - 16px);
+  margin: 8px;
+}
+
+.layout-block {
+  background-color: #fff;
+  margin: 8px 0;
+  padding: 8px;
+}
+
+.layout--no-padding {
+  padding: 0;
 }
 
 @keyframes layout-logo-spin {

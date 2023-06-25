@@ -1,11 +1,11 @@
 // 基础模块
-import React from 'react';
+import React, { memo } from 'react';
 
 // 路由模块
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 // 嵌套路由容器
-export default ({ routes }) => (
+export default memo(({ routes }) => (
   <Switch>
     {
       routes.map((item, index) => (
@@ -23,4 +23,4 @@ export default ({ routes }) => (
       ))
     }
   </Switch>
-);
+));

@@ -5,7 +5,10 @@ import React, { PureComponent } from 'react';
 import address from '@/address';
 
 // 布局组件
-import { LayContainer } from '@-react/layouts/LayMain';
+import { LayContent } from '@-react/layouts/LayMain';
+
+// 样式
+import './style/Desktop.less';
 
 
 class Desktop extends PureComponent {
@@ -16,7 +19,7 @@ class Desktop extends PureComponent {
 
   render() {
     return (
-      <LayContainer wrapperStyle={{ height: '100%' }}>
+      <LayContent className="myIframe" noPadding>
         <iframe
           src={ this.src }
           width="100%"
@@ -24,7 +27,7 @@ class Desktop extends PureComponent {
           frameBorder="0"
           scrolling="no"
         />
-      </LayContainer>
+      </LayContent>
     );
   }
 }

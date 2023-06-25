@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 
 // 布局组件
-import { LayContainer } from '@-react/layouts/LayMain';
+import { LayContent } from '@-react/layouts/LayMain';
 
 // 样式
 import './style/Desktop.less';
@@ -38,7 +38,7 @@ class Desktop extends PureComponent {
 
   render() {
     return (
-      <LayContainer>
+      <LayContent>
         <ul className="svg-container">
           <SvgItem>
             <defs>
@@ -300,7 +300,7 @@ class Desktop extends PureComponent {
             />
           </SvgItem>
         </ul>
-      </LayContainer>
+      </LayContent>
     );
   }
 }

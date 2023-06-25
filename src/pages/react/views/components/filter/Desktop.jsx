@@ -10,7 +10,7 @@ import Filter from './Filter';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 // 布局组件
-import { LayContainer } from '@-react/layouts/LayMain';
+import { LayContent } from '@-react/layouts/LayMain';
 
 // 样式
 import './style/Desktop.less';
@@ -172,7 +172,7 @@ class Desktop extends PureComponent {
 
   render() {
     return (
-      <LayContainer>
+      <LayContent>
         <Filter
           layout={{
             item: {
@@ -194,7 +194,7 @@ class Desktop extends PureComponent {
             <p key={index}>{item[0]}: {item[1] && item[1].toString()}</p>
           ))
         }
-      </LayContainer>
+      </LayContent>
     );
   }
 }

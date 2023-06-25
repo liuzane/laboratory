@@ -12,14 +12,14 @@ export const createRoutes = (routes, NotFound, isEndConcat) => {
         currentRoute.code = (currentRoute.redirect || currentRoute.path).replace(/\//g, '');
       }
 
-      if (parentPath && currentRoute.path.substr(0, 1) !== '/') {
-        currentRoute.path = parentPath + (currentRoute.path === '' ? '' : '/' + currentRoute.path);
+      if (currentRoute.path.substr(0, 1) !== '/') {
+        currentRoute.path = (parentPath || '') + (currentRoute.path === '' ? '/' : '/' + currentRoute.path);
 
         if (currentRoute.redirect) {
           currentRoute.redirect =
             currentRoute.redirect.substr(0, 1) === '/'
               ? currentRoute.redirect
-              : parentPath + '/' + currentRoute.redirect;
+              : (parentPath || '') + '/' + currentRoute.redirect;
         }
       }
 

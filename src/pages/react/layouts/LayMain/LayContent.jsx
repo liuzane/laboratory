@@ -7,10 +7,12 @@ import classnames from 'classnames';
 
 const LayContent = props => (
   <div
-    className={ classnames('layout-content', props.className) }
+    className={ classnames('layout-scrolling', props.className) }
     style={ props.style }
   >
-    { props.children }
+    <div className={ classnames('layout-content', props.noPadding ? 'layout--no-padding' : '') }>
+      { props.children }
+    </div>
   </div>
 );
 

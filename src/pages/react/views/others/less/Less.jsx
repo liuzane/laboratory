@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { fromJS, is } from 'immutable';
 
 // 布局组件
-import { LayContainer } from '@-react/layouts/LayMain';
+import { LayContent } from '@-react/layouts/LayMain';
 
 
 // 样式
@@ -26,12 +26,12 @@ class Less extends Component {
 
   render() {
     return (
-      <LayContainer>
+      <LayContent>
         <div className={ styles['container'] }>
           <div className={ styles['box'] }>box</div>
           <div className="box-global">box-global</div>
         </div>
-      </LayContainer>
+      </LayContent>
     );
   }
 }
