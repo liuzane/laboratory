@@ -95,7 +95,6 @@ export default class I18n {
    * @return {string}
    */
   getText(key) {
-    // console.log('getText', I18n.messages[key]);
-    return I18n.messages[key];
+    return I18n.messages[key] || key;
   }
 }

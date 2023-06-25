@@ -37,10 +37,10 @@
               v-for="item in breadcrumbs"
               :key="item.path"
             >
-              {{ item.name }}
+              {{ $getText(item.name) }}
             </ant-breadcrumb-item>
           </ant-breadcrumb>
-          <h3 class="app__breadcrumb-name">{{ breadcrumbs[breadcrumbs.length - 1]?.name }}</h3>
+          <h3 class="app__breadcrumb-name">{{ $getText(breadcrumbs[breadcrumbs.length - 1]?.name) }}</h3>
         </div>
 
         <ul class="app__tooltip">
@@ -64,7 +64,7 @@
                     <template v-if="menu.icon" #icon>
                       <icon :type="menu.icon"/>
                     </template>
-                    <span>{{ menu.title }}</span>
+                    <span>{{ $getText(menu.title) }}</span>
                   </ant-menu-item>
                   <ant-menu-divider v-else/>
                 </template>
@@ -77,8 +77,7 @@
             </li>
             <template #overlay>
               <ant-menu>
-                <ant-menu-item>English</ant-menu-item>
-                <ant-menu-item>简体中文</ant-menu-item>
+                <ant-menu-item v-for="(item, index) in $getLanguageList()" :key="index">{{ item.name }}</ant-menu-item>
               </ant-menu>
             </template>
           </ant-dropdown>
@@ -153,7 +152,7 @@
                 <template v-if="menu.icon" #icon>
                   <icon :type="menu.icon"/>
                 </template>
-                <template #title>{{ menu.name }}</template>
+                <template #title>{{ $getText(menu.name) }}</template>
                 <app-sub-menus :menus="menu.children" />
               </ant-sub-menu>
             </template>
@@ -162,7 +161,7 @@
                 <template v-if="menu.icon" #icon>
                   <icon :type="menu.icon"/>
                 </template>
-                <router-link :to="menu.path">{{ menu.name }}</router-link>
+                <router-link :to="menu.path">{{ $getText(menu.name) }}</router-link>
               </ant-menu-item>
             </template>
           </template>
@@ -230,8 +229,8 @@
         Modal.confirm({
           title: 'app.logout.title?',
           icon: h(ExclamationCircleOutlined),
-          okText: 'global..okText',
-          cancelText: 'global..cancelText',
+          okText: 'global.okText',
+          cancelText: 'global.cancelText',
           onOk() {
             console.log('OK');
           },

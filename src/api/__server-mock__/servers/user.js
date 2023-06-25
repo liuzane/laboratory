@@ -3,14 +3,14 @@ import adapter from '../adapter';
 const Users = {
   admin: {
     id: 'b920FfDB-63f7-dFf5-f8bb-36338ccff84B',
-    name: '管理员',
+    name: 'Administrator',
     password: '123456',
     permission: []
   },
 
   manager: {
     id: 'a3Ac3dAD-f6Ba-B04C-ae81-16D6e4A85fB8',
-    name: '经理',
+    name: 'manager',
     password: '123456',
     permission: []
   },

@@ -1,6 +1,6 @@
 {
-  "global..okText": "确认",
-  "global..cancelText": "取消",
+  "global.okText": "确认",
+  "global.cancelText": "取消",
 
   "page.header.title": "立即开始一场神奇的旅行吧！",
   "page.header.welcome": "欢迎，",
@@ -16,7 +16,7 @@
   "react-page.components.filter": "Filter",
   "react-page.components.rc-table": "RcTable",
   "react-page.components.validate": "Validate",
-  "react-page.funnies": "好玩",
+  "react-page.funnies": "有趣",
   "react-page.funnies.animation": "动画",
   "react-page.funnies.floors": "滚动层",
   "react-page.funnies.svg": "Svg",
@@ -27,5 +27,15 @@
   "react-page.others": "其他",
   "react-page.others.less": "Less",
   "react-page.others.module": "模块",
-  "react-page.others.grammar": "语法"
+  "react-page.others.grammar": "语法",
+
+  "vue-page.home": "首页",
+  "vue-page.library": "库",
+  "vue-page.antd-ui": "Antd UI",
+  "vue-page.element-ui": "Element UI",
+  "vue-page.vue-api": "Api",
+  "vue-page.setup": "Setup",
+  "vue-page.funnies": "有趣",
+  "vue-page.floors": "滚动层",
+  "vue-page.hello-world": "Hello World"
 }

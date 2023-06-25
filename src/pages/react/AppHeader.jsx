@@ -66,8 +66,8 @@ class AppHeader extends PureComponent {
           centered: true,
           title: getText('page.header.logout.title'),
           content: getText('page.header.logout.content'),
-          okText: getText('global..okText'),
-          cancelText: getText('global..cancelText'),
+          okText: getText('global.okText'),
+          cancelText: getText('global.cancelText'),
           onOk: () => {
             clearCookie();
             clearStorage('userInfo');

@@ -1,6 +1,6 @@
 {
-  "global..okText": "OK",
-  "global..cancelText": "Cancel",
+  "global.okText": "OK",
+  "global.cancelText": "Cancel",
 
   "page.header.title": "Start a magical journey right now!",
   "page.header.welcome": "Welcome, ",
@@ -27,5 +27,15 @@
   "react-page.others": "others",
   "react-page.others.less": "Less",
   "react-page.others.module": "Module",
-  "react-page.others.grammar": "Grammar"
+  "react-page.others.grammar": "Grammar",
+
+  "vue-page.home": "Home",
+  "vue-page.library": "Library",
+  "vue-page.antd-ui": "Antd UI",
+  "vue-page.element-ui": "Element UI",
+  "vue-page.vue-api": "Api",
+  "vue-page.setup": "Setup",
+  "vue-page.funnies": "Funnies",
+  "vue-page.floors": "Floors",
+  "vue-page.hello-world": "Hello World"
 }

@@ -17,14 +17,14 @@ export default createRoutes([
 
   {
     path: '/home',
-    name: 'react-page.home',
+    name: 'vue-page.home',
     icon: 'home',
     component: () => import('@-vue/views/home'),
   },
 
   {
     path: '/library',
-    name: 'routes.library',
+    name: 'vue-page.library',
     icon: 'library',
     component: Container,
     children: [
@@ -36,13 +36,13 @@ export default createRoutes([
 
       {
         path: 'antd-ui',
-        name: 'routes.antd-ui',
+        name: 'vue-page.antd-ui',
         component: () => import('@-vue/views/ui/antd-ui'),
       },
 
       {
         path: 'element-ui',
-        name: 'routes.element-ui',
+        name: 'vue-page.element-ui',
         component: () => import('@-vue/views/ui/element-ui'),
       },
     ],
@@ -50,7 +50,7 @@ export default createRoutes([
 
   {
     path: '/vue-api',
-    name: 'routes.vue-api',
+    name: 'vue-page.vue-api',
     icon: 'api',
     component: Container,
     children: [
@@ -62,55 +62,83 @@ export default createRoutes([
 
       {
         path: 'setup',
-        name: 'routes.setup',
+        name: 'vue-page.setup',
         component: () => import('@-vue/views/vue-api/setup'),
       },
     ],
   },
 
   {
-    path: '/a',
-    name: 'routes.a',
-    icon: 'home',
+    path: '/funnies',
+    name: 'vue-page.funnies',
+    icon: 'funnies',
     component: Container,
     children: [
       {
         path: '',
-        redirect: 'a',
+        redirect: 'floors',
         hidden: true,
       },
 
       {
-        path: 'b',
-        name: 'routes.b',
-        component: Container,
-        children: [
-          {
-            path: '',
-            redirect: 'c',
-            hidden: true,
-          },
+        path: 'floors',
+        name: 'vue-page.floors',
+        component: () => import('@-vue/views/funnies/floors'),
+      },
 
-          {
-            path: 'c',
-            name: 'routes.c',
-            component: Container,
-            children: [
-              {
-                path: '',
-                redirect: 'd',
-                hidden: true,
-              },
-
-              {
-                path: 'd',
-                name: 'routes.d',
-                component: () => import('@-vue/components/HelloWorld.vue'),
-              },
-            ],
-          },
-        ],
+      {
+        path: 'hello-world',
+        name: 'vue-page.hello-world',
+        component: () => import('@-vue/components/HelloWorld.vue'),
       },
     ],
   },
+
+
+
+  // {
+  //   path: '/a',
+  //   name: 'vue-page.a',
+  //   icon: 'home',
+  //   component: Container,
+  //   children: [
+  //     {
+  //       path: '',
+  //       redirect: 'a',
+  //       hidden: true,
+  //     },
+
+  //     {
+  //       path: 'b',
+  //       name: 'vue-page.b',
+  //       component: Container,
+  //       children: [
+  //         {
+  //           path: '',
+  //           redirect: 'c',
+  //           hidden: true,
+  //         },
+
+  //         {
+  //           path: 'c',
+  //           name: 'vue-page.c',
+  //           component: Container,
+  //           children: [
+  //             {
+  //               path: '',
+  //               redirect: 'd',
+  //               hidden: true,
+  //             },
+
+  //             {
+  //               path: 'd',
+  //               name: 'vue-page.d',
+  //               component: () => import('@-vue/components/HelloWorld.vue'),
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
 ], NotFound, true);

@@ -42,7 +42,19 @@
       AntInput: Input,
     },
 
-    setup(props) {
+    setup(props, context) {
+      // 透传 Attributes（非响应式的对象，等价于 $attrs）
+      console.log('context.attrs', context.attrs)
+
+      // 插槽（非响应式的对象，等价于 $slots）
+      console.log('context.slots', context.slots)
+
+      // 触发事件（函数，等价于 $emit）
+      console.log('context.emit', context.emit)
+
+      // 暴露公共属性（函数）
+      console.log('context.expose', context.expose)
+
       const counter = ref(0);
       const location = reactive({
         x: 90,
