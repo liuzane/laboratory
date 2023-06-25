@@ -22,7 +22,6 @@ export default class I18n {
       this.loadMessages(lang);
       this.setLanguage(lang);
     }
-    console.log('lang', lang);
   }
 
   /**

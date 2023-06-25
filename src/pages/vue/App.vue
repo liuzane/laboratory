@@ -230,8 +230,8 @@
         Modal.confirm({
           title: 'app.logout.title?',
           icon: h(ExclamationCircleOutlined),
-          okText: 'global.modal.okText',
-          cancelText: 'global.modal.cancelText',
+          okText: 'global..okText',
+          cancelText: 'global..cancelText',
           onOk() {
             console.log('OK');
           },

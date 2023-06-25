@@ -24,7 +24,7 @@ const routes = [
 
   {
     path: 'home',
-    title: 'routes.home',
+    title: 'react-page.home',
     icon: 'icon-home',
     component: AsyncLoad(() => import('@-react/views/home')),
     exact: true,
@@ -32,7 +32,7 @@ const routes = [
 
   {
     path: 'components',
-    title: 'routes.components',
+    title: 'react-page.components',
     icon: 'icon-components',
     component: Container,
     children: [
@@ -45,28 +45,28 @@ const routes = [
 
       // {
       //   path: 'count-table',
-      //   title: 'routes.components.count-table',
+      //   title: 'react-page.components.count-table',
       //   component: AsyncLoad(() => import('@-react/views/components/count-table')),
       //   exact: true,
       // },
 
       {
         path: 'filter',
-        title: 'routes.components.filter',
+        title: 'react-page.components.filter',
         component: AsyncLoad(() => import('@-react/views/components/filter')),
         exact: true,
       },
 
       {
         path: 'rc-table',
-        title: 'routes.components.rc-table',
+        title: 'react-page.components.rc-table',
         component: AsyncLoad(() => import('@-react/views/components/rc-table')),
         exact: true,
       },
 
       {
         path: 'validate',
-        title: 'routes.components.validate',
+        title: 'react-page.components.validate',
         component: AsyncLoad(() => import('@-react/views/components/validate')),
         exact: true,
       },
@@ -75,7 +75,7 @@ const routes = [
 
   {
     path: 'funnies',
-    title: 'routes.funnies',
+    title: 'react-page.funnies',
     icon: 'icon-funnies',
     component: Container,
     children: [
@@ -88,28 +88,28 @@ const routes = [
 
       {
         path: 'animation',
-        title: 'routes.funnies.animation',
+        title: 'react-page.funnies.animation',
         component: AsyncLoad(() => import('@-react/views/funnies/animation')),
         exact: true,
       },
 
       {
         path: 'floors',
-        title: 'routes.funnies.floors',
+        title: 'react-page.funnies.floors',
         component: AsyncLoad(() => import('@-react/views/funnies/floors')),
         exact: true,
       },
 
       {
         path: 'svg',
-        title: 'routes.funnies.svg',
+        title: 'react-page.funnies.svg',
         component: AsyncLoad(() => import('@-react/views/funnies/svg')),
         exact: true,
       },
 
       {
         path: 'iframe',
-        title: 'routes.funnies.iframe',
+        title: 'react-page.funnies.iframe',
         component: AsyncLoad(() => import('@-react/views/funnies/iframe')),
         exact: true,
       },
@@ -118,7 +118,7 @@ const routes = [
 
   {
     path: 'syntax',
-    title: 'routes.syntax',
+    title: 'react-page.syntax',
     icon: 'icon-syntax',
     component: Container,
     children: [
@@ -131,14 +131,14 @@ const routes = [
 
       {
         path: 'typescript',
-        title: 'routes.syntax.typescript',
+        title: 'react-page.syntax.typescript',
         component: AsyncLoad(() => import('@-react/views/syntax/typescript')),
         exact: true,
       },
 
       {
         path: 'react-hooks',
-        title: 'routes.syntax.react-hooks',
+        title: 'react-page.syntax.react-hooks',
         component: AsyncLoad(() => import('@-react/views/syntax/react-hooks')),
         exact: true,
       },
@@ -147,7 +147,7 @@ const routes = [
 
   {
     path: 'others',
-    title: 'routes.others',
+    title: 'react-page.others',
     icon: 'icon-others',
     component: Container,
     children: [
@@ -160,21 +160,21 @@ const routes = [
 
       {
         path: 'less',
-        title: 'routes.others.less',
+        title: 'react-page.others.less',
         component: AsyncLoad(() => import('@-react/views/others/Less')),
         exact: true,
       },
 
       {
         path: 'module',
-        title: 'routes.others.module',
+        title: 'react-page.others.module',
         component: AsyncLoad(() => import('@-react/views/others/Module')),
         exact: true,
       },
 
       {
         path: 'grammar',
-        title: 'routes.others.grammar',
+        title: 'react-page.others.grammar',
         component: AsyncLoad(() => import('@-react/views/others/Grammar')),
         exact: true,
       },

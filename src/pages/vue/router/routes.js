@@ -17,7 +17,7 @@ export default createRoutes([
 
   {
     path: '/home',
-    name: 'routes.home',
+    name: 'react-page.home',
     icon: 'home',
     component: () => import('@-vue/views/home'),
   },

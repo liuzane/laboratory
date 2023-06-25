@@ -64,10 +64,10 @@ class AppHeader extends PureComponent {
       case 'logout':
         Modal.confirm({
           centered: true,
-          title: getText('main.header.logout.title'),
-          content: getText('main.header.logout.content'),
-          okText: getText('global.modal.okText'),
-          cancelText: getText('global.modal.cancelText'),
+          title: getText('page.header.logout.title'),
+          content: getText('page.header.logout.content'),
+          okText: getText('global..okText'),
+          cancelText: getText('global..cancelText'),
           onOk: () => {
             clearCookie();
             clearStorage('userInfo');
@@ -89,19 +89,19 @@ class AppHeader extends PureComponent {
       <Menu onClick={ this.handleUser }>
         <Menu.Item key="userInfo">
           <UserOutlined className="app__menu-icon" />
-          {getText('main.header.personalInfo')}
+          {getText('page.header.personalInfo')}
         </Menu.Item>
 
         <Menu.Item key="password">
           <UnlockOutlined className="app__menu-icon" />
-          {getText('main.header.changePassword')}
+          {getText('page.header.changePassword')}
         </Menu.Item>
 
         <Menu.Divider />
 
         <Menu.Item className="app__logout" key="logout">
           <PoweroffOutlined className="app__menu-icon" />
-          {getText('main.header.logout')}
+          {getText('page.header.logout')}
         </Menu.Item>
       </Menu>
     );
@@ -139,7 +139,7 @@ class AppHeader extends PureComponent {
         {
           routeInfo.lastKey === '/home' ? (
             <h2 className="app__title">
-              {getText('main.header.title')}
+              {getText('page.header.title')}
             </h2>
           ) : (
             <div className="app__breadcrumb">
