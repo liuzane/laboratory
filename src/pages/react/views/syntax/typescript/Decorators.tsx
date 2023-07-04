@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // 公共组件
 import HighlightCode from '@-react/components/Highlight';
 
-const code = `
+const code: string = `
 interface PropertyDescriptor {
   configurable?: boolean;
   enumerable?: boolean;

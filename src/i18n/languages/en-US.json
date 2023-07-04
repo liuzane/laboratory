@@ -24,6 +24,8 @@
   "react-page.syntax": "Syntax",
   "react-page.syntax.typescript": "TypeScript",
   "react-page.syntax.react-hooks": "React Hooks",
+  "react-page.interview-questions": "Interview Questions",
+  "react-page.interview-questions.event-loop": "Event Loop",
   "react-page.others": "others",
   "react-page.others.less": "Less",
   "react-page.others.module": "Module",

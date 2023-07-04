@@ -33,7 +33,6 @@ class AppMenu extends PureComponent {
   };
 
   goto = item => {
-    console.log('goto', item);
     this.props.history.push(item.key);
   };
 

@@ -146,6 +146,28 @@ const routes = [
   },
 
   {
+    path: 'interview-questions',
+    title: 'react-page.interview-questions',
+    icon: 'icon-syntax',
+    component: Container,
+    children: [
+      {
+        path: '',
+        exact: true,
+        redirect: 'event-loop',
+        hidden: true,
+      },
+
+      {
+        path: 'event-loop',
+        title: 'react-page.interview-questions.event-loop',
+        component: AsyncLoad(() => import('@-react/views/interview-questions/event-loop')),
+        exact: true,
+      },
+    ],
+  },
+
+  {
     path: 'others',
     title: 'react-page.others',
     icon: 'icon-others',
