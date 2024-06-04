@@ -10,6 +10,7 @@ FullscreenLoading.define();
 
 const applications: { path: string; name: string }[] = [
   { path: '/', name: 'entry' },
+  { path: '/solar-system', name: 'solar-system' },
   { path: '/vue', name: 'vue' },
   { path: '/react', name: 'react' }
 ];

@@ -1,14 +1,13 @@
 // Plugins
-import { loadEnv } from '@laboratory/common/env-loader';
-import typescript from '@rollup/plugin-typescript';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import babel from '@rollup/plugin-babel';
-import replace from '@rollup/plugin-replace';
-import serve from 'rollup-plugin-serve';
-import terser from '@rollup/plugin-terser';
-import { rimraf } from 'rimraf';
-import copy from 'rollup-plugin-copy';
-import postcss from 'rollup-plugin-postcss';
+const { loadEnv } = require('@laboratory/common/env-loader');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const babel = require('@rollup/plugin-babel');
+const replace = require('@rollup/plugin-replace');
+const serve = require('rollup-plugin-serve');
+const terser = require('@rollup/plugin-terser');
+const { rimraf } = require('rimraf');
+const copy = require('rollup-plugin-copy');
+const postcss = require('rollup-plugin-postcss');
 
 // check if the mode is development
 const isDevelopment = process.env.mode === 'development';
@@ -17,8 +16,8 @@ const outputDir = 'dist';
 // load environment variables
 const env = loadEnv(process.env.mode, process.cwd());
 
-export default {
-  input: 'src/laboratory-entry.ts',
+module.exports = {
+  input: 'src/laboratory-solar-system.js',
   output: {
     format: 'es',
     entryFileNames: '[name].js',
@@ -29,25 +28,15 @@ export default {
   watch: {
     buildDelay: 1000,
     clearScreen: false,
-    include: 'src/**/*.{js,ts,css}',
+    include: 'src/**/*.{js,css}',
     exclude: 'node_modules/**'
   },
   plugins: [
-    // transpile typescript
-    typescript({
-      compilerOptions: {
-        outDir: outputDir
-      }
-    }),
-
     // resolve node_modules
     nodeResolve(),
 
     // transpile to es5
     babel({ babelHelpers: 'bundled' }),
-
-    // css
-    postcss({ extract: true }),
 
     // replaces targeted strings in files while bundling.
     replace({
@@ -55,6 +44,9 @@ export default {
       __PUBLIC_PATH: JSON.stringify(env.PUBLIC_PATH),
       __DEPLOY_ORIGIN: JSON.stringify(env.DEPLOY_ORIGIN)
     }),
+
+    // css
+    postcss({ extract: true }),
 
     // minified bundle without html.
     isDevelopment ? null : terser(),
@@ -84,7 +76,7 @@ export default {
             // by using a bound function, we can access options as `this`
             const protocol = this.https ? 'https' : 'http';
             console.log(`Server listening at ${protocol}://${host}:${address.port}/`);
-            console.log(`Open with ${protocol}://${host}:${address.port}/laboratory-entry.js`);
+            console.log(`Open with ${protocol}://${host}:${address.port}/laboratory-solar-system.js`);
           }
         })
       : null

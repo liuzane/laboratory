@@ -1,10 +1,8 @@
 {
-  "name": "@laboratory/entry",
-  "type": "module",
+  "name": "@laboratory/solar-system",
   "scripts": {
     "dev": "rollup --config --watch --environment mode:development",
     "build": "rollup --config --environment mode:production",
-    "type-check": "tsc --noEmit",
     "lint": "eslint src/* --ext .ts",
     "remove-node-modules": "rimraf node_modules"
   },
@@ -16,7 +14,6 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-replace": "^5.0.5",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
     "babel-loader": "^9.1.3",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
@@ -27,9 +24,7 @@
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-css-only": "^4.5.2",
     "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-serve": "^1.1.1",
-    "typescript": "^5.4.3",
-    "typescript-eslint": "^7.7.0"
+    "rollup-plugin-serve": "^1.1.1"
   },
   "dependencies": {
     "@laboratory/common": "file:../common/laboratory-common-1.0.0.tgz"

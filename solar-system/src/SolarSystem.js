@@ -1,5 +1,8 @@
-// 基础模块
-import React, { PureComponent } from 'react';
+// Utils
+import { hyperscript as h } from '@laboratory/common/utils';
+
+// Style
+import './style.css';
 
 // 方法集合
 import { random } from './assist';
@@ -22,30 +25,28 @@ import Asteroid from './Asteroid';
 // 彗星
 import Comet from './Comet';
 
-
-class SolarSystem extends PureComponent {
+class SolarSystem {
   constructor() {
-    super();
     this.ctx = null;
     this.width = 0;
     this.height = 0;
     this.stage = null;
-  }
 
-  componentDidMount() {
-    this.init();
-    this.sun();
-    this.mercury();
-    this.venus();
-    this.earth();
-    this.mars();
-    this.jupiter();
-    this.saturn();
-    this.uranus();
-    this.neptune();
-    this.asteroids();
-    this.comets();
-    if (this.stage) this.stage.init(this.ctx);
+    setTimeout(() => {
+      this.init();
+      this.sun();
+      this.mercury();
+      this.venus();
+      this.earth();
+      this.mars();
+      this.jupiter();
+      this.saturn();
+      this.uranus();
+      this.neptune();
+      this.asteroids();
+      this.comets();
+      if (this.stage) this.stage.init(this.ctx);
+    }, 300);
   }
 
   // 初始化
@@ -153,7 +154,7 @@ class SolarSystem extends PureComponent {
   // 小行星带
   asteroids() {
     function getAsteroidColor() {
-      const ret = [ '#' ];
+      const ret = ['#'];
       const val = random(10, 15).toString(16);
       for (let i = 0; i < 3; i++) {
         ret.push(val);
@@ -162,8 +163,12 @@ class SolarSystem extends PureComponent {
     }
 
     let asteroid = null,
-      x = 300, y = 0, r = 2, rd = 300,
-      angle = 0, d = 283,
+      x = 300,
+      y = 0,
+      r = 2,
+      rd = 300,
+      angle = 0,
+      d = 283,
       color = '#fff';
     for (let i = 0; i < 400; i++) {
       rd = random(300, 320);
@@ -182,7 +187,7 @@ class SolarSystem extends PureComponent {
   // 彗星
   comets() {
     function getCometColor() {
-      const ret = [ '#' ];
+      const ret = ['#'];
       for (let i = 0; i < 6; i++) {
         ret.push(random(3, 15).toString(16));
       }
@@ -190,9 +195,13 @@ class SolarSystem extends PureComponent {
     }
 
     let l = 180,
-      a = 800, b = 300,
-      cx = a - l, cy = 0,
-      r = 3, duration = 30, angle = 0,
+      a = 800,
+      b = 300,
+      cx = a - l,
+      cy = 0,
+      r = 3,
+      duration = 30,
+      angle = 0,
       color = '#fff';
     for (let i = 0; i < 20; i++) {
       l = random(120, 350);
@@ -208,9 +217,7 @@ class SolarSystem extends PureComponent {
   }
 
   render() {
-    return (
-      <canvas id="canvas" />
-    );
+    return h('canvas', { id: 'canvas' });
   }
 }
 

@@ -1,0 +1,10 @@
+{
+  "src/laboratory-solar-system.js": {
+    "isEntry": true,
+    "file": "laboratory-solar-system.js",
+    "src": "src/laboratory-solar-system.js",
+    "css": [
+      "laboratory-solar-system.css"
+    ]
+  }
+}

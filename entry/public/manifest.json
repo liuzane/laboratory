@@ -1,10 +1,10 @@
 {
-  "src/laboratory-vue.ts": {
+  "src/laboratory-entry.ts": {
     "isEntry": true,
     "file": "laboratory-entry.js",
-    "src": "src/laboratory-vue.ts",
+    "src": "src/laboratory-entry.ts",
     "css": [
-      "global.css"
+      "laboratory-entry.css"
     ]
   }
 }

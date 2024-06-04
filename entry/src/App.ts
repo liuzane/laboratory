@@ -4,6 +4,9 @@ import { hyperscript as h } from '@laboratory/common/utils';
 // Web Components
 import { PageAnchor, AtomBackground } from '@laboratory/common/components';
 
+// Style
+import './global.css';
+
 export default class App {
   constructor() {
     PageAnchor.define();
@@ -21,6 +24,7 @@ export default class App {
         h('h1', null, 'Entry Page'),
         h('p', null, 'description description description description description description'),
         h('ul', null, [
+          h('li', null, [h('page-anchor', { href: '/solar-system' }, 'Solar System')]),
           h('li', null, [h('page-anchor', { href: '/vue' }, 'Vue')]),
           h('li', null, [h('page-anchor', { href: '/react' }, 'React')])
         ])
