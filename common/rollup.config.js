@@ -38,12 +38,12 @@ export default {
   output: [
     {
       format: 'es',
-      entryFileNames: 'esm/[name].js',
+      entryFileNames: 'esm/[name].mjs',
       dir: outputDir
     },
     {
       format: 'cjs',
-      entryFileNames: 'cjs/[name].js',
+      entryFileNames: 'cjs/[name].cjs',
       dir: outputDir
     }
   ],

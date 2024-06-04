@@ -1,5 +1,5 @@
 // Plugins
-import { loadEnv } from './env-loader.js';
+import { loadEnv } from '@laboratory/common/env-loader';
 import typescript from '@rollup/plugin-typescript';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
@@ -40,10 +40,10 @@ export default [
           outDir: outputDir
         }
       }),
-  
+
       // resolve node_modules
       nodeResolve(),
-  
+
       // transpile to es5
       babel({ babelHelpers: 'bundled' }),
 
@@ -53,18 +53,18 @@ export default [
         __PUBLIC_PATH: JSON.stringify(env.PUBLIC_PATH),
         __DEPLOY_ORIGIN: JSON.stringify(env.DEPLOY_ORIGIN)
       }),
-  
+
       // minified bundle without html.
       isDevelopment ? null : terser(),
-  
+
       // clear output directory.
       // clear(outputDir),
-  
+
       // copy public directory to output directory.
       copy({
         targets: [{ src: 'public/*', dest: outputDir }]
       }),
-  
+
       // start dev server.
       isDevelopment
         ? serve({
@@ -92,7 +92,7 @@ export default [
     input: ['src/global.css'],
     output: {
       format: 'es',
-      file: `${outputDir}/global.css`,
+      file: `${outputDir}/global.css`
       // dir: outputDir
     },
     watch: {
@@ -106,7 +106,7 @@ export default [
       postcss({ extract: true }),
 
       // minified bundle without html.
-      isDevelopment ? null : terser(),
+      isDevelopment ? null : terser()
     ]
   }
 ];

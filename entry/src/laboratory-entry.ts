@@ -1,11 +1,11 @@
 // Plugins
-import { ManifestLoader } from '@laboratory/common/utils';
+import { ManifestLoader } from '@laboratory/common/manifest-loader';
 
 // Types
-import type { ManifestLoader as IManifestLoader } from '@laboratory/common/utils';
+import type { ManifestLoader as IManifestLoader } from '@laboratory/common/manifest-loader';
 
 // Enums
-import { ModeEnum } from '@laboratory/common/utils';
+import { ModeEnum } from '@laboratory/common/manifest-loader';
 
 // Main Entry
 import App from './App';

@@ -32,7 +32,7 @@ export function hyperscript<T extends keyof HyperElementTagNameMap>(
           }
           break;
 
-        case /on[a-Z]+/.test(attributeName) ? attributeName : null:
+        case /on[a-zA-Z]+/.test(attributeName) ? attributeName : null:
           if (typeof attributeValue === 'function') {
             if (element.addEventListener) {
               element.addEventListener(

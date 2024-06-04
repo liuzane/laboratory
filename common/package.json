@@ -5,38 +5,38 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "main": "./esm/index.js",
+  "main": "./esm/index.mjs",
   "types": "./types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./esm/index.js",
-      "require": "./cjs/index.js",
+      "import": "./esm/index.mjs",
+      "require": "./cjs/index.cjs",
       "types": "./types/components/index.d.ts",
-      "default": "./esm/index.js"
+      "default": "./esm/index.mjs"
     },
     "./components": {
-      "import": "./esm/components/index.js",
-      "require": "./cjs/components/index.js",
+      "import": "./esm/components/index.mjs",
+      "require": "./cjs/components/index.cjs",
       "types": "./types/components/index.d.ts",
-      "default": "./esm/components/index.js"
+      "default": "./esm/components/index.mjs"
     },
     "./utils": {
-      "import": "./esm/utils/index.js",
-      "require": "./cjs/utils/index.js",
+      "import": "./esm/utils/index.mjs",
+      "require": "./cjs/utils/index.cjs",
       "types": "./types/utils/index.d.ts",
-      "default": "./esm/utils/index.js"
+      "default": "./esm/utils/index.mjs"
     },
     "./env-loader": {
-      "import": "./esm/env-loader.js",
-      "require": "./cjs/env-loader.js",
+      "import": "./esm/env-loader.mjs",
+      "require": "./cjs/env-loader.cjs",
       "types": "./types/env-loader.d.ts",
-      "default": "./esm/env-loader.js"
+      "default": "./esm/env-loader.mjs"
     },
     "./manifest-loader": {
-      "import": "./esm/manifest-loader.js",
-      "require": "./cjs/manifest-loader.js",
+      "import": "./esm/manifest-loader.mjs",
+      "require": "./cjs/manifest-loader.cjs",
       "types": "./types/manifest-loader.d.ts",
-      "default": "./esm/manifest-loader.js"
+      "default": "./esm/manifest-loader.mjs"
     }
   },
   "scripts": {

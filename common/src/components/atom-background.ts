@@ -1,4 +1,4 @@
-import { hyperscript as h } from '@laboratory/common/utils';
+import { hyperscript as h } from '../utils';
 
 export interface Iline {
   beginX: number;
@@ -8,7 +8,7 @@ export interface Iline {
   opacity: number;
 }
 
-export interface ICircle {
+export interface IAtom {
   x: number;
   y: number;
   radius: number;
@@ -17,37 +17,39 @@ export interface ICircle {
   color: string;
 }
 
-export class BackgroundAtom extends HTMLElement {
+export class AtomBackground extends HTMLElement {
   static tagName: string;
-  static observedAttributes: string[] = ['point', 'animation'];
+  static observedAttributes: string[] = ['atoms', 'animation', 'active-button-text', 'inactive-button-text'];
   static style: string;
   static template: HTMLTemplateElement;
   static define() {
-    if (!window.customElements.get(BackgroundAtom.tagName)) {
-      window.customElements.define(BackgroundAtom.tagName, BackgroundAtom);
+    if (!window.customElements.get(AtomBackground.tagName)) {
+      window.customElements.define(AtomBackground.tagName, AtomBackground);
     }
   }
 
   private _shadowRoot: ShadowRoot;
   private $canvas: HTMLCanvasElement;
+  private $button: HTMLButtonElement;
   private animation: boolean;
   private width: number;
   private height: number;
-  private point: number;
+  private atoms: number;
   private ctx: CanvasRenderingContext2D;
-  private circles: ICircle[];
+  private actualAtoms: IAtom[];
   private requestId: number;
 
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._shadowRoot.appendChild(BackgroundAtom.template.content.cloneNode(true));
+    this._shadowRoot.appendChild(AtomBackground.template.content.cloneNode(true));
     this.$canvas = this._shadowRoot.querySelector('canvas');
-    this.animation = this.getAttribute('animation') === 'true'
+    this.$button = this._shadowRoot.querySelector('button.atom-bg__switch');
+    this.animation = this.getAttribute('animation') === 'true';
     this.width = 0;
     this.height = 0;
-    this.point = this.getAttribute('point') ? Number(this.getAttribute('point')) : 35;
-    this.circles = [];
+    this.atoms = Number(this.getAttribute('atoms')) || 35;
+    this.actualAtoms = [];
   }
 
   public connectedCallback() {
@@ -57,14 +59,13 @@ export class BackgroundAtom extends HTMLElement {
   public disconnectedCallback() {}
 
   public attributeChangedCallback(name: string, _oldVal: string, newVal: string) {
-    console.log('attributeChangedCallback', name, newVal);
     switch (name) {
-      case 'point':
-        this.point = newVal ? Number(newVal) : this.point;
+      case 'atoms':
+        this.atoms = newVal ? Number(newVal) : this.atoms;
         break;
 
       case 'animation':
-        this.animation = newVal === 'true'
+        this.animation = newVal === 'true';
         break;
     }
   }
@@ -79,11 +80,11 @@ export class BackgroundAtom extends HTMLElement {
     this.$canvas.height = height;
     this.ctx = this.getCanvasContext();
     this.generateAtom();
-    console.log('this.animation', this.animation);
-    console.log('this.getAttribute(animation)', this.getAttribute('animation'));
     if (this.animation) {
       this.start();
     }
+    this.renderButton();
+    this.$button.addEventListener('click', this.onSwitchAnimationClick.bind(this));
   }
 
   // 获取 canvas context
@@ -97,9 +98,9 @@ export class BackgroundAtom extends HTMLElement {
 
   // 生成原点到画布上
   private generateAtom(): void {
-    const circles = [];
-    for (let i = 0; i < this.point; i++) {
-      circles.push(
+    const actualAtoms = [];
+    for (let i = 0; i < this.atoms; i++) {
+      actualAtoms.push(
         this.drawAtom(
           this.ctx,
           this.getRandomNumber(this.width),
@@ -111,44 +112,12 @@ export class BackgroundAtom extends HTMLElement {
         )
       );
     }
-    this.circles = circles;
+    this.actualAtoms = actualAtoms;
     this.draw();
   }
 
-  // 开始动画
-  public start(): number {
-    const animation = () => {
-      for (let i = 0; i < this.point; i++) {
-        const circle = this.circles[i];
-        circle.x += circle.moveX;
-        circle.y += circle.moveY;
-        if (circle.x > this.width) {
-          circle.x = 0;
-        } else if (circle.x < 0) {
-          circle.x = this.width;
-        }
-        if (circle.y > this.height) {
-          circle.y = 0;
-        } else if (circle.y < 0) {
-          circle.y = this.height;
-        }
-      }
-      this.draw();
-      this.requestId = window.requestAnimationFrame(animation);
-    }
-    this.requestId = window.requestAnimationFrame(animation);
-    return this.requestId;
-  }
-
-  // 停止动画
-  public stop(): void {
-    if (this.requestId) {
-      window.cancelAnimationFrame(this.requestId);
-    }
-  }
-
   // 点：圆心xy坐标，半径，每帧移动xy的距离
-  private getCircle(x: number, y: number, radius: number, moveX: number, moveY: number, color: string): ICircle {
+  private getAtom(x: number, y: number, radius: number, moveX: number, moveY: number, color: string): IAtom {
     return {
       x,
       y,
@@ -184,14 +153,14 @@ export class BackgroundAtom extends HTMLElement {
     moveX: number,
     moveY: number,
     color: string
-  ): ICircle {
-    const circle: ICircle = this.getCircle(x, y, radius, moveX, moveY, color);
+  ): IAtom {
+    const atom: IAtom = this.getAtom(x, y, radius, moveX, moveY, color);
     ctx.beginPath();
-    ctx.fillStyle = circle.color;
-    ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+    ctx.fillStyle = atom.color;
+    ctx.arc(atom.x, atom.y, atom.radius, 0, 2 * Math.PI);
     ctx.fill();
     ctx.closePath();
-    return circle;
+    return atom;
   }
 
   // 绘制线条
@@ -216,8 +185,8 @@ export class BackgroundAtom extends HTMLElement {
   private draw(): void {
     let ctx = this.ctx;
     const canvas = this.$canvas;
-    const point = this.point;
-    const circles = this.circles;
+    const atoms = this.atoms;
+    const actualAtoms = this.actualAtoms;
 
     try {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -226,40 +195,96 @@ export class BackgroundAtom extends HTMLElement {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    for (let i = 0; i < point; i++) {
-      const circle = circles[i];
-      this.drawAtom(ctx, circle.x, circle.y, circle.radius, null, null, circle.color);
+    for (let i = 0; i < atoms; i++) {
+      const atom = actualAtoms[i];
+      this.drawAtom(ctx, atom.x, atom.y, atom.radius, null, null, atom.color);
     }
 
-    for (let i = 0; i < point; i++) {
-      for (let j = 0; j < point; j++) {
-        if (i + j < point) {
-          const A = Math.abs(circles[i + j].x - circles[i].x);
-          const B = Math.abs(circles[i + j].y - circles[i].y);
+    for (let i = 0; i < atoms; i++) {
+      for (let j = 0; j < atoms; j++) {
+        if (i + j < atoms) {
+          const A = Math.abs(actualAtoms[i + j].x - actualAtoms[i].x);
+          const B = Math.abs(actualAtoms[i + j].y - actualAtoms[i].y);
           const lineLength = Math.sqrt(A * A + B * B);
           const C = (1 / lineLength) * 7 - 0.009;
           const lineOpacity = C > 0.03 ? 0.03 : C;
 
           if (lineOpacity > 0) {
-            this.drawLine(ctx, circles[i].x, circles[i].y, circles[i + j].x, circles[i + j].y, lineOpacity);
+            this.drawLine(
+              ctx,
+              actualAtoms[i].x,
+              actualAtoms[i].y,
+              actualAtoms[i + j].x,
+              actualAtoms[i + j].y,
+              lineOpacity
+            );
           }
         }
       }
     }
   }
+
+  // 开始动画
+  public start(): number {
+    const animation = () => {
+      for (let i = 0; i < this.atoms; i++) {
+        const atom = this.actualAtoms[i];
+        atom.x += atom.moveX;
+        atom.y += atom.moveY;
+        if (atom.x > this.width) {
+          atom.x = 0;
+        } else if (atom.x < 0) {
+          atom.x = this.width;
+        }
+        if (atom.y > this.height) {
+          atom.y = 0;
+        } else if (atom.y < 0) {
+          atom.y = this.height;
+        }
+      }
+      this.draw();
+      this.requestId = window.requestAnimationFrame(animation);
+    };
+    this.requestId = window.requestAnimationFrame(animation);
+    return this.requestId;
+  }
+
+  // 停止动画
+  public stop(): void {
+    if (this.requestId) {
+      window.cancelAnimationFrame(this.requestId);
+    }
+  }
+
+  // 开启 / 关闭 原子动画事件
+  private onSwitchAnimationClick(): void {
+    if (this.animation) {
+      this.stop();
+      this.animation = false;
+    } else {
+      this.start();
+      this.animation = true;
+    }
+    this.renderButton();
+  }
+
+  // 更新 switch button 文字
+  private renderButton(): void {
+    this.$button.innerText = this.getAttribute(this.animation ? 'inactive-button-text' : 'active-button-text');
+  }
 }
 
-BackgroundAtom.tagName = 'background-atom';
+AtomBackground.tagName = 'atom-background';
 
-BackgroundAtom.style = `
-  .bg-atom__container {
+AtomBackground.style = `
+  .atom-bg__container {
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
   }
 
-  .bg-atom__switch {
+  .atom-bg__switch {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -272,19 +297,7 @@ BackgroundAtom.style = `
   }
 `;
 
-BackgroundAtom.template = h('template', null, [
-  h('style', null, BackgroundAtom.style),
-  h('div', { className: 'bg-atom__container' }, [
-    h('canvas', null),
-    h(
-      'button',
-      {
-        className: 'bg-atom__switch',
-        onclick: (event: Event) => {
-          console.log('button', event);
-        }
-      },
-      [h('slot', { name: 'button-text' })]
-    )
-  ])
+AtomBackground.template = h('template', null, [
+  h('style', null, AtomBackground.style),
+  h('div', { className: 'atom-bg__container' }, [h('canvas', null), h('button', { className: 'atom-bg__switch' })])
 ]);
