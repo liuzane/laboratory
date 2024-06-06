@@ -1,38 +1,23 @@
-// // service worker
-// import * as serviceWorker from '@/serviceWorker';
-
-// // 基础模块
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-
-// // 全局样式
-// import '@/styles';
-
-// // 入口组件
-// import SolarSystem from './SolarSystem';
-
-// ReactDOM.render(
-//   <SolarSystem />,
-//   document.getElementById('root')
-// );
-
-// serviceWorker.unregister();
 // Plugins
 import { ManifestLoader } from '@laboratory/common/manifest-loader';
+
+// Types
+import type { ManifestLoader as IManifestLoader } from '@laboratory/common/manifest-loader';
 
 // Enums
 import { ModeEnum } from '@laboratory/common/manifest-loader';
 
-// Main Entry
-import SolarSystem from './SolarSystem';
+// Main Login
+import App from './App';
 
 // Variables
-let app;
-let manifestLoader;
+let app: InstanceType<typeof App>;
+let manifestLoader: IManifestLoader;
 
 export function bootstrap() {
   return Promise.resolve().then(() => {
     // One-time initialization code goes here
+    console.log('login bootstrapped!');
     manifestLoader = new ManifestLoader({
       mode: ModeEnum.Production,
       origin: __DEPLOY_ORIGIN,
@@ -44,16 +29,17 @@ export function bootstrap() {
 
 export function mount() {
   return Promise.resolve().then(() => {
+    console.log('login mounted!');
     manifestLoader.mount();
-    app = new SolarSystem();
-    document.getElementById('single-spa-application:solar-system').appendChild(app.render());
+    app = new App();
+    document.getElementById('single-spa-application:login').appendChild(app.render());
   });
 }
 
 export function unmount() {
   return Promise.resolve().then(() => {
     // Do framework UI unrendering here
-    console.log('entry unmounted!');
+    console.log('login unmounted!');
     manifestLoader.unmount();
   });
 }

@@ -1,1 +1,1 @@
-start Powershell -executionpolicy RemoteSigned -noexit -file "..\..\script\powershell.ps1" "Laboratory React"
+start Powershell -executionpolicy RemoteSigned -noexit -file "..\script\powershell.ps1" "Laboratory React"

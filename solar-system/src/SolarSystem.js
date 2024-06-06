@@ -46,7 +46,7 @@ class SolarSystem {
       this.asteroids();
       this.comets();
       if (this.stage) this.stage.init(this.ctx);
-    }, 300);
+    }, 100);
   }
 
   // 初始化

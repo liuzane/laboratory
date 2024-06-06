@@ -8,9 +8,16 @@ import type { RoutesConfig } from 'single-spa-layout/dist/types/isomorphic/const
 
 FullscreenLoading.define();
 
-const applications: { path: string; name: string }[] = [
-  { path: '/', name: 'entry' },
-  { path: '/solar-system', name: 'solar-system' },
+interface IApplication {
+  path: string;
+  name: string;
+  exact?: boolean;
+}
+
+const applications: IApplication[] = [
+  { path: '/', name: 'entry', exact: true },
+  { path: '/login', name: 'login', exact: true },
+  { path: '/solar-system', name: 'solar-system', exact: true },
   { path: '/vue', name: 'vue' },
   { path: '/react', name: 'react' }
 ];
@@ -23,7 +30,7 @@ export const routesConfig: RoutesConfig = {
   routes: applications.map(application => ({
     type: 'route',
     path: application.path,
-    exact: true,
+    exact: application.exact || false,
     routes: [
       {
         type: 'application',

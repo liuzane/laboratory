@@ -4,16 +4,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 // Plugins
-import { ManifestLoader } from '@laboratory/manifest-loader';
+import { ManifestLoader } from '@laboratory/common/manifest-loader';
 
 // Enums
-import { ModeEnum } from '@laboratory/manifest-loader';
+import { ModeEnum } from '@laboratory/common/manifest-loader';
 
 // Types
-import type { ManifestLoader as IManifestLoader } from '@laboratory/manifest-loader';
+import type { ManifestLoader as IManifestLoader } from '@laboratory/common/manifest-loader';
 
-// Loading
-import PageAnchor from '@laboratory/components/page-anchor.js';
+// Web Components
+import { PageAnchor } from '@laboratory/common/components';
 
 // Styles
 import './styles/index.css';

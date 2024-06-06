@@ -7,7 +7,7 @@ import type { ConfigEnv, UserConfig } from 'vite';
 
 // Plugins
 import react from '@vitejs/plugin-react';
-import externalize from 'vite-plugin-externalize-dependencies';
+import replace from '@rollup/plugin-replace';
 
 export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
   // load environment variables
@@ -26,9 +26,6 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
   const isWindows: boolean = typeof process !== 'undefined' && process.platform === 'win32';
 
   return {
-    define: {
-      __dirname: isWindows && command === 'serve' ? JSON.stringify(path.posix.normalize(__dirname.split(path.sep).join(path.posix.sep))) : '""'
-    },
     build: {
       outDir: outputDir,
       manifest: true,
@@ -53,7 +50,12 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
     },
     plugins: [
       react(),
-      externalize({ externals: [external] })
+
+      // replaces targeted strings in files while bundling.
+      replace({
+        preventAssignment: true,
+        __dirname: isWindows && command === 'serve' ? JSON.stringify(path.posix.normalize(__dirname.split(path.sep).join(path.posix.sep))) : '""',
+      }),
     ],
     experimental: {
       // More detail see here: https://cn.vitejs.dev/guide/build.html#advanced-base-options

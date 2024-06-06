@@ -7,6 +7,7 @@ import type { ConfigEnv, UserConfig } from 'vite';
 
 // Plugins
 import vue from '@vitejs/plugin-vue';
+import replace from '@rollup/plugin-replace';
 // @ts-expect-error plugin issue
 import eslint from 'vite-plugin-eslint';
 
@@ -27,9 +28,6 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
   const customTagElementList: string[] = ['page-anchor'];
 
   return {
-    define: {
-      __dirname: isWindows && command === 'serve' ? JSON.stringify(path.posix.normalize(__dirname.split(path.sep).join(path.posix.sep))) : '""'
-    },
     build: {
       outDir: outputDir,
       manifest: true,
@@ -62,6 +60,13 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
           }
         }
       }),
+
+      // replaces targeted strings in files while bundling.
+      replace({
+        preventAssignment: true,
+        __dirname: isWindows && command === 'serve' ? JSON.stringify(path.posix.normalize(__dirname.split(path.sep).join(path.posix.sep))) : '""',
+      }),
+
       eslint({
         include: ['src/**/*.ts', 'src/**/*.vue'],
         lintOnStart: true,

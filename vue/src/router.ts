@@ -3,7 +3,11 @@ import { createRouter, createWebHashHistory } from "vue-router";
 const baseURL: string = "/vue";
 
 const routes = [
-  { path: baseURL + "/", name: "Home", component: () => import("./Home.vue") },
+  {
+    path: baseURL + "/",
+    name: "Home",
+    component: () => import("./Home.vue")
+  },
   {
     path: baseURL + "/foo",
     name: "Foo",

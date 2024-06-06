@@ -1,6 +1,6 @@
 import path from 'node:path';
 import type { InternalModuleFormat, OutputAsset, OutputChunk, RenderedChunk } from 'rollup';
-import type { ResolvedConfig } from '..';
+import type { ResolvedConfig } from 'rollup';
 import type { Plugin } from '../plugin';
 import { normalizePath, sortObjectKeys } from '../utils';
 import { generatedAssets } from './asset';
@@ -28,7 +28,7 @@ export function manifestPlugin(config: ResolvedConfig): Plugin {
   let outputCount: number;
 
   return {
-    name: 'rollup:manifest',
+    name: 'rollup:manifest-generator',
 
     buildStart() {
       outputCount = 0;

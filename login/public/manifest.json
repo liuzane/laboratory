@@ -1,0 +1,10 @@
+{
+  "src/laboratory-login.ts": {
+    "isEntry": true,
+    "file": "laboratory-login.js",
+    "src": "src/laboratory-login.ts",
+    "css": [
+      "laboratory-login.css"
+    ]
+  }
+}
