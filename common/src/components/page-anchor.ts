@@ -1,24 +1,21 @@
-import { hyperscript as h } from '../utils/hyperscript';
+// Bases
+import BaseWebComponent from './base-web-component';
 
-export class PageAnchor extends HTMLElement {
-  static tagName: string;
+// Utils
+import { hyperscript as h } from '../utils';
+
+// Styles
+import cssText from './styles/page-anchor.css?raw';
+
+export class PageAnchor extends BaseWebComponent {
+  static tagName: string = 'page-anchor';
   static observedAttributes: string[] = ['href', 'download'];
-  static style: string;
-  static template: HTMLTemplateElement;
-  static define() {
-    if (!window.customElements.get(PageAnchor.tagName)) {
-      window.customElements.define(PageAnchor.tagName, PageAnchor);
-    }
-  }
-
-  private _shadowRoot: ShadowRoot;
   private $anchor: HTMLAnchorElement;
 
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._shadowRoot.appendChild(PageAnchor.template.content.cloneNode(true));
-    this.$anchor = this._shadowRoot.querySelector('a');
+    this.init(this.render(), cssText);
+    this.$anchor = this.shadowRoot.querySelector('a');
   }
 
   public attributeChangedCallback(name: string, _oldVal: string, newVal: string) {
@@ -32,23 +29,8 @@ export class PageAnchor extends HTMLElement {
         break;
     }
   }
+
+  private render(): HTMLElement {
+    return h('a.page-anchor', null, h('slot'));
+  }
 }
-
-PageAnchor.tagName = 'page-anchor';
-
-PageAnchor.style = `
-  a {
-    font-weight: 500;
-    color: #646cff;
-    text-decoration: inherit;
-  }
-
-  a:hover {
-    color: #535bf2;
-  }
-`;
-
-PageAnchor.template = h('template', null, [
-  h('style', null, PageAnchor.style),
-  h('a', { className: 'page-anchor' }, [h('slot', null)])
-]);

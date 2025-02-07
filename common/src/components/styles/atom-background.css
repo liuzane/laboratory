@@ -1,0 +1,24 @@
+.atom-bg__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.atom-bg__canvas {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.atom-bg__switch {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #2f54eb;
+  font-size: 12px;
+  cursor: pointer;
+}

@@ -22,3 +22,9 @@ main,
   left: 50%;
   transform: translateX(-50%);
 }
+
+atom-background {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

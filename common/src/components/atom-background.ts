@@ -1,4 +1,11 @@
+// Bases
+import BaseWebComponent from './base-web-component';
+
+// Utils
 import { hyperscript as h } from '../utils';
+
+// Styles
+import cssText from './styles/atom-background.css?raw';
 
 export interface Iline {
   beginX: number;
@@ -17,18 +24,10 @@ export interface IAtom {
   color: string;
 }
 
-export class AtomBackground extends HTMLElement {
-  static tagName: string;
+export class AtomBackground extends BaseWebComponent {
+  static tagName: string = 'atom-background';
   static observedAttributes: string[] = ['atoms', 'animation', 'active-button-text', 'inactive-button-text'];
-  static style: string;
-  static template: HTMLTemplateElement;
-  static define() {
-    if (!window.customElements.get(AtomBackground.tagName)) {
-      window.customElements.define(AtomBackground.tagName, AtomBackground);
-    }
-  }
 
-  private _shadowRoot: ShadowRoot;
   private $canvas: HTMLCanvasElement;
   private $button: HTMLButtonElement;
   private animation: boolean;
@@ -41,10 +40,9 @@ export class AtomBackground extends HTMLElement {
 
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._shadowRoot.appendChild(AtomBackground.template.content.cloneNode(true));
-    this.$canvas = this._shadowRoot.querySelector('canvas');
-    this.$button = this._shadowRoot.querySelector('button.atom-bg__switch');
+    this.init(this.render(), cssText);
+    this.$canvas = this.shadowRoot.querySelector('canvas');
+    this.$button = this.shadowRoot.querySelector('button.atom-bg__switch');
     this.animation = this.getAttribute('animation') === 'true';
     this.width = 0;
     this.height = 0;
@@ -52,13 +50,13 @@ export class AtomBackground extends HTMLElement {
     this.actualAtoms = [];
   }
 
-  public connectedCallback() {
+  public connectedCallback(): void {
     this.initialize();
   }
 
-  public disconnectedCallback() {}
+  public disconnectedCallback(): void {}
 
-  public attributeChangedCallback(name: string, _oldVal: string, newVal: string) {
+  public attributeChangedCallback(name: string, _oldVal: string, newVal: string): void {
     switch (name) {
       case 'atoms':
         this.atoms = newVal ? Number(newVal) : this.atoms;
@@ -68,6 +66,18 @@ export class AtomBackground extends HTMLElement {
         this.animation = newVal === 'true';
         break;
     }
+  }
+
+  private render(): HTMLElement {
+    return h('div.atom-bg__container', null, [
+      h('canvas.atom-bg__canvas'),
+      h('button.atom-bg__switch')
+    ]);
+  }
+
+  // 更新 switch button 文字
+  private renderButton(): void {
+    this.$button.innerText = this.getAttribute(this.animation ? 'inactive-button-text' : 'active-button-text');
   }
 
   // 初始化
@@ -267,37 +277,4 @@ export class AtomBackground extends HTMLElement {
     }
     this.renderButton();
   }
-
-  // 更新 switch button 文字
-  private renderButton(): void {
-    this.$button.innerText = this.getAttribute(this.animation ? 'inactive-button-text' : 'active-button-text');
-  }
 }
-
-AtomBackground.tagName = 'atom-background';
-
-AtomBackground.style = `
-  .atom-bg__container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .atom-bg__switch {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    color: #2f54eb;
-    font-size: 12px;
-    cursor: pointer;
-  }
-`;
-
-AtomBackground.template = h('template', null, [
-  h('style', null, AtomBackground.style),
-  h('div', { className: 'atom-bg__container' }, [h('canvas', null), h('button', { className: 'atom-bg__switch' })])
-]);

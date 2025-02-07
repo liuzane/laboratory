@@ -5,7 +5,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Plugins
-
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
 import commonjs from '@rollup/plugin-commonjs';
@@ -15,6 +14,7 @@ import replace from '@rollup/plugin-replace';
 import terser from '@rollup/plugin-terser';
 import { rimraf } from 'rimraf';
 import copy from 'rollup-plugin-copy';
+// import importCss from "rollup-plugin-import-css";
 // import serve from 'rollup-plugin-serve';
 
 // check if the mode is development
@@ -26,7 +26,7 @@ const PUBLIC_PATH = isDevelopment ? '/' : '/laboratory/';
 // entry files
 const inputs = Object.fromEntries(
   glob
-    .sync('src/**/*.{ts,css}')
+    .sync('src/**/*.ts')
     .map(file => [
       path.relative('src', file.slice(0, file.length - path.extname(file).length)),
       fileURLToPath(new URL(file, import.meta.url))
@@ -74,6 +74,9 @@ export default {
     // transpile to es5
     babel({ babelHelpers: 'bundled' }),
 
+    // converts asste files to css raw string
+    writeAssteFileToRawString(),
+
     // replaces targeted strings in files while bundling.
     replace({
       preventAssignment: true,
@@ -111,7 +114,7 @@ function clear(paths = 'dist') {
 
 /**
  * write output package.json
- * @param {string|string[]} paths
+ * @param {string} outputDir
  */
 function writePackage(outputDir) {
   return {
@@ -130,6 +133,24 @@ function writePackage(outputDir) {
         );
       } catch (error) {
         console.error('write-package plugin: ', error);
+      }
+    }
+  };
+}
+
+function writeAssteFileToRawString() {
+  const suffix = '?raw';
+  return {
+    name: 'write-asste-file-to-raw-string',
+    resolveId(source, importer) {
+      if (source && source.endsWith(suffix)) {
+        return path.resolve(path.dirname(importer), source);
+      }
+    },
+    load(id) {
+      if (id && id.endsWith(suffix)) {
+        const code = fs.readFileSync(id.replace(suffix, ''), 'utf8');
+        return `export default ${JSON.stringify(code)};`;
       }
     }
   };

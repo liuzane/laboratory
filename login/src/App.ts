@@ -28,9 +28,11 @@ export default class App {
   render(): HTMLElement {
     return h('div', { className: 'container' }, [
       h('atom-background', {
-        animation: true,
-        'active-button-text': 'On Special',
-        'inactive-button-text': 'Off Special'
+        attrs: {
+          animation: true,
+          'active-button-text': 'On Special',
+          'inactive-button-text': 'Off Special'
+        }
       }),
       h('div', { className: 'wrapper' }, [
         h('h3', { className: 'title' }, 'Login to Laboratory'),
@@ -62,7 +64,7 @@ export default class App {
               console.log('onclick', event);
             }
           },
-          'Log in'
+          'Login'
         )
       ])
     ]);

@@ -16,18 +16,20 @@ export default class App {
   render() {
     return h('div', { className: 'container' }, [
       h('atom-background', {
-        animation: true,
-        'active-button-text': 'On Special',
-        'inactive-button-text': 'Off Special'
+        attrs: {
+          animation: true,
+          'active-button-text': 'On Special',
+          'inactive-button-text': 'Off Special'
+        }
       }),
       h('div', { className: 'wrapper' }, [
         h('h1', null, 'Entry Page'),
         h('p', null, 'description description description description description description'),
         h('ul', null, [
-          h('li', null, [h('page-anchor', { href: '/login' }, 'Login')]),
-          h('li', null, [h('page-anchor', { href: '/solar-system' }, 'Solar System')]),
-          h('li', null, [h('page-anchor', { href: '/vue' }, 'Vue')]),
-          h('li', null, [h('page-anchor', { href: '/react' }, 'React')])
+          h('li', null, h('page-anchor', { attrs: { href: '/login' } }, 'Login')),
+          h('li', null, h('page-anchor', { attrs: { href: '/solar-system' } }, 'Solar System')),
+          h('li', null, h('page-anchor', { attrs: { href: '/vue' } }, 'Vue')),
+          h('li', null, h('page-anchor', { attrs: { href: '/react' } }, 'React'))
         ])
       ])
     ]);
