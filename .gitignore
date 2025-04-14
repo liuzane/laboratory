@@ -62,3 +62,4 @@ typings/
 *.sln
 *.sw?
 .DS_Store
+.idea
