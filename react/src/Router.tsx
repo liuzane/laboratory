@@ -24,6 +24,13 @@ const router = createHashRouter([
           const { Foo } = await import('./components/Foo');
           return { Component: Foo };
         },
+      },
+      {
+        path: baseUrl + "/interview",
+        async lazy() {
+          const { Interview } = await import('./components/Interview');
+          return { Component: Interview };
+        },
       }
     ]
   },

@@ -20,6 +20,9 @@ console.log('add', add(1, 1));
     <RouterLink to="/vue/bar" class="mr-2">Bar</RouterLink>
     <page-anchor href="/react" class="mr-2">React</page-anchor>
   </div>
+  <div class="mt-2">
+    <RouterLink to="/vue/interview">Interview</RouterLink>
+  </div>
   <HelloWorld msg="Vite + Vue" />
 </template>
 

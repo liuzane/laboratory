@@ -18,6 +18,11 @@ const routes = [
     name: "Bar",
     component: () => import("./components/Bar.vue"),
   },
+  {
+    path: baseURL + "/interview",
+    name: "Interview",
+    component: () => import("./components/Interview.vue"),
+  },
 ];
 
 export const router = createRouter({

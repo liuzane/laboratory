@@ -5,7 +5,6 @@ import './App.css';
 import { add } from '@laboratory/common/utils';
 import { Link, Outlet } from "react-router-dom";
 
-
 function App() {
   const [count, setCount] = useState(0);
 
@@ -40,6 +39,10 @@ function App() {
       <Link to="/react/bar" className="mr-2">Bar</Link>
       <Link to="/react/foo" className="mr-2">Foo</Link>
       <page-anchor href="/vue" class="mr-2">Vue</page-anchor>
+
+      <div className="mt-2">
+        <Link to="/react/interview">Interview</Link>
+      </div>
       <Outlet />
     </>
   )
