@@ -30,8 +30,8 @@ export default class App {
       h('atom-background', {
         attrs: {
           animation: true,
-          'active-button-text': 'On Special',
-          'inactive-button-text': 'Off Special'
+          'active-button-text': 'On Effect',
+          'inactive-button-text': 'Off Effect'
         }
       }),
       h('div', { className: 'wrapper' }, [
