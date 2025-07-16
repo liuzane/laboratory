@@ -39,17 +39,22 @@ export function bootstrap() {
   });
 }
 
-export function mount() {
+export function mount(props: Record<string, unknown>) {
   return Promise.resolve().then(() => {
     console.log('react mounted!');
     console.log('manifestLoader:', manifestLoader);
     manifestLoader.mount();
-    root = ReactDOM.createRoot(document.getElementById('single-spa-application:react')!);
-    root.render(
-      <React.StrictMode>
-        <Router />
-      </React.StrictMode>,
-    );
+    setTimeout(() => {
+      root = ReactDOM.createRoot(document.getElementById('single-spa-application:react')!);
+      root.render(
+        <React.StrictMode>
+          <Router />
+        </React.StrictMode>,
+      );
+      if (typeof props.hideLoading === 'function') {
+        props.hideLoading();
+      }
+    }, 2000);
     console.log('import.meta:', import.meta);
   });
 }

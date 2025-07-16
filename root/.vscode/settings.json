@@ -1,12 +1,22 @@
 {
   "files.eol": "\n",
   "editor.tabSize": 2,
-  "editor.formatOnType": true,
-  "editor.formatOnSave": true,
+
+  // 启用对 Vue 文件的 ESLint 检查
+  "eslint.validate": ["typescript"],
+
+  // 关闭 VS Code 自带的保存时格式化（避免冲突）
+  "editor.formatOnSave": false,
+
+  // 启用保存时自动修复 ESLint 可修复的问题
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
+
+  // 强制使用 ESLint 作为格式化工具
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "eslint.format.enable": true,
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   }
 }

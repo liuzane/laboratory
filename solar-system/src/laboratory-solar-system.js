@@ -42,11 +42,14 @@ export function bootstrap() {
   });
 }
 
-export function mount() {
+export function mount(props) {
   return Promise.resolve().then(() => {
     manifestLoader.mount();
     app = new SolarSystem();
     document.getElementById('single-spa-application:solar-system').appendChild(app.render());
+    if (typeof props.hideLoading === 'function') {
+      props.hideLoading();
+    }
   });
 }
 
