@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# 检查Node版本是否在18和30之间
+NODE_VERSION=$(node -v | cut -d'v' -f2)
+MAJOR_VERSION=$(echo $NODE_VERSION | cut -d'.' -f1)
+
+if [ $MAJOR_VERSION -lt 18 ] || [ $MAJOR_VERSION -ge 30 ]; then
+  echo "Error: Node.js version must be between 18 and 30, current version is $NODE_VERSION"
+  exit 1
+fi
+
 # 获取当前脚本的绝对路径
 SCRIPT_PATH=${BASH_SOURCE[0]}
 while [ -L "$SCRIPT_PATH" ]; do
