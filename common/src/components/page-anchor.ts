@@ -10,6 +10,7 @@ import cssText from './styles/page-anchor.css?raw';
 export class PageAnchor extends BaseWebComponent {
   static tagName: string = 'page-anchor';
   static observedAttributes: string[] = ['href', 'download', 'block'];
+  static PUBLIC_PATH: string = __PUBLIC_PATH;
   private $anchor: HTMLAnchorElement;
 
   constructor() {

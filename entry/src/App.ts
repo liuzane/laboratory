@@ -7,9 +7,16 @@ import { PageAnchor, AtomBackground } from '@laboratory/common/components';
 // Style
 import './style.css';
 
+// Svgs
+import LoginSvg from '@/icons/login.svg';
+import SolarSystemSvg from '@/icons/solar-system.svg';
+import VueSvg from '@/icons/vue.svg';
+import ReactSvg from '@/icons/react.svg';
+
 interface EntryItem {
   text: string;
-  href: string;
+  path: string;
+  icon: string;
 }
 
 enum MouseDirection {
@@ -29,19 +36,23 @@ export default class App {
   private entries: EntryItem[] = [
     {
       text: 'Login Page',
-      href: '/login'
+      path: '/login',
+      icon: LoginSvg
     },
     {
       text: 'Solar System',
-      href: '/solar-system'
+      path: '/solar-system',
+      icon: SolarSystemSvg
     },
     {
       text: 'Vue Admin',
-      href: '/vue'
+      path: '/vue',
+      icon: VueSvg
     },
     {
       text: 'React Admin',
-      href: '/react'
+      path: '/react',
+      icon: ReactSvg
     },
   ];
 
@@ -76,7 +87,7 @@ export default class App {
     return MouseDirection.Top;
   }
 
-  private onMouseEnter(event: MouseEvent) {
+  private onMouseEnter(event: MouseEvent): void {
     const target = event.currentTarget as HTMLElement;
     const activeElement = target.querySelector('.list__item--active') as HTMLElement;
     activeElement.style.transition = 'none';
@@ -111,7 +122,7 @@ export default class App {
     });
   }
 
-  private onMouseLeave(event: MouseEvent) {
+  private onMouseLeave(event: MouseEvent): void {
     const target = event.currentTarget as HTMLElement;
     const activeElement = target.querySelector('.list__item--active') as HTMLElement;
     switch(this.getMouseDirection(event)) {
@@ -137,7 +148,11 @@ export default class App {
     }
   }
 
-  public render() {
+  private onItemClick(item: EntryItem): void {
+    window.location.href = `${PageAnchor.PUBLIC_PATH}#${item.path}`;
+  }
+
+  public render(): HTMLElement {
     return h('div', { className: 'container' }, [
       h('atom-background', {
         attrs: {
@@ -151,10 +166,12 @@ export default class App {
           h('li', {
             className: 'list__item',
             onMouseEnter: this.onMouseEnter.bind(this),
-            onMouseLeave: this.onMouseLeave.bind(this)
+            onMouseLeave: this.onMouseLeave.bind(this),
+            onClick: this.onItemClick.bind(this, item)
           }, [
             h('div', { className: 'list__item--active' }),
-            h('page-anchor', { attrs: { href: item.href, block: '' } }, item.text)
+            h('div', { className: 'list__item-icon', innerHTML: item.icon }),
+            h('p', { className: 'list__item-text' }, item.text)
           ])
         )))
       ])

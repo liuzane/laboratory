@@ -3,8 +3,14 @@
   padding: 0;
 }
 
-body {
-  color: rgba(0,0,0,.85);
+:root {
+  --primary-color: #1890ff;
+  --hover-color: #40a9ff;
+  --active-color: #096dd9;
+}
+
+html {
+  color: rgba(0, 0, 0, .85);
   font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
@@ -13,6 +19,11 @@ body,
 main,
 #single-spa-application\:login,
 .container {
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
   width: 100%;
   height: 100%;
 }
@@ -57,20 +68,34 @@ main,
 }
 
 .input-wrapper:hover {
-  border-color: #40a9ff;
+  border-color: var(--hover-color);
   z-index: 1;
 }
 
 .input-wrapper__focused,
 .input-wrapper:focus {
-  border-color: #40a9ff;
+  border-color: var(--active-color);
   box-shadow: 0 0 0 2px rgba(24, 144, 255, .2);
 }
 
-.input {
+.input-icon {
+  display: block;
+  margin-right: 8px;
+  width: 14px;
+  height: 14px;
+}
+
+.input-icon .icon {
+  display: block;
+  fill: rgba(0, 0, 0, 0.25);
+}
+
+.input-inner {
+  flex-grow: 1;
   border: none;
   outline: none;
   padding: 0;
+  height: 20px;
 }
 
 .login-button {
@@ -78,27 +103,46 @@ main,
   display: block;
   margin-top: 40px;
   margin-bottom: 20px;
-  border: 1px solid #1890ff;
+  border: 1px solid var(--primary-color);
   border-radius: 2px;
   box-shadow: 0 2px 0 rgba(0, 0, 0, .045);
   padding: 4px 15px;
   width: 100%;
   height: 32px;
-  background: #1890ff;
+  background-color: var(--primary-color);
   color: #fff;
   font-size: 14px;
   font-weight: 400;
   text-align: center;
   cursor: pointer;
   touch-action: manipulation;
-  transition: all .3s cubic-bezier(.645,.045,.355,1);
+  transition: all .3s cubic-bezier(.645, .045, .355, 1);
   user-select: none;
   white-space: nowrap;
 }
 
-.login-button:focus,
+.login-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  box-shadow: 0 0 0 8px var(--primary-color);
+  transition: .5s;
+}
+
 .login-button:hover {
-  background: #40a9ff;
-  border-color: #40a9ff;
-  color: #fff;
+  border-color: var(--hover-color);
+  background-color: var(--hover-color);
+}
+
+.login-button:active {
+  border-color: var(--active-color);
+  background-color: var(--active-color);
+}
+
+.login-button:active::after {
+  box-shadow: none;
+  opacity: 1;
+  transition: 0s; /*取消过渡*/
 }

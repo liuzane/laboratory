@@ -1,5 +1,10 @@
+// Bases
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 // Plugins
 import { loadEnv } from '@laboratory/common/env-loader';
+import alias from '@rollup/plugin-alias';
 import typescript from '@rollup/plugin-typescript';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
@@ -9,15 +14,20 @@ import terser from '@rollup/plugin-terser';
 import { rimraf } from 'rimraf';
 import copy from 'rollup-plugin-copy';
 import postcss from 'rollup-plugin-postcss';
+import { string } from 'rollup-plugin-string';
 
-// check if the mode is development
+// Get current file path and directory path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+// Check if in development mode
 const isDevelopment = process.env.mode === 'development';
-// the output dir
+// Output directory
 const outputDir = 'dist';
-// load environment variables
+// Load environment variables
 const env = loadEnv(process.env.mode, process.cwd());
 
 export default {
+  // Entry file
   input: 'src/laboratory-entry.ts',
   output: {
     format: 'es',
@@ -33,58 +43,66 @@ export default {
     exclude: 'node_modules/**'
   },
   plugins: [
-    // transpile typescript
+    // Path alias configuration
+    alias({
+      entries: [
+        { find: '@', replacement: resolve(__dirname, 'src') }
+      ]
+    }),
+
+    // TypeScript compilation
     typescript({
       compilerOptions: {
         outDir: outputDir
       }
     }),
 
-    // resolve node_modules
+    // Resolve node_modules modules
     nodeResolve(),
 
-    // transpile to es5
+    // Transpile to ES5
     babel({ babelHelpers: 'bundled' }),
 
-    // css
+    // CSS processing
     postcss({ extract: true }),
 
-    // replaces targeted strings in files while bundling.
+    // SVG to string conversion
+    string({
+      include: '**/*.svg'
+    }),
+
+    // Replace target strings in files during bundling
     replace({
       preventAssignment: true,
       __PUBLIC_PATH: JSON.stringify(env.PUBLIC_PATH),
       __DEPLOY_ORIGIN: JSON.stringify(env.DEPLOY_ORIGIN)
     }),
 
-    // minified bundle without html.
+    // Production code minification
     isDevelopment ? null : terser(),
 
-    // clear output directory.
+    // Clean output directory
     clear(outputDir),
 
-    // copy public directory to output directory.
+    // Copy public directory to output directory
     copy({
       targets: [{ src: 'public/*', dest: outputDir }]
     }),
 
-    // start dev server.
+    // Development server
     isDevelopment
       ? serve({
           port: Number(env.PORT),
-          // Multiple folders to serve from
           contentBase: [outputDir],
-          // set headers
           headers: {
             'Access-Control-Allow-Origin': '*'
           },
-          // execute function after server has begun listening
           onListening: function (server) {
             const address = server.address();
             const host = address.address === '::' ? 'localhost' : address.address;
-            // by using a bound function, we can access options as `this`
             const protocol = this.https ? 'https' : 'http';
-            console.log(`Server listening at ${protocol}://${host}:${address.port}/`);
-            console.log(`Open with ${protocol}://${host}:${address.port}/laboratory-entry.js`);
+            console.log(`Server running at ${protocol}://${host}:${address.port}/`);
+            console.log(`Open ${protocol}://${host}:${address.port}/laboratory-entry.js`);
           }
         })
       : null
@@ -92,8 +110,8 @@ export default {
 };
 
 /**
- * clear output directory
- * @param {string|string[]} paths
+ * Clean output directory
+ * @param {string|string[]} paths Paths to clean
  */
 function clear(paths = 'dist') {
   return {
