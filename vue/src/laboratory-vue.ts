@@ -40,14 +40,19 @@ export function bootstrap() {
   });
 }
 
-export function mount() {
+export function mount(props: Record<string, unknown>) {
   return Promise.resolve().then(() => {
     console.log('vue mounted!');
     // Do framework UI rendering here
     manifestLoader.mount();
-    app = createApp(App);
-    // For each app instance, mount() can only be called once.
-    app.use(router).mount('#single-spa-application\\:vue');
+    setTimeout(() => {
+      app = createApp(App);
+      // For each app instance, mount() can only be called once.
+      app.use(router).mount('#single-spa-application\\:vue');
+      if (typeof props.hideLoading === 'function') {
+        props.hideLoading();
+      }
+    }, 2000);
     console.log('manifestLoader:', manifestLoader);
     console.log('import.meta:', import.meta);
     console.log('import.meta.env:', import.meta.env);

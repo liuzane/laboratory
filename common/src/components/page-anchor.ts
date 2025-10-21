@@ -9,7 +9,8 @@ import cssText from './styles/page-anchor.css?raw';
 
 export class PageAnchor extends BaseWebComponent {
   static tagName: string = 'page-anchor';
-  static observedAttributes: string[] = ['href', 'download'];
+  static observedAttributes: string[] = ['href', 'download', 'block'];
+  static PUBLIC_PATH: string = __PUBLIC_PATH;
   private $anchor: HTMLAnchorElement;
 
   constructor() {
@@ -26,6 +27,14 @@ export class PageAnchor extends BaseWebComponent {
 
       case 'download':
         this.$anchor.download = newVal;
+        break;
+      
+      case 'block':
+        if (typeof newVal === 'string') {
+          this.$anchor.classList.add('block');
+        } else {
+          this.$anchor.classList.remove('block');
+        }
         break;
     }
   }

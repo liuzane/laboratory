@@ -25,12 +25,13 @@ function Write-Color([String[]]$Text, [ConsoleColor[]]$Color) {
 
 $projectPath = (Get-Location).Path
 
-Write-Color -Text "Project: ", $title -Color Blue, Green
-Write-Color -Text "Path: ", $projectPath -Color Blue, Green
+Write-Color -Text "Project: ", $title -Color Cyan, Green
 Write-Output ""
-Write-Color -Text "To Develop: ", "npm run dev" -Color Blue, DarkRed
+Write-Color -Text "Path: ", $projectPath -Color Cyan, Green
 Write-Output ""
-Write-Color -Text "To Build: ", "npm run build" -Color Blue, DarkRed
+Write-Color -Text "To Develop: ", "npm run dev" -Color Cyan, Red
+Write-Output ""
+Write-Color -Text "To Build: ", "npm run build" -Color Cyan, Red
 Write-Output ""
 
 Write-Output "npm run $script"

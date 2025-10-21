@@ -7,6 +7,10 @@ import { PageAnchor, AtomBackground } from '@laboratory/common/components';
 // Style
 import './style.css';
 
+// Svgs
+import UsernameSvg from '@/icons/username.svg';
+import PasswordSvg from '@/icons/password.svg';
+
 export default class App {
   constructor() {
     PageAnchor.define();
@@ -15,13 +19,11 @@ export default class App {
 
   addInputWrapperFocusedClass(event: FocusEvent): void {
     const inputElement = event.target as HTMLInputElement;
-    console.log('onfocus', [inputElement]);
     inputElement.parentElement.classList.add('input-wrapper__focused');
   }
 
   removeInputWrapperFocusedClass(event: FocusEvent): void {
     const inputElement = event.target as HTMLInputElement;
-    console.log('onblur', [inputElement]);
     inputElement.parentElement.classList.remove('input-wrapper__focused');
   }
 
@@ -30,16 +32,17 @@ export default class App {
       h('atom-background', {
         attrs: {
           animation: true,
-          'active-button-text': 'On Special',
-          'inactive-button-text': 'Off Special'
+          'active-button-text': 'On Effect',
+          'inactive-button-text': 'Off Effect'
         }
       }),
       h('div', { className: 'wrapper' }, [
         h('h3', { className: 'title' }, 'Login to Laboratory'),
         h('div', { className: 'input-wrapper' }, [
+          h('span', { className: 'input-icon', innerHTML: UsernameSvg }),
           h('input', {
             type: 'text',
-            className: 'input',
+            className: 'input-inner',
             placeholder: 'Please type the username',
             value: 'admin',
             onfocus: this.addInputWrapperFocusedClass,
@@ -47,9 +50,10 @@ export default class App {
           })
         ]),
         h('div', { className: 'input-wrapper' }, [
+          h('span', { className: 'input-icon', innerHTML: PasswordSvg }),
           h('input', {
             type: 'password',
-            className: 'input',
+            className: 'input-inner',
             placeholder: 'Please type the password',
             value: '123456',
             onfocus: this.addInputWrapperFocusedClass,

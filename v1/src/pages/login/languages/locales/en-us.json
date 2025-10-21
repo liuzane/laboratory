@@ -1,6 +1,6 @@
 {
-  "login.onSpecial": "On Special",
-  "login.offSpecial": "Off Special",
+  "login.onSpecial": "On Effect",
+  "login.offSpecial": "Off Effect",
   "login.title": "Login to Laboratory",
   "login.username": "Please type the username",
   "login.username-empty": "The username cannot be empty",

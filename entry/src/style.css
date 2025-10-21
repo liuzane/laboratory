@@ -12,18 +12,77 @@ main,
   height: 100%;
 }
 
+atom-background {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+}
+
 .container {
   position: relative;
+  user-select: none;
 }
 
 .wrapper {
   position: absolute;
-  top: 25%;
+  top: 40%;
   left: 50%;
   transform: translateX(-50%);
 }
 
-atom-background {
+.list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 40vw;
+}
+
+.list__item {
+  box-sizing: border-box;
+  list-style: none;
+  position: relative;
+  overflow: hidden;
+  margin: 0.5vw;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 20%);
+  border-radius: 0.2vw;
+  width: 6vw;
+  height: 6vw;
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  cursor: pointer;
+}
+
+.list__item-icon {
+  position: relative;
+  z-index: 11;
+  margin: 0.5vw auto;
+  width: 3vw;
+  height: 3vw;
+}
+
+.list__item-text {
+  position: relative;
+  z-index: 11;
+}
+
+.list__item--active {
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(238, 238, 238, 0.5);
+}
+
+.list__item page-anchor {
+  position: relative;
+  z-index: 2;
   display: block;
   width: 100%;
   height: 100%;

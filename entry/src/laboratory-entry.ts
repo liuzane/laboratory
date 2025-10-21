@@ -27,12 +27,15 @@ export function bootstrap() {
   });
 }
 
-export function mount() {
+export function mount(props: Record<string, unknown>) {
   return Promise.resolve().then(() => {
-    console.log('entry mounted!');
+    console.log('entry mounted!', props);
     manifestLoader.mount();
     app = new App();
     document.getElementById('single-spa-application:entry').appendChild(app.render());
+    if (typeof props.hideLoading === 'function') {
+      props.hideLoading();
+    }
   });
 }
 

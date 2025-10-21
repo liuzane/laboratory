@@ -17,7 +17,6 @@ let manifestLoader: IManifestLoader;
 export function bootstrap() {
   return Promise.resolve().then(() => {
     // One-time initialization code goes here
-    console.log('login bootstrapped!');
     manifestLoader = new ManifestLoader({
       mode: ModeEnum.Production,
       origin: __DEPLOY_ORIGIN,
@@ -27,12 +26,15 @@ export function bootstrap() {
   });
 }
 
-export function mount() {
+export function mount(props: Record<string, unknown>) {
   return Promise.resolve().then(() => {
-    console.log('login mounted!');
+    console.log('login mounted!', props);
     manifestLoader.mount();
     app = new App();
     document.getElementById('single-spa-application:login').appendChild(app.render());
+    if (typeof props.hideLoading === 'function') {
+      props.hideLoading();
+    }
   });
 }
 
