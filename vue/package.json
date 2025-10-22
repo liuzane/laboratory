@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@laboratory/common": "file:../common/laboratory-common-1.0.0.tgz",
+    "ant-design-vue": "^4.2.6",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },

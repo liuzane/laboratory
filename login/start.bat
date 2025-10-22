@@ -1,5 +1,5 @@
 :: start "Element Plus" /d D:\WorkSpace\Frontend\element-plus cmd /k "echo yarn website-dev && yarn website-dev"
 :: powershell -File script\powershell.ps1
-start Powershell -executionpolicy RemoteSigned -noexit -file "..\script\powershell.ps1" "Laboratory Login"
+start Powershell -executionpolicy RemoteSigned -noexit -file "..\script\windows.ps1" "Laboratory Login"
 :: start "Root" Powershell -executionpolicy RemoteSigned -noexit -file "script\color.ps1"
 :: start "myapp" powershell.exe -NoExit -Command "dotnet myapp"

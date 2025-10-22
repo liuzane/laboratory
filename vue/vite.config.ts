@@ -28,6 +28,11 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
   const customTagElementList: string[] = ['page-anchor'];
 
   return {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      }
+    },
     build: {
       outDir: outputDir,
       manifest: true,

@@ -9,13 +9,6 @@ module.exports = {
     'plugin:tailwindcss/recommended'
   ],
   plugins: ['@typescript-eslint'],
-  rules: {
-    '@typescript-eslint/no-unused-vars': ['warn', {
-      'vars': 'all',
-      'args': 'none'
-    }],
-    'vue/multi-word-component-names': 'off'
-  },
   ignorePatterns: ['**/*.css', '**/*.scss', '**/*.svg'],
   overrides: [
     {
@@ -31,5 +24,13 @@ module.exports = {
         ecmaVersion: 'latest'
       },
     },
-  ]
+  ],
+  rules: {
+    '@typescript-eslint/no-unused-vars': ['warn', {
+      'vars': 'all',
+      'args': 'none'
+    }],
+    'vue/multi-word-component-names': 'off',
+    'tailwindcss/no-custom-classname': 'off'
+  },
 };

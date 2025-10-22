@@ -1,29 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-const baseURL: string = "/vue";
-
-const routes = [
-  {
-    path: baseURL + "/",
-    name: "Home",
-    component: () => import("./Home.vue")
-  },
-  {
-    path: baseURL + "/foo",
-    name: "Foo",
-    component: () => import("./components/Foo.vue"),
-  },
-  {
-    path: baseURL + "/bar",
-    name: "Bar",
-    component: () => import("./components/Bar.vue"),
-  },
-  {
-    path: baseURL + "/interview",
-    name: "Interview",
-    component: () => import("./components/Interview.vue"),
-  },
-];
+import routes from './routes';
 
 export const router = createRouter({
   history: createWebHashHistory(),

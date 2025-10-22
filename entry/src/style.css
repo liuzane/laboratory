@@ -39,7 +39,7 @@ atom-background {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 40vw;
+  width: 800px;
 }
 
 .list__item {
@@ -47,11 +47,11 @@ atom-background {
   list-style: none;
   position: relative;
   overflow: hidden;
-  margin: 0.5vw;
+  margin: 10px;
   box-shadow: 0 1px 6px rgb(0 0 0 / 20%);
-  border-radius: 0.2vw;
-  width: 6vw;
-  height: 6vw;
+  border-radius: 4px;
+  width: 120px;
+  height: 120px;
   background-color: rgba(255, 255, 255, 0.5);
   text-align: center;
   cursor: pointer;
@@ -60,9 +60,9 @@ atom-background {
 .list__item-icon {
   position: relative;
   z-index: 11;
-  margin: 0.5vw auto;
-  width: 3vw;
-  height: 3vw;
+  margin: 10px auto;
+  width: 60px;
+  height: 60px;
 }
 
 .list__item-text {
