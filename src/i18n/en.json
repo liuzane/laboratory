@@ -1,0 +1,24 @@
+{
+  "atom-background": {
+    "active-button-text": "Turn on",
+    "inactive-button-text": "Turn off"
+  },
+  "projects": {
+    "vite-microapp-react-demo": {
+      "title": "MicroApp + Vite Example",
+      "description": "A React practice project based on the MicroApp micro-frontend framework and the Vite build tool, leveraging Module Federation for shared components and modules. It demonstrates how to seamlessly integrate multiple independent sub-applications, enabling cross-app component sharing and remote module loading, providing a quick-start practice template for frontend microservices"
+    },
+    "mock-database": {
+      "title": "Mock Database",
+      "description": "A pure frontend mock database based on IndexedDB, exposing services via Module Federation, designed to provide local data storage and query capabilities for static web applications"
+    },
+    "webpack-module-federation-demo": {
+      "title": "Webpack Module Federation Basic Example",
+      "description": "An introductory micro-frontend example based on Webpack 5 Module Federation, demonstrating runtime module sharing"
+    },
+    "solar-system": {
+      "title": "Solar System",
+      "description": "A solar system simulation based on HTML5 Canvas"
+    }
+  }
+}

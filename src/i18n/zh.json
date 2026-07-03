@@ -1,0 +1,24 @@
+{
+  "atom-background": {
+    "active-button-text": "开启动画",
+    "inactive-button-text": "停止动画"
+  },
+  "projects": {
+    "vite-microapp-react-demo": {
+      "title": "微前端 MicroApp + Vite 示例",
+      "description": "一个基于 MicroApp 微前端框架与 Vite 极速构建工具的 React 实践项目，借助模块联邦（Module Federation）实现共享组件和模块，旨在演示如何将多个独立子应用无缝集成，实现跨应用组件共享、远程模块加载，为前端微服务化提供快速上手的实践模板"
+    },
+    "mock-database": {
+      "title": "模拟数据库",
+      "description": "一个基于 IndexedDB 的纯前端模拟数据库，通过模块联邦对外暴露服务，专为静态 Web 应用提供本地数据存储与查询能力"
+    },
+    "webpack-module-federation-demo": {
+      "title": "Webpack 模块联邦基础示例",
+      "description": "基于 Webpack 5 模块联邦的微前端入门示例，演示运行时模块共享"
+    },
+    "solar-system": {
+      "title": "太阳系",
+      "description": "一个基于 HTML5 Canvas 的太阳系"
+    }
+  }
+}
