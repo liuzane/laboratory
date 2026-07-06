@@ -92,7 +92,7 @@
   .project-grid {
     grid-template-columns: repeat(3, 1fr);
     width: 64rem;
-    margin: 10rem auto;
+    margin: 7rem auto;
   }
 }
 
