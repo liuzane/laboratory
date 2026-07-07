@@ -6,19 +6,23 @@
   "projects": {
     "vite-microapp-react-demo": {
       "title": "MicroApp + Vite Example",
-      "description": "A React practice project based on the MicroApp micro-frontend framework and the Vite build tool, leveraging Module Federation for shared components and modules. It demonstrates how to seamlessly integrate multiple independent sub-applications, enabling cross-app component sharing and remote module loading, providing a quick-start practice template for frontend microservices"
+      "description": "A React practice project based on the MicroApp micro-frontend framework and the Vite build tool, leveraging Module Federation for shared components and modules. It demonstrates how to seamlessly integrate multiple independent sub-applications, enabling cross-app component sharing and remote module loading, providing a quick-start practice template for frontend microservices."
     },
     "mock-database": {
       "title": "Mock Database",
-      "description": "A pure frontend mock database based on IndexedDB, exposing services via Module Federation, designed to provide local data storage and query capabilities for static web applications"
+      "description": "A pure frontend mock database based on IndexedDB, exposing services via Module Federation, designed to provide local data storage and query capabilities for static web applications."
     },
     "webpack-module-federation-demo": {
       "title": "Webpack Module Federation Basic Example",
-      "description": "An introductory micro-frontend example based on Webpack 5 Module Federation, demonstrating runtime module sharing"
+      "description": "An introductory micro-frontend example based on Webpack 5 Module Federation, demonstrating runtime module sharing."
+    },
+    "webpack-mpa": {
+      "title": "Webpack Multi-Page Application Example",
+      "description": "A multi-page application scaffold built on Webpack, integrating both React 17 and Vue 3 to demonstrate the collaborative build of two frameworks within a single project. It includes four independent entry points: Home (index), React admin, Vue admin, and Login. Features such as hot reload, on‑demand loading, code splitting, and multi‑environment configuration are supported. This serves as a reference example of multi‑page architecture and multi‑framework integration."
     },
     "solar-system": {
       "title": "Solar System",
-      "description": "A solar system simulation based on HTML5 Canvas"
+      "description": "A solar system simulation based on HTML5 Canvas."
     }
   }
 }

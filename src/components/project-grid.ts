@@ -8,6 +8,7 @@ import { t } from '@/i18n';
 import ViteMicroappReactDemoImage from '@/images/vite-microapp-react-demo.png';
 import MockDatabaseImage from '@/images/mock-database.png';
 import WebpackModuleFederationDemoImage from '@/images/webpack-module-federation-demo.png';
+import WebpackMpaImage from '@/images/webpack-mpa.png';
 import SolarSystemImage from '@/images/solar-system.png';
 
 export interface EntryItem {
@@ -33,18 +34,28 @@ export default class ProjectGrid {
       path: 'https://liuzane.github.io/vite-microapp-react-demo',
       image: ViteMicroappReactDemoImage,
     },
+
     {
       title: t('projects.mock-database.title'),
       description: t('projects.mock-database.description'),
       path: 'https://github.com/liuzane/mock-database',
       image: MockDatabaseImage,
     },
+
     {
       title: t('projects.webpack-module-federation-demo.title'),
       description: t('projects.webpack-module-federation-demo.description'),
       path: 'https://liuzane.github.io/webpack-module-federation-demo',
       image: WebpackModuleFederationDemoImage,
     },
+
+    {
+      title: t('projects.webpack-mpa.title'),
+      description: t('projects.webpack-mpa.description'),
+      path: 'https://liuzane.github.io/webpack-mpa',
+      image: WebpackMpaImage,
+    },
+
     {
       title: t('projects.solar-system.title'),
       description: t('projects.solar-system.description'),
