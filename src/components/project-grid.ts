@@ -5,7 +5,7 @@ import { hyperscript as h } from '@/core/hyperscript';
 import { t } from '@/i18n';
 
 // Images
-import ViteMicroappReactDemoImage from '@/images/vite-microapp-react-demo.png';
+import ViteMicroappReactExampleImage from '@/images/vite-microapp-react-example.png';
 import MockDatabaseImage from '@/images/mock-database.png';
 import WebpackModuleFederationDemoImage from '@/images/webpack-module-federation-demo.png';
 import WebpackMpaImage from '@/images/webpack-mpa.png';
@@ -31,8 +31,8 @@ export default class ProjectGrid {
     {
       title: t('projects.vite-microapp-react-demo.title'),
       description: t('projects.vite-microapp-react-demo.description'),
-      path: 'https://liuzane.github.io/vite-microapp-react-demo',
-      image: ViteMicroappReactDemoImage,
+      path: 'https://liuzane.github.io/vite-microapp-react-example',
+      image: ViteMicroappReactExampleImage,
     },
 
     {
