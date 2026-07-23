@@ -14,3 +14,7 @@ npm run dev
 # 生产构建
 npm run build
 ```
+
+## 项目略缩图
+
+尺寸：3840px * 1800px
