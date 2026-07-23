@@ -4,7 +4,11 @@
     "inactive-button-text": "停止动画"
   },
   "projects": {
-    "vite-microapp-react-demo": {
+    "vue-cli-qiankun-example": {
+      "title": "微前端 Qiankun + Vue CLI 示例",
+      "description": "一个基于 Qiankun 微前端框架与 Vue CLI 构建工具的 Vue 实践项目，借助 Qiankun 的微应用加载与沙箱隔离机制，实现跨应用通信和状态共享，旨在演示如何将多个独立子应用无缝集成，实现路由分发、生命周期管理、样式隔离，为前端微服务化提供快速上手的实践模板。"
+    },
+    "vite-microapp-react-example": {
       "title": "微前端 MicroApp + Vite 示例",
       "description": "一个基于 MicroApp 微前端框架与 Vite 极速构建工具的 React 实践项目，借助模块联邦（Module Federation）实现共享组件和模块，旨在演示如何将多个独立子应用无缝集成，实现跨应用组件共享、远程模块加载，为前端微服务化提供快速上手的实践模板。"
     },

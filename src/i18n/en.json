@@ -4,7 +4,11 @@
     "inactive-button-text": "Turn off"
   },
   "projects": {
-    "vite-microapp-react-demo": {
+    "vue-cli-qiankun-example": {
+      "title": "Qiankun + Vue CLI Example",
+      "description": "A Vue practice project built on the Qiankun micro-frontend framework and Vue CLI tool. Leveraging Qiankun's micro-app loading and sandbox isolation mechanisms, it implements cross-application communication and state sharing. Designed to demonstrate how to seamlessly integrate multiple independent sub-applications, enabling routing distribution, lifecycle management, and style isolation, this template provides a quick-start practice guide for front-end microservices."
+    },
+    "vite-microapp-react-example": {
       "title": "MicroApp + Vite Example",
       "description": "A React practice project based on the MicroApp micro-frontend framework and the Vite build tool, leveraging Module Federation for shared components and modules. It demonstrates how to seamlessly integrate multiple independent sub-applications, enabling cross-app component sharing and remote module loading, providing a quick-start practice template for frontend microservices."
     },

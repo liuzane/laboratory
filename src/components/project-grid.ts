@@ -5,6 +5,7 @@ import { hyperscript as h } from '@/core/hyperscript';
 import { t } from '@/i18n';
 
 // Images
+import VueCliQiankunExampleImage from '@/images/vue-cli-qiankun-example.png';
 import ViteMicroappReactExampleImage from '@/images/vite-microapp-react-example.png';
 import MockDatabaseImage from '@/images/mock-database.png';
 import WebpackModuleFederationDemoImage from '@/images/webpack-module-federation-demo.png';
@@ -29,8 +30,15 @@ enum MouseDirection {
 export default class ProjectGrid {
   private entries: EntryItem[] = [
     {
-      title: t('projects.vite-microapp-react-demo.title'),
-      description: t('projects.vite-microapp-react-demo.description'),
+      title: t('projects.vue-cli-qiankun-example.title'),
+      description: t('projects.vue-cli-qiankun-example.description'),
+      path: 'https://liuzane.github.io/vue-cli-qiankun-example',
+      image: VueCliQiankunExampleImage,
+    },
+
+    {
+      title: t('projects.vite-microapp-react-example.title'),
+      description: t('projects.vite-microapp-react-example.description'),
       path: 'https://liuzane.github.io/vite-microapp-react-example',
       image: ViteMicroappReactExampleImage,
     },

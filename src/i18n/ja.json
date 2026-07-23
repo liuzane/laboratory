@@ -4,7 +4,11 @@
     "inactive-button-text": "オフ"
   },
   "projects": {
-    "vite-microapp-react-demo": {
+    "vue-cli-qiankun-example": {
+      "title": "Qiankun + Vue CLI サンプル",
+      "description": "Qiankun マイクロフロントエンドフレームワークと Vue CLI ビルドツールをベースにした Vue 実践プロジェクトです。Qiankun のマイクロアプリロードとサンドボックス分離機構を活用し、アプリ間通信や状態共有を実現します。複数の独立したサブアプリケーションをシームレスに統合し、ルーティング振り分け、ライフサイクル管理、スタイル分離を実装する方法を示しており、フロントエンドのマイクロサービス化に向けた迅速な導入テンプレートを提供します。"
+    },
+    "vite-microapp-react-example": {
       "title": "MicroApp + Vite サンプル",
       "description": "MicroAppマイクロフロントエンドフレームワークとViteビルドツールをベースにしたReact実践プロジェクト。Module Federationを利用してコンポーネントやモジュールを共有し、複数の独立したサブアプリケーションをシームレスに統合する方法を実演します。クロスアプリケーションでのコンポーネント共有やリモートモジュール読み込みを可能にし、フロントエンドのマイクロサービス化への迅速な導入テンプレートを提供します。"
     },
